@@ -60,6 +60,8 @@
 
 每篇 publication 只能放入一个最主要方向，避免跨分类重复计数。标题必须完整，并尽量标注会议、期刊或 `arXiv`。
 
+同一单元格内的每篇 publication 必须使用 `<br>` 独占一行，不能用连续文本或逗号堆叠。每篇统一写成 `*完整题名* ([Google Scholar](...) · [arXiv](...)) (venue)`：Google Scholar 精确题名检索排在前面；已确认 arXiv ID 时优先链接 `/abs/<id>`，否则链接 arXiv 精确题名检索页，禁止猜测 ID。
+
 ## 完整性检查
 
 - 对每位教授比较官方页、Scholar、arXiv 和补充来源的差集。
@@ -70,5 +72,4 @@
 
 ## 可复用更新提示词
 
-> 截至【日期】，重新检索 HKUST(GZ) Faculty Profiles 中全部 Microelectronics 教授。沿用本 README 的纳入、排除、年份和去重规则，先核查吕杨迪，再逐一检查每位最终候选人的官方主页、个人 publication 页、按日期排序的 Google Scholar、arXiv，并在必要时补查 DBLP、会议录、合作者主页和 AIHub。更新【目标年份】内所有期刊、会议、已录用论文及 arXiv-only 预印本；同一工作的预印本与正式版合并，年份/题名冲突必须标注。吕杨迪单独成表，其余人按“教授 × 年份 × 研究方向”组成大表，列出关键词、三句话以内概括、完整 publication 名称和 venue；最后核对逐人、逐年和总计，不能用占位项补数。
-
+> 截至【日期】，重新检索 HKUST(GZ) Faculty Profiles 中全部 Microelectronics 教授。沿用本 README 的纳入、排除、年份和去重规则，先核查吕杨迪，再逐一检查每位最终候选人的官方主页、个人 publication 页、按日期排序的 Google Scholar、arXiv，并在必要时补查 DBLP、会议录、合作者主页和 AIHub。更新【目标年份】内所有期刊、会议、已录用论文及 arXiv-only 预印本；同一工作的预印本与正式版合并，年份/题名冲突必须标注。吕杨迪单独成表，其余人按“教授 × 年份 × 研究方向”组成大表，列出关键词、三句话以内概括、完整 publication 名称和 venue；每篇 publication 用 `<br>` 独占一行，并依次附 Google Scholar 精确题名链接和 arXiv 直达/检索链接。最后核对逐人、逐年、链接数量和总计，不能用占位项补数。

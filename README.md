@@ -60,6 +60,8 @@ Use a separate table for Yangdi Lyu and one main table for the remaining faculty
 
 Assign every publication to exactly one primary category to avoid double counting. Use complete titles and identify the conference, journal, or `arXiv` whenever possible.
 
+Within a table cell, every publication must occupy its own `<br>` line rather than being packed into continuous text. Use the format `*Complete title* ([Google Scholar](...) · [arXiv](...)) (venue)`: place an exact-title Google Scholar search first; use a verified arXiv `/abs/<id>` link when available, otherwise use an exact-title arXiv search link and never guess an identifier.
+
 ## Completeness Checks
 
 - Compare the sets from official pages, Scholar, arXiv, and supplemental sources for every faculty member.
@@ -70,5 +72,4 @@ Assign every publication to exactly one primary category to avoid double countin
 
 ## Reusable Update Prompt
 
-> As of [date], re-search all Microelectronics faculty in HKUST(GZ) Faculty Profiles. Apply the inclusion, exclusion, year, and deduplication rules in this README. Verify Yangdi Lyu first, then check each final candidate’s official profile, personal publication page, date-sorted Google Scholar, and arXiv; use DBLP, conference proceedings, coauthor pages, and AIHub when needed. Update every journal paper, conference paper, accepted paper, and arXiv-only preprint in [target years]. Merge preprint and formal versions of the same work and explicitly mark year or title conflicts. Put Yangdi Lyu in a separate table and organize the others by faculty member × year × research direction, including keywords, a summary of no more than three sentences, complete publication titles, and venues. Finally verify per-person, per-year, and grand totals without using placeholder entries.
-
+> As of [date], re-search all Microelectronics faculty in HKUST(GZ) Faculty Profiles. Apply the inclusion, exclusion, year, and deduplication rules in this README. Verify Yangdi Lyu first, then check each final candidate’s official profile, personal publication page, date-sorted Google Scholar, and arXiv; use DBLP, conference proceedings, coauthor pages, and AIHub when needed. Update every journal paper, conference paper, accepted paper, and arXiv-only preprint in [target years]. Merge preprint and formal versions of the same work and explicitly mark year or title conflicts. Put Yangdi Lyu in a separate table and organize the others by faculty member × year × research direction, including keywords, a summary of no more than three sentences, complete publication titles, and venues. Put every publication on its own `<br>` line, followed by an exact-title Google Scholar link and a direct or exact-title-search arXiv link. Finally verify per-person, per-year, link, and grand totals without using placeholder entries.
