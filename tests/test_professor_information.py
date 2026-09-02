@@ -160,10 +160,74 @@ class ProfessorInformationTests(unittest.TestCase):
         publication_owners = {"doi:10.1/example": "20"}
         validate_research_subdirections(payload, professor_ids, publication_owners)
 
-        two_sentences = deepcopy(payload)
-        two_sentences["professors"][0]["subdirections"][0]["explanationEn"] = ["Sentence one.", "Sentence two."]
-        with self.assertRaisesRegex(SourceDataError, "exactly three"):
-            validate_research_subdirections(two_sentences, professor_ids, publication_owners)
+        for sentences in (
+            [],
+            ["Sentence one.", "Sentence two."],
+            ["Sentence one.", "Sentence two.", "Sentence three.", "Sentence four."],
+            ["", "Sentence two.", "Sentence three."],
+            ["Sentence one.", " SENTENCE ONE! ", "Sentence three."],
+        ):
+            invalid_sentences = deepcopy(payload)
+            invalid_sentences["professors"][0]["subdirections"][0]["explanationEn"] = sentences
+            with self.assertRaisesRegex(SourceDataError, "exactly three|duplicate"):
+                validate_research_subdirections(invalid_sentences, professor_ids, publication_owners)
+
+        official_profile_only = deepcopy(payload)
+        official_profile_only["professors"][0]["subdirections"][0]["evidencePublicationIds"] = []
+        official_profile_only["professors"][0]["subdirections"][0]["evidenceUrls"] = [
+            "https://facultyprofiles.hkust-gz.edu.cn/faculty-personal-page?id=20"
+        ]
+        official_profile_only["professors"][0]["publicationAssignments"] = []
+        validate_research_subdirections(official_profile_only, professor_ids, {})
+
+        limited = deepcopy(official_profile_only)
+        limited["professors"][0]["reviewStatus"] = "limited"
+        limited["professors"][0]["subdirections"][0]["reviewStatus"] = "limited"
+        validate_research_subdirections(limited, professor_ids, {})
+
+        missing_evidence = deepcopy(official_profile_only)
+        missing_evidence["professors"][0]["subdirections"][0]["evidenceUrls"] = []
+        with self.assertRaisesRegex(SourceDataError, "supporting evidence URLs"):
+            validate_research_subdirections(missing_evidence, professor_ids, {})
+
+        valid_unassigned = deepcopy(payload)
+        valid_unassigned["professors"][0]["publicationAssignments"][0].update({
+            "subdirectionIds": [],
+            "unassignedReasonEn": "No reliable generated sub-direction assignment was made.",
+        })
+        validate_research_subdirections(valid_unassigned, professor_ids, publication_owners)
+
+        unknown_publication = deepcopy(payload)
+        unknown_publication["professors"][0]["publicationAssignments"][0]["publicationId"] = "doi:10.1/unknown"
+        with self.assertRaisesRegex(SourceDataError, "owned"):
+            validate_research_subdirections(unknown_publication, professor_ids, publication_owners)
+
+        duplicate_assignment = deepcopy(payload)
+        duplicate_assignment["professors"][0]["publicationAssignments"].append(
+            deepcopy(duplicate_assignment["professors"][0]["publicationAssignments"][0])
+        )
+        with self.assertRaisesRegex(SourceDataError, "duplicate publication assignments"):
+            validate_research_subdirections(duplicate_assignment, professor_ids, publication_owners)
+
+        for schema_version in (True, False, "1"):
+            malformed_schema = deepcopy(payload)
+            malformed_schema["schemaVersion"] = schema_version
+            with self.assertRaisesRegex(SourceDataError, "schema version"):
+                validate_research_subdirections(malformed_schema, professor_ids, publication_owners)
+
+        for field, value in (
+            ("evidencePublicationIds", 7),
+            ("evidencePublicationIds", {}),
+            ("subdirectionIds", 7),
+            ("subdirectionIds", {}),
+        ):
+            malformed_id = deepcopy(payload)
+            if field == "evidencePublicationIds":
+                malformed_id["professors"][0]["subdirections"][0][field] = [value]
+            else:
+                malformed_id["professors"][0]["publicationAssignments"][0][field] = [value]
+            with self.assertRaisesRegex(SourceDataError, "IDs must contain strings"):
+                validate_research_subdirections(malformed_id, professor_ids, publication_owners)
 
         cross_professor = deepcopy(payload)
         with self.assertRaisesRegex(SourceDataError, "owned"):

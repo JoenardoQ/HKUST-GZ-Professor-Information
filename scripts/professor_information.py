@@ -26,6 +26,10 @@ RESEARCH_EVIDENCE_HOSTS = (
     "semanticscholar.org",
     "doi.org",
 )
+OFFICIAL_SUBDIRECTION_EVIDENCE_HOSTS = (
+    "facultyprofiles.hkust-gz.edu.cn",
+    "repository.hkust.edu.hk",
+)
 RETRIEVAL_SOURCES = (
     "OpenAlex",
     "paperscraper:arxiv",
@@ -191,6 +195,13 @@ def _valid_evidence(url: str) -> bool:
         return False
     host = (urlparse(url).hostname or "").casefold()
     return any(host == domain or host.endswith(f".{domain}") for domain in RESEARCH_EVIDENCE_HOSTS)
+
+
+def _valid_official_subdirection_evidence(url: str) -> bool:
+    if not isinstance(url, str) or not url.startswith("https://"):
+        return False
+    host = (urlparse(url).hostname or "").casefold()
+    return host in OFFICIAL_SUBDIRECTION_EVIDENCE_HOSTS
 
 
 def deduplicate_publications(records: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
@@ -883,7 +894,11 @@ def validate_research_subdirections(
     publication_owners: dict[str, str],
 ) -> None:
     """Validate professor-scoped research sub-directions and publication assignments."""
-    if not isinstance(payload, dict) or payload.get("schemaVersion") != 1:
+    if (
+        not isinstance(payload, dict)
+        or type(payload.get("schemaVersion")) is not int
+        or payload["schemaVersion"] != 1
+    ):
         raise SourceDataError("research subdirections require schema version 1")
     try:
         cutoff = date.fromisoformat(str(payload.get("cutoff")))
@@ -944,9 +959,13 @@ def validate_research_subdirections(
                 or any(not isinstance(sentence, str) or not clean(sentence) for sentence in sentences)
             ):
                 raise SourceDataError(f"subdirection {direction_id} requires exactly three non-empty sentences")
+            if len({_normalized_title(sentence) for sentence in sentences}) != len(sentences):
+                raise SourceDataError(f"subdirection {direction_id} has duplicate explanation sentences")
             evidence_publications = direction.get("evidencePublicationIds")
-            if not isinstance(evidence_publications, list) or not evidence_publications:
-                raise SourceDataError(f"subdirection {direction_id} requires supporting publication IDs")
+            if not isinstance(evidence_publications, list):
+                raise SourceDataError(f"subdirection {direction_id} supporting publication IDs must be a list")
+            if any(not isinstance(publication_id, str) or not clean(publication_id) for publication_id in evidence_publications):
+                raise SourceDataError(f"subdirection {direction_id} supporting publication IDs must contain strings")
             if len(evidence_publications) != len(set(evidence_publications)):
                 raise SourceDataError(f"subdirection {direction_id} has duplicate supporting publication IDs")
             for publication_id in evidence_publications:
@@ -961,8 +980,12 @@ def validate_research_subdirections(
                     raise SourceDataError(f"subdirection {direction_id} has an invalid evidence URL")
                 if (urlparse(url).hostname or "").casefold() == "scholar.google.com":
                     raise SourceDataError(f"subdirection {direction_id} cannot use Google Scholar evidence")
-                if not _valid_evidence(url):
+                if not _valid_evidence(url) and not _valid_official_subdirection_evidence(url):
                     raise SourceDataError(f"subdirection {direction_id} has evidence outside approved research sources")
+            if not evidence_publications and not any(
+                _valid_official_subdirection_evidence(url) for url in evidence_urls
+            ):
+                raise SourceDataError(f"subdirection {direction_id} without publications requires official research evidence")
             validate_review_status(direction.get("reviewStatus"), f"subdirection {direction_id}")
 
         assigned_publications: set[str] = set()
@@ -978,6 +1001,8 @@ def validate_research_subdirections(
             assigned_directions = assignment.get("subdirectionIds")
             if not isinstance(assigned_directions, list):
                 raise SourceDataError(f"publication {publication_id} subdirection IDs must be a list")
+            if any(not isinstance(direction_id, str) or not clean(direction_id) for direction_id in assigned_directions):
+                raise SourceDataError(f"publication {publication_id} subdirection IDs must contain strings")
             if len(assigned_directions) != len(set(assigned_directions)):
                 raise SourceDataError(f"publication {publication_id} has duplicate subdirection IDs")
             unknown_directions = set(assigned_directions) - direction_ids
