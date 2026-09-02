@@ -218,6 +218,8 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 
 For the current release, each validator must print `397/397`, and the full discovered suite must pass. Any non-zero command, count mismatch, schema/cutoff/window drift, unsafe or missing manifest path, stale review artifact, `block` status, non-publishable retrieval status, unresolved conflict reproducible in canonical `data/publications.json`, frozen-English digest mismatch, missing translation, or bilingual structural/identity/link/order mismatch stops publication.
 
+The published byte ceilings are 524,288 bytes for `data/directory-index.json`, 16,384 bytes for each profile Markdown file, 262,144 bytes for each publications Markdown file, and 131,072 bytes for each language overview. Limits apply to UTF-8 bytes and accept the exact boundary. Each ceiling leaves more than 75% headroom above the current largest artifact in its class; overflow stops the final validator.
+
 Run the generator a second time with the same arguments and require a zero diff in English generated outputs. Review the exact candidate diff, unresolved limitations, generated counts, and bilingual parity before any commit or push. The repository's clean-before-commit gate applies at that boundary.
 
 ## Canonical data schemas

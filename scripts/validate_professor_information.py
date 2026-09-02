@@ -6,14 +6,29 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import unicodedata
 from collections import defaultdict
 from pathlib import Path, PurePosixPath
 from urllib.parse import urlsplit
 
-from professor_information import (
+try:
+    from professor_information import (
+        SourceDataError, _chinese_overview_markdown, _chinese_profile_markdown,
+        _chinese_publications_markdown, _normalized_title, _overview_markdown,
+        _profile_markdown, _publications_markdown, build_translation_memory_translator,
+        in_window, validate_bilingual_parity, validate_frozen_english,
+        validate_research_analysis, validate_research_subdirections,
+        validate_retrieval_statuses, validate_release_window,
+    )
+except ModuleNotFoundError:
+    from scripts.professor_information import (
     SourceDataError,
+    _chinese_overview_markdown,
+    _chinese_profile_markdown,
     _chinese_publications_markdown,
     _normalized_title,
+    _overview_markdown,
+    _profile_markdown,
     _publications_markdown,
     build_translation_memory_translator,
     in_window,
@@ -43,6 +58,59 @@ _DIRECTORY_FIELDS = {
     "subdirectionNames", "publicationCount", "lastVerifiedOn",
 }
 _SAFE_DIRECTORY_GROUP = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
+
+PUBLISHED_BYTE_LIMITS = {
+    "directory-index": 524_288,
+    "profile": 16_384,
+    "publications": 262_144,
+    "overview": 131_072,
+}
+
+
+def validate_published_bytes(data: bytes, limit: int, label: str) -> None:
+    if len(data) > limit:
+        raise SourceDataError(f"{label} exceeds published byte limit {limit}")
+
+
+def _read_published_text(path: Path, kind: str) -> str:
+    data = path.read_bytes()
+    validate_published_bytes(data, PUBLISHED_BYTE_LIMITS[kind], str(path))
+    return data.decode("utf-8")
+
+
+def validate_self_review_release_report(root: Path, cutoff: str, artifact: dict) -> None:
+    path = root / f"reports/{cutoff}-subdirection-self-review.json"
+    report = load_json(path)
+    if not isinstance(report, dict) or report.get("schemaVersion") != 1 or report.get("cutoff") != cutoff:
+        raise SourceDataError("subdirection self-review report metadata differs")
+    results = report.get("results")
+    if not isinstance(results, list):
+        raise SourceDataError("subdirection self-review results must be a list")
+    records = {str(item["officialProfileId"]): item for item in artifact.get("professors") or []}
+    seen = set()
+    for result in results:
+        profile_id = str(result.get("officialProfileId") or "") if isinstance(result, dict) else ""
+        if not profile_id or profile_id in seen:
+            raise SourceDataError("duplicate or invalid subdirection self-review result")
+        seen.add(profile_id)
+        record = records.get(profile_id)
+        if record is None or result.get("disposition") == "block" or result.get("disposition") != record.get("reviewStatus"):
+            raise SourceDataError("subdirection self-review disposition differs or is blocked")
+        expected_directions = {item["id"]: item["reviewStatus"] for item in record["subdirections"]}
+        reviews = result.get("directionReviews")
+        actual_directions = {
+            str(item.get("subdirectionId") or ""): item.get("disposition")
+            for item in reviews or [] if isinstance(item, dict)
+        }
+        if len(actual_directions) != len(reviews or []) or actual_directions != expected_directions:
+            raise SourceDataError("subdirection self-review direction results differ")
+        assignments = record["publicationAssignments"]
+        expected_counts = (len(assignments), sum(bool(item["subdirectionIds"]) for item in assignments))
+        actual_counts = (result.get("publicationAssignmentCount"), result.get("assignedPublicationCount"))
+        if actual_counts != expected_counts or result.get("unassignedPublicationCount") != expected_counts[0] - expected_counts[1]:
+            raise SourceDataError("subdirection self-review assignment counts differ")
+    if seen != set(records):
+        raise SourceDataError("subdirection self-review is missing professor IDs")
 
 
 def _record_map(records: object, label: str) -> dict[str, dict]:
@@ -90,6 +158,8 @@ def _validate_safe_document_paths(slug: str, paths: object) -> None:
 
 
 def validate(root: Path, cutoff: str) -> dict[str, int]:
+    directory_path = root / "data/directory-index.json"
+    validate_published_bytes(directory_path.read_bytes(), PUBLISHED_BYTE_LIMITS["directory-index"], str(directory_path))
     manifest = load_json(root / "data/manifest.json")
     search = load_json(root / "data/search-index.json")
     directory = load_json(root / "data/directory-index.json")
@@ -118,6 +188,7 @@ def validate(root: Path, cutoff: str) -> dict[str, int]:
             raise SourceDataError("publication is missing an identity")
         publication_owners[publication_id].add(profile_id)
     validate_research_subdirections(subdirections, professor_ids, publication_owners)
+    validate_self_review_release_report(root, cutoff, subdirections)
     if any(artifact.get("cutoff") != cutoff for artifact in (manifest, search, directory, subdirections)):
         raise SourceDataError("release artifact cutoff mismatch")
     window = manifest.get("window")
@@ -160,15 +231,15 @@ def validate(root: Path, cutoff: str) -> dict[str, int]:
             publications_by_professor[str(publication["officialProfileId"])].append(publication)
 
     for slug, paths in documents.items():
+        document_texts = {}
         for document_kind in _DOCUMENT_SUFFIXES:
             english_path = root / paths[document_kind]["en"]
             chinese_path = root / paths[document_kind]["zhCN"]
             if not english_path.is_file() or not chinese_path.is_file():
                 raise SourceDataError(f"manifest-selected {document_kind} document is missing for {slug}")
-            parity_errors = validate_bilingual_parity(
-                english_path.read_text(encoding="utf-8"),
-                chinese_path.read_text(encoding="utf-8"),
-            )
+            document_texts[(document_kind, "en")] = _read_published_text(english_path, document_kind)
+            document_texts[(document_kind, "zhCN")] = _read_published_text(chinese_path, document_kind)
+            parity_errors = validate_bilingual_parity(document_texts[(document_kind, "en")], document_texts[(document_kind, "zhCN")])
             if parity_errors:
                 raise SourceDataError(
                     f"bilingual document structure differs for {slug} {document_kind}: "
@@ -189,6 +260,14 @@ def validate(root: Path, cutoff: str) -> dict[str, int]:
         directions_by_id = {
             item["id"]: item for item in subdirection_record["subdirections"]
         }
+        expected_profile_en = _profile_markdown(
+            professor, analysis_by_professor[profile_id], subdirection_record["subdirections"]
+        )
+        expected_profile_zh = _chinese_profile_markdown(
+            professor, analysis_by_professor[profile_id], subdirection_record["subdirections"], translator
+        )
+        if document_texts[("profile", "en")] != expected_profile_en or document_texts[("profile", "zhCN")] != expected_profile_zh:
+            raise SourceDataError(f"canonical profile document differs for {slug}")
         expected_english = _publications_markdown(
             professor, analysis_by_professor[profile_id], professor_publications,
             assignments, {key: value["nameEn"] for key, value in directions_by_id.items()},
@@ -199,20 +278,35 @@ def validate(root: Path, cutoff: str) -> dict[str, int]:
             assignments, directions_by_id, window["start"], cutoff, translator,
         )
         if (
-            (root / paths["publications"]["en"]).read_text(encoding="utf-8") != expected_english
-            or (root / paths["publications"]["zhCN"]).read_text(encoding="utf-8") != expected_chinese
+            document_texts[("publications", "en")] != expected_english
+            or document_texts[("publications", "zhCN")] != expected_chinese
         ):
             raise SourceDataError(f"canonical publication document differs for {slug}")
     overview_en = root / "All_Prof_Info.md"
     overview_zh = root / "All_Prof_Info.zh-CN.md"
     if not overview_en.is_file() or not overview_zh.is_file():
         raise SourceDataError("bilingual overview document is missing")
-    overview_errors = validate_bilingual_parity(
-        overview_en.read_text(encoding="utf-8"),
-        overview_zh.read_text(encoding="utf-8"),
-    )
+    overview_en_text = _read_published_text(overview_en, "overview")
+    overview_zh_text = _read_published_text(overview_zh, "overview")
+    overview_errors = validate_bilingual_parity(overview_en_text, overview_zh_text)
     if overview_errors:
         raise SourceDataError("bilingual overview structure differs: " + "; ".join(overview_errors))
+    ordered = sorted(
+        professors,
+        key=lambda item: (
+            unicodedata.normalize("NFKC", str(item["nameEn"])).casefold(),
+            item["officialProfileId"],
+        ),
+    )
+    publication_counts_for_overview = {
+        profile_id: len(publications_by_professor.get(profile_id, [])) for profile_id in professor_ids
+    }
+    expected_overview_en = _overview_markdown(ordered, publication_counts_for_overview, window["start"], cutoff)
+    expected_overview_zh = _chinese_overview_markdown(
+        ordered, publication_counts_for_overview, documents, window["start"], cutoff, translator
+    )
+    if overview_en_text != expected_overview_en or overview_zh_text != expected_overview_zh:
+        raise SourceDataError("canonical overview document differs")
     expected_counts = {
         "professors": len(professors),
         "publications": sum(1 for item in publications if in_window(window["start"], cutoff, item["effectiveDate"])),

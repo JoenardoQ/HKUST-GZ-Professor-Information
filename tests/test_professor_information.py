@@ -33,6 +33,29 @@ from scripts.retrieve_research_sources import (
 )
 from scripts import retrieve_research_sources as retrieval
 from scripts import professor_information as professor_logic
+from scripts import validate_professor_information as release_validator
+
+
+def write_self_review_stub(root, subdirections):
+    results = []
+    for record in subdirections["professors"]:
+        assignments = record["publicationAssignments"]
+        results.append({
+            "officialProfileId": record["officialProfileId"],
+            "disposition": record["reviewStatus"],
+            "directionReviews": [
+                {"subdirectionId": direction["id"], "disposition": direction["reviewStatus"]}
+                for direction in record["subdirections"]
+            ],
+            "publicationAssignmentCount": len(assignments),
+            "assignedPublicationCount": sum(bool(item["subdirectionIds"]) for item in assignments),
+            "unassignedPublicationCount": sum(not item["subdirectionIds"] for item in assignments),
+        })
+    report = {"schemaVersion": 1, "cutoff": subdirections["cutoff"], "results": results}
+    path = root / "reports" / f"{subdirections['cutoff']}-subdirection-self-review.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(report), encoding="utf-8")
+    return report
 
 
 def faculty_row(profile_id="20", name="陈雷", en_name="Lei CHEN"):
@@ -1495,6 +1518,7 @@ class ProfessorInformationTests(unittest.TestCase):
                 "2024-09-01", "2026-09-01", professor_logic.build_translation_memory_translator(memory),
                 research_subdirections=subdirections,
             )
+            write_self_review_stub(root, subdirections)
             command = [
                 sys.executable,
                 str(Path(__file__).parents[1] / "scripts/validate_professor_information.py"),
@@ -1633,6 +1657,7 @@ class ProfessorInformationTests(unittest.TestCase):
                 "2024-09-01", "2026-09-01", professor_logic.build_translation_memory_translator(memory),
                 research_subdirections=subdirections,
             )
+            write_self_review_stub(root, subdirections)
             command = [
                 sys.executable,
                 str(Path(__file__).parents[1] / "scripts/validate_professor_information.py"),
@@ -1689,6 +1714,7 @@ class ProfessorInformationTests(unittest.TestCase):
                 "2024-09-01", "2026-09-01", professor_logic.build_translation_memory_translator(memory),
                 research_subdirections=subdirections,
             )
+            write_self_review_stub(root, subdirections)
             command = [sys.executable, str(Path(__file__).parents[1] / "scripts/validate_professor_information.py"), "--root", str(root), "--cutoff", "2026-09-01"]
             chinese_path = root / manifest["documents"][professors[0]["slug"]]["publications"]["zhCN"]
             original = chinese_path.read_text(encoding="utf-8")
@@ -1732,6 +1758,7 @@ class ProfessorInformationTests(unittest.TestCase):
                 professor_logic.build_translation_memory_translator(memory),
                 research_subdirections=subdirections,
             )
+            write_self_review_stub(root, subdirections)
             command = [sys.executable, str(Path(__file__).parents[1] / "scripts/validate_professor_information.py"), "--root", str(root), "--cutoff", "2026-09-01"]
             english_path = root / manifest["documents"][professors[0]["slug"]]["profile"]["en"]
             original_english = english_path.read_text(encoding="utf-8")
@@ -1777,6 +1804,115 @@ class ProfessorInformationTests(unittest.TestCase):
                             research_subdirections=subdirections,
                         )
                     self.assertFalse(escaped.exists())
+
+    def test_english_generation_rejects_unsafe_slug_before_any_write(self):
+        professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
+        for slug in ("../../escaped", "/absolute", "%2e%2e", "bad\\slug"):
+            with self.subTest(slug=slug), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary) / "release"
+                malicious = deepcopy(professors)
+                malicious[0]["slug"] = slug
+                with self.assertRaisesRegex(SourceDataError, "unsafe"):
+                    generate_documents(
+                        root, malicious, [research_analysis()], [],
+                        "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                        research_subdirections=reviewed_subdirections(),
+                    )
+                self.assertFalse(root.exists())
+                self.assertFalse((Path(temporary) / "escaped.md").exists())
+
+    def test_final_validator_helpers_reject_profile_overview_and_translation_drift(self):
+        professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
+        analysis = research_analysis()
+        subdirections = reviewed_subdirections()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest = generate_documents(
+                root, professors, [analysis], [], "2024-09-01", "2026-09-01",
+                "2026-09-02T00:00:00Z", research_subdirections=subdirections,
+            )["manifest"]
+            inputs = professor_logic.collect_translation_inputs(
+                professors, [analysis], [], "2024-09-01", "2026-09-01",
+                research_subdirections=subdirections,
+            )
+            memory = {value: f"中译：{value}" for value in inputs}
+            professor_logic.generate_chinese_documents(
+                root, professors, [analysis], [], "2024-09-01", "2026-09-01",
+                professor_logic.build_translation_memory_translator(memory),
+                research_subdirections=subdirections,
+            )
+            for filename, value in (
+                ("professors.json", professors), ("research-analysis.json", [analysis]),
+                ("publications.json", []), ("research-subdirections.json", subdirections),
+                ("translations.zh-CN.json", memory),
+            ):
+                (root / "data" / filename).write_text(json.dumps(value), encoding="utf-8")
+            write_self_review_stub(root, subdirections)
+            command = [sys.executable, str(Path(__file__).parents[1] / "scripts/validate_professor_information.py"), "--root", str(root), "--cutoff", "2026-09-01"]
+            self.assertEqual(subprocess.run(command, capture_output=True, text=True).returncode, 0)
+            profile = root / manifest["documents"][professors[0]["slug"]]["profile"]["en"]
+            expected = professor_logic._profile_markdown(professors[0], analysis, subdirections["professors"][0]["subdirections"])
+            self.assertEqual(profile.read_text(encoding="utf-8"), expected)
+            manifest_path = root / "data/manifest.json"
+            profile.write_text(expected.replace("Data management", "Coordinated drift"), encoding="utf-8")
+            changed_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            relative_profile = manifest["documents"][professors[0]["slug"]]["profile"]["en"]
+            changed_manifest["translationSource"]["englishFileSha256"][relative_profile] = professor_logic._sha256_bytes(profile.read_bytes())
+            manifest_path.write_text(json.dumps(changed_manifest), encoding="utf-8")
+            rejected = subprocess.run(command, capture_output=True, text=True)
+            self.assertNotEqual(rejected.returncode, 0)
+            self.assertIn("canonical profile", rejected.stderr)
+
+            profile.write_text(expected, encoding="utf-8")
+            overview = root / "All_Prof_Info.md"
+            overview.write_text(overview.read_text(encoding="utf-8").replace("This report", "This coordinated report"), encoding="utf-8")
+            changed_manifest["translationSource"]["englishFileSha256"][relative_profile] = professor_logic._sha256_bytes(profile.read_bytes())
+            changed_manifest["translationSource"]["englishFileSha256"]["All_Prof_Info.md"] = professor_logic._sha256_bytes(overview.read_bytes())
+            manifest_path.write_text(json.dumps(changed_manifest), encoding="utf-8")
+            rejected = subprocess.run(command, capture_output=True, text=True)
+            self.assertNotEqual(rejected.returncode, 0)
+            self.assertIn("canonical overview", rejected.stderr)
+
+            overview.write_text(professor_logic._overview_markdown(professors, {"20": 0}, "2024-09-01", "2026-09-01"), encoding="utf-8")
+            changed_manifest["translationSource"]["englishFileSha256"]["All_Prof_Info.md"] = professor_logic._sha256_bytes(overview.read_bytes())
+            manifest_path.write_text(json.dumps(changed_manifest), encoding="utf-8")
+            missing_memory = deepcopy(memory)
+            missing_memory.pop("Data management")
+            (root / "data/translations.zh-CN.json").write_text(json.dumps(missing_memory), encoding="utf-8")
+            rejected = subprocess.run(command, capture_output=True, text=True)
+            self.assertNotEqual(rejected.returncode, 0)
+            self.assertIn("missing reviewed Chinese translation", rejected.stderr)
+
+    def test_final_release_self_review_gate_rejects_missing_duplicate_block_and_mismatch(self):
+        artifact = reviewed_subdirections()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            with self.assertRaisesRegex(SourceDataError, "self-review"):
+                release_validator.validate_self_review_release_report(root, "2026-09-01", artifact)
+            baseline = write_self_review_stub(root, artifact)
+            release_validator.validate_self_review_release_report(root, "2026-09-01", artifact)
+            mutations = {
+                "duplicate": lambda report: report["results"].append(deepcopy(report["results"][0])),
+                "blocked": lambda report: report["results"][0].update({"disposition": "block"}),
+                "mismatch": lambda report: report["results"][0]["directionReviews"][0].update({"subdirectionId": "invented"}),
+            }
+            path = root / "reports/2026-09-01-subdirection-self-review.json"
+            for label, mutate in mutations.items():
+                with self.subTest(label=label):
+                    changed = deepcopy(baseline)
+                    mutate(changed)
+                    path.write_text(json.dumps(changed), encoding="utf-8")
+                    with self.assertRaises(SourceDataError):
+                        release_validator.validate_self_review_release_report(root, "2026-09-01", artifact)
+
+    def test_published_byte_limits_accept_exact_boundary_and_reject_overflow(self):
+        expected = {"directory-index": 524_288, "profile": 16_384, "publications": 262_144, "overview": 131_072}
+        self.assertEqual(release_validator.PUBLISHED_BYTE_LIMITS, expected)
+        for document_class, limit in expected.items():
+            with self.subTest(document_class=document_class):
+                release_validator.validate_published_bytes(b"x" * limit, limit, document_class)
+                with self.assertRaisesRegex(SourceDataError, "byte limit"):
+                    release_validator.validate_published_bytes(b"x" * (limit + 1), limit, document_class)
 
     def test_not_started_retrieval_is_not_publishable(self):
         analyses = [research_analysis(status="not-started")]

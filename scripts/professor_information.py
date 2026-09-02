@@ -448,6 +448,66 @@ def _profile_markdown(
     return "\n".join(lines)
 
 
+def _chinese_profile_markdown(
+    professor: dict[str, Any],
+    analysis: dict[str, Any],
+    directions: list[dict[str, Any]],
+    zh: Callable[[Any], str],
+) -> str:
+    display_name = f"{professor['nameZh']} · {professor['nameEn']}" if professor.get("nameZh") else professor["nameEn"]
+    lines = [f"# {display_name}", "", f"Professor identity: `{professor['officialProfileId']}`", "", f"中文姓名：{professor['nameZh'] or '未公开'}", "", "## 官方资料与联系方式", "", f"- [香港科技大学（广州）Faculty Profiles]({professor['officialProfileUrl']})", f"- 工作邮箱：{professor['email'] or '未公开'}", f"- 办公电话：{professor['phone'] or '未公开'}"]
+    if professor.get("website"):
+        lines.append(f"- 个人网站：[{professor['website']}]({professor['website']})")
+    if professor.get("permaLink"):
+        lines.append(f"- 其他官方学术主页：[{professor['permaLink']}]({professor['permaLink']})")
+    lines.extend(["", "## 当前香港科技大学（广州）任职关系", ""])
+    if professor["affiliations"]:
+        for affiliation in professor["affiliations"]:
+            title = zh(affiliation.get("title")) if affiliation.get("title") else "职称未公开"
+            unit = zh(affiliation.get("unit")) if affiliation.get("unit") else "单位未公开"
+            hub = zh(affiliation.get("hub")) if affiliation.get("hub") else "上级单位未公开"
+            lines.append(f"- {title} — {unit} / {hub}")
+    else:
+        lines.append("- 官方来源未返回当前广州校区任职关系。")
+    lines.extend(["", "## 研究分析", "", zh(analysis["summaryEn"]), "", "### 研究兴趣", ""])
+    lines.extend(f"- {zh(value)}" for value in analysis["researchInterests"])
+    if not analysis["researchInterests"]:
+        lines.append("- 无法从本轮证据中推断稳定的研究兴趣。")
+    lines.extend(["", "### 研究领域", ""])
+    lines.extend(f"- {zh(value)}" for value in analysis["researchAreas"])
+    if not analysis["researchAreas"]:
+        lines.append("- 无法从本轮证据中推断稳定的研究领域。")
+    lines.extend(["", "### 关键词", ""])
+    lines.append("、".join(zh(value) for value in analysis["keywords"]) or "无法从本轮证据中推断关键词。")
+    evidence = " · ".join(f"[研究证据 {index + 1}]({url})" for index, url in enumerate(analysis["evidenceUrls"]))
+    if evidence:
+        lines.extend(["", f"分析证据：{evidence}"])
+    lines.extend(["", "## 生成的研究细分方向", ""])
+    for direction in directions:
+        lines.extend([f"### {zh(direction['nameEn'])}", ""])
+        for sentence in direction["explanationEn"]:
+            lines.extend([zh(sentence), ""])
+    lines.extend(["## 核验信息", "", f"官方基础资料最近核验日期：{professor['lastVerifiedOn']}", f"研究来源分析最近核验日期：{analysis['lastVerifiedOn']}", ""])
+    return "\n".join(lines)
+
+
+def _overview_markdown(ordered: list[dict[str, Any]], publication_counts: dict[str, int], start: str, end: str) -> str:
+    lines = ["# All HKUST(GZ) Professor Information", "", f"Cutoff: {end}  ", f"Inclusive publication window: {start} through {end}  ", f"Professors: {len(ordered)}  ", f"Publications retrieved in this update: {sum(publication_counts.values())}", "", "OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive. This report is not a complete publication record.", "", "## Professor directory", ""]
+    for professor in ordered:
+        path = f"professors/{_hub_directory(professor)}/{professor['slug']}.md"
+        lines.extend([f"### [{professor['nameEn']}]({path})", "", f"{professor['nameZh'] or 'Chinese name not published'} · {' / '.join(item['hub'] or '' for item in professor['affiliations']) or 'Unit not published'} · {publication_counts.get(professor['officialProfileId'], 0)} publications retrieved", ""])
+    return "\n".join(lines)
+
+
+def _chinese_overview_markdown(ordered: list[dict[str, Any]], publication_counts: dict[str, int], documents: dict[str, Any], start: str, end: str, zh: Callable[[Any], str]) -> str:
+    lines = ["# 香港科技大学（广州）教授信息总览", "", f"截止日期：{end}  ", f"论文闭区间：{start} 至 {end}  ", f"教授人数：{len(ordered)}  ", f"本轮检索到的论文：{sum(publication_counts.values())}", "", "OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；本报告不是完整发表记录。", "", "## 教授目录", ""]
+    for professor in ordered:
+        display_name = f"{professor['nameZh']} · {professor['nameEn']}" if professor.get("nameZh") else professor["nameEn"]
+        path = documents[professor["slug"]]["profile"]["zhCN"]
+        lines.extend([f"### [{display_name}]({path})", "", f"{' / '.join(zh(item['hub']) for item in professor['affiliations'] if item.get('hub')) or '单位未公开'} · 本轮检索到 {publication_counts.get(professor['officialProfileId'], 0)} 篇论文", ""])
+    return "\n".join(lines)
+
+
 def _publications_markdown(
     professor: dict[str, Any],
     analysis: dict[str, Any],
@@ -710,33 +770,21 @@ def generate_documents(
     if unknown:
         raise SourceDataError(f"publication records reference unknown professor IDs: {', '.join(unknown)}")
     ordered = sorted(professors, key=lambda item: (unicodedata.normalize("NFKC", item["nameEn"]).casefold(), item["officialProfileId"]))
-    documents: dict[str, dict[str, str]] = {}
-    search_records = []
-    directory_records = []
-    overview = [
-        "# All HKUST(GZ) Professor Information",
-        "",
-        f"Cutoff: {end}  ",
-        f"Inclusive publication window: {start} through {end}  ",
-        f"Professors: {len(ordered)}  ",
-        f"Publications retrieved in this update: {len(selected)}",
-        "",
-        "OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive. This report is not a complete publication record.",
-        "",
-        "## Professor directory",
-        "",
-    ]
+    documents: dict[str, dict[str, Any]] = {}
     for professor in ordered:
         slug = professor["slug"]
         directory = _hub_directory(professor)
-        en_path = f"professors/{directory}/{slug}.md"
-        zh_path = f"professors/{directory}/{slug}.zh-CN.md"
-        publications_en_path = f"professors/{directory}/{slug}.publications.md"
-        publications_zh_path = f"professors/{directory}/{slug}.publications.zh-CN.md"
         documents[slug] = {
-            "profile": {"en": en_path, "zhCN": zh_path},
-            "publications": {"en": publications_en_path, "zhCN": publications_zh_path},
+            "profile": {"en": f"professors/{directory}/{slug}.md", "zhCN": f"professors/{directory}/{slug}.zh-CN.md"},
+            "publications": {"en": f"professors/{directory}/{slug}.publications.md", "zhCN": f"professors/{directory}/{slug}.publications.zh-CN.md"},
         }
+    validate_manifest_document_paths({"documents": documents})
+    search_records = []
+    directory_records = []
+    for professor in ordered:
+        slug = professor["slug"]
+        en_path = documents[slug]["profile"]["en"]
+        publications_en_path = documents[slug]["publications"]["en"]
         professor_publications = sorted(
             by_professor.get(professor["officialProfileId"], []),
             key=lambda item: (item["effectiveDate"], _normalized_title(item["title"])),
@@ -763,12 +811,6 @@ def generate_documents(
             ),
             encoding="utf-8",
         )
-        overview.extend([
-            f"### [{professor['nameEn']}]({en_path})",
-            "",
-            f"{professor['nameZh'] or 'Chinese name not published'} · {' / '.join(item['hub'] or '' for item in professor['affiliations']) or 'Unit not published'} · {len(professor_publications)} publications retrieved",
-            "",
-        ])
         titles = sorted({item["title"] for item in professor_publications})
         search_records.append({
             "officialProfileId": professor["officialProfileId"],
@@ -827,7 +869,10 @@ def generate_documents(
         "records": directory_records,
     }
     root.mkdir(parents=True, exist_ok=True)
-    (root / "All_Prof_Info.md").write_text("\n".join(overview), encoding="utf-8")
+    publication_counts = {profile_id: len(items) for profile_id, items in by_professor.items()}
+    (root / "All_Prof_Info.md").write_text(
+        _overview_markdown(ordered, publication_counts, start, end), encoding="utf-8"
+    )
     english_paths = [
         "All_Prof_Info.md",
         *(paths[kind]["en"] for paths in documents.values() for kind in ("profile", "publications")),
@@ -955,19 +1000,6 @@ def generate_chinese_documents(
     ):
         zh(source)
 
-    overview = [
-        "# 香港科技大学（广州）教授信息总览",
-        "",
-        f"截止日期：{end}  ",
-        f"论文闭区间：{start} 至 {end}  ",
-        f"教授人数：{len(ordered)}  ",
-        f"本轮检索到的论文：{len(selected)}",
-        "",
-        "OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；本报告不是完整发表记录。",
-        "",
-        "## 教授目录",
-        "",
-    ]
     for professor in ordered:
         slug = professor["slug"]
         paths = documents.get(slug) or {}
@@ -997,61 +1029,8 @@ def generate_chinese_documents(
             key=lambda item: (item["effectiveDate"], _normalized_title(item["title"])),
             reverse=True,
         )
-        display_name = f"{professor['nameZh']} · {professor['nameEn']}" if professor.get("nameZh") else professor["nameEn"]
-        lines = [
-            f"# {display_name}",
-            "",
-            f"Professor identity: `{professor['officialProfileId']}`",
-            "",
-            f"中文姓名：{professor['nameZh'] or '未公开'}",
-            "",
-            "## 官方资料与联系方式",
-            "",
-            f"- [香港科技大学（广州）Faculty Profiles]({professor['officialProfileUrl']})",
-            f"- 工作邮箱：{professor['email'] or '未公开'}",
-            f"- 办公电话：{professor['phone'] or '未公开'}",
-        ]
-        if professor.get("website"):
-            lines.append(f"- 个人网站：[{professor['website']}]({professor['website']})")
-        if professor.get("permaLink"):
-            lines.append(f"- 其他官方学术主页：[{professor['permaLink']}]({professor['permaLink']})")
-        lines.extend(["", "## 当前香港科技大学（广州）任职关系", ""])
-        if professor["affiliations"]:
-            for affiliation in professor["affiliations"]:
-                title = zh(affiliation.get("title")) if affiliation.get("title") else "职称未公开"
-                unit = zh(affiliation.get("unit")) if affiliation.get("unit") else "单位未公开"
-                hub = zh(affiliation.get("hub")) if affiliation.get("hub") else "上级单位未公开"
-                lines.append(f"- {title} — {unit} / {hub}")
-        else:
-            lines.append("- 官方来源未返回当前广州校区任职关系。")
-        lines.extend(["", "## 研究分析", "", zh(analysis["summaryEn"])])
-        lines.extend(["", "### 研究兴趣", ""])
-        lines.extend(f"- {zh(value)}" for value in analysis["researchInterests"])
-        if not analysis["researchInterests"]:
-            lines.append("- 无法从本轮证据中推断稳定的研究兴趣。")
-        lines.extend(["", "### 研究领域", ""])
-        lines.extend(f"- {zh(value)}" for value in analysis["researchAreas"])
-        if not analysis["researchAreas"]:
-            lines.append("- 无法从本轮证据中推断稳定的研究领域。")
-        lines.extend(["", "### 关键词", ""])
-        lines.append("、".join(zh(value) for value in analysis["keywords"]) or "无法从本轮证据中推断关键词。")
-        evidence = " · ".join(f"[研究证据 {index + 1}]({url})" for index, url in enumerate(analysis["evidenceUrls"]))
-        if evidence:
-            lines.extend(["", f"分析证据：{evidence}"])
-        lines.extend(["", "## 生成的研究细分方向", ""])
-        for direction in directions:
-            lines.extend([f"### {zh(direction['nameEn'])}", ""])
-            for sentence in direction["explanationEn"]:
-                lines.extend([zh(sentence), ""])
-        lines.extend([
-            "## 核验信息",
-            "",
-            f"官方基础资料最近核验日期：{professor['lastVerifiedOn']}",
-            f"研究来源分析最近核验日期：{analysis['lastVerifiedOn']}",
-            "",
-        ])
         zh_path.parent.mkdir(parents=True, exist_ok=True)
-        zh_path.write_text("\n".join(lines), encoding="utf-8")
+        zh_path.write_text(_chinese_profile_markdown(professor, analysis, directions, zh), encoding="utf-8")
 
         publications_zh_path.write_text(
             _chinese_publications_markdown(
@@ -1060,13 +1039,11 @@ def generate_chinese_documents(
             ),
             encoding="utf-8",
         )
-        overview.extend([
-            f"### [{display_name}]({profile_paths['zhCN']})",
-            "",
-            f"{' / '.join(zh(item['hub']) for item in professor['affiliations'] if item.get('hub')) or '单位未公开'} · 本轮检索到 {len(professor_publications)} 篇论文",
-            "",
-        ])
-    (root / "All_Prof_Info.zh-CN.md").write_text("\n".join(overview), encoding="utf-8")
+    publication_counts = {profile_id: len(items) for profile_id, items in by_professor.items()}
+    (root / "All_Prof_Info.zh-CN.md").write_text(
+        _chinese_overview_markdown(ordered, publication_counts, documents, start, end, zh),
+        encoding="utf-8",
+    )
 
 
 def _identities(markdown: str, label: str) -> list[str]:
