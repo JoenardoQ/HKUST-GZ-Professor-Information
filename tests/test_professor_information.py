@@ -309,6 +309,7 @@ class ProfessorInformationTests(unittest.TestCase):
             )
 
     def test_subdirection_work_queue(self):
+        from scripts import validate_subdirection_review as subdirection_review
         from scripts.prepare_subdirection_work_queue import (
             build_subdirection_candidates,
             build_subdirection_work_queue,
@@ -320,7 +321,13 @@ class ProfessorInformationTests(unittest.TestCase):
             [faculty_row(), second_row], baseline_ids={"20", "21"}
         )
         analyses = [
-            research_analysis(),
+            {
+                **research_analysis(),
+                "researchAreas": [
+                    "Database systems",
+                    "Advanced Database Systems Research",
+                ],
+            },
             {
                 **research_analysis("21"),
                 "researchInterests": ["Privacy"],
@@ -390,6 +397,19 @@ class ProfessorInformationTests(unittest.TestCase):
 
         candidates = build_subdirection_candidates(queue)
         self.assertNotIn("reviewStatus", json.dumps(candidates))
+        candidate_by_id = {
+            item["officialProfileId"]: item for item in candidates["professors"]
+        }
+        self.assertEqual(
+            [item["nameEn"] for item in candidate_by_id["20"]["subdirections"]],
+            [
+                "Data management",
+                "Database systems",
+                "Advanced Database Systems Research",
+            ],
+        )
+        self.assertNotIn("evidencePublicationIds", json.dumps(candidates))
+        self.assertNotIn("publicationAssignments", json.dumps(candidates))
         artifact, report = review_subdirection_candidates(queue, candidates)
         publication_owners = {}
         for publication in publications:
@@ -420,6 +440,11 @@ class ProfessorInformationTests(unittest.TestCase):
         self.assertEqual(
             by_id["20"]["subdirections"][0]["nameEn"], "Database systems"
         )
+        self.assertNotIn(
+            "Data management",
+            {item["nameEn"] for item in by_id["20"]["subdirections"]},
+            "the independent reviewer must reject a broad unsupported prepared candidate",
+        )
         self.assertEqual(by_id["21"]["reviewStatus"], "limited")
         limited_direction = by_id["21"]["subdirections"][0]
         self.assertEqual(
@@ -436,36 +461,32 @@ class ProfessorInformationTests(unittest.TestCase):
             item["officialProfileId"]: item for item in report["results"]
         }
         direction_review = result_by_id["20"]["directionReviews"][0]
-        self.assertEqual(direction_review["evidenceBasis"], "title-and-subject-metadata")
+        self.assertEqual(
+            direction_review["evidenceBasis"],
+            "title-or-indexed-subject support",
+        )
         self.assertEqual(direction_review["evidencePublicationIds"], ["doi:10.1/database"])
         self.assertEqual(direction_review["evidenceUrls"], ["https://openalex.org/W20"])
+        self.assertEqual(
+            direction_review["sourceNamesEn"],
+            ["Database systems", "Advanced Database Systems Research"],
+        )
         self.assertTrue(direction_review["reasonEn"])
 
-        token_duplicate = deepcopy(candidates)
-        duplicate_direction = deepcopy(
-            token_duplicate["professors"][0]["subdirections"][0]
+        frozen_candidates = deepcopy(candidates)
+        with patch.object(
+            subdirection_review, "_review_text_support", return_value=False
+        ):
+            rejected_artifact, _ = review_subdirection_candidates(queue, candidates)
+        rejected_by_id = {
+            item["officialProfileId"]: item
+            for item in rejected_artifact["professors"]
+        }
+        self.assertEqual(candidates, frozen_candidates)
+        self.assertEqual(
+            [item["nameEn"] for item in rejected_by_id["20"]["subdirections"]],
+            ["Conflicting indexed research evidence"],
         )
-        duplicate_direction["id"] = "advanced-database-systems-research"
-        duplicate_direction["nameEn"] = "Advanced Database Systems Research"
-        duplicate_direction["evidencePublicationIds"] = []
-        duplicate_direction["evidenceUrls"] = []
-        token_duplicate["professors"][0]["subdirections"].append(
-            duplicate_direction
-        )
-        with self.assertRaisesRegex(SourceDataError, "semantic duplicate"):
-            review_subdirection_candidates(queue, token_duplicate)
-
-        evidence_duplicate = deepcopy(candidates)
-        duplicate_direction = deepcopy(
-            evidence_duplicate["professors"][0]["subdirections"][0]
-        )
-        duplicate_direction["id"] = "relational-storage-engines"
-        duplicate_direction["nameEn"] = "Relational storage engines"
-        evidence_duplicate["professors"][0]["subdirections"].append(
-            duplicate_direction
-        )
-        with self.assertRaisesRegex(SourceDataError, "semantic duplicate"):
-            review_subdirection_candidates(queue, evidence_duplicate)
 
         with self.assertRaisesRegex(SourceDataError, "March 1 or September 1"):
             build_subdirection_work_queue(
@@ -620,7 +641,7 @@ class ProfessorInformationTests(unittest.TestCase):
             for item in by_id["671"]["subdirections"]
         ))
 
-        self.assertEqual(reviews["22"]["professorBasis"], "conflicting-record")
+        self.assertEqual(reviews["22"]["professorBasis"], "evidence-conflict")
         self.assertEqual(
             {item["nameEn"] for item in by_id["22"]["subdirections"]},
             {"Conflicting indexed research evidence"},
@@ -631,23 +652,28 @@ class ProfessorInformationTests(unittest.TestCase):
             "AI in cancer detection",
             {item["nameEn"] for item in by_id["384"]["subdirections"]},
         )
-        self.assertEqual(reviews["475"]["professorBasis"], "incoherent-publication-record")
-        self.assertEqual(
-            {item["nameEn"] for item in by_id["475"]["subdirections"]},
-            {
-                "Anaerobic Digestion and Biogas Production",
-                "Nanoplatforms for cancer theranostics",
-            },
-        )
+        self.assertEqual(reviews["475"]["professorBasis"], "evidence-conflict")
+        names_475 = {item["nameEn"] for item in by_id["475"]["subdirections"]}
+        self.assertIn("Anaerobic Digestion and Biogas Production", names_475)
+        self.assertIn("Nanoplatforms for cancer theranostics", names_475)
+        self.assertNotIn("Distributed Sensor Networks and Detection Algorithms", names_475)
         cancer_review = next(
             item for item in reviews["475"]["directionReviews"]
             if item["subdirectionId"] == "nanoplatforms-for-cancer-theranostics"
         )
-        self.assertTrue(all(
-            any(term in title.casefold() for term in ("cancer", "tumor", "antitumor"))
-            for title in cancer_review["sourceTitles"]
+        self.assertTrue(any(
+            term in " ".join(cancer_review["matchedSubjectLabels"]).casefold()
+            for term in ("cancer", "tumor", "antitumor")
         ))
         self.assertTrue(all(not item["subdirectionIds"] for item in by_id["475"]["publicationAssignments"]))
+        self.assertEqual(reviews["115"]["professorBasis"], "publication-record")
+        self.assertGreater(reviews["115"]["assignedPublicationCount"], 0)
+        self.assertTrue({
+            "Sensorless Control of Electric Motors",
+            "Electric Motor Design and Analysis",
+            "Multilevel Inverters and Converters",
+        }.issubset({item["nameEn"] for item in by_id["115"]["subdirections"]}))
+        self.assertNotIn("identity remains uncertain", json.dumps(report).casefold())
         self.assertEqual(
             {item["nameEn"] for item in by_id["393"]["subdirections"]},
             {"BIM and Construction Integration"},
@@ -668,6 +694,47 @@ class ProfessorInformationTests(unittest.TestCase):
                 ))
                 for title in battery_review["sourceTitles"]
             ))
+
+        antenna_design = [
+            item for item in by_id["607"]["subdirections"]
+            if "antenna design" in item["nameEn"].casefold()
+        ]
+        self.assertEqual(len(antenna_design), 1)
+        antenna_review = next(
+            item for item in reviews["607"]["directionReviews"]
+            if item["subdirectionId"] == antenna_design[0]["id"]
+        )
+        self.assertIn("Antenna Design and Analysis", antenna_review["sourceNamesEn"])
+        self.assertIn("Antenna Design and Optimization", antenna_review["sourceNamesEn"])
+
+        self.assertNotIn(
+            "Artificial Intelligence in Games",
+            {item["nameEn"] for item in by_id["55"]["subdirections"]},
+        )
+
+        healthcare = next(
+            item for item in reviews["34"]["directionReviews"]
+            if item["subdirectionId"] == "artificial-intelligence-in-healthcare-and-education"
+        )
+        for source_title in healthcare["sourceTitles"]:
+            evidence_text = source_title.casefold()
+            self.assertTrue(any(term in evidence_text for term in (
+                "health", "clinical", "medical", "medicine", "education", "patient"
+            )))
+            self.assertNotIn("it terminal", evidence_text)
+
+        biomedical_3d = next(
+            item for item in reviews["372"]["directionReviews"]
+            if item["subdirectionId"] == "3d-printing-in-biomedical-research"
+        )
+        self.assertEqual(
+            biomedical_3d["evidenceBasis"],
+            "title-or-indexed-subject support",
+        )
+        self.assertTrue(any(
+            publication_id not in biomedical_3d["titleSupportedPublicationIds"]
+            for publication_id in biomedical_3d["indexedSubjectSupportedPublicationIds"]
+        ))
 
     def test_retrieval_attempts_skip_then_fail_after_three_targeted_failures(self):
         item = build_publication_work_queue(

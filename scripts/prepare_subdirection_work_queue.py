@@ -32,18 +32,6 @@ except ModuleNotFoundError:  # Direct script execution adds scripts/, not the re
     )
 
 
-_GENERIC_TOPIC_WORDS = frozenset({
-    "a", "an", "and", "application", "applications", "approach", "approaches",
-    "advanced", "based", "for", "in", "of", "on", "research", "study", "studies",
-    "the", "to",
-})
-_WEAK_SINGLE_TOKENS = frozenset({
-    "analysis", "approach", "architecture", "computational", "design", "development",
-    "effect", "impact", "management", "material", "method", "model", "network",
-    "optimization", "process", "system", "technology",
-})
-
-
 def _professor_sort_key(record: dict[str, Any]) -> tuple[str, str]:
     return (
         unicodedata.normalize("NFKC", str(record.get("nameEn") or "")).casefold(),
@@ -65,78 +53,6 @@ def _publication_sort_key(record: dict[str, Any]) -> tuple[int, str, str]:
 
 def _ascii_text(value: str) -> str:
     return unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode().casefold()
-
-
-def _stem(word: str) -> str:
-    if len(word) > 5 and word.endswith("ies"):
-        return word[:-3] + "y"
-    if len(word) > 5 and word.endswith("ing"):
-        return word[:-3]
-    if len(word) > 4 and word.endswith("ed"):
-        return word[:-2]
-    if len(word) > 4 and word.endswith("s"):
-        return word[:-1]
-    return word
-
-
-def _tokens(value: str, *, drop_generic: bool = False) -> set[str]:
-    result = {_stem(token) for token in re.findall(r"[a-z0-9]+", _ascii_text(value)) if len(token) >= 2}
-    if drop_generic:
-        result -= {_stem(token) for token in _GENERIC_TOPIC_WORDS}
-    return result
-
-
-def _similarity(left: str, right: str) -> float:
-    left_tokens, right_tokens = _tokens(left, drop_generic=True), _tokens(right, drop_generic=True)
-    if not left_tokens or not right_tokens:
-        return 0.0
-    return len(left_tokens & right_tokens) / len(left_tokens | right_tokens)
-
-
-def _set_similarity(left: set[str], right: set[str]) -> float:
-    if not left or not right:
-        return 0.0
-    return len(left & right) / len(left | right)
-
-
-def _topic_matches_publication(topic: str, publication: dict[str, Any]) -> bool:
-    """Require title-level support; keyword labels alone are not sufficient."""
-    topic_tokens = _tokens(topic, drop_generic=True)
-    title = str(publication.get("title") or "")
-    title_tokens = _tokens(title)
-    overlap = topic_tokens & title_tokens
-    topic_coverage = len(overlap) / len(topic_tokens) if topic_tokens else 0.0
-    if topic_coverage >= 0.5 and (
-        len(overlap) >= 2
-        or any(len(token) >= 6 and token not in _WEAK_SINGLE_TOKENS for token in overlap)
-    ):
-        return True
-    topic_ascii, title_ascii = _ascii_text(topic), _ascii_text(title)
-    compact_title = re.sub(r"[^a-z0-9]", "", title_ascii)
-    if "multimodal" in topic_ascii and (
-        "multimodal" in compact_title
-        or "visionlanguageaction" in compact_title
-        or re.search(r"\bvla\b", title_ascii)
-    ):
-        return True
-    if "robot" in topic_ascii and "social" not in topic_ascii and (
-        "visionlanguageaction" in compact_title or re.search(r"\bvla\b", title_ascii)
-    ):
-        return True
-    if "battery" in topic_ascii and title_tokens & {
-        "anode", "battery", "cathode", "lithium", "sodium", "zinc", "zn"
-    }:
-        return True
-    if "nanoplatform" in topic_ascii and {"cancer", "theranostic"} & topic_tokens:
-        nano_signal = bool(title_tokens & {"biomaterial", "nano", "nanoplatform", "photosensitizer"})
-        cancer_signal = bool(title_tokens & {"antitumor", "cancer", "tumor"})
-        if nano_signal and cancer_signal:
-            return True
-    if "3d" in topic_tokens and "3d" in title_tokens:
-        return True
-    if "artificial intelligence" in topic_ascii or re.search(r"\bai\b", topic_ascii):
-        return "artificial intelligence" in title_ascii or bool(re.search(r"\bai\b", title_ascii))
-    return False
 
 
 def _direction_id(name: str, used: set[str]) -> str:
@@ -261,94 +177,31 @@ def build_subdirection_work_queue(
     }
 
 
-def _merge_direction(directions: list[dict[str, Any]], name: str, matches: list[dict[str, Any]]) -> None:
-    match_ids = {item["publicationId"] for item in matches}
-    for direction in directions:
-        existing_ids = set(direction["evidencePublicationIds"])
-        if _similarity(name, direction["nameEn"]) >= 0.55 or _set_similarity(match_ids, existing_ids) >= 0.9:
-            if name not in direction["sourceNamesEn"]:
-                direction["sourceNamesEn"].append(name)
-            direction["evidencePublicationIds"] = sorted(existing_ids | match_ids)
-            direction["evidenceUrls"] = sorted(set(direction["evidenceUrls"]) | {
-                url for publication in matches for url in publication["evidenceUrls"]
-            })
-            return
-    directions.append({
-        "nameEn": name,
-        "sourceNamesEn": [name],
-        "evidencePublicationIds": sorted(item["publicationId"] for item in matches),
-        "evidenceUrls": sorted({url for item in matches for url in item["evidenceUrls"]}),
-        "evidenceBasis": "publication-title-and-analysis-topic",
-    })
-
-
 def build_subdirection_candidates(queue: dict[str, Any]) -> dict[str, Any]:
-    """Generate status-free candidates; review and disposition happen separately."""
+    """Emit every normalized analysis topic without judging evidence or assignments."""
     candidate_records: list[dict[str, Any]] = []
     for item in queue.get("professors") or []:
-        analysis, publications = item["researchAnalysis"], item["publications"]
+        analysis = item["researchAnalysis"]
         topics: list[str] = []
         for raw in [*analysis["researchInterests"], *analysis["researchAreas"]]:
             topic = clean(raw)
-            if topic and topic.casefold() not in {value.casefold() for value in topics}:
+            normalized = unicodedata.normalize("NFKC", topic or "").casefold()
+            if topic and normalized not in {
+                unicodedata.normalize("NFKC", value).casefold() for value in topics
+            }:
                 topics.append(topic)
-        directions: list[dict[str, Any]] = []
-        if publications:
-            for topic in topics:
-                matches = [publication for publication in publications if _topic_matches_publication(topic, publication)]
-                if matches:
-                    _merge_direction(directions, topic, matches)
-                if len(directions) >= 3:
-                    break
-            if not directions:
-                sampled = publications[:3]
-                directions = [{
-                    "nameEn": "Conflicting indexed research evidence",
-                    "sourceNamesEn": topics[:3],
-                    "evidencePublicationIds": [entry["publicationId"] for entry in sampled],
-                    "evidenceUrls": sorted(
-                        {url for publication in sampled for url in publication["evidenceUrls"]}
-                        | set(item["officialEvidenceUrls"])
-                        | set(analysis["evidenceUrls"])
-                    ),
-                    "evidenceBasis": "conflicting-record",
-                }]
-        elif topics:
-            for topic in topics:
-                if any(_similarity(topic, direction["nameEn"]) >= 0.55 for direction in directions):
-                    continue
-                directions.append({
-                    "nameEn": topic,
-                    "sourceNamesEn": [topic],
-                    "evidencePublicationIds": [],
-                    "evidenceUrls": sorted(set(item["officialEvidenceUrls"]) | set(analysis["evidenceUrls"])),
-                    "evidenceBasis": "analysis-only",
-                })
-                if len(directions) == 3:
-                    break
-        else:
-            directions = [{
-                "nameEn": "Evidence-limited research profile",
-                "sourceNamesEn": [],
-                "evidencePublicationIds": [],
-                "evidenceUrls": list(item["officialEvidenceUrls"]),
-                "evidenceBasis": "insufficient-evidence",
-            }]
+        if not topics:
+            topics = ["Evidence-limited research profile"]
 
         used_ids: set[str] = set()
-        for direction in directions:
-            direction["id"] = _direction_id(direction["nameEn"], used_ids)
+        directions = [{
+            "id": _direction_id(topic, used_ids),
+            "nameEn": topic,
+            "sourceNamesEn": [] if topic == "Evidence-limited research profile" else [topic],
+        } for topic in topics]
         candidate_records.append({
             "officialProfileId": item["officialProfileId"],
             "subdirections": directions,
-            "publicationAssignments": [{
-                "publicationId": publication["publicationId"],
-                "subdirectionIds": [
-                    direction["id"] for direction in directions
-                    if publication["publicationId"] in direction["evidencePublicationIds"]
-                    and direction["evidenceBasis"] == "publication-title-and-analysis-topic"
-                ],
-            } for publication in publications],
         })
     return {"schemaVersion": 1, "cutoff": queue.get("cutoff"), "professors": candidate_records}
 
