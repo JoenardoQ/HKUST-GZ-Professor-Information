@@ -66,6 +66,44 @@ def research_analysis(profile_id="20", status="complete"):
     }
 
 
+def reviewed_subdirections(profile_id="20", publication_ids=()):
+    publication_ids = list(publication_ids)
+    limited = not publication_ids
+    direction = {
+        "id": "evidence-limited-research-profile",
+        "nameEn": "Evidence-limited research profile",
+        "explanationEn": [
+            "The approved release data does not support a specific research sub-direction for this professor.",
+            "The official profile identifies the professor, but no approved thematic analysis or canonical publication is available for this release.",
+            "This record is limited to documenting insufficient approved evidence and should not be read as a description of the professor's broader research agenda.",
+        ],
+        "evidencePublicationIds": publication_ids,
+        "evidenceUrls": [
+            f"https://facultyprofiles.hkust-gz.edu.cn/faculty-personal-page?id={profile_id}"
+        ] if limited else ["https://openalex.org/W1"],
+        "reviewStatus": "limited" if limited else "pass",
+    }
+    if limited:
+        direction["limitationEn"] = direction["explanationEn"][2]
+    return {
+        "schemaVersion": 1,
+        "cutoff": "2026-09-01",
+        "professors": [{
+            "officialProfileId": profile_id,
+            "reviewStatus": "limited" if limited else "pass",
+            "subdirections": [direction],
+            "publicationAssignments": [
+                {
+                    "publicationId": publication_id,
+                    "subdirectionIds": [direction["id"]],
+                    "unassignedReasonEn": None,
+                }
+                for publication_id in publication_ids
+            ],
+        }],
+    }
+
+
 def synthetic_retrieval_queue():
     return {
         "schemaVersion": 1,
@@ -952,9 +990,9 @@ class ProfessorInformationTests(unittest.TestCase):
         professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            first = generate_documents(root, professors, [research_analysis()], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z")
+            first = generate_documents(root, professors, [research_analysis()], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=reviewed_subdirections())
             first_bytes = (root / "All_Prof_Info.md").read_bytes()
-            second = generate_documents(root, list(reversed(professors)), [research_analysis()], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z")
+            second = generate_documents(root, list(reversed(professors)), [research_analysis()], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=reviewed_subdirections())
             self.assertEqual(first, second)
             self.assertEqual(first_bytes, (root / "All_Prof_Info.md").read_bytes())
             self.assertFalse((root / "All_Prof_Info.zh-CN.md").exists(), "English generation must finish before translation")
@@ -990,7 +1028,7 @@ class ProfessorInformationTests(unittest.TestCase):
                     root, professors, [research_analysis()], publications,
                     "2024-09-01", "2026-09-01", translator,
                 )
-            generate_documents(root, professors, [research_analysis()], publications, "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z")
+            generate_documents(root, professors, [research_analysis()], publications, "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=reviewed_subdirections(publication_ids=["doi:10.1/example"]))
             professor_logic.generate_chinese_documents(
                 root, professors, [research_analysis()], publications,
                 "2024-09-01", "2026-09-01", translator,
@@ -1012,7 +1050,7 @@ class ProfessorInformationTests(unittest.TestCase):
         translator = lambda text: f"中译：{text}"
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            generate_documents(root, professors, [analysis], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z")
+            generate_documents(root, professors, [analysis], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=reviewed_subdirections())
             mutated = json.loads(json.dumps(analysis))
             mutated["summaryEn"] = "Changed after the English freeze."
             with self.assertRaisesRegex(SourceDataError, "frozen English inputs changed"):
@@ -1044,7 +1082,7 @@ class ProfessorInformationTests(unittest.TestCase):
         }
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            generate_documents(root, professors, [research_analysis()], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z")
+            generate_documents(root, professors, [research_analysis()], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=reviewed_subdirections())
             (root / "data/professors.json").write_text(json.dumps(professors, ensure_ascii=False), encoding="utf-8")
             (root / "data/research-analysis.json").write_text(json.dumps([research_analysis()], ensure_ascii=False), encoding="utf-8")
             (root / "data/publications.json").write_text("[]", encoding="utf-8")
@@ -1088,7 +1126,7 @@ class ProfessorInformationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             analysis = research_analysis()
-            generate_documents(root, professors, [analysis], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z")
+            generate_documents(root, professors, [analysis], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=reviewed_subdirections())
             (root / "data/professors.json").write_text(json.dumps(professors, ensure_ascii=False), encoding="utf-8")
             (root / "data/research-analysis.json").write_text(json.dumps([analysis], ensure_ascii=False), encoding="utf-8")
             (root / "data/publications.json").write_text("[]", encoding="utf-8")
@@ -1124,13 +1162,104 @@ class ProfessorInformationTests(unittest.TestCase):
         chinese = "# 香港科技大学（广州）教授信息总览\n\n## 教授目录\n\n### [陈雷 · Lei CHEN](professors/information-hub/lei-chen-20.zh-CN.md)\n"
         self.assertEqual(validate_bilingual_parity(english, chinese), [])
 
-    def test_manifest_contains_bilingual_allowlist(self):
+    def test_generation_writes_lightweight_directory_index_without_publication_details(self):
+        professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
+        publications = [{
+            "officialProfileId": "20",
+            "publicationId": "doi:10.1/example",
+            "title": "A Publication Title That Must Stay Offline",
+            "effectiveDate": "2025-08-01",
+            "publicationType": "conference",
+            "venue": "Private Venue",
+            "keywords": ["publication-only keyword"],
+            "evidenceUrls": ["https://openalex.org/W1"],
+        }]
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            result = generate_documents(
+                root, professors, [research_analysis()], publications,
+                "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                research_subdirections=reviewed_subdirections(publication_ids=["doi:10.1/example"]),
+            )
+            payload = json.loads((root / "data/directory-index.json").read_text(encoding="utf-8"))
+        self.assertEqual(payload, result["directoryIndex"])
+        self.assertEqual(payload["schemaVersion"], 1)
+        self.assertEqual(payload["cutoff"], "2026-09-01")
+        record = payload["records"][0]
+        self.assertEqual(record["officialProfileId"], "20")
+        self.assertEqual(record["email"], "leichen@hkust-gz.edu.cn")
+        self.assertEqual(record["hubs"], ["Information Hub"])
+        self.assertEqual(record["researchFields"], ["Data management", "Database systems"])
+        self.assertEqual(record["keywords"], ["databases", "knowledge graphs"])
+        self.assertEqual(record["subdirectionNames"], ["Evidence-limited research profile"])
+        self.assertEqual(record["publicationCount"], 1)
+        self.assertEqual(record["lastVerifiedOn"], professors[0]["lastVerifiedOn"])
+        self.assertEqual(
+            set(record),
+            {
+                "officialProfileId", "slug", "nameZh", "nameEn", "email", "phone",
+                "titles", "hubs", "units", "researchFields", "keywords",
+                "subdirectionNames", "publicationCount", "lastVerifiedOn",
+            },
+        )
+        serialized = json.dumps(payload, ensure_ascii=False)
+        self.assertNotIn("A Publication Title That Must Stay Offline", serialized)
+        self.assertNotIn("publication-only keyword", serialized)
+        self.assertNotIn("Private Venue", serialized)
+
+    def test_manifest_contains_four_level_documents(self):
         professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
         with tempfile.TemporaryDirectory() as temporary:
-            manifest = generate_documents(Path(temporary), professors, [research_analysis()], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z")["manifest"]
+            manifest = generate_documents(
+                Path(temporary), professors, [research_analysis()], [],
+                "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                research_subdirections=reviewed_subdirections(),
+            )["manifest"]
         paths = manifest["documents"][professors[0]["slug"]]
-        self.assertTrue(paths["en"].endswith(".md"))
-        self.assertTrue(paths["zhCN"].endswith(".zh-CN.md"))
+        self.assertEqual(set(paths), {"profile", "publications"})
+        self.assertEqual(set(paths["profile"]), {"en", "zhCN"})
+        self.assertEqual(set(paths["publications"]), {"en", "zhCN"})
+        self.assertTrue(paths["profile"]["en"].endswith(".md"))
+        self.assertTrue(paths["profile"]["zhCN"].endswith(".zh-CN.md"))
+        self.assertTrue(paths["publications"]["en"].endswith(".publications.md"))
+        self.assertTrue(paths["publications"]["zhCN"].endswith(".publications.zh-CN.md"))
+        for group in paths.values():
+            for relative_path in group.values():
+                self.assertFalse(Path(relative_path).is_absolute())
+                self.assertNotIn("..", Path(relative_path).parts)
+
+    def test_stage_validator_accepts_task_three_artifacts_without_final_documents(self):
+        professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
+        analysis = research_analysis()
+        subdirections = reviewed_subdirections()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            generate_documents(
+                root, professors, [analysis], [],
+                "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                research_subdirections=subdirections,
+            )
+            for filename, value in (
+                ("professors.json", professors),
+                ("research-analysis.json", [analysis]),
+                ("publications.json", []),
+                ("research-subdirections.json", subdirections),
+            ):
+                (root / "data" / filename).write_text(json.dumps(value), encoding="utf-8")
+            command = [
+                sys.executable,
+                str(Path(__file__).parents[1] / "scripts/validate_professor_information.py"),
+                "--root", str(root), "--cutoff", "2026-09-01",
+            ]
+            valid = subprocess.run(command, capture_output=True, text=True, check=False)
+            self.assertEqual(valid.returncode, 0, valid.stderr)
+            manifest_path = root / "data/manifest.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            manifest["documents"][professors[0]["slug"]]["profile"]["en"] = "../unsafe.md"
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+            unsafe = subprocess.run(command, capture_output=True, text=True, check=False)
+        self.assertNotEqual(unsafe.returncode, 0)
+        self.assertIn("safe", unsafe.stderr)
 
     def test_not_started_retrieval_is_not_publishable(self):
         analyses = [research_analysis(status="not-started")]

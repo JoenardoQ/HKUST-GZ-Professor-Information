@@ -527,12 +527,24 @@ def generate_documents(
     start: str,
     end: str,
     generated_at: str,
+    *,
+    research_subdirections: dict[str, Any],
 ) -> dict[str, Any]:
     validate_release_window(start, end)
     professor_ids = {item["officialProfileId"] for item in professors}
     validate_research_analysis(research_analysis, professor_ids)
     validate_retrieval_statuses(research_analysis)
+    publication_owners: dict[str, set[str]] = defaultdict(set)
+    for publication in publications:
+        publication_owners[str(publication["publicationId"])].add(str(publication["officialProfileId"]))
+    validate_research_subdirections(research_subdirections, professor_ids, publication_owners)
+    if research_subdirections.get("cutoff") != end:
+        raise SourceDataError("research subdirections cutoff does not match document cutoff")
     analysis_by_professor = {item["officialProfileId"]: item for item in research_analysis}
+    subdirections_by_professor = {
+        item["officialProfileId"]: item["subdirections"]
+        for item in research_subdirections["professors"]
+    }
     selected = [item for item in publications if in_window(start, end, item["effectiveDate"])]
     by_professor: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for item in selected:
@@ -543,6 +555,7 @@ def generate_documents(
     ordered = sorted(professors, key=lambda item: (unicodedata.normalize("NFKC", item["nameEn"]).casefold(), item["officialProfileId"]))
     documents: dict[str, dict[str, str]] = {}
     search_records = []
+    directory_records = []
     overview = [
         "# All HKUST(GZ) Professor Information",
         "",
@@ -561,7 +574,12 @@ def generate_documents(
         directory = _hub_directory(professor)
         en_path = f"professors/{directory}/{slug}.md"
         zh_path = f"professors/{directory}/{slug}.zh-CN.md"
-        documents[slug] = {"en": en_path, "zhCN": zh_path}
+        publications_en_path = f"professors/{directory}/{slug}.publications.md"
+        publications_zh_path = f"professors/{directory}/{slug}.publications.zh-CN.md"
+        documents[slug] = {
+            "profile": {"en": en_path, "zhCN": zh_path},
+            "publications": {"en": publications_en_path, "zhCN": publications_zh_path},
+        }
         professor_publications = sorted(
             by_professor.get(professor["officialProfileId"], []),
             key=lambda item: (item["effectiveDate"], _normalized_title(item["title"])),
@@ -596,8 +614,27 @@ def generate_documents(
             "publicationCount": len(professor_publications),
             "lastVerifiedOn": professor["lastVerifiedOn"],
         })
+        directory_records.append({
+            "officialProfileId": professor["officialProfileId"],
+            "slug": slug,
+            "nameZh": professor["nameZh"] or "",
+            "nameEn": professor["nameEn"],
+            "email": professor["email"],
+            "phone": professor["phone"],
+            "titles": sorted({item["title"] for item in professor["affiliations"] if item.get("title")}),
+            "hubs": sorted({item["hub"] for item in professor["affiliations"] if item.get("hub")}),
+            "units": sorted({item["unit"] for item in professor["affiliations"] if item.get("unit")}),
+            "researchFields": sorted(set(analysis["researchInterests"] + analysis["researchAreas"])),
+            "keywords": sorted(set(analysis["keywords"])),
+            "subdirectionNames": sorted(
+                {direction["nameEn"] for direction in subdirections_by_professor[professor["officialProfileId"]]},
+                key=str.casefold,
+            ),
+            "publicationCount": len(professor_publications),
+            "lastVerifiedOn": professor["lastVerifiedOn"],
+        })
     manifest = {
-        "schemaVersion": 1,
+        "schemaVersion": 2,
         "cutoff": end,
         "window": {"start": start, "end": end, "inclusive": True},
         "generatedAt": generated_at,
@@ -610,9 +647,15 @@ def generate_documents(
         "window": {"start": start, "end": end, "inclusive": True},
         "records": search_records,
     }
+    directory_index = {
+        "schemaVersion": 1,
+        "cutoff": end,
+        "window": {"start": start, "end": end, "inclusive": True},
+        "records": directory_records,
+    }
     root.mkdir(parents=True, exist_ok=True)
     (root / "All_Prof_Info.md").write_text("\n".join(overview), encoding="utf-8")
-    english_paths = ["All_Prof_Info.md", *(paths["en"] for paths in documents.values())]
+    english_paths = ["All_Prof_Info.md", *(paths["profile"]["en"] for paths in documents.values())]
     manifest["translationSource"] = {
         "sourceDataSha256": _translation_source_digest(
             professors, research_analysis, publications, start, end
@@ -624,7 +667,8 @@ def generate_documents(
     }
     _write_json(root / "data/manifest.json", manifest)
     _write_json(root / "data/search-index.json", search_index)
-    return {"manifest": manifest, "searchIndex": search_index}
+    _write_json(root / "data/directory-index.json", directory_index)
+    return {"manifest": manifest, "searchIndex": search_index, "directoryIndex": directory_index}
 
 
 def build_translation_memory_translator(memory: dict[str, Any]) -> Callable[[str], str]:
@@ -721,9 +765,10 @@ def generate_chinese_documents(
     for professor in ordered:
         slug = professor["slug"]
         paths = documents.get(slug) or {}
-        en_path = root / str(paths.get("en") or "")
-        zh_path = root / str(paths.get("zhCN") or "")
-        if not en_path.is_file() or not paths.get("zhCN"):
+        profile_paths = paths.get("profile") or {}
+        en_path = root / str(profile_paths.get("en") or "")
+        zh_path = root / str(profile_paths.get("zhCN") or "")
+        if not en_path.is_file() or not profile_paths.get("zhCN"):
             raise SourceDataError("English documents must be generated first")
         analysis = analysis_by_professor[professor["officialProfileId"]]
         professor_publications = sorted(
@@ -812,7 +857,7 @@ def generate_chinese_documents(
         zh_path.parent.mkdir(parents=True, exist_ok=True)
         zh_path.write_text("\n".join(lines), encoding="utf-8")
         overview.extend([
-            f"### [{display_name}]({paths['zhCN']})",
+            f"### [{display_name}]({profile_paths['zhCN']})",
             "",
             f"{' / '.join(zh(item['hub']) for item in professor['affiliations'] if item.get('hub')) or '单位未公开'} · 本轮检索到 {len(professor_publications)} 篇论文",
             "",

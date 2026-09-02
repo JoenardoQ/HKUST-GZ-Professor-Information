@@ -19,6 +19,15 @@ def load_list(path: Path) -> list[dict]:
     return value
 
 
+def load_object(path: Path) -> dict:
+    if not path.exists():
+        raise SourceDataError(f"required input does not exist: {path}")
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise SourceDataError(f"{path} must contain a JSON object")
+    return value
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--start", required=True)
@@ -29,13 +38,17 @@ def main() -> None:
     professors = load_list(args.root / "data/professors.json")
     research_analysis = load_list(args.root / "data/research-analysis.json")
     candidates = load_list(args.root / "data/publications.json")
+    research_subdirections = load_object(args.root / "data/research-subdirections.json")
     publications, conflicts = deduplicate_publications(candidates)
     if conflicts:
         conflict_path = args.root / f"reports/{args.cutoff}-conflicts.json"
         conflict_path.parent.mkdir(parents=True, exist_ok=True)
         conflict_path.write_text(json.dumps(conflicts, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         raise SourceDataError(f"publication conflicts require review: {conflict_path}")
-    generate_documents(args.root, professors, research_analysis, publications, args.start, args.cutoff, args.generated_at)
+    generate_documents(
+        args.root, professors, research_analysis, publications, args.start, args.cutoff, args.generated_at,
+        research_subdirections=research_subdirections,
+    )
     print(f"{len(professors)}/{len(professors)}")
 
 
