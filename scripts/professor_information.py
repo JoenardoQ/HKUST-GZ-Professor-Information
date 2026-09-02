@@ -891,9 +891,17 @@ _SUBDIRECTION_REVIEW_STATUSES = frozenset({"pass", "limited", "block"})
 def validate_research_subdirections(
     payload: dict[str, Any],
     professor_ids: set[str],
-    publication_owners: dict[str, str],
+    publication_owners: dict[str, str | set[str]],
 ) -> None:
     """Validate professor-scoped research sub-directions and publication assignments."""
+    def publication_is_owned_by(publication_id: str, profile_id: str) -> bool:
+        owner = publication_owners.get(publication_id)
+        if isinstance(owner, str):
+            return owner == profile_id
+        if isinstance(owner, set):
+            return profile_id in owner
+        return False
+
     if (
         not isinstance(payload, dict)
         or type(payload.get("schemaVersion")) is not int
@@ -970,7 +978,7 @@ def validate_research_subdirections(
             if len(evidence_publications) != len(set(evidence_publications)):
                 raise SourceDataError(f"subdirection {direction_id} has duplicate supporting publication IDs")
             for publication_id in evidence_publications:
-                if publication_owners.get(publication_id) != profile_id:
+                if not publication_is_owned_by(publication_id, profile_id):
                     raise SourceDataError(f"subdirection {direction_id} references a publication not owned by professor {profile_id}")
 
             evidence_urls = direction.get("evidenceUrls")
@@ -1013,7 +1021,7 @@ def validate_research_subdirections(
             publication_id = assignment.get("publicationId")
             if not isinstance(publication_id, str) or not clean(publication_id):
                 raise SourceDataError("publication ID must be a non-empty string")
-            if publication_owners.get(publication_id) != profile_id:
+            if not publication_is_owned_by(publication_id, profile_id):
                 raise SourceDataError(f"publication assignment references a publication not owned by professor {profile_id}")
             if publication_id in assigned_publications:
                 raise SourceDataError(f"professor {profile_id} has duplicate publication assignments")
@@ -1036,8 +1044,8 @@ def validate_research_subdirections(
 
         owned_publications = {
             publication_id
-            for publication_id, owner in publication_owners.items()
-            if owner == profile_id
+            for publication_id in publication_owners
+            if publication_is_owned_by(publication_id, profile_id)
         }
         if assigned_publications != owned_publications:
             raise SourceDataError(f"publication assignments do not cover professor {profile_id}'s publications")
