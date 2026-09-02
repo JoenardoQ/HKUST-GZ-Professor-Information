@@ -5,8 +5,10 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from collections import defaultdict
 from pathlib import Path, PurePosixPath
+from urllib.parse import urlsplit
 
 from professor_information import (
     SourceDataError,
@@ -31,9 +33,10 @@ _DOCUMENT_SUFFIXES = {
 }
 _DIRECTORY_FIELDS = {
     "officialProfileId", "slug", "nameZh", "nameEn", "email", "phone",
-    "titles", "hubs", "units", "researchFields", "keywords",
+    "titles", "hubs", "units", "researchFields",
     "subdirectionNames", "publicationCount", "lastVerifiedOn",
 }
+_SAFE_DIRECTORY_GROUP = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
 
 
 def _record_map(records: object, label: str) -> dict[str, dict]:
@@ -60,12 +63,21 @@ def _validate_safe_document_paths(slug: str, paths: object) -> None:
         for language, suffix in language_suffixes.items():
             value = language_paths[language]
             path = PurePosixPath(value) if isinstance(value, str) else None
+            parsed = urlsplit(value) if isinstance(value, str) else None
             if (
                 not isinstance(value, str)
                 or not value
+                or "\\" in value
+                or "%" in value
+                or parsed.scheme
+                or parsed.netloc
+                or parsed.query
+                or parsed.fragment
                 or path.is_absolute()
-                or ".." in path.parts
-                or path.parts[:1] != ("professors",)
+                or path.as_posix() != value
+                or len(path.parts) != 3
+                or path.parts[0] != "professors"
+                or not _SAFE_DIRECTORY_GROUP.fullmatch(path.parts[1])
                 or path.name != f"{slug}{suffix}"
             ):
                 raise SourceDataError(f"manifest record {slug} has an unsafe {document_kind}.{language} Markdown path")
@@ -145,7 +157,6 @@ def validate(root: Path, cutoff: str) -> dict[str, int]:
     for profile_id, professor in professor_by_id.items():
         analysis = analysis_by_professor[profile_id]
         expected_fields = sorted(set(analysis["researchInterests"] + analysis["researchAreas"]))
-        expected_keywords = sorted(set(analysis["keywords"]))
         expected_subdirections = sorted(
             {direction["nameEn"] for direction in subdirections_by_professor[profile_id]},
             key=str.casefold,
@@ -167,7 +178,6 @@ def validate(root: Path, cutoff: str) -> dict[str, int]:
             "hubs": sorted({item["hub"] for item in professor["affiliations"] if item.get("hub")}),
             "units": sorted({item["unit"] for item in professor["affiliations"] if item.get("unit")}),
             "researchFields": expected_fields,
-            "keywords": expected_keywords,
             "subdirectionNames": expected_subdirections,
             "publicationCount": publication_counts[profile_id],
             "lastVerifiedOn": professor["lastVerifiedOn"],

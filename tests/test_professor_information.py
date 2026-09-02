@@ -1190,7 +1190,6 @@ class ProfessorInformationTests(unittest.TestCase):
         self.assertEqual(record["email"], "leichen@hkust-gz.edu.cn")
         self.assertEqual(record["hubs"], ["Information Hub"])
         self.assertEqual(record["researchFields"], ["Data management", "Database systems"])
-        self.assertEqual(record["keywords"], ["databases", "knowledge graphs"])
         self.assertEqual(record["subdirectionNames"], ["Evidence-limited research profile"])
         self.assertEqual(record["publicationCount"], 1)
         self.assertEqual(record["lastVerifiedOn"], professors[0]["lastVerifiedOn"])
@@ -1198,14 +1197,45 @@ class ProfessorInformationTests(unittest.TestCase):
             set(record),
             {
                 "officialProfileId", "slug", "nameZh", "nameEn", "email", "phone",
-                "titles", "hubs", "units", "researchFields", "keywords",
+                "titles", "hubs", "units", "researchFields",
                 "subdirectionNames", "publicationCount", "lastVerifiedOn",
             },
         )
         serialized = json.dumps(payload, ensure_ascii=False)
+        self.assertNotIn("databases", serialized)
         self.assertNotIn("A Publication Title That Must Stay Offline", serialized)
         self.assertNotIn("publication-only keyword", serialized)
         self.assertNotIn("Private Venue", serialized)
+
+    def test_directory_generation_is_deterministic_for_reversed_multi_record_inputs(self):
+        professors, _ = normalize_faculty_rows([
+            faculty_row("20", "陈雷", "Lei CHEN"),
+            faculty_row("21", "王艾达", "Ada WANG"),
+        ], baseline_ids={"20", "21"})
+        analyses = [research_analysis("20"), research_analysis("21")]
+        subdirections = reviewed_subdirections("20")
+        subdirections["professors"].extend(reviewed_subdirections("21")["professors"])
+        with tempfile.TemporaryDirectory() as first_temporary, tempfile.TemporaryDirectory() as second_temporary:
+            first_root = Path(first_temporary)
+            second_root = Path(second_temporary)
+            generate_documents(
+                first_root, professors, analyses, [],
+                "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                research_subdirections=subdirections,
+            )
+            generate_documents(
+                second_root, list(reversed(professors)), list(reversed(analyses)), [],
+                "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                research_subdirections={**subdirections, "professors": list(reversed(subdirections["professors"]))},
+            )
+            self.assertEqual(
+                (first_root / "data/directory-index.json").read_bytes(),
+                (second_root / "data/directory-index.json").read_bytes(),
+            )
+            self.assertEqual(
+                (first_root / "data/manifest.json").read_bytes(),
+                (second_root / "data/manifest.json").read_bytes(),
+            )
 
     def test_manifest_contains_four_level_documents(self):
         professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
@@ -1253,13 +1283,107 @@ class ProfessorInformationTests(unittest.TestCase):
             ]
             valid = subprocess.run(command, capture_output=True, text=True, check=False)
             self.assertEqual(valid.returncode, 0, valid.stderr)
-            manifest_path = root / "data/manifest.json"
-            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-            manifest["documents"][professors[0]["slug"]]["profile"]["en"] = "../unsafe.md"
-            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
-            unsafe = subprocess.run(command, capture_output=True, text=True, check=False)
-        self.assertNotEqual(unsafe.returncode, 0)
-        self.assertIn("safe", unsafe.stderr)
+            baseline = {
+                filename: json.loads((root / "data" / filename).read_text(encoding="utf-8"))
+                for filename in (
+                    "manifest.json", "search-index.json", "directory-index.json",
+                    "professors.json", "research-analysis.json", "publications.json",
+                    "research-subdirections.json",
+                )
+            }
+
+            def assert_rejected(label, mutate, expected):
+                payloads = deepcopy(baseline)
+                mutate(payloads)
+                for filename, value in payloads.items():
+                    (root / "data" / filename).write_text(json.dumps(value), encoding="utf-8")
+                rejected = subprocess.run(command, capture_output=True, text=True, check=False)
+                self.assertNotEqual(rejected.returncode, 0, label)
+                self.assertIn(expected, rejected.stderr, label)
+
+            slug = professors[0]["slug"]
+            assert_rejected(
+                "cutoff drift",
+                lambda payloads: payloads["directory-index.json"].update({"cutoff": "2026-03-01"}),
+                "cutoff",
+            )
+            assert_rejected(
+                "count drift",
+                lambda payloads: payloads["manifest.json"]["counts"].update({"professors": 2}),
+                "counts",
+            )
+            assert_rejected(
+                "missing directory identity",
+                lambda payloads: payloads["directory-index.json"].update({"records": []}),
+                "identities",
+            )
+            assert_rejected(
+                "duplicate directory identity",
+                lambda payloads: payloads["directory-index.json"]["records"].append(
+                    deepcopy(payloads["directory-index.json"]["records"][0])
+                ),
+                "identities",
+            )
+            assert_rejected(
+                "research field drift",
+                lambda payloads: payloads["directory-index.json"]["records"][0].update({"researchFields": ["Wrong field"]}),
+                "directory index",
+            )
+            assert_rejected(
+                "directory identity drift",
+                lambda payloads: payloads["directory-index.json"]["records"][0].update({"officialProfileId": "999"}),
+                "identities",
+            )
+            assert_rejected(
+                "missing path group",
+                lambda payloads: payloads["manifest.json"]["documents"][slug].pop("profile"),
+                "exactly four",
+            )
+            assert_rejected(
+                "extra path group",
+                lambda payloads: payloads["manifest.json"]["documents"][slug].update({"other": {}}),
+                "exactly four",
+            )
+            assert_rejected(
+                "malformed path group",
+                lambda payloads: payloads["manifest.json"]["documents"][slug]["profile"].pop("zhCN"),
+                "invalid profile",
+            )
+            assert_rejected(
+                "encoded traversal",
+                lambda payloads: payloads["manifest.json"]["documents"][slug]["profile"].update({
+                    "en": payloads["manifest.json"]["documents"][slug]["profile"]["en"].rsplit("/", 1)[0]
+                    + f"/%2e%2e/{slug}.md"
+                }),
+                "unsafe",
+            )
+            assert_rejected(
+                "double-encoded traversal",
+                lambda payloads: payloads["manifest.json"]["documents"][slug]["profile"].update({
+                    "en": payloads["manifest.json"]["documents"][slug]["profile"]["en"].rsplit("/", 1)[0]
+                    + f"/%252e%252e/{slug}.md"
+                }),
+                "unsafe",
+            )
+            assert_rejected(
+                "backslash path",
+                lambda payloads: payloads["manifest.json"]["documents"][slug]["profile"].update({
+                    "en": payloads["manifest.json"]["documents"][slug]["profile"]["en"].replace("/", "\\\\")
+                }),
+                "unsafe",
+            )
+            for label, unsafe_path in (
+                ("absolute path", f"/{baseline['manifest.json']['documents'][slug]['profile']['en']}"),
+                ("scheme path", f"https://example.test/{baseline['manifest.json']['documents'][slug]['profile']['en']}"),
+                ("query path", baseline["manifest.json"]["documents"][slug]["profile"]["en"] + "?download=1"),
+                ("fragment path", baseline["manifest.json"]["documents"][slug]["profile"]["en"] + "#section"),
+                ("unexpected filename", baseline["manifest.json"]["documents"][slug]["profile"]["en"].replace(slug, f"prefix-{slug}")),
+            ):
+                assert_rejected(
+                    label,
+                    lambda payloads, unsafe_path=unsafe_path: payloads["manifest.json"]["documents"][slug]["profile"].update({"en": unsafe_path}),
+                    "unsafe",
+                )
 
     def test_not_started_retrieval_is_not_publishable(self):
         analyses = [research_analysis(status="not-started")]

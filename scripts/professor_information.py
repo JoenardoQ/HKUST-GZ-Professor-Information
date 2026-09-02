@@ -625,7 +625,6 @@ def generate_documents(
             "hubs": sorted({item["hub"] for item in professor["affiliations"] if item.get("hub")}),
             "units": sorted({item["unit"] for item in professor["affiliations"] if item.get("unit")}),
             "researchFields": sorted(set(analysis["researchInterests"] + analysis["researchAreas"])),
-            "keywords": sorted(set(analysis["keywords"])),
             "subdirectionNames": sorted(
                 {direction["nameEn"] for direction in subdirections_by_professor[professor["officialProfileId"]]},
                 key=str.casefold,
