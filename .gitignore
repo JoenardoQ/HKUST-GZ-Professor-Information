@@ -1,5 +1,6 @@
 .sync-cache/
 .venv/
+.worktrees/
 __pycache__/
 *.pyc
 
