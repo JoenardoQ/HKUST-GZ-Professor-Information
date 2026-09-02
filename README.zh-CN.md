@@ -118,7 +118,7 @@ OpenAlex 用于解析教授身份并提供主要论文清单。本仓库只能�
 
 ## 前置条件与制品策略
 
-- 从干净 clone 运行，并确保 Git、Python 3 与 pip 可用。
+- 从干净 clone 运行，并确保 Git、Python 3.10 或更高版本与 pip 可用。
 - 实时检索前通过 `requirements.txt` 安装固定版本 Python 依赖；单元测试与校验器不需要服务凭据。
 - 可选服务凭据只能通过受支持的环境变量提供，绝不能存入仓库。
 - 截止日期必须为 3 月 1 日或 9 月 1 日；闭区间起始日期正好是两年前的同一日。
@@ -155,7 +155,7 @@ python3 scripts/prepare_publication_work_queue.py \
 
 初始化脚本拒绝覆盖已有分析文件，因此恢复运行时不会静默清除已经完成的工作。
 
-安装固定版本的采集依赖后，由 Codex 处理检索队列。OpenAlex API key 只从受保护的 `OPENALEX_API_KEY` 环境变量读取；如有 Semantic Scholar 凭据，只能通过 `paperscraper` 支持的环境变量提供。测试无需凭据，任何凭据都不得写入仓库。检索先写入可恢复证据；候选构建再把 `paperscraper` 结果与 OpenAlex 匹配，执行独立 arXiv 核验，并对全部已批准来源去重：
+安装固定版本的采集依赖后，由 Codex 处理检索队列。OpenAlex API key 只从受保护的 `OPENALEX_API_KEY` 环境变量读取。Semantic Scholar API 凭据是可选项；提供时，`paperscraper` 客户端只从 `SS_API_KEY` 读取。测试无需凭据，任何凭据都不得写入仓库。检索先写入可恢复证据；候选构建再把 `paperscraper` 结果与 OpenAlex 匹配，执行独立 arXiv 核验，并对全部已批准来源去重：
 
 ```bash
 python3 -m pip install -r requirements.txt
@@ -169,6 +169,8 @@ python3 scripts/build_publication_candidates.py \
 ```
 
 检索器使用被 Git 忽略的原始断点、明确的请求超时，并且标准输出只显示进度。请求在完整首轮失败时先跳过，随后最多定点重试三次。来源级访问拒绝或限流会阻止该来源继续请求。Codex 必须先审核证据与冲突报告，再写入研究分析或生成文档。
+
+日期化冲突报告作为跟踪证据保留。经 Owner 审核后隔离并排除的候选可以继续留在报告中而不阻止发布，因为它们不在规范 `data/publications.json` 中。只有在去重时仍能从规范 `data/publications.json` 重现的未解决冲突才会中止发布。
 
 可用 `--sources` 只恢复指定的已批准来源。如果三次有记录的限时探针已经证明某个来源在本轮整体不可用，则通过 `--blocked-sources` 记录；这样可以为每位教授保留限制状态，而不会重复数百次已知失败请求。适配器仍保留，并会在之后的定期更新中再次尝试。
 
@@ -214,7 +216,7 @@ python3 scripts/validate_professor_information.py --root . --cutoff 2026-09-01
 python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
-对当前发布，两个校验器都必须输出 `397/397`，且完整发现的测试套件必须通过。任何非零退出、数量不符、schema/截止日期/窗口漂移、不安全或缺失的 manifest 路径、过期审核制品、`block` 状态、不可发布的检索状态、冲突、冻结英文摘要不符、翻译缺失，或双语结构/身份/链接/顺序不一致，都会中止发布。
+对当前发布，两个校验器都必须输出 `397/397`，且完整发现的测试套件必须通过。任何非零退出、数量不符、schema/截止日期/窗口漂移、不安全或缺失的 manifest 路径、过期审核制品、`block` 状态、不可发布的检索状态、可从规范 `data/publications.json` 重现的未解决冲突、冻结英文摘要不符、翻译缺失，或双语结构/身份/链接/顺序不一致，都会中止发布。
 
 使用相同参数再次运行生成器，英文生成输出必须零差异。任何 commit 或 push 之前，都要审核精确候选差异、未解决限制、生成数量和双语一致性，并执行仓库的 clean-before-commit 门槛。
 

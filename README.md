@@ -118,7 +118,7 @@ Sub-direction review statuses are deliberately conservative. `pass` means every 
 
 ## Prerequisites and artifact policy
 
-- Run from a clean clone with Git, Python 3, and pip available.
+- Run from a clean clone with Git, Python 3.10 or newer, and pip available.
 - Install the pinned Python dependency set from `requirements.txt` before live retrieval. Unit tests and validators do not require service credentials.
 - Supply optional service credentials only through supported environment variables; never store them in the repository.
 - Use a March 1 or September 1 cutoff. The inclusive start date is exactly two calendar years earlier.
@@ -155,7 +155,7 @@ python3 scripts/prepare_publication_work_queue.py \
 
 The initializer refuses to overwrite an existing analysis file, so resuming a run cannot silently erase completed work.
 
-Install the pinned collection dependency, then let Codex work through the queue. The OpenAlex API key is read only from the protected `OPENALEX_API_KEY` environment variable. Semantic Scholar credentials, when available, are supplied only through `paperscraper`'s supported environment variable. Credentials are optional for tests and must never be written to the repository. Retrieval writes resumable evidence; candidate construction matches `paperscraper` results to OpenAlex, applies the independent arXiv verification pass, and deduplicates all approved sources:
+Install the pinned collection dependency, then let Codex work through the queue. The OpenAlex API key is read only from the protected `OPENALEX_API_KEY` environment variable. A Semantic Scholar API credential is optional; when provided, the `paperscraper` client reads it only from `SS_API_KEY`. Credentials are optional for tests and must never be written to the repository. Retrieval writes resumable evidence; candidate construction matches `paperscraper` results to OpenAlex, applies the independent arXiv verification pass, and deduplicates all approved sources:
 
 ```bash
 python3 -m pip install -r requirements.txt
@@ -169,6 +169,8 @@ python3 scripts/build_publication_candidates.py \
 ```
 
 The retriever uses ignored raw checkpoints, bounded request timeouts, and progress-only standard output. A request failure is skipped for the full first pass and then receives at most three targeted retries. A source-wide access or rate-limit response blocks that source without further requests. Codex reviews the evidence and conflict reports before writing research analysis or generating documents.
+
+The dated conflict report remains tracked evidence. Quarantined or conflicting candidates that the Owner has reviewed and excluded may remain in that report without blocking release because they are absent from canonical `data/publications.json`. Publication stops only when unresolved conflicts remain reproducible within canonical `data/publications.json` during deduplication.
 
 Use `--sources` to resume selected approved sources. After three recorded bounded probes establish that an entire source is unavailable for the run, pass it through `--blocked-sources`; this records the limitation for every professor without repeating hundreds of known-failing requests. The adapter remains enabled for later scheduled updates.
 
@@ -214,7 +216,7 @@ python3 scripts/validate_professor_information.py --root . --cutoff 2026-09-01
 python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
-For the current release, each validator must print `397/397`, and the full discovered suite must pass. Any non-zero command, count mismatch, schema/cutoff/window drift, unsafe or missing manifest path, stale review artifact, `block` status, non-publishable retrieval status, conflict, frozen-English digest mismatch, missing translation, or bilingual structural/identity/link/order mismatch stops publication.
+For the current release, each validator must print `397/397`, and the full discovered suite must pass. Any non-zero command, count mismatch, schema/cutoff/window drift, unsafe or missing manifest path, stale review artifact, `block` status, non-publishable retrieval status, unresolved conflict reproducible in canonical `data/publications.json`, frozen-English digest mismatch, missing translation, or bilingual structural/identity/link/order mismatch stops publication.
 
 Run the generator a second time with the same arguments and require a zero diff in English generated outputs. Review the exact candidate diff, unresolved limitations, generated counts, and bilingual parity before any commit or push. The repository's clean-before-commit gate applies at that boundary.
 
