@@ -1,0 +1,2008 @@
+{
+  "counts": {
+    "documents": 397,
+    "professors": 397,
+    "publications": 5006
+  },
+  "cutoff": "2026-09-01",
+  "documents": {
+    "akihiro-goto-620": {
+      "en": "professors/systems-hub/akihiro-goto-620.md",
+      "zhCN": "professors/systems-hub/akihiro-goto-620.zh-CN.md"
+    },
+    "anca-simona-horvath-604": {
+      "en": "professors/information-hub/anca-simona-horvath-604.md",
+      "zhCN": "professors/information-hub/anca-simona-horvath-604.zh-CN.md"
+    },
+    "anurag-gumber-431": {
+      "en": "professors/society-hub/anurag-gumber-431.md",
+      "zhCN": "professors/society-hub/anurag-gumber-431.zh-CN.md"
+    },
+    "apostolos-rikos-416": {
+      "en": "professors/information-hub/apostolos-rikos-416.md",
+      "zhCN": "professors/information-hub/apostolos-rikos-416.zh-CN.md"
+    },
+    "arthur-kar-leung-lin-393": {
+      "en": "professors/college-of-future-technology/arthur-kar-leung-lin-393.md",
+      "zhCN": "professors/college-of-future-technology/arthur-kar-leung-lin-393.zh-CN.md"
+    },
+    "bei-cao-369": {
+      "en": "professors/college-of-education-sciences/bei-cao-369.md",
+      "zhCN": "professors/college-of-education-sciences/bei-cao-369.zh-CN.md"
+    },
+    "beijinni-li-236": {
+      "en": "professors/college-of-future-technology/beijinni-li-236.md",
+      "zhCN": "professors/college-of-future-technology/beijinni-li-236.zh-CN.md"
+    },
+    "beiyan-cao-663": {
+      "en": "professors/college-of-education-sciences/beiyan-cao-663.md",
+      "zhCN": "professors/college-of-education-sciences/beiyan-cao-663.zh-CN.md"
+    },
+    "benedict-jun-ma-590": {
+      "en": "professors/systems-hub/benedict-jun-ma-590.md",
+      "zhCN": "professors/systems-hub/benedict-jun-ma-590.zh-CN.md"
+    },
+    "bin-jiang-253": {
+      "en": "professors/society-hub/bin-jiang-253.md",
+      "zhCN": "professors/society-hub/bin-jiang-253.zh-CN.md"
+    },
+    "bing-li-591": {
+      "en": "professors/college-of-education-sciences/bing-li-591.md",
+      "zhCN": "professors/college-of-education-sciences/bing-li-591.zh-CN.md"
+    },
+    "bingyan-han-375": {
+      "en": "professors/society-hub/bingyan-han-375.md",
+      "zhCN": "professors/society-hub/bingyan-han-375.zh-CN.md"
+    },
+    "bingzhuo-zhong-465": {
+      "en": "professors/information-hub/bingzhuo-zhong-465.md",
+      "zhCN": "professors/information-hub/bingzhuo-zhong-465.zh-CN.md"
+    },
+    "binzhe-wang-447": {
+      "en": "professors/society-hub/binzhe-wang-447.md",
+      "zhCN": "professors/society-hub/binzhe-wang-447.zh-CN.md"
+    },
+    "bizhao-pang-745": {
+      "en": "professors/systems-hub/bizhao-pang-745.md",
+      "zhCN": "professors/systems-hub/bizhao-pang-745.zh-CN.md"
+    },
+    "bo-fang-346": {
+      "en": "professors/college-of-education-sciences/bo-fang-346.md",
+      "zhCN": "professors/college-of-education-sciences/bo-fang-346.zh-CN.md"
+    },
+    "bo-peng-707": {
+      "en": "professors/function-hub/bo-peng-707.md",
+      "zhCN": "professors/function-hub/bo-peng-707.zh-CN.md"
+    },
+    "bojun-cheng-118": {
+      "en": "professors/function-hub/bojun-cheng-118.md",
+      "zhCN": "professors/function-hub/bojun-cheng-118.zh-CN.md"
+    },
+    "cai-wu-483": {
+      "en": "professors/society-hub/cai-wu-483.md",
+      "zhCN": "professors/society-hub/cai-wu-483.zh-CN.md"
+    },
+    "chang-yan-130": {
+      "en": "professors/function-hub/chang-yan-130.md",
+      "zhCN": "professors/function-hub/chang-yan-130.zh-CN.md"
+    },
+    "changhao-chen-515": {
+      "en": "professors/systems-hub/changhao-chen-515.md",
+      "zhCN": "professors/systems-hub/changhao-chen-515.zh-CN.md"
+    },
+    "changxi-liu-726": {
+      "en": "professors/function-hub/changxi-liu-726.md",
+      "zhCN": "professors/function-hub/changxi-liu-726.zh-CN.md"
+    },
+    "chao-fang-390": {
+      "en": "professors/function-hub/chao-fang-390.md",
+      "zhCN": "professors/function-hub/chao-fang-390.zh-CN.md"
+    },
+    "chao-zhang-442": {
+      "en": "professors/society-hub/chao-zhang-442.md",
+      "zhCN": "professors/society-hub/chao-zhang-442.zh-CN.md"
+    },
+    "chaosu-li-30": {
+      "en": "professors/society-hub/chaosu-li-30.md",
+      "zhCN": "professors/society-hub/chaosu-li-30.zh-CN.md"
+    },
+    "chee-keong-tan-113": {
+      "en": "professors/function-hub/chee-keong-tan-113.md",
+      "zhCN": "professors/function-hub/chee-keong-tan-113.zh-CN.md"
+    },
+    "chen-liang-439": {
+      "en": "professors/information-hub/chen-liang-439.md",
+      "zhCN": "professors/information-hub/chen-liang-439.zh-CN.md"
+    },
+    "chen-wang-729": {
+      "en": "professors/society-hub/chen-wang-729.md",
+      "zhCN": "professors/society-hub/chen-wang-729.zh-CN.md"
+    },
+    "chen-xu-741": {
+      "en": "professors/information-hub/chen-xu-741.md",
+      "zhCN": "professors/information-hub/chen-xu-741.zh-CN.md"
+    },
+    "chencheng-dong-683": {
+      "en": "professors/systems-hub/chencheng-dong-683.md",
+      "zhCN": "professors/systems-hub/chencheng-dong-683.zh-CN.md"
+    },
+    "cheng-zhang-351": {
+      "en": "professors/systems-hub/cheng-zhang-351.md",
+      "zhCN": "professors/systems-hub/cheng-zhang-351.zh-CN.md"
+    },
+    "chengwei-qin-543": {
+      "en": "professors/information-hub/chengwei-qin-543.md",
+      "zhCN": "professors/information-hub/chengwei-qin-543.zh-CN.md"
+    },
+    "chenjian-lin-688": {
+      "en": "professors/function-hub/chenjian-lin-688.md",
+      "zhCN": "professors/function-hub/chenjian-lin-688.zh-CN.md"
+    },
+    "chenyang-li-300": {
+      "en": "professors/society-hub/chenyang-li-300.md",
+      "zhCN": "professors/society-hub/chenyang-li-300.zh-CN.md"
+    },
+    "cheuk-yi-kelvin-yuen-29": {
+      "en": "professors/society-hub/cheuk-yi-kelvin-yuen-29.md",
+      "zhCN": "professors/society-hub/cheuk-yi-kelvin-yuen-29.zh-CN.md"
+    },
+    "claire-qingqing-xing-226": {
+      "en": "professors/college-of-education-sciences/claire-qingqing-xing-226.md",
+      "zhCN": "professors/college-of-education-sciences/claire-qingqing-xing-226.zh-CN.md"
+    },
+    "clea-von-chamier-waite-470": {
+      "en": "professors/information-hub/clea-von-chamier-waite-470.md",
+      "zhCN": "professors/information-hub/clea-von-chamier-waite-470.zh-CN.md"
+    },
+    "coco-dijia-du-7": {
+      "en": "professors/society-hub/coco-dijia-du-7.md",
+      "zhCN": "professors/society-hub/coco-dijia-du-7.zh-CN.md"
+    },
+    "corey-kewei-xu-27": {
+      "en": "professors/society-hub/corey-kewei-xu-27.md",
+      "zhCN": "professors/society-hub/corey-kewei-xu-27.zh-CN.md"
+    },
+    "cuiping-pan-570": {
+      "en": "professors/systems-hub/cuiping-pan-570.md",
+      "zhCN": "professors/systems-hub/cuiping-pan-570.zh-CN.md"
+    },
+    "dan-lin-708": {
+      "en": "professors/college-of-education-sciences/dan-lin-708.md",
+      "zhCN": "professors/college-of-education-sciences/dan-lin-708.zh-CN.md"
+    },
+    "dan-liu-652": {
+      "en": "professors/college-of-education-sciences/dan-liu-652.md",
+      "zhCN": "professors/college-of-education-sciences/dan-liu-652.zh-CN.md"
+    },
+    "danyang-xie-15": {
+      "en": "professors/society-hub/danyang-xie-15.md",
+      "zhCN": "professors/society-hub/danyang-xie-15.zh-CN.md"
+    },
+    "daqiang-guo-426": {
+      "en": "professors/systems-hub/daqiang-guo-426.md",
+      "zhCN": "professors/systems-hub/daqiang-guo-426.zh-CN.md"
+    },
+    "david-kei-man-yip-1": {
+      "en": "professors/information-hub/david-kei-man-yip-1.md",
+      "zhCN": "professors/information-hub/david-kei-man-yip-1.zh-CN.md"
+    },
+    "de-yang-692": {
+      "en": "professors/college-of-education-sciences/de-yang-692.md",
+      "zhCN": "professors/college-of-education-sciences/de-yang-692.zh-CN.md"
+    },
+    "dengbo-he-58": {
+      "en": "professors/systems-hub/dengbo-he-58.md",
+      "zhCN": "professors/systems-hub/dengbo-he-58.zh-CN.md"
+    },
+    "dexiong-chen-732": {
+      "en": "professors/information-hub/dexiong-chen-732.md",
+      "zhCN": "professors/information-hub/dexiong-chen-732.zh-CN.md"
+    },
+    "dianxun-xiao-115": {
+      "en": "professors/function-hub/dianxun-xiao-115.md",
+      "zhCN": "professors/function-hub/dianxun-xiao-115.zh-CN.md"
+    },
+    "dong-lu-352": {
+      "en": "professors/college-of-future-technology/dong-lu-352.md",
+      "zhCN": "professors/college-of-future-technology/dong-lu-352.zh-CN.md"
+    },
+    "donglin-he-616": {
+      "en": "professors/function-hub/donglin-he-616.md",
+      "zhCN": "professors/function-hub/donglin-he-616.zh-CN.md"
+    },
+    "dongshan-zhang-734": {
+      "en": "professors/college-of-education-sciences/dongshan-zhang-734.md",
+      "zhCN": "professors/college-of-education-sciences/dongshan-zhang-734.zh-CN.md"
+    },
+    "dongye-lyu-331": {
+      "en": "professors/college-of-education-sciences/dongye-lyu-331.md",
+      "zhCN": "professors/college-of-education-sciences/dongye-lyu-331.zh-CN.md"
+    },
+    "echo-fanqin-meng-624": {
+      "en": "professors/college-of-education-sciences/echo-fanqin-meng-624.md",
+      "zhCN": "professors/college-of-education-sciences/echo-fanqin-meng-624.zh-CN.md"
+    },
+    "enyan-dai-449": {
+      "en": "professors/information-hub/enyan-dai-449.md",
+      "zhCN": "professors/information-hub/enyan-dai-449.zh-CN.md"
+    },
+    "eva-lingling-xie-687": {
+      "en": "professors/society-hub/eva-lingling-xie-687.md",
+      "zhCN": "professors/society-hub/eva-lingling-xie-687.zh-CN.md"
+    },
+    "fangqiang-ding-735": {
+      "en": "professors/systems-hub/fangqiang-ding-735.md",
+      "zhCN": "professors/systems-hub/fangqiang-ding-735.zh-CN.md"
+    },
+    "felicia-yen-myan-wong-469": {
+      "en": "professors/college-of-future-technology/felicia-yen-myan-wong-469.md",
+      "zhCN": "professors/college-of-future-technology/felicia-yen-myan-wong-469.zh-CN.md"
+    },
+    "gareth-john-tyson-111": {
+      "en": "professors/information-hub/gareth-john-tyson-111.md",
+      "zhCN": "professors/information-hub/gareth-john-tyson-111.zh-CN.md"
+    },
+    "ge-bai-531": {
+      "en": "professors/information-hub/ge-bai-531.md",
+      "zhCN": "professors/information-hub/ge-bai-531.zh-CN.md"
+    },
+    "ge-lin-kan-119": {
+      "en": "professors/society-hub/ge-lin-kan-119.md",
+      "zhCN": "professors/society-hub/ge-lin-kan-119.zh-CN.md"
+    },
+    "gianni-francois-g-de-bruyn-725": {
+      "en": "professors/society-hub/gianni-francois-g-de-bruyn-725.md",
+      "zhCN": "professors/society-hub/gianni-francois-g-de-bruyn-725.zh-CN.md"
+    },
+    "guang-rao-545": {
+      "en": "professors/college-of-education-sciences/guang-rao-545.md",
+      "zhCN": "professors/college-of-education-sciences/guang-rao-545.zh-CN.md"
+    },
+    "guang-zhang-32": {
+      "en": "professors/society-hub/guang-zhang-32.md",
+      "zhCN": "professors/society-hub/guang-zhang-32.zh-CN.md"
+    },
+    "guigang-cai-299": {
+      "en": "professors/function-hub/guigang-cai-299.md",
+      "zhCN": "professors/function-hub/guigang-cai-299.zh-CN.md"
+    },
+    "guo-chen-658": {
+      "en": "professors/function-hub/guo-chen-658.md",
+      "zhCN": "professors/function-hub/guo-chen-658.zh-CN.md"
+    },
+    "guobiao-hu-235": {
+      "en": "professors/information-hub/guobiao-hu-235.md",
+      "zhCN": "professors/information-hub/guobiao-hu-235.zh-CN.md"
+    },
+    "guoming-tang-427": {
+      "en": "professors/information-hub/guoming-tang-427.md",
+      "zhCN": "professors/information-hub/guoming-tang-427.zh-CN.md"
+    },
+    "guoxiong-qiu-654": {
+      "en": "professors/systems-hub/guoxiong-qiu-654.md",
+      "zhCN": "professors/systems-hub/guoxiong-qiu-654.zh-CN.md"
+    },
+    "guoyi-zhu-358": {
+      "en": "professors/function-hub/guoyi-zhu-358.md",
+      "zhCN": "professors/function-hub/guoyi-zhu-358.zh-CN.md"
+    },
+    "hai-ning-liang-437": {
+      "en": "professors/information-hub/hai-ning-liang-437.md",
+      "zhCN": "professors/information-hub/hai-ning-liang-437.zh-CN.md"
+    },
+    "haiyun-he-594": {
+      "en": "professors/information-hub/haiyun-he-594.md",
+      "zhCN": "professors/information-hub/haiyun-he-594.zh-CN.md"
+    },
+    "hang-jiang-717": {
+      "en": "professors/society-hub/hang-jiang-717.md",
+      "zhCN": "professors/society-hub/hang-jiang-717.zh-CN.md"
+    },
+    "hang-zhao-109": {
+      "en": "professors/systems-hub/hang-zhao-109.md",
+      "zhCN": "professors/systems-hub/hang-zhao-109.zh-CN.md"
+    },
+    "hao-liu-50": {
+      "en": "professors/information-hub/hao-liu-50.md",
+      "zhCN": "professors/information-hub/hao-liu-50.zh-CN.md"
+    },
+    "hao-wang-343": {
+      "en": "professors/information-hub/hao-wang-343.md",
+      "zhCN": "professors/information-hub/hao-wang-343.zh-CN.md"
+    },
+    "hao-xue-685": {
+      "en": "professors/society-hub/hao-xue-685.md",
+      "zhCN": "professors/society-hub/hao-xue-685.zh-CN.md"
+    },
+    "haoang-li-396": {
+      "en": "professors/systems-hub/haoang-li-396.md",
+      "zhCN": "professors/systems-hub/haoang-li-396.zh-CN.md"
+    },
+    "haoxiang-li-171": {
+      "en": "professors/function-hub/haoxiang-li-171.md",
+      "zhCN": "professors/function-hub/haoxiang-li-171.zh-CN.md"
+    },
+    "haoxiang-zhang-682": {
+      "en": "professors/society-hub/haoxiang-zhang-682.md",
+      "zhCN": "professors/society-hub/haoxiang-zhang-682.zh-CN.md"
+    },
+    "he-zheng-418": {
+      "en": "professors/vice-president-academic-affairs/he-zheng-418.md",
+      "zhCN": "professors/vice-president-academic-affairs/he-zheng-418.zh-CN.md"
+    },
+    "henry-zhen-liu-289": {
+      "en": "professors/function-hub/henry-zhen-liu-289.md",
+      "zhCN": "professors/function-hub/henry-zhen-liu-289.zh-CN.md"
+    },
+    "hin-kwok-tsang-9": {
+      "en": "professors/information-hub/hin-kwok-tsang-9.md",
+      "zhCN": "professors/information-hub/hin-kwok-tsang-9.zh-CN.md"
+    },
+    "hong-xing-95": {
+      "en": "professors/information-hub/hong-xing-95.md",
+      "zhCN": "professors/information-hub/hong-xing-95.zh-CN.md"
+    },
+    "hongce-zhang-40": {
+      "en": "professors/function-hub/hongce-zhang-40.md",
+      "zhCN": "professors/function-hub/hongce-zhang-40.zh-CN.md"
+    },
+    "hongwu-jiang-246": {
+      "en": "professors/function-hub/hongwu-jiang-246.md",
+      "zhCN": "professors/function-hub/hongwu-jiang-246.zh-CN.md"
+    },
+    "hongyu-li-533": {
+      "en": "professors/information-hub/hongyu-li-533.md",
+      "zhCN": "professors/information-hub/hongyu-li-533.zh-CN.md"
+    },
+    "hongyuan-lu-276": {
+      "en": "professors/systems-hub/hongyuan-lu-276.md",
+      "zhCN": "professors/systems-hub/hongyuan-lu-276.zh-CN.md"
+    },
+    "huachen-cui-247": {
+      "en": "professors/systems-hub/huachen-cui-247.md",
+      "zhCN": "professors/systems-hub/huachen-cui-247.zh-CN.md"
+    },
+    "huan-yu-45": {
+      "en": "professors/systems-hub/huan-yu-45.md",
+      "zhCN": "professors/systems-hub/huan-yu-45.zh-CN.md"
+    },
+    "huangxun-chen-321": {
+      "en": "professors/information-hub/huangxun-chen-321.md",
+      "zhCN": "professors/information-hub/huangxun-chen-321.zh-CN.md"
+    },
+    "huayi-duan-574": {
+      "en": "professors/information-hub/huayi-duan-574.md",
+      "zhCN": "professors/information-hub/huayi-duan-574.zh-CN.md"
+    },
+    "hui-xiong-31": {
+      "en": "professors/information-hub/hui-xiong-31.md",
+      "zhCN": "professors/information-hub/hui-xiong-31.zh-CN.md"
+    },
+    "huihe-qiu-141": {
+      "en": "professors/function-hub/huihe-qiu-141.md",
+      "zhCN": "professors/function-hub/huihe-qiu-141.zh-CN.md"
+    },
+    "huilian-qiu-746": {
+      "en": "professors/society-hub/huilian-qiu-746.md",
+      "zhCN": "professors/society-hub/huilian-qiu-746.zh-CN.md"
+    },
+    "immihan-ceren-yasa-371": {
+      "en": "professors/systems-hub/immihan-ceren-yasa-371.md",
+      "zhCN": "professors/systems-hub/immihan-ceren-yasa-371.zh-CN.md"
+    },
+    "ingeborg-dr-reichle-569": {
+      "en": "professors/information-hub/ingeborg-dr-reichle-569.md",
+      "zhCN": "professors/information-hub/ingeborg-dr-reichle-569.zh-CN.md"
+    },
+    "jaeuk-park-229": {
+      "en": "professors/college-of-education-sciences/jaeuk-park-229.md",
+      "zhCN": "professors/college-of-education-sciences/jaeuk-park-229.zh-CN.md"
+    },
+    "jeffrey-xu-yu-617": {
+      "en": "professors/information-hub/jeffrey-xu-yu-617.md",
+      "zhCN": "professors/information-hub/jeffrey-xu-yu-617.zh-CN.md"
+    },
+    "jenny-jinni-zhou-6": {
+      "en": "professors/college-of-future-technology/jenny-jinni-zhou-6.md",
+      "zhCN": "professors/college-of-future-technology/jenny-jinni-zhou-6.zh-CN.md"
+    },
+    "jia-li-37": {
+      "en": "professors/information-hub/jia-li-37.md",
+      "zhCN": "professors/information-hub/jia-li-37.zh-CN.md"
+    },
+    "jia-yan-320": {
+      "en": "professors/systems-hub/jia-yan-320.md",
+      "zhCN": "professors/systems-hub/jia-yan-320.zh-CN.md"
+    },
+    "jiadong-yu-377": {
+      "en": "professors/information-hub/jiadong-yu-377.md",
+      "zhCN": "professors/information-hub/jiadong-yu-377.zh-CN.md"
+    },
+    "jiaheng-wei-498": {
+      "en": "professors/information-hub/jiaheng-wei-498.md",
+      "zhCN": "professors/information-hub/jiaheng-wei-498.zh-CN.md"
+    },
+    "jiajun-mai-731": {
+      "en": "professors/college-of-education-sciences/jiajun-mai-731.md",
+      "zhCN": "professors/college-of-education-sciences/jiajun-mai-731.zh-CN.md"
+    },
+    "jian-zeng-349": {
+      "en": "professors/function-hub/jian-zeng-349.md",
+      "zhCN": "professors/function-hub/jian-zeng-349.zh-CN.md"
+    },
+    "jian-zhang-631": {
+      "en": "professors/function-hub/jian-zhang-631.md",
+      "zhCN": "professors/function-hub/jian-zhang-631.zh-CN.md"
+    },
+    "jianfeng-sun-640": {
+      "en": "professors/systems-hub/jianfeng-sun-640.md",
+      "zhCN": "professors/systems-hub/jianfeng-sun-640.zh-CN.md"
+    },
+    "jiang-xu-10": {
+      "en": "professors/function-hub/jiang-xu-10.md",
+      "zhCN": "professors/function-hub/jiang-xu-10.zh-CN.md"
+    },
+    "jiangong-liu-556": {
+      "en": "professors/society-hub/jiangong-liu-556.md",
+      "zhCN": "professors/society-hub/jiangong-liu-556.zh-CN.md"
+    },
+    "jianying-wang-662": {
+      "en": "professors/society-hub/jianying-wang-662.md",
+      "zhCN": "professors/society-hub/jianying-wang-662.zh-CN.md"
+    },
+    "jiao-guo-347": {
+      "en": "professors/college-of-education-sciences/jiao-guo-347.md",
+      "zhCN": "professors/college-of-education-sciences/jiao-guo-347.zh-CN.md"
+    },
+    "jiaqi-lu-632": {
+      "en": "professors/society-hub/jiaqi-lu-632.md",
+      "zhCN": "professors/society-hub/jiaqi-lu-632.zh-CN.md"
+    },
+    "jiaqiang-huang-100": {
+      "en": "professors/function-hub/jiaqiang-huang-100.md",
+      "zhCN": "professors/function-hub/jiaqiang-huang-100.zh-CN.md"
+    },
+    "jiawei-wang-705": {
+      "en": "professors/systems-hub/jiawei-wang-705.md",
+      "zhCN": "professors/systems-hub/jiawei-wang-705.zh-CN.md"
+    },
+    "jiaxing-yuan-517": {
+      "en": "professors/function-hub/jiaxing-yuan-517.md",
+      "zhCN": "professors/function-hub/jiaxing-yuan-517.zh-CN.md"
+    },
+    "jiayi-huang-259": {
+      "en": "professors/function-hub/jiayi-huang-259.md",
+      "zhCN": "professors/function-hub/jiayi-huang-259.zh-CN.md"
+    },
+    "jiaying-wu-48": {
+      "en": "professors/function-hub/jiaying-wu-48.md",
+      "zhCN": "professors/function-hub/jiaying-wu-48.zh-CN.md"
+    },
+    "jie-qi-643": {
+      "en": "professors/function-hub/jie-qi-643.md",
+      "zhCN": "professors/function-hub/jie-qi-643.zh-CN.md"
+    },
+    "jie-song-258": {
+      "en": "professors/systems-hub/jie-song-258.md",
+      "zhCN": "professors/systems-hub/jie-song-258.zh-CN.md"
+    },
+    "jing-lin-651": {
+      "en": "professors/college-of-future-technology/jing-lin-651.md",
+      "zhCN": "professors/college-of-future-technology/jing-lin-651.zh-CN.md"
+    },
+    "jing-tang-36": {
+      "en": "professors/information-hub/jing-tang-36.md",
+      "zhCN": "professors/information-hub/jing-tang-36.zh-CN.md"
+    },
+    "jingshen-wu-12": {
+      "en": "professors/college-of-future-technology/jingshen-wu-12.md",
+      "zhCN": "professors/college-of-future-technology/jingshen-wu-12.zh-CN.md"
+    },
+    "jinguo-liu-165": {
+      "en": "professors/function-hub/jinguo-liu-165.md",
+      "zhCN": "professors/function-hub/jinguo-liu-165.zh-CN.md"
+    },
+    "jingwei-yang-440": {
+      "en": "professors/college-of-future-technology/jingwei-yang-440.md",
+      "zhCN": "professors/college-of-future-technology/jingwei-yang-440.zh-CN.md"
+    },
+    "jinshu-chi-70": {
+      "en": "professors/function-hub/jinshu-chi-70.md",
+      "zhCN": "professors/function-hub/jinshu-chi-70.zh-CN.md"
+    },
+    "jintai-chen-473": {
+      "en": "professors/information-hub/jintai-chen-473.md",
+      "zhCN": "professors/information-hub/jintai-chen-473.zh-CN.md"
+    },
+    "jinyu-he-148": {
+      "en": "professors/society-hub/jinyu-he-148.md",
+      "zhCN": "professors/society-hub/jinyu-he-148.zh-CN.md"
+    },
+    "jishan-hu-507": {
+      "en": "professors/information-hub/jishan-hu-507.md",
+      "zhCN": "professors/information-hub/jishan-hu-507.zh-CN.md"
+    },
+    "joey-jing-zhang-679": {
+      "en": "professors/college-of-education-sciences/joey-jing-zhang-679.md",
+      "zhCN": "professors/college-of-education-sciences/joey-jing-zhang-679.zh-CN.md"
+    },
+    "juan-du-11": {
+      "en": "professors/systems-hub/juan-du-11.md",
+      "zhCN": "professors/systems-hub/juan-du-11.zh-CN.md"
+    },
+    "julie-qiaojin-lin-312": {
+      "en": "professors/systems-hub/julie-qiaojin-lin-312.md",
+      "zhCN": "professors/systems-hub/julie-qiaojin-lin-312.zh-CN.md"
+    },
+    "jun-ma-67": {
+      "en": "professors/systems-hub/jun-ma-67.md",
+      "zhCN": "professors/systems-hub/jun-ma-67.zh-CN.md"
+    },
+    "jun-wang-138": {
+      "en": "professors/function-hub/jun-wang-138.md",
+      "zhCN": "professors/function-hub/jun-wang-138.zh-CN.md"
+    },
+    "jun-wu-133": {
+      "en": "professors/systems-hub/jun-wu-133.md",
+      "zhCN": "professors/systems-hub/jun-wu-133.zh-CN.md"
+    },
+    "jun-xia-54": {
+      "en": "professors/systems-hub/jun-xia-54.md",
+      "zhCN": "professors/systems-hub/jun-xia-54.zh-CN.md"
+    },
+    "jun-xia-589": {
+      "en": "professors/information-hub/jun-xia-589.md",
+      "zhCN": "professors/information-hub/jun-xia-589.zh-CN.md"
+    },
+    "jun-yang-702": {
+      "en": "professors/systems-hub/jun-yang-702.md",
+      "zhCN": "professors/systems-hub/jun-yang-702.zh-CN.md"
+    },
+    "junhua-zhu-387": {
+      "en": "professors/college-of-education-sciences/junhua-zhu-387.md",
+      "zhCN": "professors/college-of-education-sciences/junhua-zhu-387.zh-CN.md"
+    },
+    "junjie-zhang-5": {
+      "en": "professors/information-hub/junjie-zhang-5.md",
+      "zhCN": "professors/information-hub/junjie-zhang-5.zh-CN.md"
+    },
+    "junwei-liang-224": {
+      "en": "professors/information-hub/junwei-liang-224.md",
+      "zhCN": "professors/information-hub/junwei-liang-224.zh-CN.md"
+    },
+    "junxuan-wang-586": {
+      "en": "professors/society-hub/junxuan-wang-586.md",
+      "zhCN": "professors/society-hub/junxuan-wang-586.zh-CN.md"
+    },
+    "junyu-xu-412": {
+      "en": "professors/college-of-education-sciences/junyu-xu-412.md",
+      "zhCN": "professors/college-of-education-sciences/junyu-xu-412.zh-CN.md"
+    },
+    "junyu-zheng-243": {
+      "en": "professors/function-hub/junyu-zheng-243.md",
+      "zhCN": "professors/function-hub/junyu-zheng-243.zh-CN.md"
+    },
+    "justin-jihao-hong-621": {
+      "en": "professors/society-hub/justin-jihao-hong-621.md",
+      "zhCN": "professors/society-hub/justin-jihao-hong-621.zh-CN.md"
+    },
+    "kai-tang-142": {
+      "en": "professors/systems-hub/kai-tang-142.md",
+      "zhCN": "professors/systems-hub/kai-tang-142.zh-CN.md"
+    },
+    "kaihao-zhang-65": {
+      "en": "professors/systems-hub/kaihao-zhang-65.md",
+      "zhCN": "professors/systems-hub/kaihao-zhang-65.zh-CN.md"
+    },
+    "kaishun-wu-144": {
+      "en": "professors/vice-president-research/kaishun-wu-144.md",
+      "zhCN": "professors/vice-president-research/kaishun-wu-144.zh-CN.md"
+    },
+    "kang-zhang-106": {
+      "en": "professors/information-hub/kang-zhang-106.md",
+      "zhCN": "professors/information-hub/kang-zhang-106.zh-CN.md"
+    },
+    "ke-ma-602": {
+      "en": "professors/systems-hub/ke-ma-602.md",
+      "zhCN": "professors/systems-hub/ke-ma-602.zh-CN.md"
+    },
+    "ke-xue-422": {
+      "en": "professors/college-of-future-technology/ke-xue-422.md",
+      "zhCN": "professors/college-of-future-technology/ke-xue-422.zh-CN.md"
+    },
+    "keemoon-jang-666": {
+      "en": "professors/society-hub/keemoon-jang-666.md",
+      "zhCN": "professors/society-hub/keemoon-jang-666.zh-CN.md"
+    },
+    "kefei-liu-162": {
+      "en": "professors/systems-hub/kefei-liu-162.md",
+      "zhCN": "professors/systems-hub/kefei-liu-162.zh-CN.md"
+    },
+    "kejun-jiang-541": {
+      "en": "professors/society-hub/kejun-jiang-541.md",
+      "zhCN": "professors/society-hub/kejun-jiang-541.zh-CN.md"
+    },
+    "kezhou-yang-339": {
+      "en": "professors/function-hub/kezhou-yang-339.md",
+      "zhCN": "professors/function-hub/kezhou-yang-339.zh-CN.md"
+    },
+    "kok-sin-woon-521": {
+      "en": "professors/society-hub/kok-sin-woon-521.md",
+      "zhCN": "professors/society-hub/kok-sin-woon-521.zh-CN.md"
+    },
+    "landu-jiang-384": {
+      "en": "professors/college-of-future-technology/landu-jiang-384.md",
+      "zhCN": "professors/college-of-future-technology/landu-jiang-384.zh-CN.md"
+    },
+    "lanhui-li-394": {
+      "en": "professors/college-of-future-technology/lanhui-li-394.md",
+      "zhCN": "professors/college-of-future-technology/lanhui-li-394.zh-CN.md"
+    },
+    "lanlan-cai-455": {
+      "en": "professors/function-hub/lanlan-cai-455.md",
+      "zhCN": "professors/function-hub/lanlan-cai-455.zh-CN.md"
+    },
+    "lei-chen-20": {
+      "en": "professors/information-hub/lei-chen-20.md",
+      "zhCN": "professors/information-hub/lei-chen-20.zh-CN.md"
+    },
+    "lei-li-104": {
+      "en": "professors/information-hub/lei-li-104.md",
+      "zhCN": "professors/information-hub/lei-li-104.zh-CN.md"
+    },
+    "lei-zhu-64": {
+      "en": "professors/systems-hub/lei-zhu-64.md",
+      "zhCN": "professors/systems-hub/lei-zhu-64.zh-CN.md"
+    },
+    "leifu-zhang-305": {
+      "en": "professors/society-hub/leifu-zhang-305.md",
+      "zhCN": "professors/society-hub/leifu-zhang-305.zh-CN.md"
+    },
+    "li-liu-250": {
+      "en": "professors/information-hub/li-liu-250.md",
+      "zhCN": "professors/information-hub/li-liu-250.zh-CN.md"
+    },
+    "li-tao-296": {
+      "en": "professors/systems-hub/li-tao-296.md",
+      "zhCN": "professors/systems-hub/li-tao-296.zh-CN.md"
+    },
+    "liang-yue-404": {
+      "en": "professors/systems-hub/liang-yue-404.md",
+      "zhCN": "professors/systems-hub/liang-yue-404.zh-CN.md"
+    },
+    "liang-zhang-583": {
+      "en": "professors/society-hub/liang-zhang-583.md",
+      "zhCN": "professors/society-hub/liang-zhang-583.zh-CN.md"
+    },
+    "lili-miao-611": {
+      "en": "professors/society-hub/lili-miao-611.md",
+      "zhCN": "professors/society-hub/lili-miao-611.zh-CN.md"
+    },
+    "lin-yang-26": {
+      "en": "professors/society-hub/lin-yang-26.md",
+      "zhCN": "professors/society-hub/lin-yang-26.zh-CN.md"
+    },
+    "lina-luo-639": {
+      "en": "professors/society-hub/lina-luo-639.md",
+      "zhCN": "professors/society-hub/lina-luo-639.zh-CN.md"
+    },
+    "lingbo-liu-740": {
+      "en": "professors/society-hub/lingbo-liu-740.md",
+      "zhCN": "professors/society-hub/lingbo-liu-740.zh-CN.md"
+    },
+    "lingjie-duan-592": {
+      "en": "professors/information-hub/lingjie-duan-592.md",
+      "zhCN": "professors/information-hub/lingjie-duan-592.zh-CN.md"
+    },
+    "lingluo-chu-125": {
+      "en": "professors/systems-hub/lingluo-chu-125.md",
+      "zhCN": "professors/systems-hub/lingluo-chu-125.zh-CN.md"
+    },
+    "linxiao-wang-230": {
+      "en": "professors/college-of-education-sciences/linxiao-wang-230.md",
+      "zhCN": "professors/college-of-education-sciences/linxiao-wang-230.zh-CN.md"
+    },
+    "lionel-ming-shuan-ni-13": {
+      "en": "professors/society-hub/lionel-ming-shuan-ni-13.md",
+      "zhCN": "professors/society-hub/lionel-ming-shuan-ni-13.zh-CN.md"
+    },
+    "liuqian-yu-28": {
+      "en": "professors/function-hub/liuqian-yu-28.md",
+      "zhCN": "professors/function-hub/liuqian-yu-28.zh-CN.md"
+    },
+    "liuqing-yang-126": {
+      "en": "professors/systems-hub/liuqing-yang-126.md",
+      "zhCN": "professors/systems-hub/liuqing-yang-126.zh-CN.md"
+    },
+    "lorraine-yuxin-zhang-744": {
+      "en": "professors/information-hub/lorraine-yuxin-zhang-744.md",
+      "zhCN": "professors/information-hub/lorraine-yuxin-zhang-744.zh-CN.md"
+    },
+    "lujia-wang-353": {
+      "en": "professors/college-of-future-technology/lujia-wang-353.md",
+      "zhCN": "professors/college-of-future-technology/lujia-wang-353.zh-CN.md"
+    },
+    "luoye-chen-145": {
+      "en": "professors/society-hub/luoye-chen-145.md",
+      "zhCN": "professors/society-hub/luoye-chen-145.zh-CN.md"
+    },
+    "luwen-yu-344": {
+      "en": "professors/information-hub/luwen-yu-344.md",
+      "zhCN": "professors/information-hub/luwen-yu-344.zh-CN.md"
+    },
+    "man-chan-117": {
+      "en": "professors/vice-president-teaching-learning/man-chan-117.md",
+      "zhCN": "professors/vice-president-teaching-learning/man-chan-117.zh-CN.md"
+    },
+    "maosu-li-644": {
+      "en": "professors/society-hub/maosu-li-644.md",
+      "zhCN": "professors/society-hub/maosu-li-644.zh-CN.md"
+    },
+    "marina-jinyuan-ma-228": {
+      "en": "professors/vice-president-teaching-learning/marina-jinyuan-ma-228.md",
+      "zhCN": "professors/vice-president-teaching-learning/marina-jinyuan-ma-228.zh-CN.md"
+    },
+    "mario-jun-bo-huang-645": {
+      "en": "professors/college-of-education-sciences/mario-jun-bo-huang-645.md",
+      "zhCN": "professors/college-of-education-sciences/mario-jun-bo-huang-645.zh-CN.md"
+    },
+    "mark-nicholas-grimshaw-aagaard-514": {
+      "en": "professors/information-hub/mark-nicholas-grimshaw-aagaard-514.md",
+      "zhCN": "professors/information-hub/mark-nicholas-grimshaw-aagaard-514.zh-CN.md"
+    },
+    "mei-zhang-463": {
+      "en": "professors/college-of-education-sciences/mei-zhang-463.md",
+      "zhCN": "professors/college-of-education-sciences/mei-zhang-463.zh-CN.md"
+    },
+    "menglin-yang-509": {
+      "en": "professors/information-hub/menglin-yang-509.md",
+      "zhCN": "professors/information-hub/menglin-yang-509.zh-CN.md"
+    },
+    "miaojun-huang-326": {
+      "en": "professors/college-of-future-technology/miaojun-huang-326.md",
+      "zhCN": "professors/college-of-future-technology/miaojun-huang-326.zh-CN.md"
+    },
+    "min-tian-689": {
+      "en": "professors/systems-hub/min-tian-689.md",
+      "zhCN": "professors/systems-hub/min-tian-689.zh-CN.md"
+    },
+    "mingming-fan-33": {
+      "en": "professors/college-of-future-technology/mingming-fan-33.md",
+      "zhCN": "professors/college-of-future-technology/mingming-fan-33.zh-CN.md"
+    },
+    "mirjana-prpa-660": {
+      "en": "professors/information-hub/mirjana-prpa-660.md",
+      "zhCN": "professors/information-hub/mirjana-prpa-660.zh-CN.md"
+    },
+    "mojun-chen-114": {
+      "en": "professors/systems-hub/mojun-chen-114.md",
+      "zhCN": "professors/systems-hub/mojun-chen-114.zh-CN.md"
+    },
+    "moxuan-luo-474": {
+      "en": "professors/college-of-education-sciences/moxuan-luo-474.md",
+      "zhCN": "professors/college-of-education-sciences/moxuan-luo-474.zh-CN.md"
+    },
+    "moyan-li-438": {
+      "en": "professors/society-hub/moyan-li-438.md",
+      "zhCN": "professors/society-hub/moyan-li-438.zh-CN.md"
+    },
+    "muzhi-zhou-96": {
+      "en": "professors/society-hub/muzhi-zhou-96.md",
+      "zhCN": "professors/society-hub/muzhi-zhou-96.zh-CN.md"
+    },
+    "na-jiang-532": {
+      "en": "professors/society-hub/na-jiang-532.md",
+      "zhCN": "professors/society-hub/na-jiang-532.zh-CN.md"
+    },
+    "nan-tang-297": {
+      "en": "professors/information-hub/nan-tang-297.md",
+      "zhCN": "professors/information-hub/nan-tang-297.zh-CN.md"
+    },
+    "nicolo-merendino-584": {
+      "en": "professors/information-hub/nicolo-merendino-584.md",
+      "zhCN": "professors/information-hub/nicolo-merendino-584.zh-CN.md"
+    },
+    "ning-cai-143": {
+      "en": "professors/society-hub/ning-cai-143.md",
+      "zhCN": "professors/society-hub/ning-cai-143.zh-CN.md"
+    },
+    "ning-li-522": {
+      "en": "professors/college-of-future-technology/ning-li-522.md",
+      "zhCN": "professors/college-of-future-technology/ning-li-522.zh-CN.md"
+    },
+    "ningning-ding-464": {
+      "en": "professors/information-hub/ningning-ding-464.md",
+      "zhCN": "professors/information-hub/ningning-ding-464.zh-CN.md"
+    },
+    "ningxin-su-587": {
+      "en": "professors/information-hub/ningxin-su-587.md",
+      "zhCN": "professors/information-hub/ningxin-su-587.zh-CN.md"
+    },
+    "omar-costa-hamido-603": {
+      "en": "professors/information-hub/omar-costa-hamido-603.md",
+      "zhCN": "professors/information-hub/omar-costa-hamido-603.zh-CN.md"
+    },
+    "oncay-yasa-372": {
+      "en": "professors/systems-hub/oncay-yasa-372.md",
+      "zhCN": "professors/systems-hub/oncay-yasa-372.zh-CN.md"
+    },
+    "pan-hui-47": {
+      "en": "professors/information-hub/pan-hui-47.md",
+      "zhCN": "professors/information-hub/pan-hui-47.zh-CN.md"
+    },
+    "pei-man-james-she-379": {
+      "en": "professors/information-hub/pei-man-james-she-379.md",
+      "zhCN": "professors/information-hub/pei-man-james-she-379.zh-CN.md"
+    },
+    "peng-chen-166": {
+      "en": "professors/function-hub/peng-chen-166.md",
+      "zhCN": "professors/function-hub/peng-chen-166.zh-CN.md"
+    },
+    "pengcheng-hu-286": {
+      "en": "professors/systems-hub/pengcheng-hu-286.md",
+      "zhCN": "professors/systems-hub/pengcheng-hu-286.zh-CN.md"
+    },
+    "ping-gao-23": {
+      "en": "professors/function-hub/ping-gao-23.md",
+      "zhCN": "professors/function-hub/ping-gao-23.zh-CN.md"
+    },
+    "pingyu-fan-671": {
+      "en": "professors/society-hub/pingyu-fan-671.md",
+      "zhCN": "professors/society-hub/pingyu-fan-671.zh-CN.md"
+    },
+    "qiang-huang-579": {
+      "en": "professors/systems-hub/qiang-huang-579.md",
+      "zhCN": "professors/systems-hub/qiang-huang-579.zh-CN.md"
+    },
+    "qiang-meng-750": {
+      "en": "professors/president/qiang-meng-750.md",
+      "zhCN": "professors/president/qiang-meng-750.zh-CN.md"
+    },
+    "qiang-nie-420": {
+      "en": "professors/systems-hub/qiang-nie-420.md",
+      "zhCN": "professors/systems-hub/qiang-nie-420.zh-CN.md"
+    },
+    "qianping-ren-580": {
+      "en": "professors/society-hub/qianping-ren-580.md",
+      "zhCN": "professors/society-hub/qianping-ren-580.zh-CN.md"
+    },
+    "qianqian-wei-448": {
+      "en": "professors/college-of-future-technology/qianqian-wei-448.md",
+      "zhCN": "professors/college-of-future-technology/qianqian-wei-448.zh-CN.md"
+    },
+    "qiao-he-480": {
+      "en": "professors/college-of-education-sciences/qiao-he-480.md",
+      "zhCN": "professors/college-of-education-sciences/qiao-he-480.zh-CN.md"
+    },
+    "qichun-yang-172": {
+      "en": "professors/function-hub/qichun-yang-172.md",
+      "zhCN": "professors/function-hub/qichun-yang-172.zh-CN.md"
+    },
+    "qinbai-yun-558": {
+      "en": "professors/function-hub/qinbai-yun-558.md",
+      "zhCN": "professors/function-hub/qinbai-yun-558.zh-CN.md"
+    },
+    "qing-li-39": {
+      "en": "professors/function-hub/qing-li-39.md",
+      "zhCN": "professors/function-hub/qing-li-39.zh-CN.md"
+    },
+    "qinghao-he-345": {
+      "en": "professors/college-of-future-technology/qinghao-he-345.md",
+      "zhCN": "professors/college-of-future-technology/qinghao-he-345.zh-CN.md"
+    },
+    "qingquan-chen-664": {
+      "en": "professors/systems-hub/qingquan-chen-664.md",
+      "zhCN": "professors/systems-hub/qingquan-chen-664.zh-CN.md"
+    },
+    "qiong-luo-159": {
+      "en": "professors/information-hub/qiong-luo-159.md",
+      "zhCN": "professors/information-hub/qiong-luo-159.zh-CN.md"
+    },
+    "qiumeng-li-441": {
+      "en": "professors/society-hub/qiumeng-li-441.md",
+      "zhCN": "professors/society-hub/qiumeng-li-441.zh-CN.md"
+    },
+    "qiushi-zhou-646": {
+      "en": "professors/information-hub/qiushi-zhou-646.md",
+      "zhCN": "professors/information-hub/qiushi-zhou-646.zh-CN.md"
+    },
+    "qixing-ji-44": {
+      "en": "professors/function-hub/qixing-ji-44.md",
+      "zhCN": "professors/function-hub/qixing-ji-44.zh-CN.md"
+    },
+    "quanfu-he-508": {
+      "en": "professors/function-hub/quanfu-he-508.md",
+      "zhCN": "professors/function-hub/quanfu-he-508.zh-CN.md"
+    },
+    "rachel-franz-493": {
+      "en": "professors/information-hub/rachel-franz-493.md",
+      "zhCN": "professors/information-hub/rachel-franz-493.zh-CN.md"
+    },
+    "ran-li-329": {
+      "en": "professors/college-of-education-sciences/ran-li-329.md",
+      "zhCN": "professors/college-of-education-sciences/ran-li-329.zh-CN.md"
+    },
+    "renjie-wang-256": {
+      "en": "professors/function-hub/renjie-wang-256.md",
+      "zhCN": "professors/function-hub/renjie-wang-256.zh-CN.md"
+    },
+    "renjing-xu-97": {
+      "en": "professors/function-hub/renjing-xu-97.md",
+      "zhCN": "professors/function-hub/renjing-xu-97.zh-CN.md"
+    },
+    "ricky-shi-wei-lee-16": {
+      "en": "professors/systems-hub/ricky-shi-wei-lee-16.md",
+      "zhCN": "professors/systems-hub/ricky-shi-wei-lee-16.zh-CN.md"
+    },
+    "robert-zhong-qi-105": {
+      "en": "professors/systems-hub/robert-zhong-qi-105.md",
+      "zhCN": "professors/systems-hub/robert-zhong-qi-105.zh-CN.md"
+    },
+    "robin-guohuibin-li-622": {
+      "en": "professors/society-hub/robin-guohuibin-li-622.md",
+      "zhCN": "professors/society-hub/robin-guohuibin-li-622.zh-CN.md"
+    },
+    "rongfeng-yuan-340": {
+      "en": "professors/function-hub/rongfeng-yuan-340.md",
+      "zhCN": "professors/function-hub/rongfeng-yuan-340.zh-CN.md"
+    },
+    "rongqing-zhang-680": {
+      "en": "professors/systems-hub/rongqing-zhang-680.md",
+      "zhCN": "professors/systems-hub/rongqing-zhang-680.zh-CN.md"
+    },
+    "rui-cao-374": {
+      "en": "professors/society-hub/rui-cao-374.md",
+      "zhCN": "professors/society-hub/rui-cao-374.zh-CN.md"
+    },
+    "ruiting-zuo-131": {
+      "en": "professors/society-hub/ruiting-zuo-131.md",
+      "zhCN": "professors/society-hub/ruiting-zuo-131.zh-CN.md"
+    },
+    "run-feng-751": {
+      "en": "professors/vice-president-academic-affairs/run-feng-751.md",
+      "zhCN": "professors/vice-president-academic-affairs/run-feng-751.zh-CN.md"
+    },
+    "rushi-dai-626": {
+      "en": "professors/society-hub/rushi-dai-626.md",
+      "zhCN": "professors/society-hub/rushi-dai-626.zh-CN.md"
+    },
+    "sean-sihong-xie-295": {
+      "en": "professors/information-hub/sean-sihong-xie-295.md",
+      "zhCN": "professors/information-hub/sean-sihong-xie-295.zh-CN.md"
+    },
+    "seona-park-430": {
+      "en": "professors/society-hub/seona-park-430.md",
+      "zhCN": "professors/society-hub/seona-park-430.zh-CN.md"
+    },
+    "shane-miguel-johnson-665": {
+      "en": "professors/systems-hub/shane-miguel-johnson-665.md",
+      "zhCN": "professors/systems-hub/shane-miguel-johnson-665.zh-CN.md"
+    },
+    "shangqi-lu-451": {
+      "en": "professors/information-hub/shangqi-lu-451.md",
+      "zhCN": "professors/information-hub/shangqi-lu-451.zh-CN.md"
+    },
+    "shanshi-huang-244": {
+      "en": "professors/function-hub/shanshi-huang-244.md",
+      "zhCN": "professors/function-hub/shanshi-huang-244.zh-CN.md"
+    },
+    "sheng-zhou-350": {
+      "en": "professors/function-hub/sheng-zhou-350.md",
+      "zhCN": "professors/function-hub/sheng-zhou-350.zh-CN.md"
+    },
+    "shi-qiu-596": {
+      "en": "professors/society-hub/shi-qiu-596.md",
+      "zhCN": "professors/society-hub/shi-qiu-596.zh-CN.md"
+    },
+    "shijian-gao-391": {
+      "en": "professors/information-hub/shijian-gao-391.md",
+      "zhCN": "professors/information-hub/shijian-gao-391.zh-CN.md"
+    },
+    "shiju-lin-520": {
+      "en": "professors/function-hub/shiju-lin-520.md",
+      "zhCN": "professors/function-hub/shiju-lin-520.zh-CN.md"
+    },
+    "shiqin-yu-429": {
+      "en": "professors/systems-hub/shiqin-yu-429.md",
+      "zhCN": "professors/systems-hub/shiqin-yu-429.zh-CN.md"
+    },
+    "shisheng-hu-733": {
+      "en": "professors/information-hub/shisheng-hu-733.md",
+      "zhCN": "professors/information-hub/shisheng-hu-733.zh-CN.md"
+    },
+    "shiyuan-liu-512": {
+      "en": "professors/systems-hub/shiyuan-liu-512.md",
+      "zhCN": "professors/systems-hub/shiyuan-liu-512.zh-CN.md"
+    },
+    "shuai-jia-103": {
+      "en": "professors/systems-hub/shuai-jia-103.md",
+      "zhCN": "professors/systems-hub/shuai-jia-103.zh-CN.md"
+    },
+    "shuncheng-lee-323": {
+      "en": "professors/function-hub/shuncheng-lee-323.md",
+      "zhCN": "professors/function-hub/shuncheng-lee-323.zh-CN.md"
+    },
+    "shuo-sun-582": {
+      "en": "professors/society-hub/shuo-sun-582.md",
+      "zhCN": "professors/society-hub/shuo-sun-582.zh-CN.md"
+    },
+    "si-qiao-661": {
+      "en": "professors/society-hub/si-qiao-661.md",
+      "zhCN": "professors/society-hub/si-qiao-661.zh-CN.md"
+    },
+    "siguang-li-132": {
+      "en": "professors/society-hub/siguang-li-132.md",
+      "zhCN": "professors/society-hub/siguang-li-132.zh-CN.md"
+    },
+    "sihan-chen-649": {
+      "en": "professors/function-hub/sihan-chen-649.md",
+      "zhCN": "professors/function-hub/sihan-chen-649.zh-CN.md"
+    },
+    "sijia-chen-566": {
+      "en": "professors/society-hub/sijia-chen-566.md",
+      "zhCN": "professors/society-hub/sijia-chen-566.zh-CN.md"
+    },
+    "simei-liao-271": {
+      "en": "professors/college-of-education-sciences/simei-liao-271.md",
+      "zhCN": "professors/college-of-education-sciences/simei-liao-271.zh-CN.md"
+    },
+    "sukie-xiuqi-yang-695": {
+      "en": "professors/society-hub/sukie-xiuqi-yang-695.md",
+      "zhCN": "professors/society-hub/sukie-xiuqi-yang-695.zh-CN.md"
+    },
+    "sung-hun-kim-107": {
+      "en": "professors/information-hub/sung-hun-kim-107.md",
+      "zhCN": "professors/information-hub/sung-hun-kim-107.zh-CN.md"
+    },
+    "tai-kai-ng-496": {
+      "en": "professors/college-of-education-sciences/tai-kai-ng-496.md",
+      "zhCN": "professors/college-of-education-sciences/tai-kai-ng-496.zh-CN.md"
+    },
+    "teng-zhou-123": {
+      "en": "professors/function-hub/teng-zhou-123.md",
+      "zhCN": "professors/function-hub/teng-zhou-123.zh-CN.md"
+    },
+    "tengfei-chang-267": {
+      "en": "professors/information-hub/tengfei-chang-267.md",
+      "zhCN": "professors/information-hub/tengfei-chang-267.zh-CN.md"
+    },
+    "tengjia-zuo-510": {
+      "en": "professors/information-hub/tengjia-zuo-510.md",
+      "zhCN": "professors/information-hub/tengjia-zuo-510.zh-CN.md"
+    },
+    "theodoros-papatheodorou-55": {
+      "en": "professors/information-hub/theodoros-papatheodorou-55.md",
+      "zhCN": "professors/information-hub/theodoros-papatheodorou-55.zh-CN.md"
+    },
+    "tianxiang-zhao-678": {
+      "en": "professors/information-hub/tianxiang-zhao-678.md",
+      "zhCN": "professors/information-hub/tianxiang-zhao-678.zh-CN.md"
+    },
+    "tianyuan-jin-718": {
+      "en": "professors/information-hub/tianyuan-jin-718.md",
+      "zhCN": "professors/information-hub/tianyuan-jin-718.zh-CN.md"
+    },
+    "tianyuan-li-730": {
+      "en": "professors/college-of-education-sciences/tianyuan-li-730.md",
+      "zhCN": "professors/college-of-education-sciences/tianyuan-li-730.zh-CN.md"
+    },
+    "tiefu-zhang-519": {
+      "en": "professors/college-of-education-sciences/tiefu-zhang-519.md",
+      "zhCN": "professors/college-of-education-sciences/tiefu-zhang-519.zh-CN.md"
+    },
+    "tieying-xu-411": {
+      "en": "professors/vice-president-academic-affairs/tieying-xu-411.md",
+      "zhCN": "professors/vice-president-academic-affairs/tieying-xu-411.zh-CN.md"
+    },
+    "ting-chuen-pong-446": {
+      "en": "professors/information-hub/ting-chuen-pong-446.md",
+      "zhCN": "professors/information-hub/ting-chuen-pong-446.zh-CN.md"
+    },
+    "ting-fang-245": {
+      "en": "professors/function-hub/ting-fang-245.md",
+      "zhCN": "professors/function-hub/ting-fang-245.zh-CN.md"
+    },
+    "tong-jiang-728": {
+      "en": "professors/society-hub/tong-jiang-728.md",
+      "zhCN": "professors/society-hub/tong-jiang-728.zh-CN.md"
+    },
+    "tong-zhou-499": {
+      "en": "professors/function-hub/tong-zhou-499.md",
+      "zhCN": "professors/function-hub/tong-zhou-499.zh-CN.md"
+    },
+    "tongge-huang-328": {
+      "en": "professors/college-of-future-technology/tongge-huang-328.md",
+      "zhCN": "professors/college-of-future-technology/tongge-huang-328.zh-CN.md"
+    },
+    "tongyi-zhang-98": {
+      "en": "professors/function-hub/tongyi-zhang-98.md",
+      "zhCN": "professors/function-hub/tongyi-zhang-98.zh-CN.md"
+    },
+    "tun-hao-395": {
+      "en": "professors/college-of-education-sciences/tun-hao-395.md",
+      "zhCN": "professors/college-of-education-sciences/tun-hao-395.zh-CN.md"
+    },
+    "wanru-xiong-99": {
+      "en": "professors/society-hub/wanru-xiong-99.md",
+      "zhCN": "professors/society-hub/wanru-xiong-99.zh-CN.md"
+    },
+    "wei-han-183": {
+      "en": "professors/function-hub/wei-han-183.md",
+      "zhCN": "professors/function-hub/wei-han-183.zh-CN.md"
+    },
+    "wei-jiang-403": {
+      "en": "professors/function-hub/wei-jiang-403.md",
+      "zhCN": "professors/function-hub/wei-jiang-403.zh-CN.md"
+    },
+    "wei-shyy-471": {
+      "en": "professors/function-hub/wei-shyy-471.md",
+      "zhCN": "professors/function-hub/wei-shyy-471.zh-CN.md"
+    },
+    "wei-wang-35": {
+      "en": "professors/information-hub/wei-wang-35.md",
+      "zhCN": "professors/information-hub/wei-wang-35.zh-CN.md"
+    },
+    "wei-zeng-59": {
+      "en": "professors/information-hub/wei-zeng-59.md",
+      "zhCN": "professors/information-hub/wei-zeng-59.zh-CN.md"
+    },
+    "wei-zhang-231": {
+      "en": "professors/college-of-education-sciences/wei-zhang-231.md",
+      "zhCN": "professors/college-of-education-sciences/wei-zhang-231.zh-CN.md"
+    },
+    "weijia-wen-18": {
+      "en": "professors/function-hub/weijia-wen-18.md",
+      "zhCN": "professors/function-hub/weijia-wen-18.zh-CN.md"
+    },
+    "weikai-yang-452": {
+      "en": "professors/information-hub/weikai-yang-452.md",
+      "zhCN": "professors/information-hub/weikai-yang-452.zh-CN.md"
+    },
+    "wenjun-wang-612": {
+      "en": "professors/society-hub/wenjun-wang-612.md",
+      "zhCN": "professors/society-hub/wenjun-wang-612.zh-CN.md"
+    },
+    "wenxun-hu-330": {
+      "en": "professors/college-of-future-technology/wenxun-hu-330.md",
+      "zhCN": "professors/college-of-future-technology/wenxun-hu-330.zh-CN.md"
+    },
+    "wenye-li-565": {
+      "en": "professors/college-of-education-sciences/wenye-li-565.md",
+      "zhCN": "professors/college-of-education-sciences/wenye-li-565.zh-CN.md"
+    },
+    "wenyu-wang-376": {
+      "en": "professors/systems-hub/wenyu-wang-376.md",
+      "zhCN": "professors/systems-hub/wenyu-wang-376.zh-CN.md"
+    },
+    "wufan-zhao-383": {
+      "en": "professors/society-hub/wufan-zhao-383.md",
+      "zhCN": "professors/society-hub/wufan-zhao-383.zh-CN.md"
+    },
+    "xiakun-chu-151": {
+      "en": "professors/function-hub/xiakun-chu-151.md",
+      "zhCN": "professors/function-hub/xiakun-chu-151.zh-CN.md"
+    },
+    "xian-zhang-110": {
+      "en": "professors/systems-hub/xian-zhang-110.md",
+      "zhCN": "professors/systems-hub/xian-zhang-110.zh-CN.md"
+    },
+    "xiang-lu-629": {
+      "en": "professors/society-hub/xiang-lu-629.md",
+      "zhCN": "professors/society-hub/xiang-lu-629.zh-CN.md"
+    },
+    "xiangyu-li-511": {
+      "en": "professors/function-hub/xiangyu-li-511.md",
+      "zhCN": "professors/function-hub/xiangyu-li-511.zh-CN.md"
+    },
+    "xiaofeng-liu-494": {
+      "en": "professors/society-hub/xiaofeng-liu-494.md",
+      "zhCN": "professors/society-hub/xiaofeng-liu-494.zh-CN.md"
+    },
+    "xiaojie-lu-386": {
+      "en": "professors/college-of-future-technology/xiaojie-lu-386.md",
+      "zhCN": "professors/college-of-future-technology/xiaojie-lu-386.zh-CN.md"
+    },
+    "xiaomeng-li-319": {
+      "en": "professors/systems-hub/xiaomeng-li-319.md",
+      "zhCN": "professors/systems-hub/xiaomeng-li-319.zh-CN.md"
+    },
+    "xiaotong-sun-38": {
+      "en": "professors/systems-hub/xiaotong-sun-38.md",
+      "zhCN": "professors/systems-hub/xiaotong-sun-38.zh-CN.md"
+    },
+    "xiaowen-chu-51": {
+      "en": "professors/information-hub/xiaowen-chu-51.md",
+      "zhCN": "professors/information-hub/xiaowen-chu-51.zh-CN.md"
+    },
+    "xiaoxiao-wu-164": {
+      "en": "professors/function-hub/xiaoxiao-wu-164.md",
+      "zhCN": "professors/function-hub/xiaoxiao-wu-164.zh-CN.md"
+    },
+    "xiaoyan-wang-361": {
+      "en": "professors/college-of-future-technology/xiaoyan-wang-361.md",
+      "zhCN": "professors/college-of-future-technology/xiaoyan-wang-361.zh-CN.md"
+    },
+    "xiaoyu-wang-302": {
+      "en": "professors/society-hub/xiaoyu-wang-302.md",
+      "zhCN": "professors/society-hub/xiaoyu-wang-302.zh-CN.md"
+    },
+    "xiaozhou-fan-628": {
+      "en": "professors/function-hub/xiaozhou-fan-628.md",
+      "zhCN": "professors/function-hub/xiaozhou-fan-628.zh-CN.md"
+    },
+    "xin-tong-435": {
+      "en": "professors/information-hub/xin-tong-435.md",
+      "zhCN": "professors/information-hub/xin-tong-435.zh-CN.md"
+    },
+    "xin-wang-287": {
+      "en": "professors/information-hub/xin-wang-287.md",
+      "zhCN": "professors/information-hub/xin-wang-287.zh-CN.md"
+    },
+    "xin-wang-623": {
+      "en": "professors/society-hub/xin-wang-623.md",
+      "zhCN": "professors/society-hub/xin-wang-623.zh-CN.md"
+    },
+    "xin-yang-691": {
+      "en": "professors/information-hub/xin-yang-691.md",
+      "zhCN": "professors/information-hub/xin-yang-691.zh-CN.md"
+    },
+    "xinhu-zheng-168": {
+      "en": "professors/systems-hub/xinhu-zheng-168.md",
+      "zhCN": "professors/systems-hub/xinhu-zheng-168.zh-CN.md"
+    },
+    "xinyu-chen-388": {
+      "en": "professors/function-hub/xinyu-chen-388.md",
+      "zhCN": "professors/function-hub/xinyu-chen-388.zh-CN.md"
+    },
+    "xiwen-liu-338": {
+      "en": "professors/function-hub/xiwen-liu-338.md",
+      "zhCN": "professors/function-hub/xiwen-liu-338.zh-CN.md"
+    },
+    "xu-zhang-3": {
+      "en": "professors/society-hub/xu-zhang-3.md",
+      "zhCN": "professors/society-hub/xu-zhang-3.zh-CN.md"
+    },
+    "xuancu-hong-637": {
+      "en": "professors/college-of-education-sciences/xuancu-hong-637.md",
+      "zhCN": "professors/college-of-education-sciences/xuancu-hong-637.zh-CN.md"
+    },
+    "xudong-wang-475": {
+      "en": "professors/vice-president-teaching-learning/xudong-wang-475.md",
+      "zhCN": "professors/vice-president-teaching-learning/xudong-wang-475.zh-CN.md"
+    },
+    "xuechao-wang-307": {
+      "en": "professors/society-hub/xuechao-wang-307.md",
+      "zhCN": "professors/society-hub/xuechao-wang-307.zh-CN.md"
+    },
+    "xuming-hu-402": {
+      "en": "professors/information-hub/xuming-hu-402.md",
+      "zhCN": "professors/information-hub/xuming-hu-402.zh-CN.md"
+    },
+    "xun-pan-747": {
+      "en": "professors/vice-president-academic-affairs/xun-pan-747.md",
+      "zhCN": "professors/vice-president-academic-affairs/xun-pan-747.zh-CN.md"
+    },
+    "xun-wu-60": {
+      "en": "professors/society-hub/xun-wu-60.md",
+      "zhCN": "professors/society-hub/xun-wu-60.zh-CN.md"
+    },
+    "xuning-zhang-232": {
+      "en": "professors/college-of-education-sciences/xuning-zhang-232.md",
+      "zhCN": "professors/college-of-education-sciences/xuning-zhang-232.zh-CN.md"
+    },
+    "yan-li-739": {
+      "en": "professors/information-hub/yan-li-739.md",
+      "zhCN": "professors/information-hub/yan-li-739.zh-CN.md"
+    },
+    "yan-long-636": {
+      "en": "professors/information-hub/yan-long-636.md",
+      "zhCN": "professors/information-hub/yan-long-636.zh-CN.md"
+    },
+    "yanda-zhang-681": {
+      "en": "professors/function-hub/yanda-zhang-681.md",
+      "zhCN": "professors/function-hub/yanda-zhang-681.zh-CN.md"
+    },
+    "yang-huang-364": {
+      "en": "professors/function-hub/yang-huang-364.md",
+      "zhCN": "professors/function-hub/yang-huang-364.zh-CN.md"
+    },
+    "yang-shen-468": {
+      "en": "professors/systems-hub/yang-shen-468.md",
+      "zhCN": "professors/systems-hub/yang-shen-468.zh-CN.md"
+    },
+    "yang-yue-525": {
+      "en": "professors/society-hub/yang-yue-525.md",
+      "zhCN": "professors/society-hub/yang-yue-525.zh-CN.md"
+    },
+    "yangdi-lyu-46": {
+      "en": "professors/function-hub/yangdi-lyu-46.md",
+      "zhCN": "professors/function-hub/yangdi-lyu-46.zh-CN.md"
+    },
+    "yangsiyu-lu-324": {
+      "en": "professors/society-hub/yangsiyu-lu-324.md",
+      "zhCN": "professors/society-hub/yangsiyu-lu-324.zh-CN.md"
+    },
+    "yanlin-zhang-380": {
+      "en": "professors/information-hub/yanlin-zhang-380.md",
+      "zhCN": "professors/information-hub/yanlin-zhang-380.zh-CN.md"
+    },
+    "yao-shu-544": {
+      "en": "professors/information-hub/yao-shu-544.md",
+      "zhCN": "professors/information-hub/yao-shu-544.zh-CN.md"
+    },
+    "ye-qi-22": {
+      "en": "professors/society-hub/ye-qi-22.md",
+      "zhCN": "professors/society-hub/ye-qi-22.zh-CN.md"
+    },
+    "yeyu-tong-122": {
+      "en": "professors/function-hub/yeyu-tong-122.md",
+      "zhCN": "professors/function-hub/yeyu-tong-122.zh-CN.md"
+    },
+    "yi-cai-52": {
+      "en": "professors/systems-hub/yi-cai-52.md",
+      "zhCN": "professors/systems-hub/yi-cai-52.zh-CN.md"
+    },
+    "yi-liu-121": {
+      "en": "professors/function-hub/yi-liu-121.md",
+      "zhCN": "professors/function-hub/yi-liu-121.zh-CN.md"
+    },
+    "yi-lung-kuo-443": {
+      "en": "professors/college-of-education-sciences/yi-lung-kuo-443.md",
+      "zhCN": "professors/college-of-education-sciences/yi-lung-kuo-443.zh-CN.md"
+    },
+    "yi-zhang-306": {
+      "en": "professors/society-hub/yi-zhang-306.md",
+      "zhCN": "professors/society-hub/yi-zhang-306.zh-CN.md"
+    },
+    "yichao-wang-630": {
+      "en": "professors/function-hub/yichao-wang-630.md",
+      "zhCN": "professors/function-hub/yichao-wang-630.zh-CN.md"
+    },
+    "yiding-ji-66": {
+      "en": "professors/systems-hub/yiding-ji-66.md",
+      "zhCN": "professors/systems-hub/yiding-ji-66.zh-CN.md"
+    },
+    "yiming-meng-704": {
+      "en": "professors/information-hub/yiming-meng-704.md",
+      "zhCN": "professors/information-hub/yiming-meng-704.zh-CN.md"
+    },
+    "ying-cui-146": {
+      "en": "professors/information-hub/ying-cui-146.md",
+      "zhCN": "professors/information-hub/ying-cui-146.zh-CN.md"
+    },
+    "ying-zhang-304": {
+      "en": "professors/society-hub/ying-zhang-304.md",
+      "zhCN": "professors/society-hub/ying-zhang-304.zh-CN.md"
+    },
+    "yingcong-chen-34": {
+      "en": "professors/information-hub/yingcong-chen-34.md",
+      "zhCN": "professors/information-hub/yingcong-chen-34.zh-CN.md"
+    },
+    "yixin-guo-405": {
+      "en": "professors/function-hub/yixin-guo-405.md",
+      "zhCN": "professors/function-hub/yixin-guo-405.zh-CN.md"
+    },
+    "yong-zhang-527": {
+      "en": "professors/function-hub/yong-zhang-527.md",
+      "zhCN": "professors/function-hub/yong-zhang-527.zh-CN.md"
+    },
+    "yongqi-zhang-436": {
+      "en": "professors/information-hub/yongqi-zhang-436.md",
+      "zhCN": "professors/information-hub/yongqi-zhang-436.zh-CN.md"
+    },
+    "yu-bai-719": {
+      "en": "professors/college-of-education-sciences/yu-bai-719.md",
+      "zhCN": "professors/college-of-education-sciences/yu-bai-719.zh-CN.md"
+    },
+    "yu-han-690": {
+      "en": "professors/systems-hub/yu-han-690.md",
+      "zhCN": "professors/systems-hub/yu-han-690.zh-CN.md"
+    },
+    "yu-liang-694": {
+      "en": "professors/function-hub/yu-liang-694.md",
+      "zhCN": "professors/function-hub/yu-liang-694.zh-CN.md"
+    },
+    "yuanbao-lin-385": {
+      "en": "professors/college-of-education-sciences/yuanbao-lin-385.md",
+      "zhCN": "professors/college-of-education-sciences/yuanbao-lin-385.zh-CN.md"
+    },
+    "yue-kuen-kwok-298": {
+      "en": "professors/society-hub/yue-kuen-kwok-298.md",
+      "zhCN": "professors/society-hub/yue-kuen-kwok-298.zh-CN.md"
+    },
+    "yue-li-607": {
+      "en": "professors/information-hub/yue-li-607.md",
+      "zhCN": "professors/information-hub/yue-li-607.zh-CN.md"
+    },
+    "yue-wang-425": {
+      "en": "professors/college-of-future-technology/yue-wang-425.md",
+      "zhCN": "professors/college-of-future-technology/yue-wang-425.zh-CN.md"
+    },
+    "yuheng-li-457": {
+      "en": "professors/function-hub/yuheng-li-457.md",
+      "zhCN": "professors/function-hub/yuheng-li-457.zh-CN.md"
+    },
+    "yun-chen-414": {
+      "en": "professors/function-hub/yun-chen-414.md",
+      "zhCN": "professors/function-hub/yun-chen-414.zh-CN.md"
+    },
+    "yun-hou-134": {
+      "en": "professors/society-hub/yun-hou-134.md",
+      "zhCN": "professors/society-hub/yun-hou-134.zh-CN.md"
+    },
+    "yunda-wang-116": {
+      "en": "professors/systems-hub/yunda-wang-116.md",
+      "zhCN": "professors/systems-hub/yunda-wang-116.zh-CN.md"
+    },
+    "yunlong-zi-135": {
+      "en": "professors/vice-president-teaching-learning/yunlong-zi-135.md",
+      "zhCN": "professors/vice-president-teaching-learning/yunlong-zi-135.zh-CN.md"
+    },
+    "yunpo-li-721": {
+      "en": "professors/function-hub/yunpo-li-721.md",
+      "zhCN": "professors/function-hub/yunpo-li-721.zh-CN.md"
+    },
+    "yuqi-song-581": {
+      "en": "professors/society-hub/yuqi-song-581.md",
+      "zhCN": "professors/society-hub/yuqi-song-581.zh-CN.md"
+    },
+    "yuqing-huang-605": {
+      "en": "professors/college-of-education-sciences/yuqing-huang-605.md",
+      "zhCN": "professors/college-of-education-sciences/yuqing-huang-605.zh-CN.md"
+    },
+    "yutao-yue-401": {
+      "en": "professors/information-hub/yutao-yue-401.md",
+      "zhCN": "professors/information-hub/yutao-yue-401.zh-CN.md"
+    },
+    "yutong-liang-389": {
+      "en": "professors/function-hub/yutong-liang-389.md",
+      "zhCN": "professors/function-hub/yutong-liang-389.zh-CN.md"
+    },
+    "yuwen-huang-703": {
+      "en": "professors/information-hub/yuwen-huang-703.md",
+      "zhCN": "professors/information-hub/yuwen-huang-703.zh-CN.md"
+    },
+    "yuxuan-liang-288": {
+      "en": "professors/systems-hub/yuxuan-liang-288.md",
+      "zhCN": "professors/systems-hub/yuxuan-liang-288.zh-CN.md"
+    },
+    "yuyang-wang-421": {
+      "en": "professors/information-hub/yuyang-wang-421.md",
+      "zhCN": "professors/information-hub/yuyang-wang-421.zh-CN.md"
+    },
+    "yuyu-luo-301": {
+      "en": "professors/information-hub/yuyu-luo-301.md",
+      "zhCN": "professors/information-hub/yuyu-luo-301.zh-CN.md"
+    },
+    "yuzhe-ma-63": {
+      "en": "professors/function-hub/yuzhe-ma-63.md",
+      "zhCN": "professors/function-hub/yuzhe-ma-63.zh-CN.md"
+    },
+    "zecheng-gan-49": {
+      "en": "professors/function-hub/zecheng-gan-49.md",
+      "zhCN": "professors/function-hub/zecheng-gan-49.zh-CN.md"
+    },
+    "zefeng-xu-557": {
+      "en": "professors/function-hub/zefeng-xu-557.md",
+      "zhCN": "professors/function-hub/zefeng-xu-557.zh-CN.md"
+    },
+    "zeke-xie-428": {
+      "en": "professors/information-hub/zeke-xie-428.md",
+      "zhCN": "professors/information-hub/zeke-xie-428.zh-CN.md"
+    },
+    "zexin-sun-736": {
+      "en": "professors/systems-hub/zexin-sun-736.md",
+      "zhCN": "professors/systems-hub/zexin-sun-736.zh-CN.md"
+    },
+    "zeyi-wen-120": {
+      "en": "professors/information-hub/zeyi-wen-120.md",
+      "zhCN": "professors/information-hub/zeyi-wen-120.zh-CN.md"
+    },
+    "zeyu-wang-167": {
+      "en": "professors/information-hub/zeyu-wang-167.md",
+      "zhCN": "professors/information-hub/zeyu-wang-167.zh-CN.md"
+    },
+    "zheng-luo-653": {
+      "en": "professors/college-of-future-technology/zheng-luo-653.md",
+      "zhCN": "professors/college-of-future-technology/zheng-luo-653.zh-CN.md"
+    },
+    "zhenglong-gu-650": {
+      "en": "professors/systems-hub/zhenglong-gu-650.md",
+      "zhCN": "professors/systems-hub/zhenglong-gu-650.zh-CN.md"
+    },
+    "zhenyi-yuan-706": {
+      "en": "professors/information-hub/zhenyi-yuan-706.md",
+      "zhCN": "professors/information-hub/zhenyi-yuan-706.zh-CN.md"
+    },
+    "zhidan-liu-458": {
+      "en": "professors/systems-hub/zhidan-liu-458.md",
+      "zhCN": "professors/systems-hub/zhidan-liu-458.zh-CN.md"
+    },
+    "zhijiang-guo-526": {
+      "en": "professors/information-hub/zhijiang-guo-526.md",
+      "zhCN": "professors/information-hub/zhijiang-guo-526.zh-CN.md"
+    },
+    "zhijun-ren-534": {
+      "en": "professors/college-of-education-sciences/zhijun-ren-534.md",
+      "zhCN": "professors/college-of-education-sciences/zhijun-ren-534.zh-CN.md"
+    },
+    "zhilu-lai-156": {
+      "en": "professors/information-hub/zhilu-lai-156.md",
+      "zhCN": "professors/information-hub/zhilu-lai-156.zh-CN.md"
+    },
+    "zhiming-hu-595": {
+      "en": "professors/information-hub/zhiming-hu-595.md",
+      "zhCN": "professors/information-hub/zhiming-hu-595.zh-CN.md"
+    },
+    "zhiqiang-huang-137": {
+      "en": "professors/function-hub/zhiqiang-huang-137.md",
+      "zhCN": "professors/function-hub/zhiqiang-huang-137.zh-CN.md"
+    },
+    "zhiqing-hong-659": {
+      "en": "professors/information-hub/zhiqing-hong-659.md",
+      "zhCN": "professors/information-hub/zhiqing-hong-659.zh-CN.md"
+    },
+    "zhirui-zong-128": {
+      "en": "professors/function-hub/zhirui-zong-128.md",
+      "zhCN": "professors/function-hub/zhirui-zong-128.zh-CN.md"
+    },
+    "zhonghai-lu-424": {
+      "en": "professors/function-hub/zhonghai-lu-424.md",
+      "zhCN": "professors/function-hub/zhonghai-lu-424.zh-CN.md"
+    },
+    "zhongjing-wang-567": {
+      "en": "professors/vice-president-academic-affairs/zhongjing-wang-567.md",
+      "zhCN": "professors/vice-president-academic-affairs/zhongjing-wang-567.zh-CN.md"
+    },
+    "zhuoni-zhang-24": {
+      "en": "professors/society-hub/zhuoni-zhang-24.md",
+      "zhCN": "professors/society-hub/zhuoni-zhang-24.zh-CN.md"
+    },
+    "zhuoyi-liang-308": {
+      "en": "professors/systems-hub/zhuoyi-liang-308.md",
+      "zhCN": "professors/systems-hub/zhuoyi-liang-308.zh-CN.md"
+    },
+    "zichong-chen-516": {
+      "en": "professors/society-hub/zichong-chen-516.md",
+      "zhCN": "professors/society-hub/zichong-chen-516.zh-CN.md"
+    },
+    "zijun-gong-102": {
+      "en": "professors/information-hub/zijun-gong-102.md",
+      "zhCN": "professors/information-hub/zijun-gong-102.zh-CN.md"
+    },
+    "zimu-zhu-466": {
+      "en": "professors/society-hub/zimu-zhu-466.md",
+      "zhCN": "professors/society-hub/zimu-zhu-466.zh-CN.md"
+    },
+    "zishuo-ding-450": {
+      "en": "professors/information-hub/zishuo-ding-450.md",
+      "zhCN": "professors/information-hub/zishuo-ding-450.zh-CN.md"
+    },
+    "zishuo-zhao-743": {
+      "en": "professors/society-hub/zishuo-zhao-743.md",
+      "zhCN": "professors/society-hub/zishuo-zhao-743.zh-CN.md"
+    },
+    "ziteng-cheng-456": {
+      "en": "professors/society-hub/ziteng-cheng-456.md",
+      "zhCN": "professors/society-hub/ziteng-cheng-456.zh-CN.md"
+    },
+    "zixin-zhong-453": {
+      "en": "professors/information-hub/zixin-zhong-453.md",
+      "zhCN": "professors/information-hub/zixin-zhong-453.zh-CN.md"
+    },
+    "zixuan-yuan-315": {
+      "en": "professors/society-hub/zixuan-yuan-315.md",
+      "zhCN": "professors/society-hub/zixuan-yuan-315.zh-CN.md"
+    }
+  },
+  "generatedAt": "2026-09-02T00:00:00+08:00",
+  "schemaVersion": 1,
+  "translationSource": {
+    "englishFileSha256": {
+      "All_Prof_Info.md": "f16e21a26d0ce8620c258ed6224531d7bf10c004ca7d8662bb7d5261b3990f03",
+      "professors/college-of-education-sciences/bei-cao-369.md": "b20444af4f03e11f8eb11fbd4636ddcaeede601b64867e0058958f155a740b7c",
+      "professors/college-of-education-sciences/beiyan-cao-663.md": "b81b7454558e988d5634c8c51ff7244446dffa79cdb2d3dbddea2983ba600038",
+      "professors/college-of-education-sciences/bing-li-591.md": "8baef169ff64c27b1b9bd8f157bcc75875b51a15c06382ca69e3660c4dcd850f",
+      "professors/college-of-education-sciences/bo-fang-346.md": "16e7c5a9d81198fca2f83b8fc0b38fb476d194de13ce1a3460645dd11d027795",
+      "professors/college-of-education-sciences/claire-qingqing-xing-226.md": "6710bff70436d11e8251c3b3669316623dc0c5f9770aa789f36cb46e1c3dfc96",
+      "professors/college-of-education-sciences/dan-lin-708.md": "c0e397335ea53bbee4ae961abde4367d62510501fbf0d72127648ab2e56b5f34",
+      "professors/college-of-education-sciences/dan-liu-652.md": "7f422eb5ce522175b93af5b88cd179d635801f3d092a1ed4feb1885d2b4cfe8c",
+      "professors/college-of-education-sciences/de-yang-692.md": "3424a6852475bc76a531ac8441977d906e2738bb27de1a0ac49be52825da244b",
+      "professors/college-of-education-sciences/dongshan-zhang-734.md": "5257dabd1fd2f15570f845d680e7189d02b38ace55af2703ccfc82ec5ec4edb7",
+      "professors/college-of-education-sciences/dongye-lyu-331.md": "fbfea616ca5e34a22d5b908c2e11c6d4c64f862ea23deeed82390572cf321775",
+      "professors/college-of-education-sciences/echo-fanqin-meng-624.md": "9e405486efad124e10fc82b7365b9e9f8f71360d5c2fa685a3fd45c975c87679",
+      "professors/college-of-education-sciences/guang-rao-545.md": "35d746dc43b473fc63a0c43dfdd65153d69e6cf9596bdef1222194d23497b5bb",
+      "professors/college-of-education-sciences/jaeuk-park-229.md": "5a8bb327b4dbac1ca31d3d6298ef06f8de95748f38590d5b92e36e5fec3dca1c",
+      "professors/college-of-education-sciences/jiajun-mai-731.md": "efb18da6d4c7a1c013c660b3c2730bc2f8fae80178629c02decf956f4a1fccaf",
+      "professors/college-of-education-sciences/jiao-guo-347.md": "c5cd92b6c99f8a611092e60d586871502c265920edaa57ec730439b4b6ef7f79",
+      "professors/college-of-education-sciences/joey-jing-zhang-679.md": "9eefd0b02f0b956cd1e45efc69310bcde4c86380120517258239313a26286fdd",
+      "professors/college-of-education-sciences/junhua-zhu-387.md": "47ddcaee7c798f736bf423a079c1c57a2357140af2a767d372ac502f169f9111",
+      "professors/college-of-education-sciences/junyu-xu-412.md": "72976188f5639895807e0026bf4ccc5dfbac5bdab82c18a7205a3004fa4bb935",
+      "professors/college-of-education-sciences/linxiao-wang-230.md": "d1df74af9c86c600f3297be3a46a20cfdb160603a6e952371c536910b01cd563",
+      "professors/college-of-education-sciences/mario-jun-bo-huang-645.md": "ee22314cf8f294d7b5cc00ed3b337c277daee43d2b06d1fc8347dc2532201d41",
+      "professors/college-of-education-sciences/mei-zhang-463.md": "9be8eb5754938861220eb97559b7466dda6b411aa8a67dd9f4010142d7d3ac00",
+      "professors/college-of-education-sciences/moxuan-luo-474.md": "636021f6a905e9e67ca466e17300fc06dc364c8dd762d7862cfd84c3452ba364",
+      "professors/college-of-education-sciences/qiao-he-480.md": "7be2e8265eb2632ce6d4235aa000e3c4d0e59ca830db38e596d07452d0579942",
+      "professors/college-of-education-sciences/ran-li-329.md": "c64bfe00405a48a1400e65c5c3828898dd9d4efa6bdd9ff9408e2109f152a349",
+      "professors/college-of-education-sciences/simei-liao-271.md": "10bd130fd1328a17815c33f72f5d066cb27cefec705507f00d7483115055be5f",
+      "professors/college-of-education-sciences/tai-kai-ng-496.md": "e7377aa5fc84f2a31315b9648f1d2a6002205429f93f271d2e0f18b7ca4c86a8",
+      "professors/college-of-education-sciences/tianyuan-li-730.md": "b40049778af236c216ddc05444b2033ab2224f9ece50d2ce7ac7e7ce849ef3db",
+      "professors/college-of-education-sciences/tiefu-zhang-519.md": "cba60dde861e0f29fd78050b65c14ab45c065d11390ef1417a36bdace62f0f2f",
+      "professors/college-of-education-sciences/tun-hao-395.md": "6acc54da29e33128e842c63895b46c0d9c282c20d20a0e68b83df22b5920dcb8",
+      "professors/college-of-education-sciences/wei-zhang-231.md": "ad1f8aa70292ccd8dbe37a747e4ad1fe945fc1e3b71e510b88a4c2b39cf5246f",
+      "professors/college-of-education-sciences/wenye-li-565.md": "01a3eb067d0be2f5bafa3ffedbdaa15f5ff9be478af7b4c6be6337c27b2fee3c",
+      "professors/college-of-education-sciences/xuancu-hong-637.md": "364fe9d2e3d3764348bbc029a9204433d379d66ab1de336355b500846e76ae4a",
+      "professors/college-of-education-sciences/xuning-zhang-232.md": "6db2b7f98d910ef6df5c164f06756cc4e4f75c522e70e28117b56becbe68a7f9",
+      "professors/college-of-education-sciences/yi-lung-kuo-443.md": "3aa4ed88d78636d165b55983c045574ce8f3caa13da39ef47ab03d1cfbdfb3ae",
+      "professors/college-of-education-sciences/yu-bai-719.md": "4bae8f7bb2c2bf9b6f253ea456b41e3d0e97d52fde94a28c36c0b6869056cc7c",
+      "professors/college-of-education-sciences/yuanbao-lin-385.md": "07b0d35f26c58fb88c2196a1d23c164666af9e3b3a2a219280d688078635aa60",
+      "professors/college-of-education-sciences/yuqing-huang-605.md": "1bd261971e7c4cdc55059fe96aa05e74bfaf313aa548ee6a97f31c476b3bd45d",
+      "professors/college-of-education-sciences/zhijun-ren-534.md": "02d9691fa13e3c4b1f9531a7f6dbaad03b71fc9e7f6f1e8fde8c558c6d365f06",
+      "professors/college-of-future-technology/arthur-kar-leung-lin-393.md": "b52f7053f66166af45e5fa0fe03315d71099e80977fcd6003c87d8817975799c",
+      "professors/college-of-future-technology/beijinni-li-236.md": "43f367e65e0c445c34e5da5dfa6053603e7cd312d086c13e0645b80cc01f0d7b",
+      "professors/college-of-future-technology/dong-lu-352.md": "1eadf0bd970b56667c74cf0e96d6107bc937a255fb139d41db3398a5812dc4b5",
+      "professors/college-of-future-technology/felicia-yen-myan-wong-469.md": "06d9c7e519b25b48805c4c49856a72b07e230880abd552b453adda327bb1edc0",
+      "professors/college-of-future-technology/jenny-jinni-zhou-6.md": "355301fe2d05474ed96af112961ba23bee2cb630685b9ab7d982696b66878418",
+      "professors/college-of-future-technology/jing-lin-651.md": "27351d8f0041df31cd837174b495dafc18342409e3efae884092c6ff5608802a",
+      "professors/college-of-future-technology/jingshen-wu-12.md": "71799b9cc21d6e328a78f59a7a9e4ee348cb11a67964550d7110a6a3fa979f5b",
+      "professors/college-of-future-technology/jingwei-yang-440.md": "82a8eaf8507593c15cc0a1edf831937534495c7925de37bf41dcc24b6e33bab9",
+      "professors/college-of-future-technology/ke-xue-422.md": "4077a0a0f38d19ee3ba7814caa206fa2c4dab2e3b05c854b5af8bbd9760f892b",
+      "professors/college-of-future-technology/landu-jiang-384.md": "b4141f1b1bec4c32041dc8aa0107199276ee2d89ced329435f1cea11ccec87f9",
+      "professors/college-of-future-technology/lanhui-li-394.md": "e9685e200ada9fda245e6feeb289d343b28e95680b0a2dbffe9b4d2ac6b2562d",
+      "professors/college-of-future-technology/lujia-wang-353.md": "5d96331ecf0cd69ab06cc893e6c15eb6ccb779019dd1ee4154f329e3aa8c24fa",
+      "professors/college-of-future-technology/miaojun-huang-326.md": "677d1b5a258bb8d73446822c73153ba9fbadf9b99a38dc8b0f92619686ff571b",
+      "professors/college-of-future-technology/mingming-fan-33.md": "15f1b88cbb16e8be44d9d6fde96b433b1944f0a663e4ddb907152fcacfe470fc",
+      "professors/college-of-future-technology/ning-li-522.md": "7cde8c926ac0674a4faea3d950513dbb9fd5fed6cb2a12bee548135a7ce0ace7",
+      "professors/college-of-future-technology/qianqian-wei-448.md": "f1e2002436c711207da6f71644db95ff67096e097da84d5bb4c3b89c1477bc5c",
+      "professors/college-of-future-technology/qinghao-he-345.md": "7c12d20555cdd34d3b95f0c41f013ebaee78ab52021f51c064ae8d3e21fea1e8",
+      "professors/college-of-future-technology/tongge-huang-328.md": "4270f2fcb0c423cb0c1883847f7091ea1014e346dab903b3dd5893a44ac9faf3",
+      "professors/college-of-future-technology/wenxun-hu-330.md": "de25b0be6af926903b4816608b525fa66b53bec3b65fea0cc55d03759c34c378",
+      "professors/college-of-future-technology/xiaojie-lu-386.md": "8024db0717340004cda62e37a9ffbbf4b099f2c7bbb6af861a98d662dc8f1239",
+      "professors/college-of-future-technology/xiaoyan-wang-361.md": "7e87c8aebf05d075c21fc292e6dabc58090182820a2f12d1a5ba787bf57b133e",
+      "professors/college-of-future-technology/yue-wang-425.md": "79965bdc89c4d7ba293d4c6c7a0027eb23a15bec40730abf980629b187bf488f",
+      "professors/college-of-future-technology/zheng-luo-653.md": "c55a06d719c6d61b84c78608f0f5ebf585d4f9d623e687071e0e070e3c3100a2",
+      "professors/function-hub/bo-peng-707.md": "2c818f474ef6e2a07f16f7405725cbdcdc1d73dd5bce7da30d8f127385555b37",
+      "professors/function-hub/bojun-cheng-118.md": "8bcf6a8f9619d08231002c5d80a38ee02049ff2261e94488c4af2336c4d29161",
+      "professors/function-hub/chang-yan-130.md": "44d56b690479440703dedf56685fb6b2e4631e07da13719b7b52f0db40a08f34",
+      "professors/function-hub/changxi-liu-726.md": "174ddd4e312009296fdea2227f7e89480172dbdca10f375519df5588e458e409",
+      "professors/function-hub/chao-fang-390.md": "6d3a02be059fb96f287a97a45db6565e142ee173af1dd6870f8b980560ab091b",
+      "professors/function-hub/chee-keong-tan-113.md": "44dc586035033acdf610ce590e34fee5906d9509428977319167c4d7599f2a8e",
+      "professors/function-hub/chenjian-lin-688.md": "967b99a6f3940a99da45a5fed1941deb8e57625d6d1a4d0ee055fe29d5bdaa9a",
+      "professors/function-hub/dianxun-xiao-115.md": "d95957504a3909a14272dbb850b278c0d742fd4ac217dae30021e9ca57691fd1",
+      "professors/function-hub/donglin-he-616.md": "d281143089a34f9b55e678cdf45669f717f0568b076dad012384a5e386006ca5",
+      "professors/function-hub/guigang-cai-299.md": "5f69863646936833f6136aec1d68445d1f7ca32bde553323c3c816e4cc87977c",
+      "professors/function-hub/guo-chen-658.md": "d613b7f0b0318da81a4b81ea72f9c078236a1a709bcf89503145430e03163dbf",
+      "professors/function-hub/guoyi-zhu-358.md": "44478fcad3d5fe48794370c5902581d553f23b2db9c778b509b0f74465bed33f",
+      "professors/function-hub/haoxiang-li-171.md": "9eddda1ceccc632ceaac0ba68d4b0da026df5648e42c5636905b8f6f4acfc667",
+      "professors/function-hub/henry-zhen-liu-289.md": "6ede1a6dee03228aabdbd1027499fd41e099da81b649e5f5407f03ab198c6aa1",
+      "professors/function-hub/hongce-zhang-40.md": "cd65d4ba3ab7c9f9f3b5cec06638842d334bfa6f621896585ec66911b8ed9763",
+      "professors/function-hub/hongwu-jiang-246.md": "6a3cafe68a1e59bc433cf419057e4f4982b6ce4ceba9a73799d578b60141a7cf",
+      "professors/function-hub/huihe-qiu-141.md": "0293ba8c54461d344b74c70e8f644ce75545b5198da23ede7bebb6d88179ecdc",
+      "professors/function-hub/jian-zeng-349.md": "e45653b0ba8a0d85e89fd7844a860275c680b3be6af8ad4d37c366c4674d7aea",
+      "professors/function-hub/jian-zhang-631.md": "097eb3057d8ac7b28a63ff3a405dbe45ce00393e0a1d2acba1233cb271b2859f",
+      "professors/function-hub/jiang-xu-10.md": "c4c297421ba478b4f5987ce5469ec83644860be06b25d0eec2c826da13298958",
+      "professors/function-hub/jiaqiang-huang-100.md": "5aa9dc19322498c88d1ad4d3c0a8bf4bd36bce581f129f28da319406ea83d52c",
+      "professors/function-hub/jiaxing-yuan-517.md": "42eddb3f7853f7547cb46a61fe4f50b745b345b79e262b603ad2cd6718714c39",
+      "professors/function-hub/jiayi-huang-259.md": "a0115513add3c8adb01dc92bbbaec383eea31a92783a288b8adf01a8471b6f9e",
+      "professors/function-hub/jiaying-wu-48.md": "9e367f37ba321350604d915d77e603ffcad686281b860c5288b041c7244d7e66",
+      "professors/function-hub/jie-qi-643.md": "eb859b3f589b136cfd0952e1289e65f85a4ccfa3c4e2ab2afe79ae0146c9d628",
+      "professors/function-hub/jinguo-liu-165.md": "fdda7fd026543076f4b486f3f9366ffc95d49fd39df1d2182ea869f3b69b2f95",
+      "professors/function-hub/jinshu-chi-70.md": "a31a595a9e257fbb7476b6846c47e6253e8d4b0e6b6c35a15945b36378194745",
+      "professors/function-hub/jun-wang-138.md": "cac57d0a7693145768721650d678d1a6cb07b48a560ee1be0a6320ace92aad36",
+      "professors/function-hub/junyu-zheng-243.md": "723ec70b87357661162aa4c3e1bbf93346728c4cb135a3dfc14e00a4167a8f1b",
+      "professors/function-hub/kezhou-yang-339.md": "c35867a6ef63430969a7c8bbc45eb5d37193b534341b49e1849eba9cc1c4482b",
+      "professors/function-hub/lanlan-cai-455.md": "93508534b630b99a41e84919ddeec52184a0e36fb93447d443c271d099a283d5",
+      "professors/function-hub/liuqian-yu-28.md": "572504dde103503ec2727424ccc8e2ed629f5d5d45ac7986fb8470d4a9359c63",
+      "professors/function-hub/peng-chen-166.md": "ec374654aaa97bde29f160af95b35b446b3d6a199ecc350a6d34da4cc42976f7",
+      "professors/function-hub/ping-gao-23.md": "fd2e49c7d386d7319a7ffa3c5e1470fa08eb7d072c9e1da006c0c69107c59b5b",
+      "professors/function-hub/qichun-yang-172.md": "4bb8c80446829041c227efa92fcf01f5686b10690adf6d06ff6c8cdbea41cac4",
+      "professors/function-hub/qinbai-yun-558.md": "dd55ed574c3be5ad625b9e59db645a6d79e298e9f00c25b2a40365c64ee6bd39",
+      "professors/function-hub/qing-li-39.md": "96bf660a70183a7c79fe08bd0dd3a7e963fbbd13a41d50cdcee8f3a23995e8fe",
+      "professors/function-hub/qixing-ji-44.md": "9aa62c20b0352deafd28c716fb3a8b43675ab2805a43b6267977c470f6e7ae07",
+      "professors/function-hub/quanfu-he-508.md": "b5e44bda580ce0f6c3bf07c8daf51fd0c58cacce4456d7a533af72cf8ff24b98",
+      "professors/function-hub/renjie-wang-256.md": "f473a01d02e33e2ab86567e8171f0ce06f3d7ed5e54c05e1029d0dfb5d48c514",
+      "professors/function-hub/renjing-xu-97.md": "7a98b12b58e8b6ae6aceec0f03fcb08a6bcb0a68794e7e913f1217b77be5a0c0",
+      "professors/function-hub/rongfeng-yuan-340.md": "d22af21b422053923a3e468fbd28895f7c35cdce96f15f3d7959e07817710de0",
+      "professors/function-hub/shanshi-huang-244.md": "5abd5b9a0759b85ce7d63dc76a35d556853d832ea8a5c22dadfb8845ab64f1d2",
+      "professors/function-hub/sheng-zhou-350.md": "c4e41e623e5390106d115b78d239ada40a21b0427754cfcf5c85d5e99fee90ea",
+      "professors/function-hub/shiju-lin-520.md": "0c887c8738d8a5770ff81cecd152972265ab5fb2474a99e612864f1d106d82ec",
+      "professors/function-hub/shuncheng-lee-323.md": "0d4351f70a1a279437de0af68e4d3340b7099a6b94dd29f1c96897b00afb54f2",
+      "professors/function-hub/sihan-chen-649.md": "b29fec67ec84124efda3b2cef396168888aeaa67c1fcabaee617238e62fab886",
+      "professors/function-hub/teng-zhou-123.md": "9c0605446e3a7ba8237f7b6ec3e87794ae33124dd8f03672e98c868781be3644",
+      "professors/function-hub/ting-fang-245.md": "12671b5689a681516ec0fb2a4e8d16c24c195d2b91822964674ae6fd05d08bc0",
+      "professors/function-hub/tong-zhou-499.md": "d14c7932492710daa99551a40933c62d8629a33179113e0e8bb5b4ac5df5b753",
+      "professors/function-hub/tongyi-zhang-98.md": "4de28c94d780c813cb7008d094dcd6a948b895e0b969c19f37227de963d281e4",
+      "professors/function-hub/wei-han-183.md": "0b2199c214d4a450290984cb0470a7c79607fa9e98e6708ce4a39cb3e312958f",
+      "professors/function-hub/wei-jiang-403.md": "2369855694bf6572de996cf6b137ec1c4a7ece60f3d5b2b64af72503b6d86431",
+      "professors/function-hub/wei-shyy-471.md": "5fcf9299c429072499bf2e468442357f6dc13947a2032261c2b32716e74b9456",
+      "professors/function-hub/weijia-wen-18.md": "9f6d4708e89ac006a3ab8635758e2ad225cddda15ccc7e0de00af8bc0e43e316",
+      "professors/function-hub/xiakun-chu-151.md": "b5e57151043842f5b4838ebbd11038750ff9d82ff57d93e35969222926ff8d7f",
+      "professors/function-hub/xiangyu-li-511.md": "18febb5c1dba47b28a6094bc54382cf37462a5b24dfe67621e5f9ab563e24d18",
+      "professors/function-hub/xiaoxiao-wu-164.md": "36f142bb7f3524eafe9e3c1d714e79fef0d7d99b2626d459df3d38094913cbb6",
+      "professors/function-hub/xiaozhou-fan-628.md": "132ecf9c6081c5fcadaafcf86f9d2673b6b885cef5206de56a0e4306506de098",
+      "professors/function-hub/xinyu-chen-388.md": "08a7276b9b76642c094ffe28c1c7bdd32ac03f58ef1e35f3104bf3af8d8185d6",
+      "professors/function-hub/xiwen-liu-338.md": "8c0c94065316db63f75206674dd89f48cc56a8dfbe4b09881872ded3ce04a848",
+      "professors/function-hub/yanda-zhang-681.md": "87b186a1830a9276c3624c9cb3d22a9cc7291d14406d3013f4cd7ba3a3cdf17d",
+      "professors/function-hub/yang-huang-364.md": "53df62f536dd0c5fd9ae4e35f95de9cfcfb01d923785abd6f84e9e3fc067ba20",
+      "professors/function-hub/yangdi-lyu-46.md": "9c87e72a75f09d06427a5cff1d0bdc842ffb5599f4dee224fb6a88aa6008f139",
+      "professors/function-hub/yeyu-tong-122.md": "3df10c5f4fb2680dcb90e0c4b1e38b0c518b1358785fe87b5948f4a4ed620b69",
+      "professors/function-hub/yi-liu-121.md": "caa782a3e6e446a85f718080f12a47a963a16ec3dd569522f127fd436db8820e",
+      "professors/function-hub/yichao-wang-630.md": "abcf7b6ce807aeb1fa9d093e9b858c4e87d5949b078cedb678a8506810253e25",
+      "professors/function-hub/yixin-guo-405.md": "308f4d3411fb3dcac5cbcd5b69d333d39233fb0f0da3931910cd778397fca595",
+      "professors/function-hub/yong-zhang-527.md": "cba1b061fc71cfef997696a8e79f715e0a6c92cc3171444c7a5c547424a7f5f6",
+      "professors/function-hub/yu-liang-694.md": "16be1f9f91154c821a39196cbd33650619a2274f9932649477e90fd8dd9452c5",
+      "professors/function-hub/yuheng-li-457.md": "621927ebc3721b52ba9e1be81e2b998aac431f3f5eaa639d0d43739748150fed",
+      "professors/function-hub/yun-chen-414.md": "0ac56f745d9ee67a0ce9403883fec5fe5ac7ca99a3cc6eaebfc6f9ec6ea68f0d",
+      "professors/function-hub/yunpo-li-721.md": "601caa4b6616611b41932ad3a19c2b67370cde37c15e694ccd445911e8171fba",
+      "professors/function-hub/yutong-liang-389.md": "5b858edc13eb2f5f047791c67f66a98b82cfdd14dda4d6bc8f9dc0542bd31a67",
+      "professors/function-hub/yuzhe-ma-63.md": "e78aa17d6103d76b3ce2efa765c9f2b7a3c03b892895c35985d6d356320b9186",
+      "professors/function-hub/zecheng-gan-49.md": "e3d9422bbe82893ef99b9d78608620bc8555c3605d015704a127cc44fc9dac95",
+      "professors/function-hub/zefeng-xu-557.md": "b517e9c75087fd50556801e7f2251864562e9dcbd0816a41470c29a5f6189209",
+      "professors/function-hub/zhiqiang-huang-137.md": "3297eb72cc4a1dbc6103475ec8450ded0e8dee894b330e0663231615e870733a",
+      "professors/function-hub/zhirui-zong-128.md": "08932971b15a4872e61cec1d928a33209450c24167103452ab6b77f6ecdf6ac2",
+      "professors/function-hub/zhonghai-lu-424.md": "00f343ec58a041f9045fc3bd0b3961066f4787822d161484fa99b772984fda41",
+      "professors/information-hub/anca-simona-horvath-604.md": "b95885c825b9d302dfd6cdfd85394c0d3d5f4af7df0bdb7beb248c458ac3f2e7",
+      "professors/information-hub/apostolos-rikos-416.md": "5fc67cbb18518756996b131f9245c674c30a12171ec85a915f27cd07b54163c8",
+      "professors/information-hub/bingzhuo-zhong-465.md": "1c1d5d025cd522e6f3b7814e4c755d8f05844b56656113fa0fa69a9620f061cb",
+      "professors/information-hub/chen-liang-439.md": "d2be14829a9564c3e285218a4de99af0804bba1689f751cb9eb9061d60b92a65",
+      "professors/information-hub/chen-xu-741.md": "e0f8589f387c67afef9ba84a14a13ecc262ef6af60e91805b6afa77bddd04211",
+      "professors/information-hub/chengwei-qin-543.md": "d99635ad6b3bb0611aa5f8eca0d566a78a2eaad11c4f97d6fdb35e28c7d01d90",
+      "professors/information-hub/clea-von-chamier-waite-470.md": "ff28cbeb8cdab0384bf8601dd618d4735c23d1acfe1674e54b94f25717c2bd8d",
+      "professors/information-hub/david-kei-man-yip-1.md": "74ec5125233cfc5aba86d4a8984f222e4274482f6f9c4c05913cfb420994d9df",
+      "professors/information-hub/dexiong-chen-732.md": "ca55b327c53f762ec7dc553ed86ac8b14fd1c3ccf2f17b53479c96ef394c5b1f",
+      "professors/information-hub/enyan-dai-449.md": "516709f9d0f27039cdc73cfcaef851395fa826ec5b4c6bd3f0599c1a7b980a92",
+      "professors/information-hub/gareth-john-tyson-111.md": "063479d8472bdafb429301589e07d19199929d4c71ad02c2072d39ed20dffe2e",
+      "professors/information-hub/ge-bai-531.md": "6c545966fd2793c62764e78c51038a5c91acf5283144fad1bd31cf14fa54a68b",
+      "professors/information-hub/guobiao-hu-235.md": "2aa79ed1d3d8ad7a6db59a7fecd9ea43c8710fe54ff99ce5fc87a6512968ebd9",
+      "professors/information-hub/guoming-tang-427.md": "4bb6b8d8b1f78648c097f9265dedac0d6a1d5b492082c86cc40626b9685493f5",
+      "professors/information-hub/hai-ning-liang-437.md": "fea2aef62b2a1468f8cb73f4afbbf1072fceda2308cdd91d7964931a7a433c17",
+      "professors/information-hub/haiyun-he-594.md": "6bb1749853cc8be13d644b31a0d9e2261d5a3cd9da64737b881b4b66f519a535",
+      "professors/information-hub/hao-liu-50.md": "4c17344fd18362956122264cb38622309709e8fbee5a34ce892657a0dc116d8b",
+      "professors/information-hub/hao-wang-343.md": "fe50567f1d1cac6a2715dde222c665f0c9d59a06a51db57ce3ffc4460c39733e",
+      "professors/information-hub/hin-kwok-tsang-9.md": "84d1c7f577b2057f4f01be136a8fd081afac6e6a4a33752aaea36509ce8857c6",
+      "professors/information-hub/hong-xing-95.md": "8d0ed789ee9a5960fe299ae318e52ad82f0516e77dabc44f56e8b1daed7330e0",
+      "professors/information-hub/hongyu-li-533.md": "5bb4530542f6d68b00f89f1c8901665ee946b70cc063d197cb78473c4b392772",
+      "professors/information-hub/huangxun-chen-321.md": "0ceb0f632390fffca27e9e2a5c9a473afb7c31d6e3bc128f34520b38950b137a",
+      "professors/information-hub/huayi-duan-574.md": "679177e91729253e8f8e857abf715570134062b2d40d58f229c2a7b764837239",
+      "professors/information-hub/hui-xiong-31.md": "aa2c2779b7b10f67a0921f5d860be4c9d80e344552bac7259c93444989d7c5fd",
+      "professors/information-hub/ingeborg-dr-reichle-569.md": "1c587a87da6f48e24bbf91028d74f0fe29513be77fbdf0c87cf842dc99ece977",
+      "professors/information-hub/jeffrey-xu-yu-617.md": "f89d821a9636e33134dba295bcb0421ecd7db7d6a6ca755f55ac80ea05416377",
+      "professors/information-hub/jia-li-37.md": "7302f53dc94215fef2d2f792ab86dabfbb252a70dc8fc0ca8e8fe0ec36d16840",
+      "professors/information-hub/jiadong-yu-377.md": "46a0eeda82202dddc6777a62653cc9bbb5a5efb8be847c683415df1336245d74",
+      "professors/information-hub/jiaheng-wei-498.md": "b6dc75fad5400d6c43464555bcbc6546aab416702b5ab0d4e71fd7a51b508779",
+      "professors/information-hub/jing-tang-36.md": "a238d0626cf770dc663a4ae63f869fc02cf1991b1941661062b727d7a531e47f",
+      "professors/information-hub/jintai-chen-473.md": "d18ebbecef2305d72f6cc2191ffa614fcafeab1efbbcf4db642a8e7df653f2a0",
+      "professors/information-hub/jishan-hu-507.md": "bf730d88c59e1dabb2b804065b9ea87fba2895137a2be57130b93f17c80a6683",
+      "professors/information-hub/jun-xia-589.md": "fedba83d416127230d2d8e0518328cee1885e5d750bcdc10098bc76738a36956",
+      "professors/information-hub/junjie-zhang-5.md": "a1d8185a9efb7c24687790ce3e8c5a35ef70d865aeb6aeb40ae5a909e406476b",
+      "professors/information-hub/junwei-liang-224.md": "806bfa0526a73b95dc19d625cd98c543dcbd56200793137f18634e3c31f70010",
+      "professors/information-hub/kang-zhang-106.md": "2efa5cfcfb9cbb51da0ca843c4c2c6f33c76ddb76af1d4c9e0ab316423de135f",
+      "professors/information-hub/lei-chen-20.md": "957b04220114781e0d87500f2d9efce7e7f36176d1bd8ceb71de3510a1b001c0",
+      "professors/information-hub/lei-li-104.md": "fa46a8b71c171ccbaff28dc5f9b85015b855089d356da9ca289c529512c632f6",
+      "professors/information-hub/li-liu-250.md": "a168ac533d6d4a12f8a3e7edde57e0644c37f6a1f84d0ed1c19ababd5580ee76",
+      "professors/information-hub/lingjie-duan-592.md": "0dd5dabedbb600180d97aba42d571e6e0f9e9996295107e1f90da15bd80b4c95",
+      "professors/information-hub/lorraine-yuxin-zhang-744.md": "0d4f6adbd140b21760ef0a5ffc337c4ed095441db4365e401c7baf854cef815f",
+      "professors/information-hub/luwen-yu-344.md": "83733a3d2024dd97a591a55289e1db9320ae1ec5e7d42c254050b60242d0caed",
+      "professors/information-hub/mark-nicholas-grimshaw-aagaard-514.md": "0112dd0038251b0aa70c063c3ec391c7657fea8a180170a225d86a16261e96d3",
+      "professors/information-hub/menglin-yang-509.md": "14adba87657dee9276d8792f84afbb126cd29cc5d26f0627d920a9e6d1a354e3",
+      "professors/information-hub/mirjana-prpa-660.md": "091a7165db54c43e13a8ad9f4ed125a61aa5394ee4060d56ed63dbe168241c77",
+      "professors/information-hub/nan-tang-297.md": "7851fd4343959698b491e64e73f6ae0ac8d4cb0cc590e09b3773570fb26c5f9b",
+      "professors/information-hub/nicolo-merendino-584.md": "55a756875306df38b765c528e506cc304210f3017e380bf8c01da12c7bf345fc",
+      "professors/information-hub/ningning-ding-464.md": "439eb34b00e17d480d92eab79a204749788ffea398c4f1e8c5874f28155dca97",
+      "professors/information-hub/ningxin-su-587.md": "0f08c7f97a5d01398af300a2b4d5fdf34c1acc5cba1eae4c15ddf0039314f343",
+      "professors/information-hub/omar-costa-hamido-603.md": "f0c417a22085564ddcc3906b467b7db46050171480e1ee720180f20af247ddc1",
+      "professors/information-hub/pan-hui-47.md": "5d6477c289e60cf07df5773f1e251522d74fd9811772cd817aa66afbe554f721",
+      "professors/information-hub/pei-man-james-she-379.md": "8e575a4d79205a5617dbc33c10b544dac575ba04f1bae510a4639c158393bc29",
+      "professors/information-hub/qiong-luo-159.md": "9b98003793ba80800b0672c7f703ba1370d78b11fa3a1848b0edd5b033b61a5e",
+      "professors/information-hub/qiushi-zhou-646.md": "3d6859cc8fb0ba7b9efad2519c8552c0bd4825868c43bc2c96f38b5e80b503a7",
+      "professors/information-hub/rachel-franz-493.md": "79e73c2f76ff93f6245a46d063fea30c2f16fae1e252391ac83a289f4f6af71a",
+      "professors/information-hub/sean-sihong-xie-295.md": "5686100d11fb3967f5b107da1f7573358e57fa0304baa411574f38fff236b9ba",
+      "professors/information-hub/shangqi-lu-451.md": "f528ae9a54e0325692fc57b0d5561999c5c2ab5762d2dfd7ad69f7240a277597",
+      "professors/information-hub/shijian-gao-391.md": "e5fadb40fd60b41474eda97a844220f30275024dde8e3c4dac279cd3223d4ae9",
+      "professors/information-hub/shisheng-hu-733.md": "5fd872e735565105b5fb50319595ebb98c40e2f037e63d3951a60fdf3d7e124a",
+      "professors/information-hub/sung-hun-kim-107.md": "de346877a8333dfe4f3e655075c35a291ed58ab5a8561ab56ada4bcd33085475",
+      "professors/information-hub/tengfei-chang-267.md": "c1e71afcef09584e7199157103cca9d253a3b0cd45b3bcf1cfab49d53d251add",
+      "professors/information-hub/tengjia-zuo-510.md": "66dc54b12e76f8ad80b1e76c334b04208da2cb479f22379f6a5527c0bb7a89fe",
+      "professors/information-hub/theodoros-papatheodorou-55.md": "7420dc32ceefa6d8e7f52fbf81997592e7f58421795e86472ab1ea50db5199d9",
+      "professors/information-hub/tianxiang-zhao-678.md": "84663e1830762efe92b4ee9450a94d38d9ae15231ef1a6b8ac97588d1e377a05",
+      "professors/information-hub/tianyuan-jin-718.md": "42a85623e424913fc7add199843fd41754cd00d935a465b7cdbbf803aaaad6ca",
+      "professors/information-hub/ting-chuen-pong-446.md": "c8ba6963533482b68c2fdcf2cf1ab040e1abef10df249e01dbbf8af0cbca9e41",
+      "professors/information-hub/wei-wang-35.md": "aa2b30712ac03273a21751b7a8c3aebc87767ee42c601fd76afa653cc6bb6e25",
+      "professors/information-hub/wei-zeng-59.md": "f9fb4e7eff07fe51744975b970a3df958b9cd9589edc5ae4896a46f60871220b",
+      "professors/information-hub/weikai-yang-452.md": "9b06580a9fc383ef23f3be5b422696187b39f088919a908b4bdbdd20b3e4018b",
+      "professors/information-hub/xiaowen-chu-51.md": "5f8b393b7d152327844626fe4451e89fb1464d34907ff998046ea5eeb8d1cb79",
+      "professors/information-hub/xin-tong-435.md": "05d73cd13241af0b3a3b3796df345cdd3e1c487fa73621e44f3b64d33a82827b",
+      "professors/information-hub/xin-wang-287.md": "3f67e10da71df92ae120bb8b7e1d2bf73e89d405d69f397a98db73d84ca4b920",
+      "professors/information-hub/xin-yang-691.md": "953de9d960cb95386703ca1c84d6333c6e6e7ef1d96a9d5d961e8370a68e7622",
+      "professors/information-hub/xuming-hu-402.md": "6ced41bcecef1c62383326fd12b6383c2b22ae5f0e77d0f30dd8760182e44914",
+      "professors/information-hub/yan-li-739.md": "8b5cc085926cd8091394add26a8fdc20a5d483451d96610a3a2cc94d50f3199b",
+      "professors/information-hub/yan-long-636.md": "b83cb09665a5530093f98554c76bd56cb8e4eeb5a2bc7186fed58db81f77b070",
+      "professors/information-hub/yanlin-zhang-380.md": "f9720030ea59426fcf04037ebe11debcd1657ed5b7c7b744737b3945d0396729",
+      "professors/information-hub/yao-shu-544.md": "6ff5b54ce1ca728daf28a78343e8c9018ea8433ae13aacb26036edc1fb2685fb",
+      "professors/information-hub/yiming-meng-704.md": "3dde6deaa2d49e58a6dd11d7692d7c62204a29d215a77287e4923a8e42944400",
+      "professors/information-hub/ying-cui-146.md": "b34350ae9f64a997b9ea0b5949a5be30a9bae58310d72f49a330a403cdcdec08",
+      "professors/information-hub/yingcong-chen-34.md": "5e52aa19576db7848f5f04bb26c292deb3d1d173deaa020b8bca7a0539e1063f",
+      "professors/information-hub/yongqi-zhang-436.md": "12dfdb6ed21dadc87821bdb3bd6c86c196f6e703953fbd5d99d868d06b6d1391",
+      "professors/information-hub/yue-li-607.md": "6b35f9703e9b2943cfcf697f5541a4f0c04d4f1e6b51fd9587df3e037a9f3b7c",
+      "professors/information-hub/yutao-yue-401.md": "1463fa68426273e38ec46be145f7096007b084b954b9f67f2cb84692bfbfcc0b",
+      "professors/information-hub/yuwen-huang-703.md": "cf322f9af39a6c1065e77b3cff75084f42e31bf221de899678433bbec89cab98",
+      "professors/information-hub/yuyang-wang-421.md": "1bb027acd7aade63a5acf23d3471bcd80fe7f4da21205705ad5304e82edc75f4",
+      "professors/information-hub/yuyu-luo-301.md": "5383ee5ab906675492e051fb67a9ac9281161faf1f254c5e0de0f493daef02b6",
+      "professors/information-hub/zeke-xie-428.md": "c407e8e6935672d454dd826f74a1f9c1d5fd95560c781b46acef30f0dd77efce",
+      "professors/information-hub/zeyi-wen-120.md": "be8883cf756d0ee9597b6da9f3e8d4cba849f15d07a35da895fff59ec4bcd43a",
+      "professors/information-hub/zeyu-wang-167.md": "9fecb39e32dbb497d7aade5350db212231ba5db1ca938c7c7d8d2d359e51025d",
+      "professors/information-hub/zhenyi-yuan-706.md": "6762dd4794530d302915eed43b84a4af2edb719f5967fef00de10b4e85816e14",
+      "professors/information-hub/zhijiang-guo-526.md": "b7c4bf42cb43a8ae5c08ce187b6a74b9e29f75ca04afdc09159d13e92be750ff",
+      "professors/information-hub/zhilu-lai-156.md": "74a4fa3c311821ae6f5ce8029fe3a88f19a617a02be83c8f1f3d4022cc3f1311",
+      "professors/information-hub/zhiming-hu-595.md": "0677b92b08bee0061f4a7b83188546c9aec142d55bf441d7920456ae5f613596",
+      "professors/information-hub/zhiqing-hong-659.md": "12c04e7eea238553bb020813a44248f098473634e3724c6d0f2bc223b9ad1a72",
+      "professors/information-hub/zijun-gong-102.md": "e37ef05b6b04d521e0dc7f1c2f883025ed30e6510191a60a92a7f3c274e09051",
+      "professors/information-hub/zishuo-ding-450.md": "c97cf404b244a88b71e7b91d2847ff88ca9051b748afd882af2255c5b5edd638",
+      "professors/information-hub/zixin-zhong-453.md": "eed82ce1b41a9d3c6d0951b885fcc12396fb7f24b22d6ecf140f792927385000",
+      "professors/president/qiang-meng-750.md": "1269a943a8b5121f7de69ef1887709374a76ac7663f07487bf2400f731beaa80",
+      "professors/society-hub/anurag-gumber-431.md": "bf74fe0fc65b362bfbbde969dd32e63107d39d9a66b37d0b1f6a99f498723f3a",
+      "professors/society-hub/bin-jiang-253.md": "ee00dfcd575b1509c9c6303b6e9859979caa4d22d44712856254e017cd3e47d0",
+      "professors/society-hub/bingyan-han-375.md": "1ac19a50d452c4d7adc88d9dc2708ff0f9d6991ea96ddd455bf7c5ec4297c784",
+      "professors/society-hub/binzhe-wang-447.md": "263fef059f204eae0f636ee302b8651e797f8c359784b61b674dfec82a7e8f27",
+      "professors/society-hub/cai-wu-483.md": "bd6b2a306c425c93725e43146b1c8e93738475f2c500c5c7f8cc370ca59e9a37",
+      "professors/society-hub/chao-zhang-442.md": "b7c67a56c73f0db78bfa3f828607ed42cdc412820933a7c67bf07a438968fa83",
+      "professors/society-hub/chaosu-li-30.md": "bed42ae21a564509826669df3e4f982ced744affa07961b1b4bca1e7289b9b2b",
+      "professors/society-hub/chen-wang-729.md": "c52b2486bb55b01c4c110b95c1819be203d9af93b2a69289bab6cb6f2676e637",
+      "professors/society-hub/chenyang-li-300.md": "77065c95a128a66c01e6a244cf4f33f6e8d645681cfbab38d4943c11cfae2a0e",
+      "professors/society-hub/cheuk-yi-kelvin-yuen-29.md": "85edeb26f6f8881e98caaae826434a1e573c17fdab6bda1c39a7260ca972f025",
+      "professors/society-hub/coco-dijia-du-7.md": "4563f70d9868d6a207b70b2308ea8a12be49a5425c37b1ecfd1d7b490add1961",
+      "professors/society-hub/corey-kewei-xu-27.md": "bc069ad5331e7d4f7638067d882b1d4edfe8726e904c87aba97608d3ea8ddb8a",
+      "professors/society-hub/danyang-xie-15.md": "dd7cfc284e21fb9b33d04e0c7cec70e2be52cafdfae32181eb2514b64a7090a0",
+      "professors/society-hub/eva-lingling-xie-687.md": "d5d9eefcbe69cbe79937785c92d4f4d837205009e4f9f7c5e143b1dac857d9c0",
+      "professors/society-hub/ge-lin-kan-119.md": "a9a188bbef6df65f7aef1274de1e6d7af83eedc9b536275f7cab062778fb2d25",
+      "professors/society-hub/gianni-francois-g-de-bruyn-725.md": "6130ab16956f64560ee837f7240958bee60a549457dbde3000b3fe9508a4975a",
+      "professors/society-hub/guang-zhang-32.md": "fbfc47a09c626b54f4c3c89c8f2e3358441b8b882f7d6ec126328302eeb6bb34",
+      "professors/society-hub/hang-jiang-717.md": "4770aaa95ae54216694646173730c8b0b006cfac59bcbff701330317f33647f2",
+      "professors/society-hub/hao-xue-685.md": "9ab33166c4ca0c65e0664e7f38ae995249bf9d187654b8e472f9c3f43b79ac35",
+      "professors/society-hub/haoxiang-zhang-682.md": "c3cdb638a907a7c53ae5a8ba60cd9ef9a6567b45b63a3cae390eea76c0484f23",
+      "professors/society-hub/huilian-qiu-746.md": "e6722c68707b8af159f542388684f7dbb5fc9c1a4c3277921ffa698dc9468c08",
+      "professors/society-hub/jiangong-liu-556.md": "7292e62a60276ae005bb6b13b895d2b1ae5f7f5f87e0a4ab65778ab50cd5bc6c",
+      "professors/society-hub/jianying-wang-662.md": "561af7e77f8633e497d5b6fc6166594c2884037ee2866c03a72935943d826ac3",
+      "professors/society-hub/jiaqi-lu-632.md": "fc76506ffc3212e32c04834b1caba66f1780d8015a5e2ebd29b6fa2c34d9859a",
+      "professors/society-hub/jinyu-he-148.md": "3bdf1b911c0dbb27c8a6cf320cad82ac79f4e24a8649e146fda3088bfbcde971",
+      "professors/society-hub/junxuan-wang-586.md": "6090933943fe64cd7f319af8ee11c7f88d62ac748609c27f53305bef21126e57",
+      "professors/society-hub/justin-jihao-hong-621.md": "03264af268bb7456d8a1eb13c76e5290c0108e46c14f9c055c860f65982ecad2",
+      "professors/society-hub/keemoon-jang-666.md": "e5194053611af084e0173c387032cc54f6f6066578a12695543dc82f1832041f",
+      "professors/society-hub/kejun-jiang-541.md": "c2138cb72d51bb7cc6a1c2cd9f6cbb6f24f9abe305261a40efc9253bfea1790f",
+      "professors/society-hub/kok-sin-woon-521.md": "61af5a225dc0076b85d65e4a652e9b5aa44716f09e087db26586d61b4f196472",
+      "professors/society-hub/leifu-zhang-305.md": "28f7fa4431574a3b2fb06917b6065aab135687f12d79af3d6f2115f19dd0717c",
+      "professors/society-hub/liang-zhang-583.md": "16ffaae74cba5850a4f4a8a6763bd065b6d9d840be4f64e63e676b5e7bd07d51",
+      "professors/society-hub/lili-miao-611.md": "4100347a97d14a3081a74d1691ca543aac6c6d9a2b688923f3d1a82b94c295f9",
+      "professors/society-hub/lin-yang-26.md": "51f24ebd2382a8e3486e6571de7e64d6c9716cb7a297b0e7595cfaa391fac7cb",
+      "professors/society-hub/lina-luo-639.md": "3237c1d60acf14876dec99b0d93d2864f45f10b283c3beb298e48efc6d89bdb1",
+      "professors/society-hub/lingbo-liu-740.md": "0f0f2fd82626046fd48a3017548ee84426eefca54f2ddfe06da7720d3e13e65d",
+      "professors/society-hub/lionel-ming-shuan-ni-13.md": "54f41128eb244705fab1323342e9ea1db8d154f1ee1f80002d54688fd9804ecc",
+      "professors/society-hub/luoye-chen-145.md": "0118179fb2ece81893bc727b753c01759a3ed0808c46dd2761ae6bc53f76194c",
+      "professors/society-hub/maosu-li-644.md": "d3139c0ba493cfc8d809ff6ced89aa7fad558e88878f77dde8badc46e93c00c1",
+      "professors/society-hub/moyan-li-438.md": "0cbaa525c62abee0e290048d54d0888340ee5ec41b3b0874a9fd02502bda86d6",
+      "professors/society-hub/muzhi-zhou-96.md": "fc3b52299e2da82a49223e6d7d883ee185a1df73fffff4a85692cd71dca31c85",
+      "professors/society-hub/na-jiang-532.md": "cc1946ffa32329885822e1f17bcf7a04b1b13ec82ad8092088f2cdf4c0404ea2",
+      "professors/society-hub/ning-cai-143.md": "0901fec462ea1b21230e9c75fcede86c2fe14dc0e5c19638ee87d13341597f3e",
+      "professors/society-hub/pingyu-fan-671.md": "63409fabdb29e7a625bc52a2436d80f2161217996850c0e6828c8fa4f9505709",
+      "professors/society-hub/qianping-ren-580.md": "8e157d773199fdaa5d8bb5a92daec8a08f9d8d80e2a5556940c3afb2ba09d9f7",
+      "professors/society-hub/qiumeng-li-441.md": "dc3b7b4052e8446c56aa4aba8db94f3aa8397282828e54a1ecbbdb8b6b7bfcab",
+      "professors/society-hub/robin-guohuibin-li-622.md": "08495596cd9338e7fe42bf855b2b8833ef03c5dfb83d198b970cdd885d5559d1",
+      "professors/society-hub/rui-cao-374.md": "4bccad52ba1ba0552e1e321e5c13fa32e78dfcc2c9ee05e41a461e64d5a413ef",
+      "professors/society-hub/ruiting-zuo-131.md": "3cc1708a882b90c23c9cd92a0553fdba72cca48ab9099d957f60c9335126d6eb",
+      "professors/society-hub/rushi-dai-626.md": "38f043728e8aa70d1c4e3873a89d6ebb03aa3c0f98b0c4fe9119263ed7ff4152",
+      "professors/society-hub/seona-park-430.md": "bde0144eaebfe1be472502d46b4c4ee1a32ef21026ff4dd42f5d6612cf87ebdc",
+      "professors/society-hub/shi-qiu-596.md": "9a8fa24d92bd3c91ad1bd6724261b8cd8331eaa73c710b33d46f984f9db46d7d",
+      "professors/society-hub/shuo-sun-582.md": "e9923c27b7dee23df923b7b40934d4c0eb5d15d03082ee83e0c707791476253f",
+      "professors/society-hub/si-qiao-661.md": "226f2cbf3e9f7e8758037ef1470fd80af40f053f20871f85fca13a417c2ff6f9",
+      "professors/society-hub/siguang-li-132.md": "c9d4373fb3c5986a10d550c62ca1bc11a7a641647fa7c6b20f5ec2aeb186bdad",
+      "professors/society-hub/sijia-chen-566.md": "2e53c19a8234828a445b7f62d8563d96351572b61917f6d3a1f69ef6647ec41d",
+      "professors/society-hub/sukie-xiuqi-yang-695.md": "3f01f1ff52bb28877144b1eeb5914a8974b03ab59e00f815f8789497094eebec",
+      "professors/society-hub/tong-jiang-728.md": "1a17f833214f8a40e325db3d6d0725ea3446942fc8507301d2d03adaae2df70e",
+      "professors/society-hub/wanru-xiong-99.md": "7bb873021e9a183611b8f89d9ccd8b975be95472bc7460911c9907c2330f1623",
+      "professors/society-hub/wenjun-wang-612.md": "f38119e58ceaff8885086eb9740c64822a0667920a47ef42790108eb757dcc31",
+      "professors/society-hub/wufan-zhao-383.md": "830386464b56e817179b4f3923ff1db5f3c02d271c46885f00788179a969cf3e",
+      "professors/society-hub/xiang-lu-629.md": "4e47c83efd05507680b7808189b6808a663e458cc027f8b203db4b5ca0ec6b45",
+      "professors/society-hub/xiaofeng-liu-494.md": "78000d449815af09e1ad33139a78f5168513201ac2dc6e53d053bc11009b7e50",
+      "professors/society-hub/xiaoyu-wang-302.md": "e637b375c6697fbbf15b26321e08c81c09a795e99608cd3b34d630cd42f32b0b",
+      "professors/society-hub/xin-wang-623.md": "76b94bdfda93fa322e5bb8647980035d43cd7fb134f89ea340aa3f70355f45ca",
+      "professors/society-hub/xu-zhang-3.md": "b7d0ce27b43661c01683636c2b5078e12b331f482511d74e462939dec32aa92e",
+      "professors/society-hub/xuechao-wang-307.md": "14609794f2ab138f125140154a8de0395cd7b057187016a0cc7a195155fc44ec",
+      "professors/society-hub/xun-wu-60.md": "2c73b58fd556dfece55afdfc076d21fe3c959c916f90a2c2171e60b115adb1ac",
+      "professors/society-hub/yang-yue-525.md": "7d3d4a9a781a29d2dbd6a5d2a9db34836f782ddce225ffaafb5cf75560886589",
+      "professors/society-hub/yangsiyu-lu-324.md": "020874f667ad8ccf35d545c6e2d11fb4e946e32644f3a202971bbed0027aec74",
+      "professors/society-hub/ye-qi-22.md": "653eb97e5ddbd20877f4250b51d1b3ef5991145cd5e0b04d8fa57b4fce88ed00",
+      "professors/society-hub/yi-zhang-306.md": "fa1fb744fb7c63dd78358e0aff4ae55506de3caa7c31966be520f5dea2077bc5",
+      "professors/society-hub/ying-zhang-304.md": "877eeb2ca3ae0564305bc8bb2bfb932b0f95b691b65e018471e1813270ee2803",
+      "professors/society-hub/yue-kuen-kwok-298.md": "b7e8bc1b716bec46862896d010e34dca830171390b93e007f40217eef4bc09b4",
+      "professors/society-hub/yun-hou-134.md": "989b409a451f59302ba36bd8a8d8d50929be3b906579d7ccd817fa46feb226e4",
+      "professors/society-hub/yuqi-song-581.md": "2a29454798b703e203f05892e7f96988574b3ea841b8a5cc258b3b24dc80da35",
+      "professors/society-hub/zhuoni-zhang-24.md": "8b2f883daef40ce378067e805060cafe0da199f2b8b133fd6b6bee086edad21f",
+      "professors/society-hub/zichong-chen-516.md": "e38895d3d5d64e1f90818412099884850b6843f75f27aa100380bb59b2855498",
+      "professors/society-hub/zimu-zhu-466.md": "94a10a4f390769d96c7e6b7c1415d2225d3029aadbc63f6a79fb6370af0bc587",
+      "professors/society-hub/zishuo-zhao-743.md": "c76cb247e9a67cb9365ef1d527cb6583477403530053e33ea0e9f294e1a85af8",
+      "professors/society-hub/ziteng-cheng-456.md": "cf0be658f3093f6ab90945d777891a70dffb81baf57f0cd2b8f577024ae5bad7",
+      "professors/society-hub/zixuan-yuan-315.md": "34516ec5cb287491960e3ef0523ca9608421b3bb746d2b142f253c6014ee7774",
+      "professors/systems-hub/akihiro-goto-620.md": "b343ff0e7028b65e122fb094ec0d32d71fb4123fdf05321d134630e27de988d0",
+      "professors/systems-hub/benedict-jun-ma-590.md": "1012489b825dd3d8c9273984da3217c3fd04f6f19c9ed699e4939e0b654bf6d1",
+      "professors/systems-hub/bizhao-pang-745.md": "f4837f05cb3b4ac9c24993197725986bf9ee879f5d5a92380e515a13d64f39c2",
+      "professors/systems-hub/changhao-chen-515.md": "c0d433dcdd643a3ad69d8d9871220aeefe8ad7c7eb453c88c6d44ace8739573b",
+      "professors/systems-hub/chencheng-dong-683.md": "1b9c14fac880d4ba0a49644cd34ddb8001572e8fbbb884cd178fe4f24d7f9911",
+      "professors/systems-hub/cheng-zhang-351.md": "789f4c3c92c1892efd24bb5aa18de61e75abc6707e28e99f1eb622ee59821dea",
+      "professors/systems-hub/cuiping-pan-570.md": "408364a2e362df9252d0c503b4bab53715a224fc460e70ceba4b595f856943cf",
+      "professors/systems-hub/daqiang-guo-426.md": "c48e8cc82e157836f80a98496248d68e906f624a5fafca6ff7638bd559d358e0",
+      "professors/systems-hub/dengbo-he-58.md": "952f08f68e3b67d83779b2350661d94159722bda3f170d5faeb4de08f28d7cf2",
+      "professors/systems-hub/fangqiang-ding-735.md": "56fce07b4a421fdf3782828adf3056899e43dcd2d98428630b9b441d0dbcaa62",
+      "professors/systems-hub/guoxiong-qiu-654.md": "631c7fa397e3e9a8fecb44bcfe6130898fbd11a33843f5b9c1392d1686cc507f",
+      "professors/systems-hub/hang-zhao-109.md": "30f27bfd6d0338cab01a3644b39f046ab7f394e0c4687e04d9f665b83f780dfe",
+      "professors/systems-hub/haoang-li-396.md": "fd83e2ad63868d17ff4ba302087262acb650ca47705e2c7c8b2ee2aa1fb75ee8",
+      "professors/systems-hub/hongyuan-lu-276.md": "3b5f6d89430f5b3f2ebffbfaa83a26432e7036c144512cf2b003bb463cae549b",
+      "professors/systems-hub/huachen-cui-247.md": "8aed77551bcaf001f36139f9fe02ea1fc99dafdea0b6608622355008b2a703fa",
+      "professors/systems-hub/huan-yu-45.md": "6d1c58c0aca27bdf24096b178297e53b7225e80ff683922c65f7e6421b126e46",
+      "professors/systems-hub/immihan-ceren-yasa-371.md": "b1c33045d82b6a7daec8cd687149388688c91a47141bebb6c3d5c82278c8a0d4",
+      "professors/systems-hub/jia-yan-320.md": "e0321d8ff81107b16b17d9fe575ce1bc6c05300b077a85b42b3db69404cc6287",
+      "professors/systems-hub/jianfeng-sun-640.md": "d80b55313104619a9f4860ba80633491637b64cce034a17d53594082a9f1cbc3",
+      "professors/systems-hub/jiawei-wang-705.md": "5ffe19ff319b8a21e620f1dc41d7a8caaa76ddcab975061be659e18838241506",
+      "professors/systems-hub/jie-song-258.md": "8c8bbfc318834b05ea82438b17351e81507c3be16f5df072bfebc98c654da31c",
+      "professors/systems-hub/juan-du-11.md": "132fdac79a8dd936f52e001ccc737d558e6309c34723692d4ca9249d851b7426",
+      "professors/systems-hub/julie-qiaojin-lin-312.md": "ac0068571975b95f3c2de6b502bf2cc74bee868be944602dc68f4a33a06ae102",
+      "professors/systems-hub/jun-ma-67.md": "89a338c5244b0f22267e4ded2eddb1237f9d2dea834721f6585e91bf4bb2b137",
+      "professors/systems-hub/jun-wu-133.md": "be6e0fe3de8880ea317b60e5efe573cff4ac228076a6899355e0240c148cbc15",
+      "professors/systems-hub/jun-xia-54.md": "3070fa034fdde3d8bc6cc7b20a53a412b627b72d482567a9dd277095211d78de",
+      "professors/systems-hub/jun-yang-702.md": "b5c0d71e955711f6ec711cce38a16965633abb69dcb0a0fd13b0f39afaee77e0",
+      "professors/systems-hub/kai-tang-142.md": "dc60c8e29eb5c6ac597e317e8ea5df5b49efc7dfd2675868da8d937b51f3c7b5",
+      "professors/systems-hub/kaihao-zhang-65.md": "c4bd2434f64d0c7e2f00fbf105aa83c1919b7d217c0d96a47b343e7f1b0de8a4",
+      "professors/systems-hub/ke-ma-602.md": "f750adffa9ca9e9960b45c2c8d28138e7951b293e8aecac0192e4220d8eaa08a",
+      "professors/systems-hub/kefei-liu-162.md": "6fc47eb8712b85c24cbe15b81ad335d245bdedb31834299b4b0dee58ff38039f",
+      "professors/systems-hub/lei-zhu-64.md": "54af29910ede9d45a4738b667fb93b0c31c48dedc79c5e8ba507b69f9419c9c4",
+      "professors/systems-hub/li-tao-296.md": "bc6ec2f7808b1ba7e425bbbe39dc045460072d656414fdd5636ce761cdce4a36",
+      "professors/systems-hub/liang-yue-404.md": "9e6ed088eb7a64e1d5b21579740010fde00f2ade7f80ed30bac7a523d5ac1e8d",
+      "professors/systems-hub/lingluo-chu-125.md": "5f5ff6a513e215c80dac3e2c83f09fc8c6d1956ab01936978518a75ee5fe1eda",
+      "professors/systems-hub/liuqing-yang-126.md": "6c161d27c2a280875bdb0a7e201ee41945b89d85c6a7e67fe14a5a7e32f2ef89",
+      "professors/systems-hub/min-tian-689.md": "58038b477bcdd2934720087ff3f25579aa2da90fff4c8d2b0f87976f93935dfc",
+      "professors/systems-hub/mojun-chen-114.md": "bf285423ae567f8b1d2e54d0a28755a822d3878e9879f38e45522e7fcb83ca0d",
+      "professors/systems-hub/oncay-yasa-372.md": "ecb88e4f4cb34d0bc753ebe5ed3ab29a38ffcbde11f02d49b1065f5356760c8b",
+      "professors/systems-hub/pengcheng-hu-286.md": "54627cb71ac921bb08e6452c06428f13e0bc6e48a11a6a78e1154fb24c612bc3",
+      "professors/systems-hub/qiang-huang-579.md": "cec28f4bc28eae69b494648a22489354fa1579c84dd8b14c3f3a4a856984ce07",
+      "professors/systems-hub/qiang-nie-420.md": "13c034f48a029feefdd3ee8d08939dd56da5fac303641e6a4f13e3b2acd34b49",
+      "professors/systems-hub/qingquan-chen-664.md": "70e7c5d1b42dee250a109040db5680644587b7f48cd1c6d4fbcead317588e4ee",
+      "professors/systems-hub/ricky-shi-wei-lee-16.md": "2ecd11311aa778c05845a811cbaa19e4ca21edca03f877960c1796165f27c4f2",
+      "professors/systems-hub/robert-zhong-qi-105.md": "441fa80b0714861ec976166d6a93a393ff39a087d2ee372999c637158eaf75f3",
+      "professors/systems-hub/rongqing-zhang-680.md": "68e045f69ee7ff6a7c5cdc780263ed300740c1a6750930ecf3e4a5e2deee9ab8",
+      "professors/systems-hub/shane-miguel-johnson-665.md": "348dc624ec5a695b57bbbb30d3713967252fbd4b8b774764365d25f16aac4fca",
+      "professors/systems-hub/shiqin-yu-429.md": "569ab912a4ad21aea7322cee8319fa0a99d4684a17972f16172819a31798dc60",
+      "professors/systems-hub/shiyuan-liu-512.md": "1b23a337d929cb8d14b8be06048cc805a65cec2f82163460efe8027ed308f595",
+      "professors/systems-hub/shuai-jia-103.md": "13e1db87d43e1168d8e0b7ea3da3717576509f1b977a7a11521b4e20e4f4c4db",
+      "professors/systems-hub/wenyu-wang-376.md": "33fc18a0fb8cb5ee2e3f6d4bf31f4b517922b23b9ea184e8ccc5daf13b261e93",
+      "professors/systems-hub/xian-zhang-110.md": "4228688c957ce10b86c06987b45a6613a5e6d85b05053a3e6a12eaaca6b58922",
+      "professors/systems-hub/xiaomeng-li-319.md": "ea89829ca7bf13635389675f6640e7eb7406cc4f532910b8caac8be8ddfd24e1",
+      "professors/systems-hub/xiaotong-sun-38.md": "e77af4d83f772bbf9873f7ee012d91d6897d44758e3eb481555cd6b1a7379b65",
+      "professors/systems-hub/xinhu-zheng-168.md": "684c6faaf94a37fd0e0e43c6983d8c1aa324cd97248f4eb876d00142bdd6eb9f",
+      "professors/systems-hub/yang-shen-468.md": "9056a691afeb37aa5cee99402f97c71351ab88d0ce02ed97e5f47b30695a6743",
+      "professors/systems-hub/yi-cai-52.md": "94672a4331faeb0ed5294d986402d6cb316c37a28d6d466df895674d4c0397b2",
+      "professors/systems-hub/yiding-ji-66.md": "f8ada26f769c2c43ee7bc900fef1e5aa67f08f75dba7afc2e9f8b6b94ecac914",
+      "professors/systems-hub/yu-han-690.md": "d67dff0bcfb0ce491a9d2bf571a923ea48c840261eb3a9fa64f44bf173bcb232",
+      "professors/systems-hub/yunda-wang-116.md": "529687f5eb7b184b72e63470427a33b9a465dc68556a6729e571d1503cdec4ab",
+      "professors/systems-hub/yuxuan-liang-288.md": "f5d73adf5b062e8acb08649b95763b232b472acbdef87854da297b060b12d425",
+      "professors/systems-hub/zexin-sun-736.md": "51168729529b622c9e238f932cd1cdd4c11cf891e147f2da111d268e5b8f37ec",
+      "professors/systems-hub/zhenglong-gu-650.md": "56c0cda6e552eb9d742ed1ea20cb17030c5599b74c28c68745c3b32358fdbe43",
+      "professors/systems-hub/zhidan-liu-458.md": "dbd9dffc91a4ab115fef8e95d4ebc22cd92ae84f058aeb8453a3110a1dab255f",
+      "professors/systems-hub/zhuoyi-liang-308.md": "12730c37ac1f3e83773536bd184f3aa97bd6c625f643f21ff363edd3596f29be",
+      "professors/vice-president-academic-affairs/he-zheng-418.md": "c45d78f40dada9071c1e46facde01b00d0ad3e13cafaabeed5df4e67d9240931",
+      "professors/vice-president-academic-affairs/run-feng-751.md": "a423c9272134903e56b5b4265c9e6aa15b6d140d2f2dc09993a0bb300de33611",
+      "professors/vice-president-academic-affairs/tieying-xu-411.md": "ecaad6f84beb98be29031995e51f2fb8f58ee1bfd0bfe4b732b9142380874bfd",
+      "professors/vice-president-academic-affairs/xun-pan-747.md": "9188c6bc10de7dd6957e6c834df137e3261553ddf0cea3b45ecaeae6868c0b33",
+      "professors/vice-president-academic-affairs/zhongjing-wang-567.md": "2063f59768e9bace02d9e491b8a3f7da17a6761daa92e93bfbeebfb44e631b23",
+      "professors/vice-president-research/kaishun-wu-144.md": "bedb2a0ccffbcf820c76ddb33f8171bfa956a76260844934b18a4fbd21b0f8a5",
+      "professors/vice-president-teaching-learning/man-chan-117.md": "99e7a3d6002cb701201066a4f7980cff75fc1062a43102f180730e72d0c59544",
+      "professors/vice-president-teaching-learning/marina-jinyuan-ma-228.md": "d8ba059f22b5573024d8c0a067fb61aa9e4a74206c806b415865f2425c69bf53",
+      "professors/vice-president-teaching-learning/xudong-wang-475.md": "7f0d970b1d38e86e7d89f8d6ed1ceadfccbfdd74de33395cfa662503a19e4d6b",
+      "professors/vice-president-teaching-learning/yunlong-zi-135.md": "0aa0f92ffb971070c9921e3501cf83ce3cddb4aef6101b91d46662d2dc436243"
+    },
+    "sourceDataSha256": "d647107f2b928acb4cad04886cca0826eb58b428b173a809b907d6655a469d8f"
+  },
+  "window": {
+    "end": "2026-09-01",
+    "inclusive": true,
+    "start": "2024-09-01"
+  }
+}
