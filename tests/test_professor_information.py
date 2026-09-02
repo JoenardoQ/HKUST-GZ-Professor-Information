@@ -1,4 +1,5 @@
 import contextlib
+from copy import deepcopy
 import io
 import json
 import subprocess
@@ -20,6 +21,7 @@ from scripts.professor_information import (
     publication_candidates_from_evidence,
     record_retrieval_attempt,
     validate_research_analysis,
+    validate_research_subdirections,
     validate_retrieval_statuses,
     validate_bilingual_parity,
     validate_artifact_window,
@@ -131,6 +133,65 @@ class ProfessorInformationTests(unittest.TestCase):
         analyses[0]["evidenceUrls"] = ["https://facultyprofiles.hkust-gz.edu.cn/faculty-personal-page?id=20"]
         with self.assertRaisesRegex(SourceDataError, "approved research sources"):
             validate_research_analysis(analyses, {"20"})
+
+    def test_research_subdirection_contract(self):
+        payload = {
+            "schemaVersion": 1,
+            "cutoff": "2026-09-01",
+            "professors": [{
+                "officialProfileId": "20",
+                "reviewStatus": "pass",
+                "subdirections": [{
+                    "id": "database-systems",
+                    "nameEn": "Database systems",
+                    "explanationEn": ["Sentence one.", "Sentence two.", "Sentence three."],
+                    "evidencePublicationIds": ["doi:10.1/example"],
+                    "evidenceUrls": ["https://openalex.org/W1"],
+                    "reviewStatus": "pass",
+                }],
+                "publicationAssignments": [{
+                    "publicationId": "doi:10.1/example",
+                    "subdirectionIds": ["database-systems"],
+                    "unassignedReasonEn": None,
+                }],
+            }],
+        }
+        professor_ids = {"20"}
+        publication_owners = {"doi:10.1/example": "20"}
+        validate_research_subdirections(payload, professor_ids, publication_owners)
+
+        two_sentences = deepcopy(payload)
+        two_sentences["professors"][0]["subdirections"][0]["explanationEn"] = ["Sentence one.", "Sentence two."]
+        with self.assertRaisesRegex(SourceDataError, "exactly three"):
+            validate_research_subdirections(two_sentences, professor_ids, publication_owners)
+
+        cross_professor = deepcopy(payload)
+        with self.assertRaisesRegex(SourceDataError, "owned"):
+            validate_research_subdirections(cross_professor, professor_ids, {"doi:10.1/example": "99"})
+
+        unknown_subdirection = deepcopy(payload)
+        unknown_subdirection["professors"][0]["publicationAssignments"][0]["subdirectionIds"] = ["unknown-direction"]
+        with self.assertRaisesRegex(SourceDataError, "unknown subdirection"):
+            validate_research_subdirections(unknown_subdirection, professor_ids, publication_owners)
+
+        duplicate_normalized_name = deepcopy(payload)
+        duplicate_normalized_name["professors"][0]["subdirections"].append({
+            **duplicate_normalized_name["professors"][0]["subdirections"][0],
+            "id": "database-systems-duplicate",
+            "nameEn": " DATABASE SYSTEMS ",
+        })
+        with self.assertRaisesRegex(SourceDataError, "duplicate"):
+            validate_research_subdirections(duplicate_normalized_name, professor_ids, publication_owners)
+
+        scholar_evidence = deepcopy(payload)
+        scholar_evidence["professors"][0]["subdirections"][0]["evidenceUrls"] = ["https://scholar.google.com/citations?user=example"]
+        with self.assertRaisesRegex(SourceDataError, "Google Scholar"):
+            validate_research_subdirections(scholar_evidence, professor_ids, publication_owners)
+
+        unresolved_block = deepcopy(payload)
+        unresolved_block["professors"][0]["reviewStatus"] = "block"
+        with self.assertRaisesRegex(SourceDataError, "blocked"):
+            validate_research_subdirections(unresolved_block, professor_ids, publication_owners)
 
     def test_retrieval_attempts_skip_then_fail_after_three_targeted_failures(self):
         item = build_publication_work_queue(

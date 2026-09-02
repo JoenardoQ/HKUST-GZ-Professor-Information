@@ -873,6 +873,135 @@ def validate_bilingual_parity(english: str, chinese: str) -> list[str]:
     return errors
 
 
+_SUBDIRECTION_ID = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
+_SUBDIRECTION_REVIEW_STATUSES = frozenset({"pass", "limited", "block"})
+
+
+def validate_research_subdirections(
+    payload: dict[str, Any],
+    professor_ids: set[str],
+    publication_owners: dict[str, str],
+) -> None:
+    """Validate professor-scoped research sub-directions and publication assignments."""
+    if not isinstance(payload, dict) or payload.get("schemaVersion") != 1:
+        raise SourceDataError("research subdirections require schema version 1")
+    try:
+        cutoff = date.fromisoformat(str(payload.get("cutoff")))
+    except ValueError as error:
+        raise SourceDataError("research subdirections require an ISO cutoff date") from error
+    if (cutoff.month, cutoff.day) not in {(3, 1), (9, 1)}:
+        raise SourceDataError("research subdirections cutoff must be March 1 or September 1")
+    records = payload.get("professors")
+    if not isinstance(records, list):
+        raise SourceDataError("research subdirections professors must be a list")
+
+    seen_professors: set[str] = set()
+    for record in records:
+        if not isinstance(record, dict):
+            raise SourceDataError("research subdirection professor record must be an object")
+        profile_id = clean(record.get("officialProfileId"))
+        if not profile_id or profile_id not in professor_ids:
+            raise SourceDataError("research subdirections reference an unknown professor")
+        if profile_id in seen_professors:
+            raise SourceDataError(f"duplicate research subdirections for professor {profile_id}")
+        seen_professors.add(profile_id)
+
+        def validate_review_status(status: Any, label: str) -> None:
+            if status not in _SUBDIRECTION_REVIEW_STATUSES:
+                raise SourceDataError(f"{label} has an invalid review status")
+            if status == "block":
+                raise SourceDataError(f"{label} is blocked")
+
+        validate_review_status(record.get("reviewStatus"), f"professor {profile_id}")
+        subdirections = record.get("subdirections")
+        assignments = record.get("publicationAssignments")
+        if not isinstance(subdirections, list) or not isinstance(assignments, list):
+            raise SourceDataError(f"professor {profile_id} requires subdirections and publication assignments")
+
+        direction_ids: set[str] = set()
+        normalized_names: set[str] = set()
+        for direction in subdirections:
+            if not isinstance(direction, dict):
+                raise SourceDataError(f"professor {profile_id} has a malformed subdirection")
+            direction_id = direction.get("id")
+            if not isinstance(direction_id, str) or not _SUBDIRECTION_ID.fullmatch(direction_id):
+                raise SourceDataError(f"professor {profile_id} has an invalid subdirection ID")
+            if direction_id in direction_ids:
+                raise SourceDataError(f"professor {profile_id} has a duplicate subdirection ID")
+            direction_ids.add(direction_id)
+            name = clean(direction.get("nameEn"))
+            normalized_name = _normalized_title(name or "")
+            if not normalized_name:
+                raise SourceDataError(f"professor {profile_id} has an empty subdirection name")
+            if normalized_name in normalized_names:
+                raise SourceDataError(f"professor {profile_id} has a duplicate subdirection name")
+            normalized_names.add(normalized_name)
+
+            sentences = direction.get("explanationEn")
+            if (
+                not isinstance(sentences, list)
+                or len(sentences) != 3
+                or any(not isinstance(sentence, str) or not clean(sentence) for sentence in sentences)
+            ):
+                raise SourceDataError(f"subdirection {direction_id} requires exactly three non-empty sentences")
+            evidence_publications = direction.get("evidencePublicationIds")
+            if not isinstance(evidence_publications, list) or not evidence_publications:
+                raise SourceDataError(f"subdirection {direction_id} requires supporting publication IDs")
+            if len(evidence_publications) != len(set(evidence_publications)):
+                raise SourceDataError(f"subdirection {direction_id} has duplicate supporting publication IDs")
+            for publication_id in evidence_publications:
+                if publication_owners.get(publication_id) != profile_id:
+                    raise SourceDataError(f"subdirection {direction_id} references a publication not owned by professor {profile_id}")
+
+            evidence_urls = direction.get("evidenceUrls")
+            if not isinstance(evidence_urls, list) or not evidence_urls:
+                raise SourceDataError(f"subdirection {direction_id} requires supporting evidence URLs")
+            for url in evidence_urls:
+                if not isinstance(url, str):
+                    raise SourceDataError(f"subdirection {direction_id} has an invalid evidence URL")
+                if (urlparse(url).hostname or "").casefold() == "scholar.google.com":
+                    raise SourceDataError(f"subdirection {direction_id} cannot use Google Scholar evidence")
+                if not _valid_evidence(url):
+                    raise SourceDataError(f"subdirection {direction_id} has evidence outside approved research sources")
+            validate_review_status(direction.get("reviewStatus"), f"subdirection {direction_id}")
+
+        assigned_publications: set[str] = set()
+        for assignment in assignments:
+            if not isinstance(assignment, dict):
+                raise SourceDataError(f"professor {profile_id} has a malformed publication assignment")
+            publication_id = assignment.get("publicationId")
+            if publication_owners.get(publication_id) != profile_id:
+                raise SourceDataError(f"publication assignment references a publication not owned by professor {profile_id}")
+            if publication_id in assigned_publications:
+                raise SourceDataError(f"professor {profile_id} has duplicate publication assignments")
+            assigned_publications.add(publication_id)
+            assigned_directions = assignment.get("subdirectionIds")
+            if not isinstance(assigned_directions, list):
+                raise SourceDataError(f"publication {publication_id} subdirection IDs must be a list")
+            if len(assigned_directions) != len(set(assigned_directions)):
+                raise SourceDataError(f"publication {publication_id} has duplicate subdirection IDs")
+            unknown_directions = set(assigned_directions) - direction_ids
+            if unknown_directions:
+                raise SourceDataError(f"publication {publication_id} references an unknown subdirection")
+            unassigned_reason = assignment.get("unassignedReasonEn")
+            if assigned_directions and unassigned_reason is not None:
+                raise SourceDataError(f"publication {publication_id} cannot be assigned and unassigned")
+            if not assigned_directions and (not isinstance(unassigned_reason, str) or not clean(unassigned_reason)):
+                raise SourceDataError(f"publication {publication_id} requires an unassigned reason")
+
+        owned_publications = {
+            publication_id
+            for publication_id, owner in publication_owners.items()
+            if owner == profile_id
+        }
+        if assigned_publications != owned_publications:
+            raise SourceDataError(f"publication assignments do not cover professor {profile_id}'s publications")
+
+    missing = professor_ids - seen_professors
+    if missing:
+        raise SourceDataError(f"research subdirections are missing professor IDs: {', '.join(sorted(missing))}")
+
+
 def validate_research_analysis(analyses: list[dict[str, Any]], professor_ids: set[str]) -> None:
     seen: set[str] = set()
     for analysis in analyses:
