@@ -1,0 +1,10 @@
+.sync-cache/
+.venv/
+__pycache__/
+*.pyc
+
+# Resumable or one-run working reports; release artifacts remain tracked.
+reports/*-publication-work-queue.json
+reports/*-retrieval-evidence.json
+reports/*-translation-inputs.json
+reports/translation-shards/
