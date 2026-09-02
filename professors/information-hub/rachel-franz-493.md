@@ -37,22 +37,15 @@ Body position, Position (finance), Position paper, Position statement, Statement
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5143366189) · [Research evidence 2](https://openalex.org/W4414519026)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Conflicting indexed research evidence
 
-Retrieval status: **incomplete**
+The available analysis labels and retrieved publications do not form a coherent research sub-direction.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The conflict review sampled “2025 Position statement on active outdoor play”, which do not consistently support the analysis topics.
 
-### 2025 Position statement on active outdoor play
-
-Publication identity: `doi:10.1186/s12966-025-01813-9`
-
-- Effective date: 2025-09-25
-- Venue/type: International Journal of Behavioral Nutrition and Physical Activity
-- Keywords: Body position, Child Therapy and Development, Outdoor and Experiential Education, Position (finance), Position paper, Position statement, Statement (logic), Urban Green Space and Health
-- Verification: [Evidence 1](https://openalex.org/W4414519026)
+Because the analysis topics and most owned-publication metadata diverge in this release, no substantive publication assignment is asserted.
 
 ## Verification
 

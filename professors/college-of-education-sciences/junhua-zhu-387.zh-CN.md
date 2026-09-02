@@ -39,47 +39,15 @@ Professor identity: `387`
 
 分析证据：[研究证据 1](https://openalex.org/A5100939152) · [研究证据 2](https://openalex.org/W4414433198) · [研究证据 3](https://openalex.org/W7130329348) · [研究证据 4](https://openalex.org/W7130481785) · [研究证据 5](https://openalex.org/W7165219905)
 
-## 本轮检索到的论文
+## 生成的研究细分方向
 
-闭区间：2024-09-01 至 2026-09-01。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。
+### 相互冲突的索引研究证据
 
-检索状态：**incomplete**
+现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-- 有限尝试后部分获批研究来源不可用：OpenAlex、paperscraper:arxiv、paperscraper:biorxiv、paperscraper:chemrxiv、paperscraper:medrxiv。
+冲突审核抽样检查了“To Run or Not to Run: Analyzing the Cost-Effectiveness of Code Execution in LLM-Based Program Repair”, “ParaTutor: Coordinating Parent and Child Math Tutoring through Role Separated LLM Scaffolding”, and 1 other sampled publication，这些论文未能一致支持分析主题。
 
-### To Run or Not to Run: Analyzing the Cost-Effectiveness of Code Execution in LLM-Based Program Repair｜运行还是不运行：分析 LLM 程序修复中的代码执行成本
-
-Publication identity: `doi:10.48550/arxiv.2606.26978`
-
-- 有效日期：2026-06-25
-- 发表场所/类型：unknown
-- 核验：[证据 1](https://arxiv.org/abs/2606.26978)
-
-### ParaTutor: Coordinating Parent and Child Math Tutoring through Role Separated LLM Scaffolding｜ParaTutor：通过角色分离的 LLM 脚手架协调家长与儿童数学辅导
-
-Publication identity: `doi:10.48550/arxiv.2606.18030`
-
-- 有效日期：2026-06-16
-- 发表场所/类型：unknown
-- 关键词：Formative assessment, Innovative Teaching and Learning Methods, Intelligent Tutoring Systems and Adaptive Learning, Interface (matter), Process (computing), Teaching and Learning Programming, User interface, Value (mathematics), Work (physics)
-- 核验：[证据 1](https://arxiv.org/abs/2606.18030) · [证据 2](https://openalex.org/W7165219905)
-
-### Meflex: A Multi-agent Scaffolding System for Entrepreneurial Ideation Iteration via Nonlinear Business Plan Writing｜Meflex：通过非线性商业计划写作实现创业构想迭代的多智能体脚手架系统
-
-Publication identity: `doi:10.48550/arxiv.2602.15631`
-
-- 有效日期：2026-02-17
-- 发表场所/类型：unknown
-- 核验：[证据 1](https://arxiv.org/abs/2602.15631)
-
-### Designing the Future of Entrepreneurship Education: Exploring an AI-Empowered Scaffold System for Business Plan Development｜创业教育的未来设计：探索 AI 赋能的商业计划开发支架系统
-
-Publication identity: `doi:10.1109/icaie64856.2025.11158485`
-
-- 有效日期：2025-05-29
-- 发表场所/类型：unknown
-- 关键词：Bridging (networking), Business plan, Engineering Education and Technology, Entrepreneurship, Entrepreneurship Studies and Influences, Entrepreneurship education, Experiential learning, Impact of AI and Big Data on Business and Society, Mentorship, Plan (archaeology), Transformative learning
-- 核验：[证据 1](https://arxiv.org/abs/2505.23326) · [证据 2](https://openalex.org/W4414433198)
+由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 
 ## 核验信息
 

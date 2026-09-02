@@ -38,15 +38,31 @@ Carbon dioxide, Carbon dioxide in Earth's atmosphere, Code (set theory), Electri
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5119462352) · [Research evidence 2](https://openalex.org/W4413789689) · [Research evidence 3](https://openalex.org/W7131393235) · [Research evidence 4](https://openalex.org/W7203971325) · [Research evidence 5](https://openalex.org/W7203999894)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Smart Grid Energy Management
 
-Retrieval status: **incomplete**
+This evidence-bounded sub-direction concerns smart grid energy management in the approved analysis record.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The approved analysis explicitly lists Smart Grid Energy Management, with indexed terminology including Carbon dioxide, Carbon dioxide in Earth's atmosphere, and Electricity.
 
-No publication was retrieved in this update window. This does not establish that no publication exists.
+This direction is limited to approved analysis metadata because no canonical release-window publication is available for confirmation.
+
+### Energy Efficiency and Management
+
+This evidence-bounded sub-direction concerns energy efficiency and management in the approved analysis record.
+
+The approved analysis explicitly lists Energy Efficiency and Management, with indexed terminology including Carbon dioxide, Carbon dioxide in Earth's atmosphere, and Electricity.
+
+This direction is limited to approved analysis metadata because no canonical release-window publication is available for confirmation.
+
+### Energy Load and Power Forecasting
+
+This evidence-bounded sub-direction concerns energy load and power forecasting in the approved analysis record.
+
+The approved analysis explicitly lists Energy Load and Power Forecasting, with indexed terminology including Carbon dioxide, Carbon dioxide in Earth's atmosphere, and Electricity.
+
+This direction is limited to approved analysis metadata because no canonical release-window publication is available for confirmation.
 
 ## Verification
 

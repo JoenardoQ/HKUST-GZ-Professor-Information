@@ -39,31 +39,15 @@ Artificial neural network, Computer science, Convergence (economics), Deep learn
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5102900096) · [Research evidence 2](https://openalex.org/W4403277217) · [Research evidence 3](https://openalex.org/W4416025486)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Economic theories and models
 
-Retrieval status: **incomplete**
+This sub-direction covers economic theories and models as represented in the reviewed release record.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The review cites “A Dynamic Principal-Agent Problem with One-Sided Commitment”; 0 have topic-discriminative title support and 1 has corroborating indexed-subject support.
 
-### DeepPAAC: A New Deep Galerkin Method for Principal-Agent Problems
-
-Publication identity: `doi:10.48550/arxiv.2511.04309`
-
-- Effective date: 2025-11-06
-- Venue/type: unknown
-- Keywords: Artificial neural network, Convergence (economics), Deep learning, Deep neural networks, Galerkin method, Generative Adversarial Networks and Image Synthesis, Hamiltonian system, Model Reduction and Neural Networks, Numerical analysis, Reinforcement Learning in Robotics
-- Verification: [Evidence 1](https://arxiv.org/abs/2511.04309) · [Evidence 2](https://openalex.org/W4416025486)
-
-### A Dynamic Principal-Agent Problem with One-Sided Commitment
-
-Publication identity: `doi:10.1287/moor.2022.0223`
-
-- Effective date: 2024-10-09
-- Venue/type: Mathematics of Operations Research
-- Keywords: Auction Theory and Applications, Computer science, Economic Policies and Impacts, Economic theories and models, Mathematical economics, Mathematical optimization, Mathematics, Principal (computer security)
-- Verification: [Evidence 1](https://openalex.org/W4403277217)
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
 ## Verification
 

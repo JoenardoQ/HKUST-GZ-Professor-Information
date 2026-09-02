@@ -32,16 +32,15 @@ No keywords could be inferred from the retrieved evidence.
 
 Analysis evidence: [Research evidence 1](https://api.openalex.org/authors?search=INGEBORG+DR.+REICHLE&per_page=5)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Evidence-limited research profile
 
-Retrieval status: **incomplete**
+The approved release data does not support a specific research sub-direction for this professor.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
-- No disambiguated OpenAlex work was available in the update window.
+The official profile identifies the professor, but no approved thematic analysis or canonical publication is available for this release.
 
-No publication was retrieved in this update window. This does not establish that no publication exists.
+This record is limited to documenting insufficient approved evidence and should not be read as a description of the professor's broader research agenda.
 
 ## Verification
 

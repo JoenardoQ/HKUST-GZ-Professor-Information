@@ -39,49 +39,31 @@ Recent indexed publications most consistently center on 3D Printing in Biomedica
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5027653251) · [Research evidence 2](https://openalex.org/W4403192415) · [Research evidence 3](https://openalex.org/W4412378615) · [Research evidence 4](https://openalex.org/W4415773760) · [Research evidence 5](https://openalex.org/W7203830278)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### 3D Printing in Biomedical Research
 
-Retrieval status: **incomplete**
+This sub-direction covers 3d printing in biomedical research as represented in the reviewed release record.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The review cites “Multidirectional Filamented Light Biofabrication Creates Aligned and Contractile Cardiac Tissues”; 0 have topic-discriminative title support and 1 has corroborating indexed-subject support.
 
-### An Electro-Permanent Magnet-Based Control System for Small-Scale Magnetic Robots
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
-Publication identity: `doi:10.1109/marss70227.2026.11655685`
+### Additive Manufacturing and 3D Printing Technologies
 
-- Effective date: 2026-07-01
-- Venue/type: conference-paper
-- Keywords: Control (management), Control system, Control theory (sociology), Noise (video), Robot, Stability (learning theory), Tracking system
-- Verification: [Evidence 1](https://openalex.org/W7203830278) · [Evidence 2](https://www.semanticscholar.org/paper/8eff151b6d261e618c4d34f1d4fdc08170c62f6f)
+This sub-direction covers additive manufacturing and 3d printing technologies as represented in the reviewed release record.
 
-### One‐Step Printing of Heterogeneous 3D Soft Magnetic Machines
+The review cites “One‐Step Printing of Heterogeneous 3D Soft Magnetic Machines” and “Multidirectional Filamented Light Biofabrication Creates Aligned and Contractile Cardiac Tissues”; 1 has topic-discriminative title support and 2 have corroborating indexed-subject support.
 
-Publication identity: `doi:10.1002/admt.202501515`
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
-- Effective date: 2025-11-02
-- Venue/type: Advanced Materials Technologies
-- Keywords: 3D Printing in Biomedical Research, 3D printing, Advanced Materials and Mechanics, Elastomer, Fabrication, Magnetic nanoparticles, Micro and Nano Robotics, Robot, Soft materials, Soft robotics
-- Verification: [Evidence 1](https://openalex.org/W4415773760) · [Evidence 2](https://www.semanticscholar.org/paper/763d80f212813ca3deb79137d2275c0d6b9ba7f6)
+### Cancer Research and Treatments
 
-### Magnetic Soft Robots for Targeted Bacterial Delivery and Enhanced Tumor Spheroid Disaggregation
+This sub-direction covers cancer research and treatments as represented in the reviewed release record.
 
-Publication identity: `doi:10.1002/aisy.202500257`
+The review cites “Magnetic Soft Robots for Targeted Bacterial Delivery and Enhanced Tumor Spheroid Disaggregation”; 1 has topic-discriminative title support and 1 has corroborating indexed-subject support.
 
-- Effective date: 2025-10-01
-- Venue/type: Advanced Intelligent Systems
-- Keywords: Artificial intelligence, Biology, Biophysics, Cancer Research and Treatments, Cell culture, Computer science, Genetics, Human–computer interaction, Materials science, Micro and Nano Robotics, Molecular Communication and Nanonetworks, Nanotechnology, Robot, Spheroid
-- Verification: [Evidence 1](https://openalex.org/W4412378615) · [Evidence 2](https://www.semanticscholar.org/paper/40f2d850dff2a0fa7caabdcc4f59260dc12ab587)
-
-### Multidirectional Filamented Light Biofabrication Creates Aligned and Contractile Cardiac Tissues
-
-Publication identity: `doi:10.1002/advs.202404509`
-
-- Effective date: 2024-10-07
-- Venue/type: Advanced Science
-- Keywords: 3D Printing in Biomedical Research, Additive Manufacturing and 3D Printing Technologies, Biofabrication, Biomedical engineering, Contractility, Internal medicine, Materials science, Medicine, Nanotechnology, Tissue Engineering and Regenerative Medicine, Tissue engineering
-- Verification: [Evidence 1](https://openalex.org/W4403192415) · [Evidence 2](https://www.semanticscholar.org/paper/6ea811801a7945efd5e287310c4c6f7f976873c5)
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
 ## Verification
 

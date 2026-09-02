@@ -38,22 +38,15 @@ Deep learning, Discriminative model, DNA binding site, Genomics, Matching (stati
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5081592658) · [Research evidence 2](https://openalex.org/W7154939136)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Conflicting indexed research evidence
 
-Retrieval status: **incomplete**
+The available analysis labels and retrieved publications do not form a coherent research sub-direction.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The conflict review sampled “NyxBind: enhancing deep neural representations for transcription factor binding site prediction via contrastive learning”, which do not consistently support the analysis topics.
 
-### NyxBind: enhancing deep neural representations for transcription factor binding site prediction via contrastive learning
-
-Publication identity: `doi:10.1093/bib/bbag182`
-
-- Effective date: 2026-03-01
-- Venue/type: Briefings in Bioinformatics
-- Keywords: Biomedical Text Mining and Ontologies, DNA binding site, Deep learning, Discriminative model, Genomics, Genomics and Chromatin Dynamics, Machine Learning in Bioinformatics, Matching (statistics), Pattern recognition (psychology), Sequence (biology), Transcription (linguistics)
-- Verification: [Evidence 1](https://openalex.org/W7154939136)
+Because the analysis topics and most owned-publication metadata diverge in this release, no substantive publication assignment is asserted.
 
 ## Verification
 

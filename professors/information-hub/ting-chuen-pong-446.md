@@ -37,22 +37,15 @@ Artificial intelligence, Computer graphics (images), Computer science, Data visu
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5003975427) · [Research evidence 2](https://openalex.org/W4407129064) · [Research evidence 3](https://openalex.org/W4407124178) · [Research evidence 4](https://openalex.org/W4410986621)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Conflicting indexed research evidence
 
-Retrieval status: **incomplete**
+The available analysis labels and retrieved publications do not form a coherent research sub-direction.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The conflict review sampled “eLIVE: e-Learning Laboratory for Immersive Virtual Environments”, which do not consistently support the analysis topics.
 
-### eLIVE: e-Learning Laboratory for Immersive Virtual Environments
-
-Publication identity: `doi:10.1109/educon62633.2025.11016425`
-
-- Effective date: 2025-04-22
-- Venue/type: conference-paper
-- Keywords: Computer science, E learning, Educational Games and Gamification, Human–computer interaction, Multimedia, Open Education and E-Learning, The Internet, Virtual reality, World Wide Web
-- Verification: [Evidence 1](https://openalex.org/W4410986621) · [Evidence 2](https://www.semanticscholar.org/paper/6430e5417df7696110007988d6b9d2efd5dcacfb)
+Because the analysis topics and most owned-publication metadata diverge in this release, no substantive publication assignment is asserted.
 
 ## Verification
 

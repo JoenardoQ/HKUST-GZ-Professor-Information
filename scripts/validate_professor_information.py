@@ -13,6 +13,7 @@ from urllib.parse import urlsplit
 from professor_information import (
     SourceDataError,
     in_window,
+    validate_bilingual_parity,
     validate_research_analysis,
     validate_research_subdirections,
     validate_retrieval_statuses,
@@ -135,6 +136,30 @@ def validate(root: Path, cutoff: str) -> dict[str, int]:
         raise SourceDataError("manifest identities do not match professor data")
     for slug, paths in documents.items():
         _validate_safe_document_paths(slug, paths)
+        for document_kind in _DOCUMENT_SUFFIXES:
+            english_path = root / paths[document_kind]["en"]
+            chinese_path = root / paths[document_kind]["zhCN"]
+            if not english_path.is_file() or not chinese_path.is_file():
+                raise SourceDataError(f"manifest-selected {document_kind} document is missing for {slug}")
+            parity_errors = validate_bilingual_parity(
+                english_path.read_text(encoding="utf-8"),
+                chinese_path.read_text(encoding="utf-8"),
+            )
+            if parity_errors:
+                raise SourceDataError(
+                    f"bilingual document structure differs for {slug} {document_kind}: "
+                    + "; ".join(parity_errors)
+                )
+    overview_en = root / "All_Prof_Info.md"
+    overview_zh = root / "All_Prof_Info.zh-CN.md"
+    if not overview_en.is_file() or not overview_zh.is_file():
+        raise SourceDataError("bilingual overview document is missing")
+    overview_errors = validate_bilingual_parity(
+        overview_en.read_text(encoding="utf-8"),
+        overview_zh.read_text(encoding="utf-8"),
+    )
+    if overview_errors:
+        raise SourceDataError("bilingual overview structure differs: " + "; ".join(overview_errors))
     expected_counts = {
         "professors": len(professors),
         "publications": sum(1 for item in publications if in_window(window["start"], cutoff, item["effectiveDate"])),

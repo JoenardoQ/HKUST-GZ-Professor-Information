@@ -36,22 +36,15 @@ Air quality index, Bay, Business, China, Environmental planning, Environmental r
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5018891193) · [Research evidence 2](https://openalex.org/W4407843011)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Conflicting indexed research evidence
 
-Retrieval status: **incomplete**
+The available analysis labels and retrieved publications do not form a coherent research sub-direction.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The conflict review sampled “From research to policy recommendations: A scientometric case study of air quality management in the Greater Bay Area, China”, which do not consistently support the analysis topics.
 
-### From research to policy recommendations: A scientometric case study of air quality management in the Greater Bay Area, China
-
-Publication identity: `doi:10.1016/j.envsci.2025.104025`
-
-- Effective date: 2025-03-01
-- Venue/type: Environmental Science &amp; Policy
-- Keywords: Air Quality and Health Impacts, Air quality index, Bay, Business, China, Energy, Environment, Economic Growth, Environmental planning, Environmental resource management, Environmental science, Geography, Meteorology, Quality (philosophy)
-- Verification: [Evidence 1](https://openalex.org/W4407843011) · [Evidence 2](https://www.semanticscholar.org/paper/8683abe5d32e89c75e720fd3336c7b12b9a8b45b)
+Because the analysis topics and most owned-publication metadata diverge in this release, no substantive publication assignment is asserted.
 
 ## Verification
 

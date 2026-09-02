@@ -38,40 +38,15 @@ Professor identity: `308`
 
 分析证据：[研究证据 1](https://openalex.org/A5035887405) · [研究证据 2](https://openalex.org/W4407453526) · [研究证据 3](https://openalex.org/W4409686680) · [研究证据 4](https://openalex.org/W4415617088)
 
-## 本轮检索到的论文
+## 生成的研究细分方向
 
-闭区间：2024-09-01 至 2026-09-01。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。
+### 相互冲突的索引研究证据
 
-检索状态：**incomplete**
+现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-- 有限尝试后部分获批研究来源不可用：OpenAlex、paperscraper:arxiv、paperscraper:biorxiv、paperscraper:chemrxiv、paperscraper:medrxiv。
+冲突审核抽样检查了“HTGTS‐TCR‐Seq for Profiling of Mouse and Human T‐Cell Receptor α and β Gene Rearrangements and Diversity”, “Deficiency of FUN14 domain-containing 1 enhances the migration and invasion of fibroblast-like synoviocytes in rheumatoid arthritis through mitochondrial dysregulation”, and 1 other sampled publication，这些论文未能一致支持分析主题。
 
-### HTGTS‐TCR‐Seq for Profiling of Mouse and Human T‐Cell Receptor α and β Gene Rearrangements and Diversity｜HTGTS‐TCR‐Seq：分析小鼠和人 T 细胞受体 α、β 基因重排与多样性
-
-Publication identity: `doi:10.1002/advs.202509497`
-
-- 有效日期：2025-10-27
-- 发表场所/类型：Advanced Science
-- 关键词：Gene, Gene rearrangement, Germline, Immune Cell Function and Interaction, Multiplex, Profiling (computer programming), Recombination-activating gene, Repertoire, Single-cell and spatial transcriptomics, T-cell and B-cell Immunology, T-cell receptor, V(D)J recombination
-- 核验：[证据 1](https://openalex.org/W4415617088)
-
-### Deficiency of FUN14 domain-containing 1 enhances the migration and invasion of fibroblast-like synoviocytes in rheumatoid arthritis through mitochondrial dysregulation｜FUN14 结构域蛋白 1 缺乏通过线粒体失调增强类成纤维细胞样滑膜细胞在类风湿关节炎中的迁移和侵袭
-
-Publication identity: `doi:10.1016/j.cellsig.2025.111829`
-
-- 有效日期：2025-04-22
-- 发表场所/类型：Cellular Signalling
-- 关键词：Autoimmune and Inflammatory Disorders Research, Autophagy in Disease and Therapy, Biology, Cancer research, Cell biology, Cell culture, Chemistry, Fibroblast, Genetics, Immunology, Medicine, Rheumatoid Arthritis Research and Therapies, Rheumatoid arthritis
-- 核验：[证据 1](https://openalex.org/W4409686680)
-
-### Crack Propagation Simulation and Experimental Validation in Fracture Toughness Tests of GIS Epoxy Insulators｜GIS 环氧绝缘子断裂韧性试验中的裂纹扩展仿真与实验验证
-
-Publication identity: `doi:10.1109/tim.2025.3541700`
-
-- 有效日期：2025-01-01
-- 发表场所/类型：IEEE Transactions on Instrumentation and Measurement
-- 关键词：Composite material, Engineering, Epoxy, Fracture (geology), Fracture mechanics, Fracture toughness, Geotechnical Engineering and Underground Structures, High voltage insulation and dielectric phenomena, Materials science, Structural Analysis of Composite Materials, Structural engineering
-- 核验：[证据 1](https://openalex.org/W4407453526) · [证据 2](https://www.semanticscholar.org/paper/46997bbc2b494f3e53a57420e0e955be2086f3c0)
+由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 
 ## 核验信息
 

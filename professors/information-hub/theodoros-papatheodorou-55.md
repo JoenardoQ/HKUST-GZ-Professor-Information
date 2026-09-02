@@ -40,40 +40,15 @@ Aesthetics, Art, Artificial intelligence, Cognitive science, Computer graphics (
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5055294358) · [Research evidence 2](https://openalex.org/W4403928913) · [Research evidence 3](https://openalex.org/W4404519602) · [Research evidence 4](https://openalex.org/W4412474794)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Ethics and Social Impacts of AI
 
-Retrieval status: **incomplete**
+This sub-direction covers ethics and social impacts of ai as represented in the reviewed release record.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The review cites “AI-rays: Exploring Bias in the Gaze of AI Through a Multimodal Interactive Installation”; 1 has topic-discriminative title support and 1 has corroborating indexed-subject support.
 
-### Speculative AI Re-enactment of the Figurists' Encounters with the I Ching
-
-Publication identity: `doi:10.1145/3736780`
-
-- Effective date: 2025-07-16
-- Venue/type: Proceedings of the ACM on Computer Graphics and Interactive Techniques
-- Keywords: Chinese history and philosophy, Cognitive science, Digital Humanities and Scholarship, Epistemology, Law in Society and Culture, Philosophy, Psychology
-- Verification: [Evidence 1](https://openalex.org/W4412474794) · [Evidence 2](https://www.semanticscholar.org/paper/590d4ab0fb9bac774ed8d9ec6f4601882c06f9ab)
-
-### Cinema Meowdiso: Films Co-Created by Human, Large Language Models and a Cat
-
-Publication identity: `doi:10.1145/3680530.3695443`
-
-- Effective date: 2024-11-19
-- Venue/type: conference-paper
-- Keywords: Art, Artificial Intelligence in Games, Computer graphics (images), Computer science, Generative Adversarial Networks and Image Synthesis, Movie theater, Multimodal Machine Learning Applications, Visual arts
-- Verification: [Evidence 1](https://openalex.org/W4404519602) · [Evidence 2](https://www.semanticscholar.org/paper/97235ac53ae4058fb9d665ed2af802f47a1ee5e7)
-
-### AI-rays: Exploring Bias in the Gaze of AI Through a Multimodal Interactive Installation
-
-Publication identity: `doi:10.1145/3680530.3695433`
-
-- Effective date: 2024-11-19
-- Venue/type: conference-paper
-- Keywords: Aesthetics, Art, Artificial intelligence, Computer science, Contrast (vision), Covert, Ethics and Social Impacts of AI, Gaze, Generative Adversarial Networks and Image Synthesis, Human–computer interaction, Identity (music), Scrutiny, Sociology, Virtual Reality Applications and Impacts, Vision
-- Verification: [Evidence 1](https://arxiv.org/abs/2410.03786) · [Evidence 2](https://openalex.org/W4403928913) · [Evidence 3](https://www.semanticscholar.org/paper/b5ae2c84683237798a9e702c990b773eef474532)
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
 ## Verification
 

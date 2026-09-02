@@ -40,66 +40,15 @@ Action (physics), Commit, Computer science, Correctness, Data science, Federated
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5102921755) · [Research evidence 2](https://openalex.org/W4404385876) · [Research evidence 3](https://openalex.org/W7162499398) · [Research evidence 4](https://openalex.org/W4403759975) · [Research evidence 5](https://openalex.org/W4405955416)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Conflicting indexed research evidence
 
-Retrieval status: **incomplete**
+The available analysis labels and retrieved publications do not form a coherent research sub-direction.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The conflict review sampled “CoWAM: Coordination Contracts for Selective Policy Intervention with WAMs”, “State of the Union: Toward Reproducible Performance Evaluations in Federated Learning”, and 1 other sampled publication, which do not consistently support the analysis topics.
 
-### CoWAM: Coordination Contracts for Selective Policy Intervention with WAMs
-
-Publication identity: `arxiv:2608.02578`
-
-- Effective date: 2026-08-03
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2608.02578)
-
-### State of the Union: Toward Reproducible Performance Evaluations in Federated Learning
-
-Publication identity: `doi:10.1109/tkde.2026.3697810`
-
-- Effective date: 2026-05-27
-- Venue/type: IEEE Transactions on Knowledge and Data Engineering
-- Keywords: Adversarial Robustness in Machine Learning, Data Quality and Management, Data modeling, Distributed database, Federated learning, Key (lock), Privacy-Preserving Technologies in Data, Server, State (computer science)
-- Verification: [Evidence 1](https://openalex.org/W7162499398)
-
-### Evaluating and Improving the Performance of Federated Learning Algorithms
-
-Publication identity: `title-sha256:c8d57251e6b3547eebbc02462edefe4764149f52ea9a02cadf592b74ee487fee`
-
-- Effective date: 2025-10-01
-- Venue/type: TSpace (University of Toronto)
-- Keywords: Aggregate (composite), Asynchronous communication, Cryptography and Data Security, Distributed learning, Federated learning, Mobile Crowdsensing and Crowdsourcing, Privacy-Preserving Technologies in Data, Selection (genetic algorithm), Set (abstract data type), Suite, Variety (cybernetics)
-- Verification: [Evidence 1](https://openalex.org/W7132945174)
-
-### Calibre: Towards Fair and Accurate Personalized Federated Learning with Self-Supervised Learning
-
-Publication identity: `doi:10.48550/arxiv.2412.20020`
-
-- Effective date: 2024-12-28
-- Venue/type: unknown
-- Keywords: Artificial intelligence, Computer science, Cooperative learning, Data science, Federated learning, Mathematics education, Open learning, Personalized learning, Privacy-Preserving Technologies in Data, Psychology, Teaching method
-- Verification: [Evidence 1](https://arxiv.org/abs/2412.20020) · [Evidence 2](https://openalex.org/W4405955416)
-
-### Pack: Towards Communication-Efficient Homomorphic Encryption in Federated Learning
-
-Publication identity: `doi:10.1145/3698038.3698557`
-
-- Effective date: 2024-11-14
-- Venue/type: conference-paper
-- Keywords: Computer science, Computer security, Cryptography and Data Security, Encryption, Homomorphic encryption, Privacy-Preserving Technologies in Data, Wireless Communication Security Techniques
-- Verification: [Evidence 1](https://openalex.org/W4404385876)
-
-### Democratizing the Federation in Federated Learning
-
-Publication identity: `doi:10.1109/mass62177.2024.00017`
-
-- Effective date: 2024-09-23
-- Venue/type: conference-paper
-- Keywords: Computer science, Data science, Human Rights and Immigration, World Wide Web
-- Verification: [Evidence 1](https://openalex.org/W4403759975)
+Because the analysis topics and most owned-publication metadata diverge in this release, no substantive publication assignment is asserted.
 
 ## Verification
 

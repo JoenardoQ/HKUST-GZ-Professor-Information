@@ -38,40 +38,15 @@ Additive Markov chain, Asynchronous communication, Balance equation, Chain (unit
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5014044732) · [Research evidence 2](https://openalex.org/W4413213491) · [Research evidence 3](https://openalex.org/W7164759891) · [Research evidence 4](https://openalex.org/W7169501428)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Game Theory and Applications
 
-Retrieval status: **incomplete**
+This sub-direction covers game theory and applications as represented in the reviewed release record.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The review cites “Risk-averse mean field games: Exploitability and non-asymptotic analysis”; 0 have topic-discriminative title support and 1 has corroborating indexed-subject support.
 
-### AHRL-PM: Asynchronous Hierarchical Reinforcement Learning Framework for Enhanced Portfolio Management.
-
-Publication identity: `doi:10.1109/tnnls.2026.3711337`
-
-- Effective date: 2026-07-17
-- Venue/type: IEEE Transactions on Neural Networks and Learning Systems
-- Keywords: Advanced Bandit Algorithms Research, Asynchronous communication, Component (thermodynamics), Control (management), Financial Distress and Bankruptcy Prediction, Portfolio, Reinforcement learning, Risk and Portfolio Optimization, Variety (cybernetics)
-- Verification: [Evidence 1](https://openalex.org/W7169501428) · [Evidence 2](https://www.semanticscholar.org/paper/5fb6996be26388979261d178afaa6c150a08b545)
-
-### Risk-averse mean field games: Exploitability and non-asymptotic analysis
-
-Publication identity: `doi:10.1016/j.spa.2026.105022`
-
-- Effective date: 2026-06-14
-- Venue/type: Stochastic Processes and their Applications
-- Keywords: Field (mathematics), Game Theory and Applications, Mean field theory, Probability theory, Risk and Portfolio Optimization, Stochastic process, Stochastic processes and financial applications
-- Verification: [Evidence 1](https://openalex.org/W7164759891) · [Evidence 2](https://www.semanticscholar.org/paper/34331b368b1b584b6907b34413a079a48d24b721)
-
-### The two-sided exit problem for an additive functional of a time-inhomogeneous Markov chain
-
-Publication identity: `doi:10.1080/17442508.2025.2532635`
-
-- Effective date: 2025-08-11
-- Venue/type: Stochastics
-- Keywords: Additive Markov chain, Advanced Queuing Theory Analysis, Balance equation, Chain (unit), Computer science, Markov Chains and Monte Carlo Methods, Markov chain, Markov chain mixing time, Markov model, Mathematical optimization, Mathematics, Physics, Probability and Risk Models, Statistical physics, Statistics
-- Verification: [Evidence 1](https://openalex.org/W4413213491)
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
 ## Verification
 

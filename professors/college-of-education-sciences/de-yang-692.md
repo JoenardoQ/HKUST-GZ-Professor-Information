@@ -36,22 +36,15 @@ Adjuvant, Antigenic drift, Biology, Immune system, Immunization, Immunogenicity,
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5042752501) · [Research evidence 2](https://openalex.org/W4407113349)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Influenza Virus Research Studies
 
-Retrieval status: **incomplete**
+This sub-direction covers influenza virus research studies as represented in the reviewed release record.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The review cites “Cross-protection against homo and heterologous influenza viruses via intranasal administration of an HA chimeric multiepitope nanoparticle vaccine”; 0 have topic-discriminative title support and 1 has corroborating indexed-subject support.
 
-### Cross-protection against homo and heterologous influenza viruses via intranasal administration of an HA chimeric multiepitope nanoparticle vaccine
-
-Publication identity: `doi:10.1186/s12951-025-03122-6`
-
-- Effective date: 2025-02-04
-- Venue/type: Journal of Nanobiotechnology
-- Keywords: Adjuvant, Antigenic drift, Biology, Immune system, Immunization, Immunogenicity, Immunology, Influenza A virus, Influenza Virus Research Studies, Influenza vaccine, Microbiology, Nasal administration, Respiratory viral infections research, Vaccination, Virology, Virus, interferon and immune responses
-- Verification: [Evidence 1](https://openalex.org/W4407113349)
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
 ## Verification
 

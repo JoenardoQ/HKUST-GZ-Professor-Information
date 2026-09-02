@@ -41,165 +41,31 @@ Active perception, Benchmark (surveying), Computer science, Control (management)
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5001005006) · [Research evidence 2](https://openalex.org/W4406727843) · [Research evidence 3](https://openalex.org/W7123362663) · [Research evidence 4](https://openalex.org/W4405035050) · [Research evidence 5](https://openalex.org/W4406785258)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Formal Methods in Verification
 
-Retrieval status: **incomplete**
+This sub-direction covers formal methods in verification as represented in the reviewed release record.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The review cites “Verification of Diagnosability for Cyber-Physical Systems: A Hybrid Barrier Certificate Approach” and “Automatic Generation of Safety-compliant Linear Temporal Logic via Large Language Model: A Self-supervised Framework”; 0 have topic-discriminative title support and 2 have corroborating indexed-subject support.
 
-### H-PAC Hand: Control-Oriented Modeling and Tendon-Elasticity Compensation for an Underactuated Robotic Hand
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
-Publication identity: `doi:10.48550/arxiv.2608.16712`
+### Robot Manipulation and Learning
 
-- Effective date: 2026-08-17
-- Venue/type: unknown
-- Keywords: Compensation (psychology), Control theory (sociology), Exoskeleton, Joint (building), Modular design, Pipeline (software), Prosthetics and Rehabilitation Robotics, Robot Manipulation and Learning, Robotic arm, Robotic hand, Soft Robotics and Applications, Underactuation
-- Verification: [Evidence 1](https://arxiv.org/abs/2608.16712) · [Evidence 2](https://openalex.org/W7203695700)
+This sub-direction covers robot manipulation and learning as represented in the reviewed release record.
 
-### SafeBuild-Bench: A Temporal-Robust Construction Safety Benchmark with Graph-Enhanced Data Mining
+The review cites “Agile-VLA: Few-Shot Industrial Pose Rectification via Implicit Affordance Anchoring”; 1 has topic-discriminative title support and 0 have corroborating indexed-subject support.
 
-Publication identity: `arxiv:2608.00068`
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
-- Effective date: 2026-07-29
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2608.00068)
+### Modeling and Simulation Systems
 
-### Lure-and-Reveal: An Exposure Framework for Stealthy Deception Attack in Multi-sensor Uncertain Systems
+This sub-direction covers modeling and simulation systems as represented in the reviewed release record.
 
-Publication identity: `doi:10.48550/arxiv.2605.10098`
+The review cites “Hierarchical Control for Continuous-time Systems via General Approximate Alternating Simulation Relations”, “Hierarchical control for cyber–physical systems via general approximate alternating simulation relations”, and 2 other matched publications; 3 have topic-discriminative title support and 2 have corroborating indexed-subject support.
 
-- Effective date: 2026-05-11
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2605.10098)
-
-### Hierarchical Control for Continuous-time Systems via General Approximate Alternating Simulation Relations
-
-Publication identity: `doi:10.48550/arxiv.2604.28108`
-
-- Effective date: 2026-04-30
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2604.28108)
-
-### Bridging Discrete Planning and Continuous Execution for Redundant Robot
-
-Publication identity: `doi:10.48550/arxiv.2604.02021`
-
-- Effective date: 2026-04-02
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2604.02021)
-
-### Communication-Aware Synthesis of Safety Controller for Networked Control Systems
-
-Publication identity: `doi:10.48550/arxiv.2603.29392`
-
-- Effective date: 2026-03-31
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2603.29392)
-
-### PiCo: Active Manifold Canonicalization for Robust Robotic Visual Anomaly Detection
-
-Publication identity: `doi:10.48550/arxiv.2603.23122`
-
-- Effective date: 2026-03-24
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2603.23122)
-
-### PHANTOM Hand
-
-Publication identity: `doi:10.48550/arxiv.2603.23152`
-
-- Effective date: 2026-03-24
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2603.23152)
-
-### Agile-VLA: Few-Shot Industrial Pose Rectification via Implicit Affordance Anchoring
-
-Publication identity: `doi:10.48550/arxiv.2603.22899`
-
-- Effective date: 2026-03-24
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2603.22899)
-
-### Hierarchical control for cyber–physical systems via general approximate alternating simulation relations
-
-Publication identity: `doi:10.1016/j.nahs.2026.101705`
-
-- Effective date: 2026-03-20
-- Venue/type: Nonlinear Analysis Hybrid Systems
-- Keywords: Control (management), Control system, Control theory (sociology), Hierarchical control system, Modeling and Simulation Systems, Simulation Techniques and Applications, Smart Grid Security and Resilience
-- Verification: [Evidence 1](https://openalex.org/W7139964072)
-
-### AR2-4FV: Anchored Referring and Re-identification for Long-Term Grounding in Fixed-View Videos
-
-Publication identity: `doi:10.48550/arxiv.2603.07758`
-
-- Effective date: 2026-03-08
-- Venue/type: arXiv.org
-- Verification: [Evidence 1](https://arxiv.org/abs/2603.07758) · [Evidence 2](https://www.semanticscholar.org/paper/73ea5846b7f79bfa8dcf0121908ac5d39d9430d3)
-
-### Verification of Diagnosability for Cyber-Physical Systems: A Hybrid Barrier Certificate Approach
-
-Publication identity: `doi:10.1109/tac.2026.3669025`
-
-- Effective date: 2026-03-02
-- Venue/type: IEEE Transactions on Automatic Control
-- Keywords: Automaton, Construct (python library), Fault Detection and Control Systems, Finite-state machine, Formal verification, Hybrid automaton, Model checking, Property (philosophy), Safety Systems Engineering in Autonomy, Smart Grid Security and Resilience, State (computer science)
-- Verification: [Evidence 1](https://openalex.org/W7133214591)
-
-### Automatic Generation of Safety-compliant Linear Temporal Logic via Large Language Model: A Self-supervised Framework
-
-Publication identity: `doi:10.48550/arxiv.2503.15840`
-
-- Effective date: 2025-03-20
-- Venue/type: unknown
-- Keywords: Consistency (knowledge bases), Formal language, Formal methods, Formal specification, Formal verification, Linear temporal logic, Model checking, Natural Language Processing Techniques, Specification language, Speech and dialogue systems, Temporal logic, Topic Modeling
-- Verification: [Evidence 1](https://arxiv.org/abs/2503.15840) · [Evidence 2](https://openalex.org/W4415064505)
-
-### Symbolic Control for Autonomous Docking of Marine Surface Vessels
-
-Publication identity: `arxiv:2501.13199`
-
-- Effective date: 2025-01-22
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2501.13199)
-
-### Secure-by-Construction Synthesis for Control Systems
-
-Publication identity: `doi:10.1109/tac.2025.3532541`
-
-- Effective date: 2025-01-22
-- Venue/type: IEEE Transactions on Automatic Control
-- Keywords: Artificial intelligence, Computer science, Control (management), Control engineering, Control system, Electrical engineering, Embedded Systems Design Techniques, Engineering, Formal Methods in Verification, Physical Unclonable Functions (PUFs) and Hardware Security
-- Verification: [Evidence 1](https://openalex.org/W4406727843)
-
-### Towards Safe AI: A Compositional Construction of Safe-visor Architecture for Interconnected Systems
-
-Publication identity: `doi:10.1016/j.ifacol.2025.07.068`
-
-- Effective date: 2025-01-01
-- Venue/type: IFAC-PapersOnLine
-- Keywords: Advanced Memory and Neural Computing, Archaeology, Architecture, CCD and CMOS Imaging Sensors, Computer architecture, Computer science, Embedded system, History, Physical Unclonable Functions (PUFs) and Hardware Security
-- Verification: [Evidence 1](https://openalex.org/W4413097619)
-
-### Verification of Approximate Prognosability via Barrier Certificates
-
-Publication identity: `doi:10.1109/cdc56724.2024.10886053`
-
-- Effective date: 2024-12-16
-- Venue/type: conference-paper
-- Keywords: Computer science, Fault Detection and Control Systems, Programming language, Reservoir Engineering and Simulation Methods
-- Verification: [Evidence 1](https://openalex.org/W4407951722)
-
-### Transfer Learning for Control Systems via Neural Simulation Relations
-
-Publication identity: `doi:10.48550/arxiv.2412.01783`
-
-- Effective date: 2024-12-02
-- Venue/type: unknown
-- Keywords: Artificial intelligence, Artificial neural network, Cognitive science, Computer science, Control (management), Model Reduction and Neural Networks, Neural Networks and Applications, Neural system, Neuroscience, Psychology, Transfer of learning
-- Verification: [Evidence 1](https://arxiv.org/abs/2412.01783) · [Evidence 2](https://openalex.org/W4405035050)
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
 ## Verification
 

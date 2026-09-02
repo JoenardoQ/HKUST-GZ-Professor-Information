@@ -36,22 +36,15 @@ Professor identity: `721`
 
 分析证据：[研究证据 1](https://openalex.org/A5004832238) · [研究证据 2](https://openalex.org/W4405275022)
 
-## 本轮检索到的论文
+## 生成的研究细分方向
 
-闭区间：2024-09-01 至 2026-09-01。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。
+### 相互冲突的索引研究证据
 
-检索状态：**incomplete**
+现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-- 有限尝试后部分获批研究来源不可用：OpenAlex、paperscraper:arxiv、paperscraper:biorxiv、paperscraper:chemrxiv、paperscraper:medrxiv。
+冲突审核抽样检查了“Prediction of Oil and Gas Well Integrity Using Well Construction Physical Parameters and Geospatial Metrics”，这些论文未能一致支持分析主题。
 
-### Prediction of Oil and Gas Well Integrity Using Well Construction Physical Parameters and Geospatial Metrics｜利用建井物理参数和地理空间指标预测油气井完整性
-
-Publication identity: `doi:10.1021/acs.energyfuels.4c03758`
-
-- 有效日期：2024-12-11
-- 发表场所/类型：Energy & Fuels
-- 关键词：Atmospheric and Environmental Gas Dynamics, Computer science, Data mining, Engineering, Environmental science, Fossil fuel, Geology, Geospatial analysis, Hydrocarbon exploration and reservoir analysis, Petroleum engineering, Remote sensing, Reservoir Engineering and Simulation Methods, Waste management
-- 核验：[证据 1](https://openalex.org/W4405275022)
+由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 
 ## 核验信息
 

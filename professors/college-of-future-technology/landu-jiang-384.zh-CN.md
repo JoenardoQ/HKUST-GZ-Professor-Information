@@ -39,31 +39,15 @@ Professor identity: `384`
 
 分析证据：[研究证据 1](https://openalex.org/A5019654551) · [研究证据 2](https://openalex.org/W4404127406) · [研究证据 3](https://openalex.org/W4408351936)
 
-## 本轮检索到的论文
+## 生成的研究细分方向
 
-闭区间：2024-09-01 至 2026-09-01。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。
+### 相互冲突的索引研究证据
 
-检索状态：**incomplete**
+现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-- 有限尝试后部分获批研究来源不可用：OpenAlex、paperscraper:arxiv、paperscraper:biorxiv、paperscraper:chemrxiv、paperscraper:medrxiv。
+冲突审核抽样检查了“MVDC : A Multi-view Dental Completion Model Based on Contrastive Learning” and “scDTL: enhancing single-cell RNA-seq imputation through deep transfer learning with bulk cell information”，这些论文未能一致支持分析主题。
 
-### MVDC : A Multi-view Dental Completion Model Based on Contrastive Learning｜MVDC：基于对比学习的多视图牙齿补全模型
-
-Publication identity: `doi:10.1109/icassp49660.2025.10888840`
-
-- 有效日期：2025-04-06
-- 发表场所/类型：IEEE International Conference on Acoustics, Speech, and Signal Processing
-- 关键词：AI in cancer detection, Artificial intelligence, Completion (oil and gas wells), Computer science, Dental Radiography and Imaging, Engineering, Mechanical engineering, Natural language processing
-- 核验：[证据 1](https://openalex.org/W4408351936) · [证据 2](https://www.semanticscholar.org/paper/566233521236b63a77bd0e3a0e7c4fc556809847)
-
-### scDTL: enhancing single-cell RNA-seq imputation through deep transfer learning with bulk cell information｜scDTL：通过结合整体细胞信息的深度迁移学习增强单细胞 RNA-seq 插补
-
-Publication identity: `doi:10.1093/bib/bbae555`
-
-- 有效日期：2024-09-23
-- 发表场所/类型：Briefings in Bioinformatics
-- 关键词：Artificial intelligence, Biology, Cell, Computational biology, Computer science, Domain Adaptation and Few-Shot Learning, Extracellular vesicles in disease, Gene, Gene expression, Genetics, Imputation (statistics), Machine learning, Missing data, RNA-Seq, Single-cell and spatial transcriptomics, Transcriptome, Transfer of learning
-- 核验：[证据 1](https://openalex.org/W4404127406) · [证据 2](https://www.semanticscholar.org/paper/c40d712c0fdfb21dd6cd0c9602812b73b2aed627)
+由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 
 ## 核验信息
 

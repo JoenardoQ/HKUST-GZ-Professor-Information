@@ -39,45 +39,31 @@ Professor identity: `626`
 
 分析证据：[研究证据 1](https://openalex.org/A5080908779) · [研究证据 2](https://openalex.org/W7128302690) · [研究证据 3](https://openalex.org/W7138433492) · [研究证据 4](https://openalex.org/W7139144971) · [研究证据 5](https://openalex.org/W7166701221)
 
-## 本轮检索到的论文
+## 生成的研究细分方向
 
-闭区间：2024-09-01 至 2026-09-01。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。
+### 多模态机器学习应用
 
-检索状态：**incomplete**
+该研究细分方向涵盖已审核发布记录中所体现的多模态机器学习应用。
 
-- 有限尝试后部分获批研究来源不可用：OpenAlex、paperscraper:arxiv、paperscraper:biorxiv、paperscraper:chemrxiv、paperscraper:medrxiv。
+审核引用了“Suppression Sticks, Locality Is Fragile: A Closed-Loop Target-and-Control Audit of Task-Vector Negation in VLA Policies”, “How Should Vision-Language-Action Models Use Proprioceptive State?”, and 1 other matched publication；其中 3 篇具有可区分主题的标题支持，0 篇具有相互印证的索引主题支持。
 
-### Suppression Sticks, Locality Is Fragile: A Closed-Loop Target-and-Control Audit of Task-Vector Negation in VLA Policies｜抑制棍棒，局部性脆弱：VLA 策略中任务向量否定的闭环目标与控制审计
+这一解释仅限于不完整的发布窗口索引元数据，不能据此确定该教授完整或当前的研究方向。
 
-Publication identity: `doi:10.48550/arxiv.2608.04692`
+### 机器人操作与学习
 
-- 有效日期：2026-08-05
-- 发表场所/类型：unknown
-- 核验：[证据 1](https://arxiv.org/abs/2608.04692)
+该研究细分方向涵盖已审核发布记录中所体现的机器人操作与学习。
 
-### How Should Vision-Language-Action Models Use Proprioceptive State?｜视觉-语言-动作模型应如何使用本体感知状态？
+审核引用了“Suppression Sticks, Locality Is Fragile: A Closed-Loop Target-and-Control Audit of Task-Vector Negation in VLA Policies” and “How Should Vision-Language-Action Models Use Proprioceptive State?”；其中 2 篇具有可区分主题的标题支持，0 篇具有相互印证的索引主题支持。
 
-Publication identity: `doi:10.48550/arxiv.2608.03052`
+这一解释仅限于不完整的发布窗口索引元数据，不能据此确定该教授完整或当前的研究方向。
 
-- 有效日期：2026-08-04
-- 发表场所/类型：unknown
-- 核验：[证据 1](https://arxiv.org/abs/2608.03052)
+### 三维形状建模与分析
 
-### NaLA: A 3D Native LLM Layout Agent for High-quality 3D Scene Generation｜NaLA：用于高质量 3D 场景生成的 3D 原生 LLM 布局智能体
+该研究细分方向涵盖已审核发布记录中所体现的三维形状建模与分析。
 
-Publication identity: `doi:10.48550/arxiv.2606.29395`
+审核引用了“NaLA: A 3D Native LLM Layout Agent for High-quality 3D Scene Generation”；其中 1 篇具有可区分主题的标题支持，0 篇具有相互印证的索引主题支持。
 
-- 有效日期：2026-06-28
-- 发表场所/类型：arXiv.org
-- 核验：[证据 1](https://arxiv.org/abs/2606.29395) · [证据 2](https://www.semanticscholar.org/paper/705365a9e6509f2096f346af89b4c65456d800ad)
-
-### Intelligent Co-Design: An Interactive LLM Framework for Interior Spatial Design via Multi-Modal Agents｜智能协同设计：通过多模态智能体进行室内空间设计的交互式 LLM 框架
-
-Publication identity: `doi:10.48550/arxiv.2603.15341`
-
-- 有效日期：2026-03-16
-- 发表场所/类型：arXiv.org
-- 核验：[证据 1](https://arxiv.org/abs/2603.15341) · [证据 2](https://www.semanticscholar.org/paper/b72402ab15a1d65e05b57637b74cb94e4ad3b215)
+这一解释仅限于不完整的发布窗口索引元数据，不能据此确定该教授完整或当前的研究方向。
 
 ## 核验信息
 

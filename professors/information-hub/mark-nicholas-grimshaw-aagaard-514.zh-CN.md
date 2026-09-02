@@ -38,40 +38,15 @@ Professor identity: `514`
 
 分析证据：[研究证据 1](https://openalex.org/A5130247031) · [研究证据 2](https://openalex.org/W7139822066) · [研究证据 3](https://openalex.org/W7154878442) · [研究证据 4](https://openalex.org/W7162226611)
 
-## 本轮检索到的论文
+## 生成的研究细分方向
 
-闭区间：2024-09-01 至 2026-09-01。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。
+### 相互冲突的索引研究证据
 
-检索状态：**incomplete**
+现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-- 有限尝试后部分获批研究来源不可用：OpenAlex、paperscraper:arxiv、paperscraper:biorxiv、paperscraper:chemrxiv、paperscraper:medrxiv。
+冲突审核抽样检查了“Considerations Towards Outdoor Impact Mitigation of Site-Related NIME Practice”, “Research assessment in the context of the Humanities:A conversation about the Aalborg University Research Indicator”, and 1 other sampled publication，这些论文未能一致支持分析主题。
 
-### The Metricised University:Purpose, Reliability, and Consequences?｜指标化大学：目的、可靠性与后果？
-
-Publication identity: `title-sha256:55050e5b7a86711984a943742755ae82fa6826840b22604a7937034f73df24fd`
-
-- 有效日期：2026-01-01
-- 发表场所/类型：VBN Forskningsportal (Aalborg Universitet)
-- 关键词：Identification (biology), Process (computing), Set (abstract data type)
-- 核验：[证据 1](https://openalex.org/W7139822066)
-
-### Research assessment in the context of the Humanities:A conversation about the Aalborg University Research Indicator｜人文学科语境下的科研评估：关于奥尔堡大学科研指标的对话
-
-Publication identity: `title-sha256:0448576fcb8e1cd8af103d57d0ce307c26e1a546e2798ca3f7c32147e77735e8`
-
-- 有效日期：2026-01-01
-- 发表场所/类型：VBN Forskningsportal (Aalborg Universitet)
-- 关键词：Academic Research and Education Studies, Context (archaeology), Conversation, Conversation analysis, Education, Healthcare and Sociology Research, Educational Tools and Methods, Research methodology
-- 核验：[证据 1](https://openalex.org/W7154878442)
-
-### Considerations Towards Outdoor Impact Mitigation of Site-Related NIME Practice｜关于减轻场地相关 NIME 实践户外影响的思考
-
-Publication identity: `title-sha256:8b0f02aac4f68bb63e1a9fd779abfddf4ee5d8ed53332fd00056c554ba607171`
-
-- 有效日期：2026-01-01
-- 发表场所/类型：VBN Forskningsportal (Aalborg Universitet)
-- 关键词：Conservation Techniques and Studies, Environmental impact assessment, Facilities and Workplace Management, Innovative Human-Technology Interaction, Materiality (auditing), Position (finance), Reflexivity, Scholarship, Social impact, Sustainability
-- 核验：[证据 1](https://openalex.org/W7162226611)
+由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 
 ## 核验信息
 

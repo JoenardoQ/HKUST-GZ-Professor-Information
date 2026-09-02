@@ -33,16 +33,15 @@ Professor identity: `545`
 
 分析证据：[研究证据 1](https://api.openalex.org/authors?search=Guang+RAO&per_page=5)
 
-## 本轮检索到的论文
+## 生成的研究细分方向
 
-闭区间：2024-09-01 至 2026-09-01。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。
+### 证据有限的研究概况
 
-检索状态：**incomplete**
+已批准的发布数据不足以支持该教授的具体研究细分方向。
 
-- 有限尝试后部分获批研究来源不可用：OpenAlex、paperscraper:arxiv、paperscraper:biorxiv、paperscraper:chemrxiv、paperscraper:medrxiv。
-- 在更新窗口内没有可消歧的 OpenAlex 作品可用。
+官方资料可确认教授身份，但本次发布没有可用的已批准主题分析或规范论文。
 
-本轮时间窗内未检索到论文；这不能证明该教授没有论文。
+本记录仅用于说明已批准证据不足，不应视为对该教授更广泛研究方向的描述。
 
 ## 核验信息
 

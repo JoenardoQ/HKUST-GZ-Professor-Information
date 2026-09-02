@@ -39,40 +39,15 @@ Accounting, Business, Business ethics, Context (archaeology), Corporate governan
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5090571737) · [Research evidence 2](https://openalex.org/W4411451005) · [Research evidence 3](https://openalex.org/W4416000997) · [Research evidence 4](https://openalex.org/W4416003491)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Conflicting indexed research evidence
 
-Retrieval status: **incomplete**
+The available analysis labels and retrieved publications do not form a coherent research sub-direction.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The conflict review sampled “Approaches to Board Role Adoption and Their Effects: The Case of Corporate Sustainability Committees”, “Corporate ESG Engagement and Earnings Management: A Moral Licensing Perspective”, and 1 other sampled publication, which do not consistently support the analysis topics.
 
-### Corporate ESG Engagement and Earnings Management: A Moral Licensing Perspective
-
-Publication identity: `doi:10.5465/amproc.2025.20429abstract`
-
-- Effective date: 2025-07-01
-- Venue/type: Academy of Management Proceedings
-- Keywords: Corporate Law and Human Rights, Corporate Social Responsibility Reporting, Corporate governance, Corporate social responsibility, Earnings, Global trade, sustainability, and social impact, Greenwashing, Perspective (graphical), Profit (economics), Sample (material), Shareholder
-- Verification: [Evidence 1](https://openalex.org/W4416000997)
-
-### Approaches to Board Role Adoption and Their Effects: The Case of Corporate Sustainability Committees
-
-Publication identity: `doi:10.5465/amproc.2025.16098abstract`
-
-- Effective date: 2025-07-01
-- Venue/type: Academy of Management Proceedings
-- Keywords: Context (archaeology), Corporate Finance and Governance, Corporate Law and Human Rights, Corporate Social Responsibility Reporting, Corporate governance, Corporate sustainability, On board, Structuring, Sustainability, Sustainability reporting
-- Verification: [Evidence 1](https://openalex.org/W4416003491)
-
-### Investee Peers and Corporate Social Responsibility: Evidence from U.S. Listed Firms
-
-Publication identity: `doi:10.1007/s10551-025-06030-9`
-
-- Effective date: 2025-06-19
-- Venue/type: Journal of Business Ethics
-- Keywords: Accounting, Business, Business ethics, Corporate Social Responsibility Reporting, Corporate social responsibility, Environmental Sustainability in Business, Political science, Public relations, Quality of Life Research, Sustainable Finance and Green Bonds
-- Verification: [Evidence 1](https://openalex.org/W4411451005)
+Because the analysis topics and most owned-publication metadata diverge in this release, no substantive publication assignment is asserted.
 
 ## Verification
 

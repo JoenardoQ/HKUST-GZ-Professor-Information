@@ -37,22 +37,15 @@ Professor identity: `393`
 
 分析证据：[研究证据 1](https://openalex.org/A5086799766) · [研究证据 2](https://openalex.org/W7155528256)
 
-## 本轮检索到的论文
+## 生成的研究细分方向
 
-闭区间：2024-09-01 至 2026-09-01。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。
+### BIM 与建筑施工集成
 
-检索状态：**incomplete**
+该研究细分方向涵盖已审核发布记录中所体现的BIM 与建筑施工集成。
 
-- 有限尝试后部分获批研究来源不可用：OpenAlex、paperscraper:arxiv、paperscraper:biorxiv、paperscraper:chemrxiv、paperscraper:medrxiv。
+审核引用了“Research on natural language driven intelligent visualization generation based on deep integration of LLM and BIM”；其中 1 篇具有可区分主题的标题支持，1 篇具有相互印证的索引主题支持。
 
-### Research on natural language driven intelligent visualization generation based on deep integration of LLM and BIM｜基于 LLM 与 BIM 深度融合的自然语言驱动智能可视化生成研究
-
-Publication identity: `doi:10.1117/12.3110474`
-
-- 有效日期：2026-04-24
-- 发表场所/类型：conference-paper
-- 关键词：3D Surveying and Cultural Heritage, BIM and Construction Integration, Building information modeling, Digital Transformation in Industry, Domain (mathematical analysis), Executable, Natural language, Natural language understanding, Semantics (computer science), Task (project management), Visualization, Workflow
-- 核验：[证据 1](https://openalex.org/W7155528256) · [证据 2](https://www.semanticscholar.org/paper/2bbdd06e4a8d2c92c804f182a816614b5547deb0)
+这一解释仅限于不完整的发布窗口索引元数据，不能据此确定该教授完整或当前的研究方向。
 
 ## 核验信息
 

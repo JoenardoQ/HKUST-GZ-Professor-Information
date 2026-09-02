@@ -37,22 +37,15 @@ Building information modeling, Domain (mathematical analysis), Executable, Natur
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5086799766) · [Research evidence 2](https://openalex.org/W7155528256)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### BIM and Construction Integration
 
-Retrieval status: **incomplete**
+This sub-direction covers bim and construction integration as represented in the reviewed release record.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The review cites “Research on natural language driven intelligent visualization generation based on deep integration of LLM and BIM”; 1 has topic-discriminative title support and 1 has corroborating indexed-subject support.
 
-### Research on natural language driven intelligent visualization generation based on deep integration of LLM and BIM
-
-Publication identity: `doi:10.1117/12.3110474`
-
-- Effective date: 2026-04-24
-- Venue/type: conference-paper
-- Keywords: 3D Surveying and Cultural Heritage, BIM and Construction Integration, Building information modeling, Digital Transformation in Industry, Domain (mathematical analysis), Executable, Natural language, Natural language understanding, Semantics (computer science), Task (project management), Visualization, Workflow
-- Verification: [Evidence 1](https://openalex.org/W7155528256) · [Evidence 2](https://www.semanticscholar.org/paper/2bbdd06e4a8d2c92c804f182a816614b5547deb0)
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
 ## Verification
 

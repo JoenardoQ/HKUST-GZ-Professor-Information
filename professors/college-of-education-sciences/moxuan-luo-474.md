@@ -38,31 +38,15 @@ Communications system, Distributed acoustic sensing, Interferometry, Key (lock),
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5054750662) · [Research evidence 2](https://openalex.org/W7125903268) · [Research evidence 3](https://openalex.org/W7164585891)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Optical Network Technologies
 
-Retrieval status: **incomplete**
+This sub-direction covers optical network technologies as represented in the reviewed release record.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The review cites “Joint SOP-Based and Fading-Suppressed Phase-Based Vibration Sensing Integrated in Short-Reach Optical Interconnects” and “Recent Advances in Integrated Forward Vibration Sensing in Optical Communication Systems”; 1 has topic-discriminative title support and 2 have corroborating indexed-subject support.
 
-### Joint SOP-Based and Fading-Suppressed Phase-Based Vibration Sensing Integrated in Short-Reach Optical Interconnects
-
-Publication identity: `doi:10.3390/photonics13060572`
-
-- Effective date: 2026-06-11
-- Venue/type: Photonics
-- Keywords: Advanced Fiber Optic Sensors, Advanced Photonic Communication Systems, Distributed acoustic sensing, Interferometry, Optical communication, Optical cross-connect, Optical power, Polarization (electrochemistry), Polarizer, Semiconductor Lasers and Optical Devices, Vibration
-- Verification: [Evidence 1](https://openalex.org/W7164585891) · [Evidence 2](https://www.semanticscholar.org/paper/9e58a79d866bc7e4276798e9adfaa09892034b06)
-
-### Recent Advances in Integrated Forward Vibration Sensing in Optical Communication Systems
-
-Publication identity: `doi:10.1109/acp66871.2025.11350700`
-
-- Effective date: 2025-11-05
-- Venue/type: conference-paper
-- Keywords: Advanced Fiber Laser Technologies, Advanced Fiber Optic Sensors, Communications system, Key (lock), Optical Network Technologies, Optical communication, Optical fiber, State (computer science), Vibration
-- Verification: [Evidence 1](https://openalex.org/W7125903268) · [Evidence 2](https://www.semanticscholar.org/paper/f4b306436dfc0592f1a881fe47caf2169e006f0d)
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
 ## Verification
 

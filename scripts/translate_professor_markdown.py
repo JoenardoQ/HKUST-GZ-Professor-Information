@@ -21,6 +21,13 @@ def load_list(path: Path) -> list[dict]:
     return value
 
 
+def load_object(path: Path) -> dict:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise SourceDataError(f"{path} must contain a JSON object")
+    return value
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--start", required=True)
@@ -43,6 +50,7 @@ def main() -> None:
         args.start,
         args.cutoff,
         build_translation_memory_translator(memory),
+        research_subdirections=load_object(args.root / "data/research-subdirections.json"),
     )
     print(f"{len(professors)}/{len(professors)}")
 

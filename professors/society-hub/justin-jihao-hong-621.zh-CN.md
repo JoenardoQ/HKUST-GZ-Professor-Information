@@ -39,31 +39,15 @@ Professor identity: `621`
 
 分析证据：[研究证据 1](https://openalex.org/A5115410772) · [研究证据 2](https://openalex.org/W4405309599) · [研究证据 3](https://openalex.org/W7131287011) · [研究证据 4](https://openalex.org/W7164515933) · [研究证据 5](https://openalex.org/W7164522046)
 
-## 本轮检索到的论文
+## 生成的研究细分方向
 
-闭区间：2024-09-01 至 2026-09-01。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。
+### 相互冲突的索引研究证据
 
-检索状态：**incomplete**
+现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-- 有限尝试后部分获批研究来源不可用：OpenAlex、paperscraper:arxiv、paperscraper:biorxiv、paperscraper:chemrxiv、paperscraper:medrxiv。
+冲突审核抽样检查了“The Costs of Leader Biases: Evidence from Superstitious Chinese Mayors” and “Not always a Panacea: History education and identity-building in Taiwan”，这些论文未能一致支持分析主题。
 
-### The Costs of Leader Biases: Evidence from Superstitious Chinese Mayors｜领导者偏见的代价：来自迷信中国市长的证据
-
-Publication identity: `doi:10.2139/ssrn.6841701`
-
-- 有效日期：2026-01-01
-- 发表场所/类型：SSRN Electronic Journal
-- 关键词：China's Socioeconomic Reforms and Governance, Culture, Economy, and Development Studies, Ideology, Investment (military), Politics, Population, Productivity, Public investment, Public spending, Social Capital and Networks
-- 核验：[证据 1](https://openalex.org/W7164515933)
-
-### Not always a Panacea: History education and identity-building in Taiwan｜并非总是万能药：台湾的历史教育与身份建构
-
-Publication identity: `doi:10.1016/j.jebo.2024.106837`
-
-- 有效日期：2025-01-01
-- 发表场所/类型：Journal of Economic Behavior &amp; Organization
-- 关键词：Aesthetics, Educator Training and Historical Pedagogy, Hong Kong and Taiwan Politics, Identity (music), Media Influence and Politics, Medicine, Panacea (medicine), Philosophy, Political science, Sociology
-- 核验：[证据 1](https://openalex.org/W4405309599) · [证据 2](https://www.semanticscholar.org/paper/084eaa04283b15c9eab8d3910b4c945573d7579e)
+由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 
 ## 核验信息
 

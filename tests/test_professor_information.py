@@ -997,6 +997,108 @@ class ProfessorInformationTests(unittest.TestCase):
             self.assertEqual(first_bytes, (root / "All_Prof_Info.md").read_bytes())
             self.assertFalse((root / "All_Prof_Info.zh-CN.md").exists(), "English generation must finish before translation")
 
+    def test_profile_and_publication_markdown_are_split(self):
+        professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
+        publications = [{
+            "officialProfileId": "20",
+            "publicationId": "doi:10.1/example",
+            "title": "A Robust Data System",
+            "effectiveDate": "2025-08-01",
+            "publicationType": "conference",
+            "venue": "SIGMOD",
+            "keywords": ["database"],
+            "evidenceUrls": ["https://openalex.org/W1"],
+        }]
+        subdirections = reviewed_subdirections(
+            publication_ids=["doi:10.1/example"]
+        )
+        direction = subdirections["professors"][0]["subdirections"][0]
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest = generate_documents(
+                root, professors, [research_analysis()], publications,
+                "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                research_subdirections=subdirections,
+            )["manifest"]
+            paths = manifest["documents"][professors[0]["slug"]]
+            profile = (root / paths["profile"]["en"]).read_text(encoding="utf-8")
+            self.assertTrue((root / paths["publications"]["en"]).is_file())
+            publication_list = (root / paths["publications"]["en"]).read_text(encoding="utf-8")
+
+            self.assertIn("Work email: leichen@hkust-gz.edu.cn", profile)
+            self.assertIn("### Research interests\n\n- Data management", profile)
+            self.assertIn("### Research areas\n\n- Database systems", profile)
+            self.assertIn("### Keywords\n\ndatabases, knowledge graphs", profile)
+            self.assertIn(f"### {direction['nameEn']}", profile)
+            for sentence in direction["explanationEn"]:
+                self.assertEqual(profile.count(sentence), 1)
+            self.assertNotIn("Publication identity:", profile)
+            self.assertNotIn("A Robust Data System", profile)
+            self.assertIn("Publication identity: `doi:10.1/example`", publication_list)
+            self.assertIn("### A Robust Data System", publication_list)
+
+            english_hashes = manifest["translationSource"]["englishFileSha256"]
+            self.assertIn(paths["profile"]["en"], english_hashes)
+            self.assertIn(paths["publications"]["en"], english_hashes)
+
+    def test_publication_notes_reference_reviewed_subdirections(self):
+        professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
+        publications = [
+            {
+                "officialProfileId": "20", "publicationId": "doi:10.1/assigned",
+                "title": "Assigned Publication", "effectiveDate": "2025-08-01",
+                "publicationType": "journal", "venue": "Identity Venue",
+                "keywords": ["source-keyword"], "evidenceUrls": ["https://openalex.org/W1"],
+            },
+            {
+                "officialProfileId": "20", "publicationId": "doi:10.1/unassigned",
+                "title": "Unassigned Publication", "effectiveDate": "2025-07-01",
+                "publicationType": "journal", "venue": "Second Venue",
+                "keywords": [], "evidenceUrls": ["https://openalex.org/W2"],
+            },
+        ]
+        subdirections = reviewed_subdirections(
+            publication_ids=["doi:10.1/assigned", "doi:10.1/unassigned"]
+        )
+        record = subdirections["professors"][0]
+        record["publicationAssignments"][1] = {
+            "publicationId": "doi:10.1/unassigned",
+            "subdirectionIds": [],
+            "unassignedReasonEn": "The reviewed evidence is insufficient for a reliable assignment.",
+        }
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest = generate_documents(
+                root, professors, [research_analysis()], publications,
+                "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                research_subdirections=subdirections,
+            )["manifest"]
+            paths = manifest["documents"][professors[0]["slug"]]
+            self.assertTrue((root / paths["publications"]["en"]).is_file())
+            publication_list = (root / paths["publications"]["en"]).read_text(encoding="utf-8")
+            self.assertRegex(
+                publication_list,
+                r"- Verification: \[Evidence 1\]\(https://openalex.org/W1\)\n\n"
+                r"\*Generated research sub-direction: Evidence-limited research profile\*",
+            )
+            self.assertRegex(
+                publication_list,
+                r"- Verification: \[Evidence 1\]\(https://openalex.org/W2\)\n\n"
+                r"\*No reliable generated sub-direction assignment\.\*",
+            )
+            self.assertNotIn(record["publicationAssignments"][1]["unassignedReasonEn"], publication_list)
+
+            translation_inputs = professor_logic.collect_translation_inputs(
+                professors, [research_analysis()], publications,
+                "2024-09-01", "2026-09-01",
+                research_subdirections=subdirections,
+            )
+            direction = record["subdirections"][0]
+            for source in [direction["nameEn"], *direction["explanationEn"], record["publicationAssignments"][1]["unassignedReasonEn"]]:
+                self.assertIn(source, translation_inputs)
+
     def test_chinese_generation_requires_frozen_english_and_preserves_bibliographic_identity(self):
         professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
         publications = [{
@@ -1023,19 +1125,22 @@ class ProfessorInformationTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
+            subdirections = reviewed_subdirections(publication_ids=["doi:10.1/example"])
             with self.assertRaisesRegex(SourceDataError, "English documents must be generated first"):
                 professor_logic.generate_chinese_documents(
                     root, professors, [research_analysis()], publications,
                     "2024-09-01", "2026-09-01", translator,
+                    research_subdirections=subdirections,
                 )
-            generate_documents(root, professors, [research_analysis()], publications, "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=reviewed_subdirections(publication_ids=["doi:10.1/example"]))
+            generate_documents(root, professors, [research_analysis()], publications, "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=subdirections)
             professor_logic.generate_chinese_documents(
                 root, professors, [research_analysis()], publications,
                 "2024-09-01", "2026-09-01", translator,
+                research_subdirections=subdirections,
             )
             slug = professors[0]["slug"]
-            english = (root / f"professors/information-hub/{slug}.md").read_text(encoding="utf-8")
-            chinese = (root / f"professors/information-hub/{slug}.zh-CN.md").read_text(encoding="utf-8")
+            english = (root / f"professors/information-hub/{slug}.publications.md").read_text(encoding="utf-8")
+            chinese = (root / f"professors/information-hub/{slug}.publications.zh-CN.md").read_text(encoding="utf-8")
             self.assertIn("### A Robust Data System｜一个稳健的数据系统", chinese)
             self.assertIn("Publication identity: `doi:10.1/example`", chinese)
             self.assertIn("https://openalex.org/W1", chinese)
@@ -1043,6 +1148,18 @@ class ProfessorInformationTests(unittest.TestCase):
             self.assertIn("- 关键词：database", chinese)
             self.assertEqual(validate_bilingual_parity(english, chinese), [])
             self.assertTrue((root / "All_Prof_Info.zh-CN.md").is_file())
+            for kind in ("profile", "publications"):
+                english_path = root / f"professors/information-hub/{slug}{'.publications' if kind == 'publications' else ''}.md"
+                chinese_path = root / f"professors/information-hub/{slug}{'.publications' if kind == 'publications' else ''}.zh-CN.md"
+                self.assertTrue(english_path.is_file())
+                self.assertTrue(chinese_path.is_file())
+                self.assertEqual(
+                    validate_bilingual_parity(
+                        english_path.read_text(encoding="utf-8"),
+                        chinese_path.read_text(encoding="utf-8"),
+                    ),
+                    [],
+                )
 
     def test_chinese_generation_rejects_structured_or_english_drift_after_freeze(self):
         professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
@@ -1050,15 +1167,76 @@ class ProfessorInformationTests(unittest.TestCase):
         translator = lambda text: f"中译：{text}"
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            generate_documents(root, professors, [analysis], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=reviewed_subdirections())
+            subdirections = reviewed_subdirections()
+            generate_documents(root, professors, [analysis], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=subdirections)
             mutated = json.loads(json.dumps(analysis))
             mutated["summaryEn"] = "Changed after the English freeze."
             with self.assertRaisesRegex(SourceDataError, "frozen English inputs changed"):
-                professor_logic.generate_chinese_documents(root, professors, [mutated], [], "2024-09-01", "2026-09-01", translator)
+                professor_logic.generate_chinese_documents(root, professors, [mutated], [], "2024-09-01", "2026-09-01", translator, research_subdirections=subdirections)
             overview = root / "All_Prof_Info.md"
             overview.write_text(overview.read_text(encoding="utf-8") + "\nchanged\n", encoding="utf-8")
             with self.assertRaisesRegex(SourceDataError, "frozen English file changed"):
-                professor_logic.generate_chinese_documents(root, professors, [analysis], [], "2024-09-01", "2026-09-01", translator)
+                professor_logic.generate_chinese_documents(root, professors, [analysis], [], "2024-09-01", "2026-09-01", translator, research_subdirections=subdirections)
+
+    def test_chinese_generation_requires_a_digest_for_every_english_document(self):
+        professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
+        analysis = research_analysis()
+        subdirections = reviewed_subdirections()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest = generate_documents(
+                root, professors, [analysis], [],
+                "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                research_subdirections=subdirections,
+            )["manifest"]
+            publication_path = manifest["documents"][professors[0]["slug"]]["publications"]["en"]
+            manifest["translationSource"]["englishFileSha256"].pop(publication_path)
+            (root / "data/manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+            with self.assertRaisesRegex(SourceDataError, "frozen English file hashes"):
+                professor_logic.generate_chinese_documents(
+                    root, professors, [analysis], [],
+                    "2024-09-01", "2026-09-01", lambda text: f"中译：{text}",
+                    research_subdirections=subdirections,
+                )
+
+    def test_chinese_generation_accepts_shared_publication_identity_owned_by_each_professor(self):
+        professors, _ = normalize_faculty_rows([
+            faculty_row("20", "陈雷", "Lei CHEN"),
+            faculty_row("21", "王艾达", "Ada WANG"),
+        ], baseline_ids={"20", "21"})
+        publications = [
+            {
+                "officialProfileId": profile_id,
+                "publicationId": "doi:10.1/shared",
+                "title": "Shared Publication",
+                "effectiveDate": "2025-08-01",
+                "publicationType": "journal",
+                "venue": "Shared Venue",
+                "keywords": [],
+                "evidenceUrls": ["https://openalex.org/W1"],
+            }
+            for profile_id in ("20", "21")
+        ]
+        analyses = [research_analysis("20"), research_analysis("21")]
+        subdirections = reviewed_subdirections("20", ["doi:10.1/shared"])
+        subdirections["professors"].extend(
+            reviewed_subdirections("21", ["doi:10.1/shared"])["professors"]
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            generate_documents(
+                root, professors, analyses, publications,
+                "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                research_subdirections=subdirections,
+            )
+            professor_logic.generate_chinese_documents(
+                root, professors, analyses, publications,
+                "2024-09-01", "2026-09-01", lambda text: f"中译：{text}",
+                research_subdirections=subdirections,
+            )
+            for professor in professors:
+                path = root / f"professors/information-hub/{professor['slug']}.publications.zh-CN.md"
+                self.assertTrue(path.is_file())
 
     def test_translation_memory_fails_closed_for_missing_or_empty_text(self):
         translator = professor_logic.build_translation_memory_translator({"Database systems": "数据库系统"})
@@ -1079,13 +1257,19 @@ class ProfessorInformationTests(unittest.TestCase):
             "Database systems": "数据库系统",
             "databases": "数据库",
             "knowledge graphs": "知识图谱",
+            "Evidence-limited research profile": "证据有限的研究概况",
+            "The approved release data does not support a specific research sub-direction for this professor.": "已批准的发布数据不足以支持该教授的具体研究细分方向。",
+            "The official profile identifies the professor, but no approved thematic analysis or canonical publication is available for this release.": "官方资料可确认教授身份，但本次发布没有可用的已批准主题分析或规范论文。",
+            "This record is limited to documenting insufficient approved evidence and should not be read as a description of the professor's broader research agenda.": "本记录仅用于说明已批准证据不足，不应视为对该教授更广泛研究方向的描述。",
         }
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            generate_documents(root, professors, [research_analysis()], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=reviewed_subdirections())
+            subdirections = reviewed_subdirections()
+            generate_documents(root, professors, [research_analysis()], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=subdirections)
             (root / "data/professors.json").write_text(json.dumps(professors, ensure_ascii=False), encoding="utf-8")
             (root / "data/research-analysis.json").write_text(json.dumps([research_analysis()], ensure_ascii=False), encoding="utf-8")
             (root / "data/publications.json").write_text("[]", encoding="utf-8")
+            (root / "data/research-subdirections.json").write_text(json.dumps(subdirections, ensure_ascii=False), encoding="utf-8")
             (root / "data/translations.zh-CN.json").write_text(json.dumps(memory, ensure_ascii=False), encoding="utf-8")
             result = subprocess.run([
                 sys.executable,
@@ -1126,10 +1310,12 @@ class ProfessorInformationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             analysis = research_analysis()
-            generate_documents(root, professors, [analysis], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=reviewed_subdirections())
+            subdirections = reviewed_subdirections()
+            generate_documents(root, professors, [analysis], [], "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z", research_subdirections=subdirections)
             (root / "data/professors.json").write_text(json.dumps(professors, ensure_ascii=False), encoding="utf-8")
             (root / "data/research-analysis.json").write_text(json.dumps([analysis], ensure_ascii=False), encoding="utf-8")
             (root / "data/publications.json").write_text("[]", encoding="utf-8")
+            (root / "data/research-subdirections.json").write_text(json.dumps(subdirections, ensure_ascii=False), encoding="utf-8")
             (root / "data/translations.zh-CN.json").write_text(json.dumps({"Database systems": "数据库系统"}), encoding="utf-8")
             result = subprocess.run([
                 sys.executable,
@@ -1258,7 +1444,7 @@ class ProfessorInformationTests(unittest.TestCase):
                 self.assertFalse(Path(relative_path).is_absolute())
                 self.assertNotIn("..", Path(relative_path).parts)
 
-    def test_stage_validator_accepts_task_three_artifacts_without_final_documents(self):
+    def test_release_validator_rejects_cross_artifact_drift(self):
         professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
         analysis = research_analysis()
         subdirections = reviewed_subdirections()
@@ -1276,6 +1462,11 @@ class ProfessorInformationTests(unittest.TestCase):
                 ("research-subdirections.json", subdirections),
             ):
                 (root / "data" / filename).write_text(json.dumps(value), encoding="utf-8")
+            professor_logic.generate_chinese_documents(
+                root, professors, [analysis], [],
+                "2024-09-01", "2026-09-01", lambda text: f"中译：{text}",
+                research_subdirections=subdirections,
+            )
             command = [
                 sys.executable,
                 str(Path(__file__).parents[1] / "scripts/validate_professor_information.py"),
@@ -1384,6 +1575,52 @@ class ProfessorInformationTests(unittest.TestCase):
                     lambda payloads, unsafe_path=unsafe_path: payloads["manifest.json"]["documents"][slug]["profile"].update({"en": unsafe_path}),
                     "unsafe",
                 )
+
+    def test_release_validator_requires_existing_bilingual_documents_with_matching_structure(self):
+        professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
+        analysis = research_analysis()
+        subdirections = reviewed_subdirections()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest = generate_documents(
+                root, professors, [analysis], [],
+                "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                research_subdirections=subdirections,
+            )["manifest"]
+            for filename, value in (
+                ("professors.json", professors),
+                ("research-analysis.json", [analysis]),
+                ("publications.json", []),
+                ("research-subdirections.json", subdirections),
+            ):
+                (root / "data" / filename).write_text(json.dumps(value), encoding="utf-8")
+            professor_logic.generate_chinese_documents(
+                root, professors, [analysis], [],
+                "2024-09-01", "2026-09-01", lambda text: f"中译：{text}",
+                research_subdirections=subdirections,
+            )
+            command = [
+                sys.executable,
+                str(Path(__file__).parents[1] / "scripts/validate_professor_information.py"),
+                "--root", str(root), "--cutoff", "2026-09-01",
+            ]
+            self.assertEqual(subprocess.run(command, capture_output=True, text=True).returncode, 0)
+
+            paths = manifest["documents"][professors[0]["slug"]]
+            chinese_publications = root / paths["publications"]["zhCN"]
+            original = chinese_publications.read_text(encoding="utf-8")
+            chinese_publications.unlink()
+            missing = subprocess.run(command, capture_output=True, text=True)
+            self.assertNotEqual(missing.returncode, 0)
+            self.assertIn("document is missing", missing.stderr)
+
+            chinese_publications.write_text(
+                original.replace("## 本轮检索到的论文", "### 本轮检索到的论文", 1),
+                encoding="utf-8",
+            )
+            drifted = subprocess.run(command, capture_output=True, text=True)
+            self.assertNotEqual(drifted.returncode, 0)
+            self.assertIn("bilingual document structure", drifted.stderr)
 
     def test_not_started_retrieval_is_not_publishable(self):
         analyses = [research_analysis(status="not-started")]

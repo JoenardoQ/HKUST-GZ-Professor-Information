@@ -39,31 +39,15 @@ Accountability, Administration (probate law), Aesthetics, Bureaucracy, China, Co
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5115410772) · [Research evidence 2](https://openalex.org/W4405309599) · [Research evidence 3](https://openalex.org/W7131287011) · [Research evidence 4](https://openalex.org/W7164515933) · [Research evidence 5](https://openalex.org/W7164522046)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Conflicting indexed research evidence
 
-Retrieval status: **incomplete**
+The available analysis labels and retrieved publications do not form a coherent research sub-direction.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The conflict review sampled “The Costs of Leader Biases: Evidence from Superstitious Chinese Mayors” and “Not always a Panacea: History education and identity-building in Taiwan”, which do not consistently support the analysis topics.
 
-### The Costs of Leader Biases: Evidence from Superstitious Chinese Mayors
-
-Publication identity: `doi:10.2139/ssrn.6841701`
-
-- Effective date: 2026-01-01
-- Venue/type: SSRN Electronic Journal
-- Keywords: China's Socioeconomic Reforms and Governance, Culture, Economy, and Development Studies, Ideology, Investment (military), Politics, Population, Productivity, Public investment, Public spending, Social Capital and Networks
-- Verification: [Evidence 1](https://openalex.org/W7164515933)
-
-### Not always a Panacea: History education and identity-building in Taiwan
-
-Publication identity: `doi:10.1016/j.jebo.2024.106837`
-
-- Effective date: 2025-01-01
-- Venue/type: Journal of Economic Behavior &amp; Organization
-- Keywords: Aesthetics, Educator Training and Historical Pedagogy, Hong Kong and Taiwan Politics, Identity (music), Media Influence and Politics, Medicine, Panacea (medicine), Philosophy, Political science, Sociology
-- Verification: [Evidence 1](https://openalex.org/W4405309599) · [Evidence 2](https://www.semanticscholar.org/paper/084eaa04283b15c9eab8d3910b4c945573d7579e)
+Because the analysis topics and most owned-publication metadata diverge in this release, no substantive publication assignment is asserted.
 
 ## Verification
 

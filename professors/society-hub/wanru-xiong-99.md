@@ -38,22 +38,15 @@ Context (archaeology), Destinations, Disadvantaged, Ethnic group, Immigration, I
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5080566738) · [Research evidence 2](https://openalex.org/W4414671124)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Conflicting indexed research evidence
 
-Retrieval status: **incomplete**
+The available analysis labels and retrieved publications do not form a coherent research sub-direction.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The conflict review sampled “Co‐Ethnic Networks in Ethnic Minority's Migration Destination Choices”, which do not consistently support the analysis topics.
 
-### Co‐Ethnic Networks in Ethnic Minority's Migration Destination Choices
-
-Publication identity: `doi:10.1002/psp.70114`
-
-- Effective date: 2025-09-30
-- Venue/type: Population Space and Place
-- Keywords: Context (archaeology), Destinations, Disadvantaged, Ethnic group, Immigration, Internal migration, Migration and Labor Dynamics, Migration, Ethnicity, and Economy, Sample (material), Urban, Neighborhood, and Segregation Studies
-- Verification: [Evidence 1](https://openalex.org/W4414671124) · [Evidence 2](https://www.semanticscholar.org/paper/c52d9b540e5efc95c2ef320e402e82fe8941d0f6)
+Because the analysis topics and most owned-publication metadata diverge in this release, no substantive publication assignment is asserted.
 
 ## Verification
 

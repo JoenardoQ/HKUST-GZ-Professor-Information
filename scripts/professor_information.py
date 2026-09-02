@@ -392,12 +392,10 @@ def _publication_markdown(publication: dict[str, Any]) -> list[str]:
     return lines
 
 
-def _professor_markdown(
+def _profile_markdown(
     professor: dict[str, Any],
     analysis: dict[str, Any],
-    publications: list[dict[str, Any]],
-    start: str,
-    end: str,
+    subdirections: list[dict[str, Any]],
 ) -> str:
     lines = [
         f"# {professor['nameEn']}",
@@ -441,7 +439,28 @@ def _professor_markdown(
     )
     if evidence:
         lines.extend(["", f"Analysis evidence: {evidence}"])
-    lines.extend([
+    lines.extend(["", "## Generated research sub-directions", ""])
+    for direction in subdirections:
+        lines.extend([f"### {direction['nameEn']}", ""])
+        for sentence in direction["explanationEn"]:
+            lines.extend([sentence, ""])
+    lines.extend(["## Verification", "", f"Official basics last verified: {professor['lastVerifiedOn']}", f"Research-source analysis last verified: {analysis['lastVerifiedOn']}", ""])
+    return "\n".join(lines)
+
+
+def _publications_markdown(
+    professor: dict[str, Any],
+    analysis: dict[str, Any],
+    publications: list[dict[str, Any]],
+    assignments: dict[str, dict[str, Any]],
+    direction_names: dict[str, str],
+    start: str,
+    end: str,
+) -> str:
+    lines = [
+        f"# {professor['nameEn']} — Publications",
+        "",
+        f"Professor identity: `{professor['officialProfileId']}`",
         "",
         "## Publications retrieved in this update",
         "",
@@ -449,13 +468,20 @@ def _professor_markdown(
         "",
         f"Retrieval status: **{analysis['status']}**",
         "",
-    ])
+    ]
     if analysis["notes"]:
         lines.extend(f"- {note}" for note in analysis["notes"])
         lines.append("")
     if publications:
         for publication in publications:
             lines.extend(_publication_markdown(publication))
+            assignment = assignments[publication["publicationId"]]
+            names = [direction_names[item] for item in assignment["subdirectionIds"]]
+            note = (
+                f"Generated research sub-direction: {', '.join(names)}"
+                if names else "No reliable generated sub-direction assignment."
+            )
+            lines.extend([f"*{note}*", ""])
     else:
         lines.extend(["No publication was retrieved in this update window. This does not establish that no publication exists.", ""])
     lines.extend(["## Verification", "", f"Official basics last verified: {professor['lastVerifiedOn']}", f"Research-source analysis last verified: {analysis['lastVerifiedOn']}", ""])
@@ -475,6 +501,7 @@ def _translation_source_digest(
     professors: list[dict[str, Any]],
     research_analysis: list[dict[str, Any]],
     publications: list[dict[str, Any]],
+    research_subdirections: dict[str, Any],
     start: str,
     end: str,
 ) -> str:
@@ -489,6 +516,13 @@ def _translation_source_digest(
                 str(item.get("publicationId") or _publication_identity(item)),
             ),
         ),
+        "researchSubdirections": {
+            **research_subdirections,
+            "professors": sorted(
+                research_subdirections.get("professors") or [],
+                key=lambda item: str(item.get("officialProfileId") or ""),
+            ),
+        },
     }
     encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return _sha256_bytes(encoded)
@@ -500,6 +534,7 @@ def validate_frozen_english(
     professors: list[dict[str, Any]],
     research_analysis: list[dict[str, Any]],
     publications: list[dict[str, Any]],
+    research_subdirections: dict[str, Any],
     start: str,
     end: str,
 ) -> None:
@@ -507,12 +542,28 @@ def validate_frozen_english(
     if manifest.get("window") != {"start": start, "end": end, "inclusive": True}:
         raise SourceDataError("frozen English window changed")
     binding = manifest.get("translationSource") or {}
-    expected_source = _translation_source_digest(professors, research_analysis, publications, start, end)
+    expected_source = _translation_source_digest(
+        professors, research_analysis, publications, research_subdirections, start, end
+    )
     if binding.get("sourceDataSha256") != expected_source:
         raise SourceDataError("frozen English inputs changed")
     hashes = binding.get("englishFileSha256")
     if not isinstance(hashes, dict) or not hashes:
         raise SourceDataError("frozen English file hashes are missing")
+    documents = manifest.get("documents")
+    if not isinstance(documents, dict):
+        raise SourceDataError("frozen English file hashes are missing")
+    expected_paths = {"All_Prof_Info.md"}
+    for paths in documents.values():
+        if not isinstance(paths, dict):
+            raise SourceDataError("frozen English file hashes are missing")
+        for document_kind in ("profile", "publications"):
+            group = paths.get(document_kind)
+            if not isinstance(group, dict) or not isinstance(group.get("en"), str):
+                raise SourceDataError("frozen English file hashes are missing")
+            expected_paths.add(group["en"])
+    if set(hashes) != expected_paths:
+        raise SourceDataError("frozen English file hashes do not cover every English document")
     for relative_path, expected_hash in hashes.items():
         path = root / str(relative_path)
         if not path.is_file() or _sha256_bytes(path.read_bytes()) != expected_hash:
@@ -543,6 +594,10 @@ def generate_documents(
     analysis_by_professor = {item["officialProfileId"]: item for item in research_analysis}
     subdirections_by_professor = {
         item["officialProfileId"]: item["subdirections"]
+        for item in research_subdirections["professors"]
+    }
+    subdirection_records = {
+        item["officialProfileId"]: item
         for item in research_subdirections["professors"]
     }
     selected = [item for item in publications if in_window(start, end, item["effectiveDate"])]
@@ -588,7 +643,24 @@ def generate_documents(
         destination = root / en_path
         destination.parent.mkdir(parents=True, exist_ok=True)
         analysis = analysis_by_professor[professor["officialProfileId"]]
-        destination.write_text(_professor_markdown(professor, analysis, professor_publications, start, end), encoding="utf-8")
+        subdirection_record = subdirection_records[professor["officialProfileId"]]
+        directions = subdirection_record["subdirections"]
+        destination.write_text(
+            _profile_markdown(professor, analysis, directions), encoding="utf-8"
+        )
+        assignments = {
+            item["publicationId"]: item
+            for item in subdirection_record["publicationAssignments"]
+        }
+        direction_names = {item["id"]: item["nameEn"] for item in directions}
+        publications_destination = root / publications_en_path
+        publications_destination.write_text(
+            _publications_markdown(
+                professor, analysis, professor_publications, assignments,
+                direction_names, start, end,
+            ),
+            encoding="utf-8",
+        )
         overview.extend([
             f"### [{professor['nameEn']}]({en_path})",
             "",
@@ -654,10 +726,13 @@ def generate_documents(
     }
     root.mkdir(parents=True, exist_ok=True)
     (root / "All_Prof_Info.md").write_text("\n".join(overview), encoding="utf-8")
-    english_paths = ["All_Prof_Info.md", *(paths["profile"]["en"] for paths in documents.values())]
+    english_paths = [
+        "All_Prof_Info.md",
+        *(paths[kind]["en"] for paths in documents.values() for kind in ("profile", "publications")),
+    ]
     manifest["translationSource"] = {
         "sourceDataSha256": _translation_source_digest(
-            professors, research_analysis, publications, start, end
+            professors, research_analysis, publications, research_subdirections, start, end
         ),
         "englishFileSha256": {
             relative_path: _sha256_bytes((root / relative_path).read_bytes())
@@ -686,6 +761,8 @@ def collect_translation_inputs(
     publications: list[dict[str, Any]],
     start: str,
     end: str,
+    *,
+    research_subdirections: dict[str, Any] | None = None,
 ) -> list[str]:
     values: set[str] = set()
     for professor in professors:
@@ -701,6 +778,17 @@ def collect_translation_inputs(
             continue
         if title := clean(publication.get("title")):
             values.add(title)
+    for record in (research_subdirections or {}).get("professors") or []:
+        for direction in record.get("subdirections") or []:
+            if name := clean(direction.get("nameEn")):
+                values.add(name)
+            values.update(
+                sentence for item in direction.get("explanationEn") or []
+                if (sentence := clean(item))
+            )
+        for assignment in record.get("publicationAssignments") or []:
+            if reason := clean(assignment.get("unassignedReasonEn")):
+                values.add(reason)
     return sorted(values, key=str.casefold)
 
 
@@ -712,6 +800,8 @@ def generate_chinese_documents(
     start: str,
     end: str,
     translator: Callable[[str], str],
+    *,
+    research_subdirections: dict[str, Any],
 ) -> None:
     """Translate frozen English output while preserving bibliographic structure."""
     manifest_path = root / "data/manifest.json"
@@ -720,13 +810,24 @@ def generate_chinese_documents(
         raise SourceDataError("English documents must be generated first")
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     validate_frozen_english(
-        root, manifest, professors, research_analysis, publications, start, end
+        root, manifest, professors, research_analysis, publications,
+        research_subdirections, start, end
     )
     documents = manifest.get("documents") or {}
     professor_ids = {item["officialProfileId"] for item in professors}
     validate_research_analysis(research_analysis, professor_ids)
     validate_retrieval_statuses(research_analysis)
     analysis_by_professor = {item["officialProfileId"]: item for item in research_analysis}
+    publication_owners: dict[str, set[str]] = defaultdict(set)
+    for publication in publications:
+        publication_owners[str(publication["publicationId"])].add(
+            str(publication["officialProfileId"])
+        )
+    validate_research_subdirections(research_subdirections, professor_ids, publication_owners)
+    subdirection_records = {
+        item["officialProfileId"]: item
+        for item in research_subdirections["professors"]
+    }
     selected = [item for item in publications if in_window(start, end, item["effectiveDate"])]
     by_professor: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for publication in selected:
@@ -745,7 +846,10 @@ def generate_chinese_documents(
             cache[source] = translated
         return cache[source]
 
-    for source in collect_translation_inputs(professors, research_analysis, publications, start, end):
+    for source in collect_translation_inputs(
+        professors, research_analysis, publications, start, end,
+        research_subdirections=research_subdirections,
+    ):
         zh(source)
 
     overview = [
@@ -765,11 +869,26 @@ def generate_chinese_documents(
         slug = professor["slug"]
         paths = documents.get(slug) or {}
         profile_paths = paths.get("profile") or {}
+        publication_paths = paths.get("publications") or {}
         en_path = root / str(profile_paths.get("en") or "")
         zh_path = root / str(profile_paths.get("zhCN") or "")
-        if not en_path.is_file() or not profile_paths.get("zhCN"):
+        publications_en_path = root / str(publication_paths.get("en") or "")
+        publications_zh_path = root / str(publication_paths.get("zhCN") or "")
+        if (
+            not en_path.is_file()
+            or not publications_en_path.is_file()
+            or not profile_paths.get("zhCN")
+            or not publication_paths.get("zhCN")
+        ):
             raise SourceDataError("English documents must be generated first")
         analysis = analysis_by_professor[professor["officialProfileId"]]
+        subdirection_record = subdirection_records[professor["officialProfileId"]]
+        directions = subdirection_record["subdirections"]
+        directions_by_id = {item["id"]: item for item in directions}
+        assignments = {
+            item["publicationId"]: item
+            for item in subdirection_record["publicationAssignments"]
+        }
         professor_publications = sorted(
             by_professor.get(professor["officialProfileId"], []),
             key=lambda item: (item["effectiveDate"], _normalized_title(item["title"])),
@@ -816,36 +935,11 @@ def generate_chinese_documents(
         evidence = " · ".join(f"[研究证据 {index + 1}]({url})" for index, url in enumerate(analysis["evidenceUrls"]))
         if evidence:
             lines.extend(["", f"分析证据：{evidence}"])
-        lines.extend([
-            "",
-            "## 本轮检索到的论文",
-            "",
-            f"闭区间：{start} 至 {end}。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。",
-            "",
-            f"检索状态：**{analysis['status']}**",
-            "",
-        ])
-        if analysis["notes"]:
-            lines.extend(f"- {zh(note)}" for note in analysis["notes"])
-            lines.append("")
-        if professor_publications:
-            for publication in professor_publications:
-                title = publication["title"]
-                venue = clean(publication.get("venue")) or publication.get("publicationType") or "未知 venue"
-                lines.extend([
-                    f"### {title}｜{zh(title)}",
-                    "",
-                    f"Publication identity: `{publication['publicationId']}`",
-                    "",
-                    f"- 有效日期：{publication['effectiveDate']}",
-                    f"- 发表场所/类型：{venue}",
-                ])
-                if publication.get("keywords"):
-                    lines.append(f"- 关键词：{', '.join(publication['keywords'])}")
-                links = " · ".join(f"[证据 {index + 1}]({url})" for index, url in enumerate(publication["evidenceUrls"]))
-                lines.extend([f"- 核验：{links}", ""])
-        else:
-            lines.extend(["本轮时间窗内未检索到论文；这不能证明该教授没有论文。", ""])
+        lines.extend(["", "## 生成的研究细分方向", ""])
+        for direction in directions:
+            lines.extend([f"### {zh(direction['nameEn'])}", ""])
+            for sentence in direction["explanationEn"]:
+                lines.extend([zh(sentence), ""])
         lines.extend([
             "## 核验信息",
             "",
@@ -855,6 +949,55 @@ def generate_chinese_documents(
         ])
         zh_path.parent.mkdir(parents=True, exist_ok=True)
         zh_path.write_text("\n".join(lines), encoding="utf-8")
+
+        publication_lines = [
+            f"# {display_name} — 论文",
+            "",
+            f"Professor identity: `{professor['officialProfileId']}`",
+            "",
+            "## 本轮检索到的论文",
+            "",
+            f"闭区间：{start} 至 {end}。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。",
+            "",
+            f"检索状态：**{analysis['status']}**",
+            "",
+        ]
+        if analysis["notes"]:
+            publication_lines.extend(f"- {zh(note)}" for note in analysis["notes"])
+            publication_lines.append("")
+        if professor_publications:
+            for publication in professor_publications:
+                title = publication["title"]
+                venue = clean(publication.get("venue")) or publication.get("publicationType") or "未知 venue"
+                publication_lines.extend([
+                    f"### {title}｜{zh(title)}",
+                    "",
+                    f"Publication identity: `{publication['publicationId']}`",
+                    "",
+                    f"- 有效日期：{publication['effectiveDate']}",
+                    f"- 发表场所/类型：{venue}",
+                ])
+                if publication.get("keywords"):
+                    publication_lines.append(f"- 关键词：{', '.join(publication['keywords'])}")
+                links = " · ".join(f"[证据 {index + 1}]({url})" for index, url in enumerate(publication["evidenceUrls"]))
+                publication_lines.extend([f"- 核验：{links}", ""])
+                assignment = assignments[publication["publicationId"]]
+                names = [zh(directions_by_id[item]["nameEn"]) for item in assignment["subdirectionIds"]]
+                note = (
+                    f"生成的研究细分方向：{', '.join(names)}"
+                    if names else "未作出可靠的生成研究细分方向归属。"
+                )
+                publication_lines.extend([f"*{note}*", ""])
+        else:
+            publication_lines.extend(["本轮时间窗内未检索到论文；这不能证明该教授没有论文。", ""])
+        publication_lines.extend([
+            "## 核验信息",
+            "",
+            f"官方基础资料最近核验日期：{professor['lastVerifiedOn']}",
+            f"研究来源分析最近核验日期：{analysis['lastVerifiedOn']}",
+            "",
+        ])
+        publications_zh_path.write_text("\n".join(publication_lines), encoding="utf-8")
         overview.extend([
             f"### [{display_name}]({profile_paths['zhCN']})",
             "",
@@ -887,6 +1030,8 @@ _HEADING_KEYS = {
     "研究领域": "research-areas",
     "Keywords": "keywords",
     "关键词": "keywords",
+    "Generated research sub-directions": "subdirections",
+    "生成的研究细分方向": "subdirections",
     "Publications retrieved in this update": "publications",
     "本轮检索到的论文": "publications",
     "Verification": "verification",
@@ -907,6 +1052,8 @@ def _heading_signature(markdown: str) -> list[tuple[int, str]]:
                 current_h2 = key or f"unknown:{title}"
             if key is None and level == 3 and current_h2 == "publications":
                 key = "publication"
+            if key is None and level == 3 and current_h2 == "subdirections":
+                key = "subdirection"
             if key is None and level == 3 and current_h2 == "professor-directory":
                 key = "professor"
             if key is None:

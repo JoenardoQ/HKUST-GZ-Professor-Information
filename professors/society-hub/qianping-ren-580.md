@@ -37,22 +37,15 @@ Developmental psychology, Famine, History, Psychology, Psychotherapist, Term (ti
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5049509890) · [Research evidence 2](https://openalex.org/W4406675419)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Conflicting indexed research evidence
 
-Retrieval status: **incomplete**
+The available analysis labels and retrieved publications do not form a coherent research sub-direction.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The conflict review sampled “Long-term impacts of early adversity on subjective well-being: Evidence from the Chinese great famine”, which do not consistently support the analysis topics.
 
-### Long-term impacts of early adversity on subjective well-being: Evidence from the Chinese great famine
-
-Publication identity: `doi:10.1016/j.jebo.2025.106905`
-
-- Effective date: 2025-02-01
-- Venue/type: Journal of Economic Behavior &amp; Organization
-- Keywords: Birth, Development, and Health, Developmental psychology, Famine, Health disparities and outcomes, History, Psychological Well-being and Life Satisfaction, Psychology, Psychotherapist, Term (time), Well-being
-- Verification: [Evidence 1](https://openalex.org/W4406675419) · [Evidence 2](https://www.semanticscholar.org/paper/5ac161618fec4b57b93a01b64e0f5491efdd1ce0)
+Because the analysis topics and most owned-publication metadata diverge in this release, no substantive publication assignment is asserted.
 
 ## Verification
 

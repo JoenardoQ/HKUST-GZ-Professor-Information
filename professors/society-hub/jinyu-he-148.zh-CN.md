@@ -39,40 +39,15 @@ Professor identity: `148`
 
 分析证据：[研究证据 1](https://openalex.org/A5090571737) · [研究证据 2](https://openalex.org/W4411451005) · [研究证据 3](https://openalex.org/W4416000997) · [研究证据 4](https://openalex.org/W4416003491)
 
-## 本轮检索到的论文
+## 生成的研究细分方向
 
-闭区间：2024-09-01 至 2026-09-01。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。
+### 相互冲突的索引研究证据
 
-检索状态：**incomplete**
+现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-- 有限尝试后部分获批研究来源不可用：OpenAlex、paperscraper:arxiv、paperscraper:biorxiv、paperscraper:chemrxiv、paperscraper:medrxiv。
+冲突审核抽样检查了“Approaches to Board Role Adoption and Their Effects: The Case of Corporate Sustainability Committees”, “Corporate ESG Engagement and Earnings Management: A Moral Licensing Perspective”, and 1 other sampled publication，这些论文未能一致支持分析主题。
 
-### Corporate ESG Engagement and Earnings Management: A Moral Licensing Perspective｜企业 ESG 参与和盈余管理：道德许可视角
-
-Publication identity: `doi:10.5465/amproc.2025.20429abstract`
-
-- 有效日期：2025-07-01
-- 发表场所/类型：Academy of Management Proceedings
-- 关键词：Corporate Law and Human Rights, Corporate Social Responsibility Reporting, Corporate governance, Corporate social responsibility, Earnings, Global trade, sustainability, and social impact, Greenwashing, Perspective (graphical), Profit (economics), Sample (material), Shareholder
-- 核验：[证据 1](https://openalex.org/W4416000997)
-
-### Approaches to Board Role Adoption and Their Effects: The Case of Corporate Sustainability Committees｜董事会角色采纳方式及其影响：企业可持续发展委员会案例
-
-Publication identity: `doi:10.5465/amproc.2025.16098abstract`
-
-- 有效日期：2025-07-01
-- 发表场所/类型：Academy of Management Proceedings
-- 关键词：Context (archaeology), Corporate Finance and Governance, Corporate Law and Human Rights, Corporate Social Responsibility Reporting, Corporate governance, Corporate sustainability, On board, Structuring, Sustainability, Sustainability reporting
-- 核验：[证据 1](https://openalex.org/W4416003491)
-
-### Investee Peers and Corporate Social Responsibility: Evidence from U.S. Listed Firms｜被投资企业同行与企业社会责任：来自美国上市公司的证据
-
-Publication identity: `doi:10.1007/s10551-025-06030-9`
-
-- 有效日期：2025-06-19
-- 发表场所/类型：Journal of Business Ethics
-- 关键词：Accounting, Business, Business ethics, Corporate Social Responsibility Reporting, Corporate social responsibility, Environmental Sustainability in Business, Political science, Public relations, Quality of Life Research, Sustainable Finance and Green Bonds
-- 核验：[证据 1](https://openalex.org/W4411451005)
+由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 
 ## 核验信息
 

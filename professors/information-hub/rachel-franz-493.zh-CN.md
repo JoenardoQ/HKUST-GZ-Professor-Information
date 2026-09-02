@@ -37,22 +37,15 @@ Professor identity: `493`
 
 分析证据：[研究证据 1](https://openalex.org/A5143366189) · [研究证据 2](https://openalex.org/W4414519026)
 
-## 本轮检索到的论文
+## 生成的研究细分方向
 
-闭区间：2024-09-01 至 2026-09-01。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。
+### 相互冲突的索引研究证据
 
-检索状态：**incomplete**
+现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-- 有限尝试后部分获批研究来源不可用：OpenAlex、paperscraper:arxiv、paperscraper:biorxiv、paperscraper:chemrxiv、paperscraper:medrxiv。
+冲突审核抽样检查了“2025 Position statement on active outdoor play”，这些论文未能一致支持分析主题。
 
-### 2025 Position statement on active outdoor play｜2025 年积极户外游戏立场声明
-
-Publication identity: `doi:10.1186/s12966-025-01813-9`
-
-- 有效日期：2025-09-25
-- 发表场所/类型：International Journal of Behavioral Nutrition and Physical Activity
-- 关键词：Body position, Child Therapy and Development, Outdoor and Experiential Education, Position (finance), Position paper, Position statement, Statement (logic), Urban Green Space and Health
-- 核验：[证据 1](https://openalex.org/W4414519026)
+由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 
 ## 核验信息
 

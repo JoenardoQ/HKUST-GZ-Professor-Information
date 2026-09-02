@@ -39,40 +39,15 @@ Academic achievement, Cognitive psychology, Computer science, Developmental psyc
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5043377324) · [Research evidence 2](https://openalex.org/W4403096431) · [Research evidence 3](https://openalex.org/W4403306181) · [Research evidence 4](https://openalex.org/W4404444024)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Conflicting indexed research evidence
 
-Retrieval status: **incomplete**
+The available analysis labels and retrieved publications do not form a coherent research sub-direction.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The conflict review sampled “The big-fish-little-pond effect on academic self-concept among Chinese middle school students”, “Perceived feedback and school belonging: the mediating role of subjective well-being”, and 1 other sampled publication, which do not consistently support the analysis topics.
 
-### The big-fish-little-pond effect on academic self-concept among Chinese middle school students
-
-Publication identity: `doi:10.1007/s12144-024-06939-w`
-
-- Effective date: 2024-11-16
-- Venue/type: Current Psychology
-- Keywords: Education, Achievement, and Giftedness, Fish <Actinopterygii>, Fishery, Mathematics education, Motivation and Self-Concept in Sports, Psychology, School Choice and Performance, Social psychology
-- Verification: [Evidence 1](https://openalex.org/W4404444024)
-
-### Perceived feedback and school belonging: the mediating role of subjective well-being
-
-Publication identity: `doi:10.3389/fpsyg.2024.1450788`
-
-- Effective date: 2024-10-10
-- Venue/type: Frontiers in Psychology
-- Keywords: Academic achievement, Developmental psychology, Early Childhood Education and Development, Education, Achievement, and Giftedness, Happiness, Mediation, Psychology, Social psychology, Subjective well-being, Well-being, Youth Substance Use and School Attendance
-- Verification: [Evidence 1](https://openalex.org/W4403306181) · [Evidence 2](https://www.semanticscholar.org/paper/5f07a4ee02984ac448938f3532e94ae8f381290a)
-
-### The role of social–emotional competencies in interpersonal relationships: a structural equation modeling approach
-
-Publication identity: `doi:10.3389/fpsyg.2024.1360467`
-
-- Effective date: 2024-10-03
-- Venue/type: Frontiers in Psychology
-- Keywords: Cognitive psychology, Computer science, Developmental psychology, Early Childhood Education and Development, Emotional Intelligence and Performance, Interpersonal communication, Psychological Well-being and Life Satisfaction, Psychology, Social psychology, Social skills, Structural equation modeling
-- Verification: [Evidence 1](https://openalex.org/W4403096431)
+Because the analysis topics and most owned-publication metadata diverge in this release, no substantive publication assignment is asserted.
 
 ## Verification
 

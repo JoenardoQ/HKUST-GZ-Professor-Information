@@ -17,6 +17,13 @@ def load_list(path: Path) -> list[dict]:
     return value
 
 
+def load_object(path: Path) -> dict:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise SourceDataError(f"{path} must contain a JSON object")
+    return value
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--start", required=True)
@@ -37,6 +44,7 @@ def main() -> None:
         load_list(args.root / "data/publications.json"),
         args.start,
         args.cutoff,
+        research_subdirections=load_object(args.root / "data/research-subdirections.json"),
     )
     missing = [value for value in inputs if not str(memory.get(value) or "").strip()]
     output = args.output or args.root / f"reports/{args.cutoff}-translation-inputs.json"

@@ -39,45 +39,31 @@ Recent indexed publications most consistently center on Multimodal Machine Learn
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5080908779) · [Research evidence 2](https://openalex.org/W7128302690) · [Research evidence 3](https://openalex.org/W7138433492) · [Research evidence 4](https://openalex.org/W7139144971) · [Research evidence 5](https://openalex.org/W7166701221)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Multimodal Machine Learning Applications
 
-Retrieval status: **incomplete**
+This sub-direction covers multimodal machine learning applications as represented in the reviewed release record.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The review cites “Suppression Sticks, Locality Is Fragile: A Closed-Loop Target-and-Control Audit of Task-Vector Negation in VLA Policies”, “How Should Vision-Language-Action Models Use Proprioceptive State?”, and 1 other matched publication; 3 have topic-discriminative title support and 0 have corroborating indexed-subject support.
 
-### Suppression Sticks, Locality Is Fragile: A Closed-Loop Target-and-Control Audit of Task-Vector Negation in VLA Policies
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
-Publication identity: `doi:10.48550/arxiv.2608.04692`
+### Robot Manipulation and Learning
 
-- Effective date: 2026-08-05
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2608.04692)
+This sub-direction covers robot manipulation and learning as represented in the reviewed release record.
 
-### How Should Vision-Language-Action Models Use Proprioceptive State?
+The review cites “Suppression Sticks, Locality Is Fragile: A Closed-Loop Target-and-Control Audit of Task-Vector Negation in VLA Policies” and “How Should Vision-Language-Action Models Use Proprioceptive State?”; 2 have topic-discriminative title support and 0 have corroborating indexed-subject support.
 
-Publication identity: `doi:10.48550/arxiv.2608.03052`
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
-- Effective date: 2026-08-04
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2608.03052)
+### 3D Shape Modeling and Analysis
 
-### NaLA: A 3D Native LLM Layout Agent for High-quality 3D Scene Generation
+This sub-direction covers 3d shape modeling and analysis as represented in the reviewed release record.
 
-Publication identity: `doi:10.48550/arxiv.2606.29395`
+The review cites “NaLA: A 3D Native LLM Layout Agent for High-quality 3D Scene Generation”; 1 has topic-discriminative title support and 0 have corroborating indexed-subject support.
 
-- Effective date: 2026-06-28
-- Venue/type: arXiv.org
-- Verification: [Evidence 1](https://arxiv.org/abs/2606.29395) · [Evidence 2](https://www.semanticscholar.org/paper/705365a9e6509f2096f346af89b4c65456d800ad)
-
-### Intelligent Co-Design: An Interactive LLM Framework for Interior Spatial Design via Multi-Modal Agents
-
-Publication identity: `doi:10.48550/arxiv.2603.15341`
-
-- Effective date: 2026-03-16
-- Venue/type: arXiv.org
-- Verification: [Evidence 1](https://arxiv.org/abs/2603.15341) · [Evidence 2](https://www.semanticscholar.org/paper/b72402ab15a1d65e05b57637b74cb94e4ad3b215)
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
 ## Verification
 

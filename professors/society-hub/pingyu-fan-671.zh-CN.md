@@ -38,15 +38,31 @@ Professor identity: `671`
 
 分析证据：[研究证据 1](https://openalex.org/A5119462352) · [研究证据 2](https://openalex.org/W4413789689) · [研究证据 3](https://openalex.org/W7131393235) · [研究证据 4](https://openalex.org/W7203971325) · [研究证据 5](https://openalex.org/W7203999894)
 
-## 本轮检索到的论文
+## 生成的研究细分方向
 
-闭区间：2024-09-01 至 2026-09-01。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。
+### 智能电网能源管理
 
-检索状态：**incomplete**
+这一有证据边界的研究细分方向涉及已批准分析记录中的智能电网能源管理。
 
-- 有限尝试后部分获批研究来源不可用：OpenAlex、paperscraper:arxiv、paperscraper:biorxiv、paperscraper:chemrxiv、paperscraper:medrxiv。
+已批准的分析明确列出智能电网能源管理，索引术语包括 Carbon dioxide, Carbon dioxide in Earth's atmosphere, and Electricity。
 
-本轮时间窗内未检索到论文；这不能证明该教授没有论文。
+由于没有发布窗口内的规范论文可供确认，该方向仅依据已批准的分析元数据。
+
+### 能源效率与管理
+
+这一有证据边界的研究细分方向涉及已批准分析记录中的能源效率与管理。
+
+已批准的分析明确列出能源效率与管理，索引术语包括 Carbon dioxide, Carbon dioxide in Earth's atmosphere, and Electricity。
+
+由于没有发布窗口内的规范论文可供确认，该方向仅依据已批准的分析元数据。
+
+### 能源负荷与功率预测
+
+这一有证据边界的研究细分方向涉及已批准分析记录中的能源负荷与功率预测。
+
+已批准的分析明确列出能源负荷与功率预测，索引术语包括 Carbon dioxide, Carbon dioxide in Earth's atmosphere, and Electricity。
+
+由于没有发布窗口内的规范论文可供确认，该方向仅依据已批准的分析元数据。
 
 ## 核验信息
 

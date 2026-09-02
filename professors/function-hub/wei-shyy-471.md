@@ -38,40 +38,15 @@ Aerodynamic force, Aerodynamics, Bending, Bird flight, Compressibility, Flow (ma
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5038626545) · [Research evidence 2](https://openalex.org/W7125697761) · [Research evidence 3](https://openalex.org/W7163355760) · [Research evidence 4](https://openalex.org/W7202206156)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Conflicting indexed research evidence
 
-Retrieval status: **incomplete**
+The available analysis labels and retrieved publications do not form a coherent research sub-direction.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The conflict review sampled “Implications of compressibility on the quiescent thermal and momentum cores”, “The Role of Tail Bending in Avian Aerodynamics and Flight Control.”, and 1 other sampled publication, which do not consistently support the analysis topics.
 
-### Implications of compressibility on the quiescent thermal and momentum cores
-
-Publication identity: `doi:10.1515/tp-2026-0079`
-
-- Effective date: 2026-08-11
-- Venue/type: Transport Phenomena
-- Keywords: Compressibility, Fluid Dynamics and Turbulent Flows, Intermittency, Mach number, Magnetic confinement fusion research, Momentum (technical analysis), Plasma and Flow Control in Aerodynamics, Reynolds number, Thermal, Turbulence, Vorticity
-- Verification: [Evidence 1](https://openalex.org/W7202206156)
-
-### The Role of Tail Bending in Avian Aerodynamics and Flight Control.
-
-Publication identity: `doi:10.1093/icb/icag069`
-
-- Effective date: 2026-06-03
-- Venue/type: Integrative and Comparative Biology
-- Keywords: Aerodynamic force, Aerodynamics, Aeroelasticity and Vibration Control, Aerospace and Aviation Technology, Bending, Biomimetic flight and propulsion mechanisms, Kinematics, Particle image velocimetry, Vorticity, Wind tunnel, Wing
-- Verification: [Evidence 1](https://openalex.org/W7163355760) · [Evidence 2](https://www.semanticscholar.org/paper/7010b508130a77b8b2624ae37dcdcae275a3f01d)
-
-### Microraptor reveals specialized gliding capabilities in multiwinged early paravians
-
-Publication identity: `doi:10.1073/pnas.2518106123`
-
-- Effective date: 2026-01-26
-- Venue/type: Proceedings of the National Academy of Sciences
-- Keywords: Aerodynamics, Biomimetic flight and propulsion mechanisms, Bird flight, Flow (mathematics), Fluid Dynamics and Turbulent Flows, Insect flight, Leading edge, Paleontology and Evolutionary Biology, Vortex, Wake, Wing
-- Verification: [Evidence 1](https://openalex.org/W7125697761) · [Evidence 2](https://www.semanticscholar.org/paper/89228dd09019632d8907a50fc52e06a5bbe9435e)
+Because the analysis topics and most owned-publication metadata diverge in this release, no substantive publication assignment is asserted.
 
 ## Verification
 

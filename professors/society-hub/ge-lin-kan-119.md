@@ -40,64 +40,31 @@ Dementia, Embodied cognition, Interface (matter), Intervention (counseling), Joy
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5102229339) · [Research evidence 2](https://openalex.org/W7143497333) · [Research evidence 3](https://openalex.org/W7117301116) · [Research evidence 4](https://openalex.org/W7118092482) · [Research evidence 5](https://openalex.org/W7118524669)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Multimodal Machine Learning Applications
 
-Retrieval status: **incomplete**
+This sub-direction covers multimodal machine learning applications as represented in the reviewed release record.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The review cites “QA-MoE: Towards a Continuous Reliability Spectrum with Quality-Aware Mixture of Experts for Robust Multimodal Sentiment Analysis”; 1 has topic-discriminative title support and 0 have corroborating indexed-subject support.
 
-### Sample-Efficient Post-Training for LEGO Spatial-Physics Reasoning
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
-Publication identity: `doi:10.48550/arxiv.2606.07602`
+### Virtual Reality Applications and Impacts
 
-- Effective date: 2026-05-29
-- Venue/type: arXiv.org
-- Verification: [Evidence 1](https://arxiv.org/abs/2606.07602) · [Evidence 2](https://www.semanticscholar.org/paper/22bc968984f86dbb2c83217ad3656ba6871714ce)
+This sub-direction covers virtual reality applications and impacts as represented in the reviewed release record.
 
-### QA-MoE: Towards a Continuous Reliability Spectrum with Quality-Aware Mixture of Experts for Robust Multimodal Sentiment Analysis
+The review cites “LocoScooter: Designing a Stationary Scooter-Based Locomotion System for Navigation in Virtual Reality”; 1 has topic-discriminative title support and 0 have corroborating indexed-subject support.
 
-Publication identity: `doi:10.48550/arxiv.2604.05704`
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
-- Effective date: 2026-04-07
-- Venue/type: Annual Meeting of the Association for Computational Linguistics
-- Verification: [Evidence 1](https://arxiv.org/abs/2604.05704) · [Evidence 2](https://www.semanticscholar.org/paper/813e5c945afd6e4bad78f6e40aa981874eaed5bd)
+### Dementia and Cognitive Impairment Research
 
-### Co-designing with frail nursing home residents to gamify a VR-based physio-cognitive intervention
+This sub-direction covers dementia and cognitive impairment research as represented in the reviewed release record.
 
-Publication identity: `doi:10.1038/s41746-026-02351-9`
+The review cites “VR‐based Physical Activity Improves Cognition in Frail Nursing Home Residents with Diagnosed or Suspected Dementia in Hong Kong”; 0 have topic-discriminative title support and 1 has corroborating indexed-subject support.
 
-- Effective date: 2026-01-24
-- Venue/type: npj Digital Medicine
-- Keywords: Dementia, Dementia and Cognitive Impairment Research, Duration (music), Educational Games and Gamification, Gerontological nursing, Intervention (counseling), Nursing homes, Psychological intervention, Reminiscence, Stroke Rehabilitation and Recovery
-- Verification: [Evidence 1](https://openalex.org/W7125581461)
-
-### LocoScooter: Designing a Stationary Scooter-Based Locomotion System for Navigation in Virtual Reality
-
-Publication identity: `arxiv:2601.02167`
-
-- Effective date: 2026-01-05
-- Venue/type: unknown
-- Verification: [Evidence 1](https://arxiv.org/abs/2601.02167)
-
-### VR‐based Physical Activity Improves Cognition in Frail Nursing Home Residents with Diagnosed or Suspected Dementia in Hong Kong
-
-Publication identity: `doi:10.1002/alz70858_102598`
-
-- Effective date: 2025-12-01
-- Venue/type: Alzheimer s & Dementia
-- Keywords: Activities of daily living, Cognition, Cognitive impairment, Dementia, Dementia and Cognitive Impairment Research, Frailty in Older Adults, Intervention (counseling), Nursing homes, Physical activity, Technology Use by Older Adults
-- Verification: [Evidence 1](https://openalex.org/W7117301116)
-
-### From Adherence to Happiness: Co-designing with Frail Nursing Home Residents to Gamify Tech-based Intervention
-
-Publication identity: `doi:10.1093/geroni/igaf122.2802`
-
-- Effective date: 2025-12-01
-- Venue/type: Innovation in Aging
-- Keywords: Dementia, Dementia and Cognitive Impairment Research, Educational Games and Gamification, Intervention (counseling), MEDLINE, Nursing homes, Psychological intervention, Psychosocial, Technology Use by Older Adults
-- Verification: [Evidence 1](https://openalex.org/W7118092482)
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
 ## Verification
 

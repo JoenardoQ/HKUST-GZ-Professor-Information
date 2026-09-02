@@ -37,22 +37,15 @@ Government (linguistics), Identification (biology), Limit (mathematics), Risk as
 
 Analysis evidence: [Research evidence 1](https://openalex.org/A5111287276) · [Research evidence 2](https://openalex.org/W7160890685)
 
-## Publications retrieved in this update
+## Generated research sub-directions
 
-Inclusive window: 2024-09-01 through 2026-09-01. OpenAlex, paperscraper sources, and independent arXiv verification are not exhaustive; this is not a complete publication record.
+### Artificial Intelligence in Healthcare and Education
 
-Retrieval status: **incomplete**
+This sub-direction covers artificial intelligence in healthcare and education as represented in the reviewed release record.
 
-- Some approved research sources were unavailable after bounded attempts: OpenAlex, paperscraper:arxiv, paperscraper:biorxiv, paperscraper:chemrxiv, paperscraper:medrxiv.
+The review cites “When AI is wrong: the limits of human oversight in AI-assisted diagnostic decision-making”; 1 has topic-discriminative title support and 1 has corroborating indexed-subject support.
 
-### When AI is wrong: the limits of human oversight in AI-assisted diagnostic decision-making
-
-Publication identity: `doi:10.1080/0144929x.2026.2666286`
-
-- Effective date: 2026-05-12
-- Venue/type: Behaviour and Information Technology
-- Keywords: Artificial Intelligence in Healthcare and Education, Clinical Reasoning and Diagnostic Skills, Explainable Artificial Intelligence (XAI), Government (linguistics), Identification (biology), Limit (mathematics), Risk assessment, Set (abstract data type)
-- Verification: [Evidence 1](https://openalex.org/W7160890685) · [Evidence 2](https://www.semanticscholar.org/paper/a83d327fc03fcccb5d1aff2155e512da1fe7d358)
+This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.
 
 ## Verification
 
