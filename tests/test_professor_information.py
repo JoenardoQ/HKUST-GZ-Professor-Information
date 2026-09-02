@@ -196,6 +196,24 @@ class ProfessorInformationTests(unittest.TestCase):
         valid_limited["professors"][0]["subdirections"][0]["limitationEn"] = "Sentence three."
         validate_research_subdirections(valid_limited, professor_ids, {})
 
+        professor_limited_with_pass_direction = deepcopy(payload)
+        professor_limited_with_pass_direction["professors"][0]["reviewStatus"] = "limited"
+        with self.assertRaisesRegex(SourceDataError, "aggregate review status"):
+            validate_research_subdirections(professor_limited_with_pass_direction, professor_ids, publication_owners)
+
+        publication_backed_limited = deepcopy(payload)
+        publication_backed_limited["professors"][0]["reviewStatus"] = "limited"
+        publication_backed_limited["professors"][0]["subdirections"][0].update({
+            "reviewStatus": "limited",
+            "limitationEn": "Sentence three.",
+        })
+        validate_research_subdirections(publication_backed_limited, professor_ids, publication_owners)
+
+        professor_pass_with_limited_direction = deepcopy(publication_backed_limited)
+        professor_pass_with_limited_direction["professors"][0]["reviewStatus"] = "pass"
+        with self.assertRaisesRegex(SourceDataError, "aggregate review status"):
+            validate_research_subdirections(professor_pass_with_limited_direction, professor_ids, publication_owners)
+
         pass_with_limitation = deepcopy(payload)
         pass_with_limitation["professors"][0]["subdirections"][0]["limitationEn"] = "Sentence three."
         with self.assertRaisesRegex(SourceDataError, "pass.*limitation"):

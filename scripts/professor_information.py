@@ -935,6 +935,7 @@ def validate_research_subdirections(
 
         direction_ids: set[str] = set()
         normalized_names: set[str] = set()
+        has_limited_direction = False
         for direction in subdirections:
             if not isinstance(direction, dict):
                 raise SourceDataError(f"professor {profile_id} has a malformed subdirection")
@@ -989,6 +990,7 @@ def validate_research_subdirections(
             direction_review_status = direction.get("reviewStatus")
             validate_review_status(direction_review_status, f"subdirection {direction_id}")
             if direction_review_status == "limited":
+                has_limited_direction = True
                 limitation = direction.get("limitationEn")
                 if not isinstance(limitation, str) or not clean(limitation):
                     raise SourceDataError(f"limited subdirection {direction_id} requires a non-empty limitation")
@@ -1000,6 +1002,9 @@ def validate_research_subdirections(
                 record.get("reviewStatus") != "limited" or direction_review_status != "limited"
             ):
                 raise SourceDataError(f"official-only subdirection {direction_id} and its professor record must be limited")
+        expected_professor_status = "limited" if has_limited_direction else "pass"
+        if record.get("reviewStatus") != expected_professor_status:
+            raise SourceDataError(f"professor {profile_id} has an inconsistent aggregate review status")
 
         assigned_publications: set[str] = set()
         for assignment in assignments:
