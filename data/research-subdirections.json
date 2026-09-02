@@ -16730,7 +16730,7 @@
           ],
           "explanationEn": [
             "This sub-direction covers optical network technologies as represented in the reviewed release record.",
-            "The review cites “Joint SOP-Based and Fading-Suppressed Phase-Based Vibration Sensing Integrated in Short-Reach Optical Interconnects” and “Recent Advances in Integrated Forward Vibration Sensing in Optical Communication Systems”; 2 have topic-discriminative title support and 2 have corroborating indexed-subject support.",
+            "The review cites “Joint SOP-Based and Fading-Suppressed Phase-Based Vibration Sensing Integrated in Short-Reach Optical Interconnects” and “Recent Advances in Integrated Forward Vibration Sensing in Optical Communication Systems”; 1 has topic-discriminative title support and 2 have corroborating indexed-subject support.",
             "This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda."
           ],
           "id": "optical-network-technologies",
@@ -31696,31 +31696,25 @@
       "publicationAssignments": [
         {
           "publicationId": "doi:10.1364/ol.603526",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         },
         {
           "publicationId": "doi:10.1364/optica.608118",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         },
         {
           "publicationId": "doi:10.1021/acsphotonics.6c00302",
           "subdirectionIds": [
-            "optical-network-technologies"
+            "photonic-and-optical-devices"
           ],
           "unassignedReasonEn": null
         },
         {
           "publicationId": "doi:10.23919/date69613.2026.11539629",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         },
         {
           "publicationId": "doi:10.1109/jlt.2025.3619929",
@@ -31748,37 +31742,36 @@
         {
           "publicationId": "doi:10.1109/ecoc66593.2025.11263448",
           "subdirectionIds": [
-            "optical-network-technologies"
+            "optical-network-technologies",
+            "advanced-photonic-communication-systems"
           ],
           "unassignedReasonEn": null
         },
         {
           "publicationId": "doi:10.1364/ol.571348",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         },
         {
           "publicationId": "doi:10.1002/lpor.202500546",
           "subdirectionIds": [
-            "optical-network-technologies"
+            "optical-network-technologies",
+            "advanced-photonic-communication-systems"
           ],
           "unassignedReasonEn": null
         },
         {
           "publicationId": "doi:10.1109/jlt.2025.3587919",
           "subdirectionIds": [
-            "optical-network-technologies"
+            "optical-network-technologies",
+            "advanced-photonic-communication-systems"
           ],
           "unassignedReasonEn": null
         },
         {
           "publicationId": "doi:10.1063/5.0271875",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         },
         {
           "publicationId": "arxiv:2505.15166",
@@ -31796,42 +31789,39 @@
         {
           "publicationId": "doi:10.1109/iseda65950.2025.11101099",
           "subdirectionIds": [
-            "optical-network-technologies"
+            "photonic-and-optical-devices"
           ],
           "unassignedReasonEn": null
         },
         {
           "publicationId": "doi:10.1021/acssensors.4c03404",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         },
         {
           "publicationId": "doi:10.23919/date64628.2025.10993062",
           "subdirectionIds": [
-            "optical-network-technologies"
+            "optical-network-technologies",
+            "advanced-photonic-communication-systems"
           ],
           "unassignedReasonEn": null
         },
         {
           "publicationId": "doi:10.23919/date64628.2025.10993226",
           "subdirectionIds": [
-            "optical-network-technologies"
+            "photonic-and-optical-devices"
           ],
           "unassignedReasonEn": null
         },
         {
           "publicationId": "doi:10.1109/jphot.2025.3556127",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         },
         {
           "publicationId": "doi:10.1364/optica.546823",
           "subdirectionIds": [
-            "optical-network-technologies"
+            "photonic-and-optical-devices"
           ],
           "unassignedReasonEn": null
         },
@@ -31843,23 +31833,21 @@
         {
           "publicationId": "doi:10.1364/ofc.2025.tu3j.1",
           "subdirectionIds": [
-            "optical-network-technologies"
+            "advanced-photonic-communication-systems"
           ],
           "unassignedReasonEn": null
         },
         {
           "publicationId": "doi:10.1364/cleo_at.2025.aa125_2",
           "subdirectionIds": [
-            "optical-network-technologies"
+            "photonic-and-optical-devices"
           ],
           "unassignedReasonEn": null
         },
         {
           "publicationId": "doi:10.1364/ofc.2025.m4j.4",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         },
         {
           "publicationId": "doi:10.1364/cleo_at.2025.aa128_6",
@@ -31877,130 +31865,106 @@
         },
         {
           "publicationId": "doi:10.1364/cleo_at.2025.aa124_2",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         },
         {
           "publicationId": "doi:10.1364/ofc.2025.m1d.4",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         },
         {
           "publicationId": "arxiv:2411.17480",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         },
         {
           "publicationId": "doi:10.1002/lpor.202401357",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         },
         {
           "publicationId": "doi:10.1109/ipc60965.2024.10799624",
           "subdirectionIds": [
-            "optical-network-technologies"
+            "optical-network-technologies",
+            "advanced-photonic-communication-systems"
           ],
           "unassignedReasonEn": null
         },
         {
           "publicationId": "doi:10.48550/arxiv.2410.15172",
           "subdirectionIds": [
-            "optical-network-technologies"
+            "photonic-and-optical-devices"
           ],
           "unassignedReasonEn": null
         },
         {
           "publicationId": "doi:10.1021/acsphotonics.4c01522",
-          "subdirectionIds": [
-            "optical-network-technologies"
-          ],
-          "unassignedReasonEn": null
+          "subdirectionIds": [],
+          "unassignedReasonEn": "The reviewed evidence does not support a reliable assignment of this publication to the accepted sub-directions."
         }
       ],
       "reviewStatus": "limited",
       "subdirections": [
         {
           "evidencePublicationIds": [
-            "arxiv:2411.17480",
-            "doi:10.1002/lpor.202401357",
-            "doi:10.1002/lpor.202500546",
-            "doi:10.1021/acsphotonics.4c01522",
             "doi:10.1021/acsphotonics.6c00302",
-            "doi:10.1021/acssensors.4c03404",
-            "doi:10.1063/5.0271875",
-            "doi:10.1109/ecoc66593.2025.11263174",
-            "doi:10.1109/ecoc66593.2025.11263448",
-            "doi:10.1109/iccad66269.2025.11240866",
-            "doi:10.1109/ipc60965.2024.10799624",
             "doi:10.1109/iseda65950.2025.11101099",
-            "doi:10.1109/jlt.2025.3587919",
-            "doi:10.1109/jlt.2025.3619929",
-            "doi:10.1109/jphot.2025.3556127",
-            "doi:10.1109/jphot.2025.3570958",
-            "doi:10.1364/cleo_at.2025.aa124_2",
             "doi:10.1364/cleo_at.2025.aa125_2",
-            "doi:10.1364/cleo_at.2025.aa128_6",
-            "doi:10.1364/ofc.2025.m1d.4",
-            "doi:10.1364/ofc.2025.m4j.4",
-            "doi:10.1364/ofc.2025.tu3j.1",
-            "doi:10.1364/ofc.2025.w2a.5",
-            "doi:10.1364/ol.571348",
-            "doi:10.1364/ol.603526",
             "doi:10.1364/optica.546823",
-            "doi:10.1364/optica.608118",
-            "doi:10.23919/date64628.2025.10993062",
             "doi:10.23919/date64628.2025.10993226",
-            "doi:10.23919/date69613.2026.11539629",
             "doi:10.48550/arxiv.2410.15172"
           ],
           "evidenceUrls": [
             "https://arxiv.org/abs/2410.15172",
-            "https://arxiv.org/abs/2411.15025",
-            "https://arxiv.org/abs/2411.17480",
-            "https://arxiv.org/abs/2604.11763",
-            "https://openalex.org/W4403092405",
             "https://openalex.org/W4404088408",
-            "https://openalex.org/W4404618696",
-            "https://openalex.org/W4405633442",
             "https://openalex.org/W4407298712",
-            "https://openalex.org/W4409014435",
-            "https://openalex.org/W4409454775",
+            "https://openalex.org/W4410583475",
+            "https://openalex.org/W4413120674",
+            "https://openalex.org/W4414324979",
+            "https://openalex.org/W7169842238"
+          ],
+          "explanationEn": [
+            "This sub-direction covers photonic and optical devices as represented in the reviewed release record.",
+            "The review cites “High-Efficiency, Broadband, and Polarization-Diversity Multicore Fiber-Chip Interfaces for Optical I/O”, “Machine Learning-Assisted Design Automation of Integrated Photonic Devices”, and 4 other matched publications; 0 have topic-discriminative title support and 6 have corroborating indexed-subject support.",
+            "This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda."
+          ],
+          "id": "photonic-and-optical-devices",
+          "limitationEn": "This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda.",
+          "nameEn": "Photonic and Optical Devices",
+          "reviewStatus": "limited"
+        },
+        {
+          "evidencePublicationIds": [
+            "doi:10.1002/lpor.202500546",
+            "doi:10.1109/ecoc66593.2025.11263174",
+            "doi:10.1109/ecoc66593.2025.11263448",
+            "doi:10.1109/iccad66269.2025.11240866",
+            "doi:10.1109/ipc60965.2024.10799624",
+            "doi:10.1109/jlt.2025.3587919",
+            "doi:10.1109/jlt.2025.3619929",
+            "doi:10.1109/jphot.2025.3570958",
+            "doi:10.1364/cleo_at.2025.aa128_6",
+            "doi:10.1364/ofc.2025.w2a.5",
+            "doi:10.23919/date64628.2025.10993062"
+          ],
+          "evidenceUrls": [
+            "https://openalex.org/W4405633442",
             "https://openalex.org/W4410428187",
             "https://openalex.org/W4410583470",
-            "https://openalex.org/W4410583475",
             "https://openalex.org/W4410992419",
-            "https://openalex.org/W4410992710",
-            "https://openalex.org/W4410993189",
-            "https://openalex.org/W4410993970",
             "https://openalex.org/W4412404195",
-            "https://openalex.org/W4412406608",
-            "https://openalex.org/W4413120674",
             "https://openalex.org/W4413289690",
-            "https://openalex.org/W4413322634",
             "https://openalex.org/W4414324827",
-            "https://openalex.org/W4414324979",
-            "https://openalex.org/W4414325156",
             "https://openalex.org/W4415003148",
             "https://openalex.org/W4416429549",
             "https://openalex.org/W4417052536",
             "https://openalex.org/W4417053618",
-            "https://openalex.org/W7163586108",
-            "https://openalex.org/W7169842238",
-            "https://openalex.org/W7202209118",
-            "https://openalex.org/W7203576754",
             "https://www.semanticscholar.org/paper/e29b467900376d5f2221615fb8ef725280458cb1"
           ],
           "explanationEn": [
             "This sub-direction covers optical network technologies as represented in the reviewed release record.",
-            "The review cites “Ultra-low-loss slow-light thin-film lithium-niobate optical modulator”, “Low‐Loss and Low‐Power Silicon Ring Based WDM 32×$\\times$100 GHz Filter Enabled by a Novel Bend Design”, and 29 other matched publications; 8 have topic-discriminative title support and 30 have corroborating indexed-subject support.",
+            "The review cites “Reconfigurable Hybrid Polarization/Wavelength (De)Multiplexer for 1.6-Tbps Fiber Communications”, “Constraints-aware Adaptive Routing with Hybrid Waveguides for Photonic Integrated Circuits”, and 9 other matched publications; 2 have topic-discriminative title support and 11 have corroborating indexed-subject support.",
             "This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda."
           ],
           "id": "optical-network-technologies",
@@ -32010,19 +31974,31 @@
         },
         {
           "evidencePublicationIds": [
+            "doi:10.1002/lpor.202500546",
             "doi:10.1109/ecoc66593.2025.11263174",
+            "doi:10.1109/ecoc66593.2025.11263448",
+            "doi:10.1109/ipc60965.2024.10799624",
+            "doi:10.1109/jlt.2025.3587919",
             "doi:10.1109/jlt.2025.3619929",
-            "doi:10.1109/jphot.2025.3570958"
+            "doi:10.1109/jphot.2025.3570958",
+            "doi:10.1364/ofc.2025.tu3j.1",
+            "doi:10.23919/date64628.2025.10993062"
           ],
           "evidenceUrls": [
+            "https://openalex.org/W4405633442",
             "https://openalex.org/W4410428187",
+            "https://openalex.org/W4410583470",
+            "https://openalex.org/W4410992710",
+            "https://openalex.org/W4412404195",
+            "https://openalex.org/W4413289690",
             "https://openalex.org/W4415003148",
+            "https://openalex.org/W4417052536",
             "https://openalex.org/W4417053618",
             "https://www.semanticscholar.org/paper/e29b467900376d5f2221615fb8ef725280458cb1"
           ],
           "explanationEn": [
             "This sub-direction covers advanced photonic communication systems as represented in the reviewed release record.",
-            "The review cites “Reconfigurable Hybrid Polarization/Wavelength (De)Multiplexer for 1.6-Tbps Fiber Communications”, “Enabling 448-Gbps-Per-Wavelength Fiber Communications with Integrated Silicon Photonic Transceiver and Processor”, and 1 other matched publication; 2 have topic-discriminative title support and 3 have corroborating indexed-subject support.",
+            "The review cites “Reconfigurable Hybrid Polarization/Wavelength (De)Multiplexer for 1.6-Tbps Fiber Communications”, “Enabling 448-Gbps-Per-Wavelength Fiber Communications with Integrated Silicon Photonic Transceiver and Processor”, and 7 other matched publications; 2 have topic-discriminative title support and 9 have corroborating indexed-subject support.",
             "This interpretation is limited to incomplete release-window index metadata and does not establish the professor's complete or current research agenda."
           ],
           "id": "advanced-photonic-communication-systems",

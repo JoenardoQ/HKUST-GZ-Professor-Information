@@ -54,6 +54,7 @@ _NON_DISCRIMINATIVE_CORE_WORDS = frozenset({
     "methods", "property", "properties", "related", "science", "studies", "study",
     "production", "technique", "techniques", "treatment", "treatments",
 })
+_DOMAIN_DEFINING_CORE_CONTEXTS = {"network": frozenset({"optical"})}
 _DUPLICATE_MODIFIERS = frozenset({
     "advanced", "advancement", "analysis", "application", "material", "optimization",
     "research", "study", "technique", "technology",
@@ -72,6 +73,7 @@ _CONCEPT_ALIASES: dict[str, frozenset[str]] = {
     "magnetic": frozenset({"ferromagnetic", "ferromagnetism", "magnet", "magnetic", "magnetism"}),
     "multimodal": frozenset({"multimodal", "multi modal", "vision language action", "vla"}),
     "multilevel": frozenset({"multi level", "multilevel"}),
+    "network": frozenset({"communication", "network", "networking"}),
     "photocatalysis": frozenset({"photocatalysis", "photocatalyst", "photocatalytic"}),
     "reduction": frozenset({"electroreduction", "reduce", "reduced", "reducing", "reduction"}),
     "robot": frozenset({"robot", "robotic", "robotics"}),
@@ -164,6 +166,9 @@ def _canonical_concept(word: str) -> str:
 def _topic_core_concepts(topic: str) -> frozenset[str]:
     tokens = _review_tokens(topic)
     generic = {_review_stem(token) for token in _NON_DISCRIMINATIVE_CORE_WORDS}
+    for concept, contexts in _DOMAIN_DEFINING_CORE_CONTEXTS.items():
+        if concept in tokens and tokens & contexts:
+            generic.discard(concept)
     concepts = {_canonical_concept(token) for token in tokens - generic}
     topic_ascii = _ascii(topic)
     if "carbon dioxide" in topic_ascii:

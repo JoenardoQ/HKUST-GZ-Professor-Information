@@ -5729,14 +5729,10 @@
           ],
           "matchedPublicationCount": 3,
           "matchedSubjectLabels": [
-            "Core (optical fiber)",
             "Free-space optical communication",
             "Optical communication",
-            "Optical fiber",
             "Optical Network Technologies",
-            "Optical Wireless Communication Technologies",
-            "Photonic and Optical Devices",
-            "Semiconductor Lasers and Optical Devices"
+            "Optical Wireless Communication Technologies"
           ],
           "reasonEn": "The reviewer accepted 3 cited publications using topic-discriminative title-or-indexed-subject evidence; generic abbreviations alone were insufficient.",
           "sourceNamesEn": [
@@ -8683,11 +8679,7 @@
           "matchedPublicationCount": 2,
           "matchedSubjectLabels": [
             "Optical communication",
-            "Optical cross-connect",
-            "Optical fiber",
-            "Optical Network Technologies",
-            "Optical power",
-            "Semiconductor Lasers and Optical Devices"
+            "Optical Network Technologies"
           ],
           "reasonEn": "The reviewer accepted 2 cited publications using topic-discriminative title-or-indexed-subject evidence; generic abbreviations alone were insufficient.",
           "sourceNamesEn": [
@@ -8699,7 +8691,6 @@
           ],
           "subdirectionId": "optical-network-technologies",
           "titleSupportedPublicationIds": [
-            "doi:10.3390/photonics13060572",
             "doi:10.1109/acp66871.2025.11350700"
           ]
         }
@@ -15341,186 +15332,165 @@
       "unassignedPublicationCount": 15
     },
     {
-      "assignedPublicationCount": 31,
+      "assignedPublicationCount": 18,
       "directionReviews": [
         {
           "disposition": "limited",
           "evidenceBasis": "title-or-indexed-subject support",
           "evidencePublicationIds": [
-            "arxiv:2411.17480",
-            "doi:10.1002/lpor.202401357",
-            "doi:10.1002/lpor.202500546",
-            "doi:10.1021/acsphotonics.4c01522",
             "doi:10.1021/acsphotonics.6c00302",
-            "doi:10.1021/acssensors.4c03404",
-            "doi:10.1063/5.0271875",
-            "doi:10.1109/ecoc66593.2025.11263174",
-            "doi:10.1109/ecoc66593.2025.11263448",
-            "doi:10.1109/iccad66269.2025.11240866",
-            "doi:10.1109/ipc60965.2024.10799624",
             "doi:10.1109/iseda65950.2025.11101099",
-            "doi:10.1109/jlt.2025.3587919",
-            "doi:10.1109/jlt.2025.3619929",
-            "doi:10.1109/jphot.2025.3556127",
-            "doi:10.1109/jphot.2025.3570958",
-            "doi:10.1364/cleo_at.2025.aa124_2",
             "doi:10.1364/cleo_at.2025.aa125_2",
-            "doi:10.1364/cleo_at.2025.aa128_6",
-            "doi:10.1364/ofc.2025.m1d.4",
-            "doi:10.1364/ofc.2025.m4j.4",
-            "doi:10.1364/ofc.2025.tu3j.1",
-            "doi:10.1364/ofc.2025.w2a.5",
-            "doi:10.1364/ol.571348",
-            "doi:10.1364/ol.603526",
             "doi:10.1364/optica.546823",
-            "doi:10.1364/optica.608118",
-            "doi:10.23919/date64628.2025.10993062",
             "doi:10.23919/date64628.2025.10993226",
-            "doi:10.23919/date69613.2026.11539629",
             "doi:10.48550/arxiv.2410.15172"
           ],
           "evidenceUrls": [
             "https://arxiv.org/abs/2410.15172",
-            "https://arxiv.org/abs/2411.15025",
-            "https://arxiv.org/abs/2411.17480",
-            "https://arxiv.org/abs/2604.11763",
-            "https://openalex.org/W4403092405",
             "https://openalex.org/W4404088408",
-            "https://openalex.org/W4404618696",
-            "https://openalex.org/W4405633442",
             "https://openalex.org/W4407298712",
-            "https://openalex.org/W4409014435",
-            "https://openalex.org/W4409454775",
-            "https://openalex.org/W4410428187",
-            "https://openalex.org/W4410583470",
             "https://openalex.org/W4410583475",
-            "https://openalex.org/W4410992419",
-            "https://openalex.org/W4410992710",
-            "https://openalex.org/W4410993189",
-            "https://openalex.org/W4410993970",
-            "https://openalex.org/W4412404195",
-            "https://openalex.org/W4412406608",
             "https://openalex.org/W4413120674",
-            "https://openalex.org/W4413289690",
-            "https://openalex.org/W4413322634",
-            "https://openalex.org/W4414324827",
             "https://openalex.org/W4414324979",
-            "https://openalex.org/W4414325156",
-            "https://openalex.org/W4415003148",
-            "https://openalex.org/W4416429549",
-            "https://openalex.org/W4417052536",
-            "https://openalex.org/W4417053618",
-            "https://openalex.org/W7163586108",
-            "https://openalex.org/W7169842238",
-            "https://openalex.org/W7202209118",
-            "https://openalex.org/W7203576754",
-            "https://www.semanticscholar.org/paper/e29b467900376d5f2221615fb8ef725280458cb1"
+            "https://openalex.org/W7169842238"
           ],
           "indexedSubjectSupportedPublicationIds": [
-            "doi:10.1002/lpor.202401357",
-            "doi:10.1002/lpor.202500546",
-            "doi:10.1021/acsphotonics.4c01522",
             "doi:10.1021/acsphotonics.6c00302",
-            "doi:10.1021/acssensors.4c03404",
-            "doi:10.1063/5.0271875",
+            "doi:10.1109/iseda65950.2025.11101099",
+            "doi:10.23919/date64628.2025.10993226",
+            "doi:10.1364/optica.546823",
+            "doi:10.1364/cleo_at.2025.aa125_2",
+            "doi:10.48550/arxiv.2410.15172"
+          ],
+          "matchedPublicationCount": 6,
+          "matchedSubjectLabels": [
+            "Photonic and Optical Devices"
+          ],
+          "reasonEn": "The reviewer accepted 6 cited publications using topic-discriminative title-or-indexed-subject evidence; generic abbreviations alone were insufficient.",
+          "sourceNamesEn": [
+            "Photonic and Optical Devices"
+          ],
+          "sourceTitles": [
+            "High-Efficiency, Broadband, and Polarization-Diversity Multicore Fiber-Chip Interfaces for Optical I/O",
+            "Machine Learning-Assisted Design Automation of Integrated Photonic Devices",
+            "Bi-Level Optimization Accelerated DRC-Aware Physical Design Automation for Photonic Devices"
+          ],
+          "subdirectionId": "photonic-and-optical-devices",
+          "titleSupportedPublicationIds": []
+        },
+        {
+          "disposition": "limited",
+          "evidenceBasis": "title-or-indexed-subject support",
+          "evidencePublicationIds": [
+            "doi:10.1002/lpor.202500546",
             "doi:10.1109/ecoc66593.2025.11263174",
             "doi:10.1109/ecoc66593.2025.11263448",
             "doi:10.1109/iccad66269.2025.11240866",
             "doi:10.1109/ipc60965.2024.10799624",
-            "doi:10.1109/iseda65950.2025.11101099",
             "doi:10.1109/jlt.2025.3587919",
             "doi:10.1109/jlt.2025.3619929",
-            "doi:10.1109/jphot.2025.3556127",
             "doi:10.1109/jphot.2025.3570958",
-            "doi:10.1364/cleo_at.2025.aa124_2",
-            "doi:10.1364/cleo_at.2025.aa125_2",
             "doi:10.1364/cleo_at.2025.aa128_6",
-            "doi:10.1364/ofc.2025.m1d.4",
-            "doi:10.1364/ofc.2025.m4j.4",
-            "doi:10.1364/ofc.2025.tu3j.1",
             "doi:10.1364/ofc.2025.w2a.5",
-            "doi:10.1364/ol.571348",
-            "doi:10.1364/ol.603526",
-            "doi:10.1364/optica.546823",
-            "doi:10.1364/optica.608118",
-            "doi:10.23919/date64628.2025.10993062",
-            "doi:10.23919/date64628.2025.10993226",
-            "doi:10.23919/date69613.2026.11539629",
-            "doi:10.48550/arxiv.2410.15172"
+            "doi:10.23919/date64628.2025.10993062"
           ],
-          "matchedPublicationCount": 31,
+          "evidenceUrls": [
+            "https://openalex.org/W4405633442",
+            "https://openalex.org/W4410428187",
+            "https://openalex.org/W4410583470",
+            "https://openalex.org/W4410992419",
+            "https://openalex.org/W4412404195",
+            "https://openalex.org/W4413289690",
+            "https://openalex.org/W4414324827",
+            "https://openalex.org/W4415003148",
+            "https://openalex.org/W4416429549",
+            "https://openalex.org/W4417052536",
+            "https://openalex.org/W4417053618",
+            "https://www.semanticscholar.org/paper/e29b467900376d5f2221615fb8ef725280458cb1"
+          ],
+          "indexedSubjectSupportedPublicationIds": [
+            "doi:10.1109/jlt.2025.3619929",
+            "doi:10.1109/iccad66269.2025.11240866",
+            "doi:10.1109/ecoc66593.2025.11263174",
+            "doi:10.1109/ecoc66593.2025.11263448",
+            "doi:10.1002/lpor.202500546",
+            "doi:10.1109/jlt.2025.3587919",
+            "doi:10.1109/jphot.2025.3570958",
+            "doi:10.23919/date64628.2025.10993062",
+            "doi:10.1364/cleo_at.2025.aa128_6",
+            "doi:10.1364/ofc.2025.w2a.5",
+            "doi:10.1109/ipc60965.2024.10799624"
+          ],
+          "matchedPublicationCount": 11,
           "matchedSubjectLabels": [
             "Advanced Optical Network Technologies",
-            "Advanced optical system design",
-            "Near-Field Optical Microscopy",
-            "Optical add-drop multiplexer",
-            "Optical and Acousto-Optic Technologies",
-            "Optical Coatings and Gratings",
             "Optical communication",
-            "Optical cross-connect",
-            "Optical fiber",
-            "Optical Imaging and Spectroscopy Techniques",
-            "Optical modulator",
-            "Optical Network Technologies",
-            "Optical performance monitoring",
-            "Optical switch",
-            "Photonic and Optical Devices",
-            "Semiconductor Lasers and Optical Devices",
-            "Single-mode optical fiber"
+            "Optical Network Technologies"
           ],
-          "reasonEn": "The reviewer accepted 31 cited publications using topic-discriminative title-or-indexed-subject evidence; generic abbreviations alone were insufficient.",
+          "reasonEn": "The reviewer accepted 11 cited publications using topic-discriminative title-or-indexed-subject evidence; generic abbreviations alone were insufficient.",
           "sourceNamesEn": [
-            "Photonic and Optical Devices",
             "Optical Network Technologies"
           ],
           "sourceTitles": [
-            "Ultra-low-loss slow-light thin-film lithium-niobate optical modulator",
-            "Low‐Loss and Low‐Power Silicon Ring Based WDM 32×$\\times$100 GHz Filter Enabled by a Novel Bend Design",
-            "Bridging Single‐Mode and Few‐Mode Fiber Systems via Multidimensional On‐Chip Optical Processing and Switching"
+            "Reconfigurable Hybrid Polarization/Wavelength (De)Multiplexer for 1.6-Tbps Fiber Communications",
+            "Constraints-aware Adaptive Routing with Hybrid Waveguides for Photonic Integrated Circuits",
+            "Enabling 448-Gbps-Per-Wavelength Fiber Communications with Integrated Silicon Photonic Transceiver and Processor"
           ],
           "subdirectionId": "optical-network-technologies",
           "titleSupportedPublicationIds": [
-            "arxiv:2411.17480",
-            "doi:10.1002/lpor.202500546",
-            "doi:10.1021/acsphotonics.6c00302",
-            "doi:10.1021/acssensors.4c03404",
             "doi:10.1109/jphot.2025.3570958",
-            "doi:10.1364/ofc.2025.w2a.5",
-            "doi:10.1364/optica.546823",
-            "doi:10.48550/arxiv.2410.15172"
+            "doi:10.1364/ofc.2025.w2a.5"
           ]
         },
         {
           "disposition": "limited",
           "evidenceBasis": "title-or-indexed-subject support",
           "evidencePublicationIds": [
+            "doi:10.1002/lpor.202500546",
             "doi:10.1109/ecoc66593.2025.11263174",
+            "doi:10.1109/ecoc66593.2025.11263448",
+            "doi:10.1109/ipc60965.2024.10799624",
+            "doi:10.1109/jlt.2025.3587919",
             "doi:10.1109/jlt.2025.3619929",
-            "doi:10.1109/jphot.2025.3570958"
+            "doi:10.1109/jphot.2025.3570958",
+            "doi:10.1364/ofc.2025.tu3j.1",
+            "doi:10.23919/date64628.2025.10993062"
           ],
           "evidenceUrls": [
+            "https://openalex.org/W4405633442",
             "https://openalex.org/W4410428187",
+            "https://openalex.org/W4410583470",
+            "https://openalex.org/W4410992710",
+            "https://openalex.org/W4412404195",
+            "https://openalex.org/W4413289690",
             "https://openalex.org/W4415003148",
+            "https://openalex.org/W4417052536",
             "https://openalex.org/W4417053618",
             "https://www.semanticscholar.org/paper/e29b467900376d5f2221615fb8ef725280458cb1"
           ],
           "indexedSubjectSupportedPublicationIds": [
             "doi:10.1109/jlt.2025.3619929",
             "doi:10.1109/ecoc66593.2025.11263174",
-            "doi:10.1109/jphot.2025.3570958"
+            "doi:10.1109/ecoc66593.2025.11263448",
+            "doi:10.1002/lpor.202500546",
+            "doi:10.1109/jlt.2025.3587919",
+            "doi:10.1109/jphot.2025.3570958",
+            "doi:10.23919/date64628.2025.10993062",
+            "doi:10.1364/ofc.2025.tu3j.1",
+            "doi:10.1109/ipc60965.2024.10799624"
           ],
-          "matchedPublicationCount": 3,
+          "matchedPublicationCount": 9,
           "matchedSubjectLabels": [
             "Advanced Photonic Communication Systems"
           ],
-          "reasonEn": "The reviewer accepted 3 cited publications using topic-discriminative title-or-indexed-subject evidence; generic abbreviations alone were insufficient.",
+          "reasonEn": "The reviewer accepted 9 cited publications using topic-discriminative title-or-indexed-subject evidence; generic abbreviations alone were insufficient.",
           "sourceNamesEn": [
             "Advanced Photonic Communication Systems"
           ],
           "sourceTitles": [
             "Reconfigurable Hybrid Polarization/Wavelength (De)Multiplexer for 1.6-Tbps Fiber Communications",
             "Enabling 448-Gbps-Per-Wavelength Fiber Communications with Integrated Silicon Photonic Transceiver and Processor",
-            "Photonics Breakthroughs 2024: Multidimensional Integrated (de)Multiplexers for Optical Fiber Communications"
+            "High-Speed Direct-Detection Advanced Modulation Format Transmission Using a Silicon Microring Modulator with >90 GHz Bandwidth"
           ],
           "subdirectionId": "advanced-photonic-communication-systems",
           "titleSupportedPublicationIds": [
@@ -15534,7 +15504,7 @@
       "professorBasis": "publication-record",
       "professorReasonEn": "Accepted directions have topic-discriminative title-or-indexed-subject support and same-professor evidence resolution.",
       "publicationAssignmentCount": 33,
-      "unassignedPublicationCount": 2
+      "unassignedPublicationCount": 15
     },
     {
       "assignedPublicationCount": 0,
@@ -18425,8 +18395,7 @@
           "matchedPublicationCount": 2,
           "matchedSubjectLabels": [
             "Optical Network Technologies",
-            "Optical Wireless Communication Technologies",
-            "Photonic and Optical Devices"
+            "Optical Wireless Communication Technologies"
           ],
           "reasonEn": "The reviewer accepted 2 cited publications using topic-discriminative title-or-indexed-subject evidence; generic abbreviations alone were insufficient.",
           "sourceNamesEn": [

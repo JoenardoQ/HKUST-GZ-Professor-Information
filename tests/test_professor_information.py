@@ -632,6 +632,38 @@ class ProfessorInformationTests(unittest.TestCase):
             with self.subTest(topic=topic, evidence=evidence):
                 self.assertTrue(_review_text_support(topic, evidence))
 
+    def test_subdirection_matcher_keeps_domain_defining_concepts_distinct(self):
+        from scripts.validate_subdirection_review import _near_duplicate, _review_text_support
+
+        optical_device = (
+            {"nameEn": "Photonic and Optical Devices"},
+            {},
+            {"p-shared"},
+        )
+        optical_network = (
+            {"nameEn": "Optical Network Technologies"},
+            {},
+            {"p-shared"},
+        )
+
+        self.assertFalse(_near_duplicate(optical_device, optical_network))
+        self.assertFalse(_review_text_support(
+            "Optical Network Technologies",
+            "Transfer Learning Enhanced Blood Pressure Monitoring Based on Flexible Optical Pulse Sensing Patch",
+        ))
+        self.assertTrue(_review_text_support(
+            "Optical Network Technologies",
+            "Programmable optical networks for datacenter communications",
+        ))
+        self.assertTrue(_review_text_support(
+            "Optical Network Technologies",
+            "High-speed fiber optical communication systems",
+        ))
+        self.assertTrue(_review_text_support(
+            "Advanced Neural Network Applications",
+            "A deep neural architecture for time-series forecasting",
+        ))
+
     def test_subdirection_duplicate_merge_revalidates_unioned_publications(self):
         from scripts.validate_subdirection_review import _merge_reviewed_direction
 
@@ -802,6 +834,15 @@ class ProfessorInformationTests(unittest.TestCase):
         )
         self.assertIn("Antenna Design and Analysis", antenna_review["sourceNamesEn"])
         self.assertIn("Antenna Design and Optimization", antenna_review["sourceNamesEn"])
+
+        names_122 = {item["nameEn"] for item in by_id["122"]["subdirections"]}
+        self.assertIn("Photonic and Optical Devices", names_122)
+        self.assertIn("Optical Network Technologies", names_122)
+        blood_pressure = next(
+            item for item in by_id["122"]["publicationAssignments"]
+            if item["publicationId"] == "doi:10.1021/acssensors.4c03404"
+        )
+        self.assertNotIn("optical-network-technologies", blood_pressure["subdirectionIds"])
 
         self.assertNotIn(
             "Artificial Intelligence in Games",
