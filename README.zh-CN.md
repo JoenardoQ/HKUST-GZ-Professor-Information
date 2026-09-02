@@ -45,21 +45,28 @@ data/
   professors.json               # 规范化官方人员名单
   research-analysis.json        # 经审核的多来源研究分析
   publications.json             # 经审核和去重的候选
+  research-subdirections.json  # 经独立审核的英文子方向与论文归属
   translations.zh-CN.json      # 经审核的精确键中文翻译记忆
-  manifest.json                 # 双语路径允许列表与数量
+  manifest.json                 # schema v2 双语简介/论文允许列表、数量与英文冻结摘要
+  directory-index.json          # 轻量公开目录记录
   search-index.json             # 网站使用的有界公开搜索数据
 professors/<unit>/
-  <slug>.md                      # 生成的英文教授文档
-  <slug>.zh-CN.md                # Codex 中文译稿
+  <slug>.md                      # 生成的英文教授简介
+  <slug>.zh-CN.md                # 经审核的中文教授简介
+  <slug>.publications.md         # 生成的英文论文详情
+  <slug>.publications.zh-CN.md   # 经审核的中文论文详情
 reports/
   <cutoff>-roster-diff.json
   <cutoff>-conflicts.json
+  <cutoff>-subdirection-self-review.json
 scripts/
   sync_professor_information.py
   initialize_research_analysis.py
   prepare_publication_work_queue.py
   retrieve_research_sources.py
   build_publication_candidates.py
+  prepare_subdirection_work_queue.py
+  validate_subdirection_review.py
   generate_professor_markdown.py
   prepare_chinese_translation.py
   translate_professor_markdown.py
@@ -68,6 +75,14 @@ tests/
   COVERAGE.md
   test_professor_information.py
 ```
+
+公开数据分为三级读取：
+
+1. `data/directory-index.json` 提供轻量目录与筛选记录，不包含论文题名或详情。
+2. `professors/<unit>/<slug>.md` 及对应 `.zh-CN.md` 提供教授简介和经审核的研究子方向。
+3. `professors/<unit>/<slug>.publications.md` 及对应 `.publications.zh-CN.md` 提供论文详情。
+
+`data/manifest.json` 使用 schema version 2。对每个教授 slug，`documents.<slug>.profile.{en,zhCN}` 与 `documents.<slug>.publications.{en,zhCN}` 是仅有的公开 Markdown 路径。`data/search-index.json`、`data/directory-index.json` 和 `data/research-subdirections.json` 仍使用 schema version 1。
 
 [`HKUSTGZ_microelectronics_2025_2026_publications.md`](HKUSTGZ_microelectronics_2025_2026_publications.md) 仅作为历史参考证据保留，不是全校生成数据的事实来源。
 
@@ -87,16 +102,28 @@ OpenAlex 用于解析教授身份并提供主要论文清单。本仓库只能�
 
 英文是生成流程的主版本。中文文件是译稿，不是独立生成的数据集。
 
-1. 先生成完整英文索引和每位教授的英文文件。
-2. 校验规范化数据、数量、身份、链接、日期窗口和确定性输出。
-3. 冻结本轮英文输出。
-4. 由 Codex 审核并填写 `data/translations.zh-CN.json`，再通过遇到缺项即失败的翻译命令生成一一对应的 `.zh-CN.md` 文件。
-5. 中文论文条目必须保留完整英文原题，并增加中文译名；不得用译名替换书目题名。
+1. 根据教授、研究分析和论文规范数据生成英文子方向队列与候选。
+2. 由 Codex 审核英文证据，再运行独立审核命令。审核可以保守发布 `limited`，但不得留下未解决的 `block`。
+3. 生成完整英文总览、简介文件、论文文件、目录索引、搜索索引和 manifest。
+4. 校验规范化数据、数量、身份、链接、日期窗口、子方向审核和确定性输出；随后按 manifest 摘要冻结英文输出。
+5. 由 Codex 审核并填写 `data/translations.zh-CN.json`，再通过遇到缺项即失败的翻译命令生成对应的中文总览、简介和论文文件。
+6. 中文论文条目必须保留完整英文原题，并增加中文译名；不得用译名替换书目题名。
    发表场所名称和逐篇论文的来源关键词保留其发表语言，避免改写书目专名和精确检索词。
-6. 校验每份英文文档都有中文对应文件，且教授/论文身份、外部链接、数量和标题结构一致。
+7. 运行两个发布校验器和完整单元测试套件。每份英文文档都必须有中文对应文件，且教授/论文身份、外部链接、数量、顺序、标题层级和标题结构一致。
 
 翻译阶段不得修改 `professors.json`、`research-analysis.json`、`publications.json`、搜索索引或英文 Markdown。
 翻译记忆以精确英文展示文本为键。缺失或空白译文会在写入任何中文文档前中止，因此不完整翻译记忆不会产生半翻译目录。
+
+子方向审核状态采用保守语义。`pass` 表示该教授的所有已接受子方向均通过审核；任一子方向存在明确证据限制时，该方向及教授聚合状态都必须为 `limited`；`block` 表示问题未解决，不能发布。仅由官方教授页支持的方向必须是 `limited`，且限制说明必须重复为第三句解释。论文只有在提供明确英文原因时才可不归入任何子方向。
+
+## 前置条件与制品策略
+
+- 从干净 clone 运行，并确保 Git、Python 3 与 pip 可用。
+- 实时检索前通过 `requirements.txt` 安装固定版本 Python 依赖；单元测试与校验器不需要服务凭据。
+- 可选服务凭据只能通过受支持的环境变量提供，绝不能存入仓库。
+- 截止日期必须为 3 月 1 日或 9 月 1 日；闭区间起始日期正好是两年前的同一日。
+
+规范输入、经审核输出、公开索引、双语 Markdown、`data/manifest.json`、日期化名单/冲突报告，以及 `reports/<cutoff>-subdirection-self-review.json` 都是跟踪的发布制品。可恢复检索证据、论文/翻译/子方向工作队列、未经审核的子方向候选与提示词、翻译分片、子方向分片、`.sync-cache/`、`.venv/`、Python 字节码，以及内部 agent 日志/历史/评估制品均属于工作材料，必须保持忽略或置于仓库外。不得把被忽略的队列、提示词、分片或内部评估制品提升为发布文档。
 
 ## 更新命令
 
@@ -145,6 +172,25 @@ python3 scripts/build_publication_candidates.py \
 
 可用 `--sources` 只恢复指定的已批准来源。如果三次有记录的限时探针已经证明某个来源在本轮整体不可用，则通过 `--blocked-sources` 记录；这样可以为每位教授保留限制状态，而不会重复数百次已知失败请求。适配器仍保留，并会在之后的定期更新中再次尝试。
 
+生成公开文档前，先准备并独立审核英文子方向：
+
+```bash
+python3 scripts/prepare_subdirection_work_queue.py \
+  --root . \
+  --cutoff 2026-09-01
+
+python3 scripts/validate_subdirection_review.py \
+  --root . \
+  --cutoff 2026-09-01 \
+  --write-reviewed
+
+python3 scripts/validate_subdirection_review.py \
+  --root . \
+  --cutoff 2026-09-01
+```
+
+准备命令会在 `reports/` 下写入被忽略的工作队列与未经审核候选；本次发布应输出 `397/397`。`--write-reviewed` 会拒绝过期的准备输入、重新计算独立审核、拒绝任何 `block`，并写入被跟踪的 `data/research-subdirections.json` 与日期化自审报告。仅校验命令会从规范数据重新计算队列和审核，并要求结果与两个跟踪制品完全相等。
+
 ```bash
 python3 scripts/generate_professor_markdown.py \
   --start 2024-09-01 \
@@ -163,13 +209,16 @@ python3 scripts/translate_professor_markdown.py \
 准备命令只把缺失的精确键字符串写入日期化翻译输入报告。Codex 审核并合并这些译文到翻译记忆后，再生成中文 Markdown 并校验：
 
 ```bash
-python3 -m unittest tests/test_professor_information.py
-python3 scripts/validate_professor_information.py --cutoff 2026-09-01
+python3 scripts/validate_subdirection_review.py --root . --cutoff 2026-09-01
+python3 scripts/validate_professor_information.py --root . --cutoff 2026-09-01
+python3 -m unittest discover -s tests -p 'test_*.py'
 ```
+
+对当前发布，两个校验器都必须输出 `397/397`，且完整发现的测试套件必须通过。任何非零退出、数量不符、schema/截止日期/窗口漂移、不安全或缺失的 manifest 路径、过期审核制品、`block` 状态、不可发布的检索状态、冲突、冻结英文摘要不符、翻译缺失，或双语结构/身份/链接/顺序不一致，都会中止发布。
 
 使用相同参数再次运行生成器，英文生成输出必须零差异。任何 commit 或 push 之前，都要审核精确候选差异、未解决限制、生成数量和双语一致性，并执行仓库的 clean-before-commit 门槛。
 
-## 论文输入结构
+## 规范数据结构
 
 `data/research-analysis.json` 是与官方基础资料分离的 JSON 数组。经审核记录的最小结构如下：
 
@@ -210,10 +259,12 @@ python3 scripts/validate_professor_information.py --cutoff 2026-09-01
 
 禁止用占位项增加数量。只有当每位教授都通过日期化证据说明明确标记为 `blocked`、`incomplete` 或 `complete` 时，空数组才有效；`not-started` 不能发布。
 
+`data/research-subdirections.json` 是 schema version 1 对象，内部按教授记录组织。每位教授包含聚合 `reviewStatus`、至少一个英文 `subdirections` 项，以及其每篇论文的一条归属记录。每个子方向包含稳定 ID、英文名称、恰好三句互不重复的解释、获准的证据 URL、证据论文 ID，以及 `pass` 或 `limited` 状态；受限方向还必须包含 `limitationEn`。每条论文归属要么列出已接受的子方向 ID，要么给出明确的 `unassignedReasonEn`。
+
 ## 网站契约
 
-网站只读取固定公开仓库的 `main` 分支。它先校验 `data/manifest.json` 与 `data/search-index.json`，再读取允许列表中的英文或中文 Markdown。所有 Markdown 均视为不可信输入：禁止执行原始 HTML、脚本、iframe、图片和危险 URL；拒绝跳转、无效 UTF-8、超大内容和任意路径；重新验证失败后不提供超过新鲜期的缓存内容。
+网站只读取固定公开仓库的 `main` 分支。它要求 manifest schema version 2，第一级读取 `data/directory-index.json`，随后两级只读取 manifest 允许列表中的英文或中文简介与论文路径。所有 Markdown 均视为不可信输入：禁止执行原始 HTML、脚本、iframe、图片和危险 URL；拒绝跳转、无效 UTF-8、超大内容和任意路径；重新验证失败后不提供超过新鲜期的缓存内容。
 
 ## 审核与发布
 
-只有在另行授权时，Codex 任务才能准备日期分支、commit、push 和 PR。Owner 负责审核和合并。`main` 分支保护、required review 和受保护部署环境保持启用。打 tag 与网站部署是合并后的独立动作，必须另行授权。
+每年 3 月 1 日和 9 月 1 日运行此工作流：截止日期就是窗口终点，闭区间起点为两年前的同一日。两个校验器和完整测试套件通过后，只审核并暂存预期的跟踪制品。只有在另行授权时，Codex 任务才能准备日期分支、commit、push 和 PR。Owner 负责审核和合并。修改网站前，必须回读 GitHub `main`，确认 manifest schema version 2 与 `data/directory-index.json` 已就绪。打 tag 与网站部署是合并后的独立动作，必须另行授权。
