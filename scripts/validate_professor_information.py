@@ -12,8 +12,13 @@ from urllib.parse import urlsplit
 
 from professor_information import (
     SourceDataError,
+    _chinese_publications_markdown,
+    _normalized_title,
+    _publications_markdown,
+    build_translation_memory_translator,
     in_window,
     validate_bilingual_parity,
+    validate_frozen_english,
     validate_research_analysis,
     validate_research_subdirections,
     validate_retrieval_statuses,
@@ -92,6 +97,7 @@ def validate(root: Path, cutoff: str) -> dict[str, int]:
     research_analysis = load_json(root / "data/research-analysis.json")
     publications = load_json(root / "data/publications.json")
     subdirections = load_json(root / "data/research-subdirections.json")
+    translations = load_json(root / "data/translations.zh-CN.json")
     if not isinstance(professors, list) or not isinstance(publications, list) or not isinstance(research_analysis, list):
         raise SourceDataError("canonical professor, publication, and analysis data must be lists")
     professor_ids = {str(item["officialProfileId"]) for item in professors}
@@ -131,11 +137,29 @@ def validate(root: Path, cutoff: str) -> dict[str, int]:
     if not isinstance(documents, dict) or len(documents) != len(professors):
         raise SourceDataError("manifest document count does not match professor data")
     professor_by_id = _record_map(professors, "professor")
+    professor_by_slug = {record["slug"]: record for record in professors}
     expected_slugs = {record["slug"] for record in professors}
     if set(documents) != expected_slugs:
         raise SourceDataError("manifest identities do not match professor data")
     for slug, paths in documents.items():
         _validate_safe_document_paths(slug, paths)
+    validate_frozen_english(
+        root, manifest, professors, research_analysis, publications,
+        subdirections, window["start"], cutoff,
+    )
+    if not isinstance(translations, dict):
+        raise SourceDataError("translation memory must contain a JSON object")
+    translator = build_translation_memory_translator(translations)
+    subdirection_records = {
+        str(record["officialProfileId"]): record
+        for record in subdirections["professors"]
+    }
+    publications_by_professor: dict[str, list[dict]] = defaultdict(list)
+    for publication in publications:
+        if in_window(window["start"], cutoff, publication["effectiveDate"]):
+            publications_by_professor[str(publication["officialProfileId"])].append(publication)
+
+    for slug, paths in documents.items():
         for document_kind in _DOCUMENT_SUFFIXES:
             english_path = root / paths[document_kind]["en"]
             chinese_path = root / paths[document_kind]["zhCN"]
@@ -150,6 +174,35 @@ def validate(root: Path, cutoff: str) -> dict[str, int]:
                     f"bilingual document structure differs for {slug} {document_kind}: "
                     + "; ".join(parity_errors)
                 )
+        professor = professor_by_slug[slug]
+        profile_id = str(professor["officialProfileId"])
+        professor_publications = sorted(
+            publications_by_professor[profile_id],
+            key=lambda item: (item["effectiveDate"], _normalized_title(item["title"])),
+            reverse=True,
+        )
+        subdirection_record = subdirection_records[profile_id]
+        assignments = {
+            item["publicationId"]: item
+            for item in subdirection_record["publicationAssignments"]
+        }
+        directions_by_id = {
+            item["id"]: item for item in subdirection_record["subdirections"]
+        }
+        expected_english = _publications_markdown(
+            professor, analysis_by_professor[profile_id], professor_publications,
+            assignments, {key: value["nameEn"] for key, value in directions_by_id.items()},
+            window["start"], cutoff,
+        )
+        expected_chinese = _chinese_publications_markdown(
+            professor, analysis_by_professor[profile_id], professor_publications,
+            assignments, directions_by_id, window["start"], cutoff, translator,
+        )
+        if (
+            (root / paths["publications"]["en"]).read_text(encoding="utf-8") != expected_english
+            or (root / paths["publications"]["zhCN"]).read_text(encoding="utf-8") != expected_chinese
+        ):
+            raise SourceDataError(f"canonical publication document differs for {slug}")
     overview_en = root / "All_Prof_Info.md"
     overview_zh = root / "All_Prof_Info.zh-CN.md"
     if not overview_en.is_file() or not overview_zh.is_file():

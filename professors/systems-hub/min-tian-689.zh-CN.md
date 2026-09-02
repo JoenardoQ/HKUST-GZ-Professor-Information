@@ -44,7 +44,7 @@ Professor identity: `689`
 
 现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-冲突审核抽样检查了“Protocol for mouse vascular dementia model and evaluation of progressive tissue damage in subcortical white matter and adjacent cortex”, “Oleic acid-enriched diet improves maternal lactation performance and neonatal growth through GPR40 and GPR120 signaling pathways”, and 1 other sampled publication，这些论文未能一致支持分析主题。
+冲突审核抽样检查了“Protocol for mouse vascular dementia model and evaluation of progressive tissue damage in subcortical white matter and adjacent cortex”, “Oleic acid-enriched diet improves maternal lactation performance and neonatal growth through GPR40 and GPR120 signaling pathways”，另有 1 篇抽样论文，这些论文未能一致支持分析主题。
 
 由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 

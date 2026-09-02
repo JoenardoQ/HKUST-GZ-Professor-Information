@@ -48,7 +48,7 @@ Professor identity: `126`
 
 现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-冲突审核抽样检查了“Soil heterogeneity modulates pollutant–nutrient coupled microbial cross-kingdom interactions and PAH-degradation in long-term contaminated industrial soils”, “A hierarchical dynamic fault tree and Markov chain framework for safety-critical register localization in automotive-grade SoCs”, and 1 other sampled publication，这些论文未能一致支持分析主题。
+冲突审核抽样检查了“Soil heterogeneity modulates pollutant–nutrient coupled microbial cross-kingdom interactions and PAH-degradation in long-term contaminated industrial soils”, “A hierarchical dynamic fault tree and Markov chain framework for safety-critical register localization in automotive-grade SoCs”，另有 1 篇抽样论文，这些论文未能一致支持分析主题。
 
 由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 

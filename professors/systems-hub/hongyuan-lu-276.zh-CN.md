@@ -44,7 +44,7 @@ Professor identity: `276`
 
 现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-冲突审核抽样检查了“Large-scale EEG neural network changes following accelerated high-definition transcranial direct current stimulation in major depressive disorder: A randomized controlled trial”, “Comparison of the clinical efficacy, safety and EEG functional connectivity changes between 18-Hz rTMS and iTBS of accelerated dTMS treatment for major depressive disorder: a randomized controlled trial”, and 1 other sampled publication，这些论文未能一致支持分析主题。
+冲突审核抽样检查了“Large-scale EEG neural network changes following accelerated high-definition transcranial direct current stimulation in major depressive disorder: A randomized controlled trial”, “Comparison of the clinical efficacy, safety and EEG functional connectivity changes between 18-Hz rTMS and iTBS of accelerated dTMS treatment for major depressive disorder: a randomized controlled trial”，另有 1 篇抽样论文，这些论文未能一致支持分析主题。
 
 由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 

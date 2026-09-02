@@ -46,7 +46,7 @@ Professor identity: `353`
 
 现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-冲突审核抽样检查了“Research on the military application of wavefront-coding-based extended depth-of-field telephoto optical system”, “PD-VLA: Accelerating Vision-Language-Action Model Integrated with Action Chunking via Parallel Decoding”, and 1 other sampled publication，这些论文未能一致支持分析主题。
+冲突审核抽样检查了“Research on the military application of wavefront-coding-based extended depth-of-field telephoto optical system”, “PD-VLA: Accelerating Vision-Language-Action Model Integrated with Action Chunking via Parallel Decoding”，另有 1 篇抽样论文，这些论文未能一致支持分析主题。
 
 由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 

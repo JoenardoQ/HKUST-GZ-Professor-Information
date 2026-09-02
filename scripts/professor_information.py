@@ -9,9 +9,9 @@ import unicodedata
 from collections import defaultdict
 from collections import Counter
 from datetime import date
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Callable
-from urllib.parse import quote, urlencode, urlparse
+from urllib.parse import quote, urlencode, urlparse, urlsplit
 
 FACULTY_BASE = "https://facultyprofiles.hkust-gz.edu.cn"
 ARXIV_HOST = "arxiv.org"
@@ -488,6 +488,67 @@ def _publications_markdown(
     return "\n".join(lines)
 
 
+def _chinese_publications_markdown(
+    professor: dict[str, Any],
+    analysis: dict[str, Any],
+    publications: list[dict[str, Any]],
+    assignments: dict[str, dict[str, Any]],
+    directions_by_id: dict[str, dict[str, Any]],
+    start: str,
+    end: str,
+    zh: Callable[[Any], str],
+) -> str:
+    display_name = f"{professor['nameZh']} · {professor['nameEn']}" if professor.get("nameZh") else professor["nameEn"]
+    lines = [
+        f"# {display_name} — 论文",
+        "",
+        f"Professor identity: `{professor['officialProfileId']}`",
+        "",
+        "## 本轮检索到的论文",
+        "",
+        f"闭区间：{start} 至 {end}。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。",
+        "",
+        f"检索状态：**{analysis['status']}**",
+        "",
+    ]
+    if analysis["notes"]:
+        lines.extend(f"- {zh(note)}" for note in analysis["notes"])
+        lines.append("")
+    if publications:
+        for publication in publications:
+            title = publication["title"]
+            venue = clean(publication.get("venue")) or publication.get("publicationType") or "未知 venue"
+            lines.extend([
+                f"### {title}｜{zh(title)}",
+                "",
+                f"Publication identity: `{publication['publicationId']}`",
+                "",
+                f"- 有效日期：{publication['effectiveDate']}",
+                f"- 发表场所/类型：{venue}",
+            ])
+            if publication.get("keywords"):
+                lines.append(f"- 关键词：{', '.join(publication['keywords'])}")
+            links = " · ".join(f"[证据 {index + 1}]({url})" for index, url in enumerate(publication["evidenceUrls"]))
+            lines.extend([f"- 核验：{links}", ""])
+            assignment = assignments[publication["publicationId"]]
+            names = [zh(directions_by_id[item]["nameEn"]) for item in assignment["subdirectionIds"]]
+            note = (
+                f"生成的研究细分方向：{', '.join(names)}"
+                if names else "未作出可靠的生成研究细分方向归属。"
+            )
+            lines.extend([f"*{note}*", ""])
+    else:
+        lines.extend(["本轮时间窗内未检索到论文；这不能证明该教授没有论文。", ""])
+    lines.extend([
+        "## 核验信息",
+        "",
+        f"官方基础资料最近核验日期：{professor['lastVerifiedOn']}",
+        f"研究来源分析最近核验日期：{analysis['lastVerifiedOn']}",
+        "",
+    ])
+    return "\n".join(lines)
+
+
 def _write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -568,6 +629,47 @@ def validate_frozen_english(
         path = root / str(relative_path)
         if not path.is_file() or _sha256_bytes(path.read_bytes()) != expected_hash:
             raise SourceDataError("frozen English file changed")
+
+
+_MANIFEST_DOCUMENT_SUFFIXES = {
+    "profile": {"en": ".md", "zhCN": ".zh-CN.md"},
+    "publications": {"en": ".publications.md", "zhCN": ".publications.zh-CN.md"},
+}
+_SAFE_DOCUMENT_DIRECTORY = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
+
+
+def validate_manifest_document_paths(manifest: dict[str, Any]) -> None:
+    documents = manifest.get("documents")
+    if not isinstance(documents, dict):
+        raise SourceDataError("manifest documents must be an object")
+    for slug, paths in documents.items():
+        if not isinstance(slug, str) or not isinstance(paths, dict) or set(paths) != set(_MANIFEST_DOCUMENT_SUFFIXES):
+            raise SourceDataError("manifest document paths are malformed")
+        for kind, suffixes in _MANIFEST_DOCUMENT_SUFFIXES.items():
+            group = paths.get(kind)
+            if not isinstance(group, dict) or set(group) != set(suffixes):
+                raise SourceDataError(f"manifest record {slug} has an invalid {kind} path group")
+            for language, suffix in suffixes.items():
+                value = group[language]
+                path = PurePosixPath(value) if isinstance(value, str) else None
+                parsed = urlsplit(value) if isinstance(value, str) else None
+                if (
+                    not isinstance(value, str)
+                    or not value
+                    or "\\" in value
+                    or "%" in value
+                    or parsed.scheme
+                    or parsed.netloc
+                    or parsed.query
+                    or parsed.fragment
+                    or path.is_absolute()
+                    or path.as_posix() != value
+                    or len(path.parts) != 3
+                    or path.parts[0] != "professors"
+                    or not _SAFE_DOCUMENT_DIRECTORY.fullmatch(path.parts[1])
+                    or path.name != f"{slug}{suffix}"
+                ):
+                    raise SourceDataError(f"manifest record {slug} has an unsafe {kind}.{language} path")
 
 
 def generate_documents(
@@ -809,6 +911,7 @@ def generate_chinese_documents(
     if not manifest_path.is_file() or not overview_en.is_file():
         raise SourceDataError("English documents must be generated first")
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    validate_manifest_document_paths(manifest)
     validate_frozen_english(
         root, manifest, professors, research_analysis, publications,
         research_subdirections, start, end
@@ -950,54 +1053,13 @@ def generate_chinese_documents(
         zh_path.parent.mkdir(parents=True, exist_ok=True)
         zh_path.write_text("\n".join(lines), encoding="utf-8")
 
-        publication_lines = [
-            f"# {display_name} — 论文",
-            "",
-            f"Professor identity: `{professor['officialProfileId']}`",
-            "",
-            "## 本轮检索到的论文",
-            "",
-            f"闭区间：{start} 至 {end}。OpenAlex、paperscraper 多来源结果与独立 arXiv 核验均不保证穷尽；这不是完整发表记录。",
-            "",
-            f"检索状态：**{analysis['status']}**",
-            "",
-        ]
-        if analysis["notes"]:
-            publication_lines.extend(f"- {zh(note)}" for note in analysis["notes"])
-            publication_lines.append("")
-        if professor_publications:
-            for publication in professor_publications:
-                title = publication["title"]
-                venue = clean(publication.get("venue")) or publication.get("publicationType") or "未知 venue"
-                publication_lines.extend([
-                    f"### {title}｜{zh(title)}",
-                    "",
-                    f"Publication identity: `{publication['publicationId']}`",
-                    "",
-                    f"- 有效日期：{publication['effectiveDate']}",
-                    f"- 发表场所/类型：{venue}",
-                ])
-                if publication.get("keywords"):
-                    publication_lines.append(f"- 关键词：{', '.join(publication['keywords'])}")
-                links = " · ".join(f"[证据 {index + 1}]({url})" for index, url in enumerate(publication["evidenceUrls"]))
-                publication_lines.extend([f"- 核验：{links}", ""])
-                assignment = assignments[publication["publicationId"]]
-                names = [zh(directions_by_id[item]["nameEn"]) for item in assignment["subdirectionIds"]]
-                note = (
-                    f"生成的研究细分方向：{', '.join(names)}"
-                    if names else "未作出可靠的生成研究细分方向归属。"
-                )
-                publication_lines.extend([f"*{note}*", ""])
-        else:
-            publication_lines.extend(["本轮时间窗内未检索到论文；这不能证明该教授没有论文。", ""])
-        publication_lines.extend([
-            "## 核验信息",
-            "",
-            f"官方基础资料最近核验日期：{professor['lastVerifiedOn']}",
-            f"研究来源分析最近核验日期：{analysis['lastVerifiedOn']}",
-            "",
-        ])
-        publications_zh_path.write_text("\n".join(publication_lines), encoding="utf-8")
+        publications_zh_path.write_text(
+            _chinese_publications_markdown(
+                professor, analysis, professor_publications, assignments,
+                directions_by_id, start, end, zh,
+            ),
+            encoding="utf-8",
+        )
         overview.extend([
             f"### [{display_name}]({profile_paths['zhCN']})",
             "",

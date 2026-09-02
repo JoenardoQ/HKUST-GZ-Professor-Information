@@ -45,7 +45,7 @@ Professor identity: `653`
 
 现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-冲突审核抽样检查了“Effects of Comprehensive Chest Physiotherapy on Early Peripheral Blood Th17/Treg Immune Balance and Its Association with Key Clinical Outcomes in Postoperative Patients Receiving Mechanical Ventilation in the Surgical Intensive Care Unit: A Prospective, Single-Blind, Randomized Controlled Trial”, “A Pathology‐Instructed Theranostic Platform with Mechanoadaptive and ROS‐Powered Nanobreathing Functions for Precision Myocardial Repair”, and 1 other sampled publication，这些论文未能一致支持分析主题。
+冲突审核抽样检查了“Effects of Comprehensive Chest Physiotherapy on Early Peripheral Blood Th17/Treg Immune Balance and Its Association with Key Clinical Outcomes in Postoperative Patients Receiving Mechanical Ventilation in the Surgical Intensive Care Unit: A Prospective, Single-Blind, Randomized Controlled Trial”, “A Pathology‐Instructed Theranostic Platform with Mechanoadaptive and ROS‐Powered Nanobreathing Functions for Precision Myocardial Repair”，另有 1 篇抽样论文，这些论文未能一致支持分析主题。
 
 由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 

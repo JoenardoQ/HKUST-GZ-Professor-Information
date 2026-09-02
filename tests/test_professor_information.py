@@ -1328,6 +1328,28 @@ class ProfessorInformationTests(unittest.TestCase):
             self.assertIn(analysis["summaryEn"], payload["inputs"])
             self.assertEqual(result.stdout, f"{len(payload['inputs'])}/{payload['totalInputs']}\n")
 
+    def test_translation_memory_localizes_sampled_publication_connector_without_changing_titles(self):
+        source = (
+            "The conflict review sampled “20.5 % efficient ternary organic photovoltaics using an asymmetric "
+            "small-molecular acceptor to manipulate intermolecular packing and reduce energy losses”, “High "
+            "Efficiency n‐Type Doping of Organic Semiconductors by Cation Exchange”, and 1 other sampled "
+            "publication, which do not consistently support the analysis topics."
+        )
+        memory = json.loads(
+            (Path(__file__).parents[1] / "data/translations.zh-CN.json").read_text(encoding="utf-8")
+        )
+        translated = memory[source]
+        self.assertNotIn("and 1 other sampled publication", translated)
+        self.assertIn("另有 1 篇抽样论文", translated)
+        self.assertIn(
+            "20.5 % efficient ternary organic photovoltaics using an asymmetric small-molecular acceptor to manipulate intermolecular packing and reduce energy losses",
+            translated,
+        )
+        self.assertIn(
+            "High Efficiency n‐Type Doping of Organic Semiconductors by Cation Exchange",
+            translated,
+        )
+
     def test_bilingual_parity_rejects_missing_or_changed_identity(self):
         english = "# Lei CHEN\n\nProfessor identity: `20`\n\nPublication identity: `doi:10.1/example`\n\n[Official profile](https://facultyprofiles.hkust-gz.edu.cn/faculty-personal-page?id=20)\n"
         chinese = "# 陈雷 · Lei CHEN\n\nProfessor identity: `20`\n\nPublication identity: `doi:10.1/example`\n\n[官方主页](https://facultyprofiles.hkust-gz.edu.cn/faculty-personal-page?id=20)\n"
@@ -1455,16 +1477,22 @@ class ProfessorInformationTests(unittest.TestCase):
                 "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
                 research_subdirections=subdirections,
             )
+            inputs = professor_logic.collect_translation_inputs(
+                professors, [analysis], [], "2024-09-01", "2026-09-01",
+                research_subdirections=subdirections,
+            )
+            memory = {value: f"中译：{value}" for value in inputs}
             for filename, value in (
                 ("professors.json", professors),
                 ("research-analysis.json", [analysis]),
                 ("publications.json", []),
                 ("research-subdirections.json", subdirections),
+                ("translations.zh-CN.json", memory),
             ):
                 (root / "data" / filename).write_text(json.dumps(value), encoding="utf-8")
             professor_logic.generate_chinese_documents(
                 root, professors, [analysis], [],
-                "2024-09-01", "2026-09-01", lambda text: f"中译：{text}",
+                "2024-09-01", "2026-09-01", professor_logic.build_translation_memory_translator(memory),
                 research_subdirections=subdirections,
             )
             command = [
@@ -1587,16 +1615,22 @@ class ProfessorInformationTests(unittest.TestCase):
                 "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
                 research_subdirections=subdirections,
             )["manifest"]
+            inputs = professor_logic.collect_translation_inputs(
+                professors, [analysis], [], "2024-09-01", "2026-09-01",
+                research_subdirections=subdirections,
+            )
+            memory = {value: f"中译：{value}" for value in inputs}
             for filename, value in (
                 ("professors.json", professors),
                 ("research-analysis.json", [analysis]),
                 ("publications.json", []),
                 ("research-subdirections.json", subdirections),
+                ("translations.zh-CN.json", memory),
             ):
                 (root / "data" / filename).write_text(json.dumps(value), encoding="utf-8")
             professor_logic.generate_chinese_documents(
                 root, professors, [analysis], [],
-                "2024-09-01", "2026-09-01", lambda text: f"中译：{text}",
+                "2024-09-01", "2026-09-01", professor_logic.build_translation_memory_translator(memory),
                 research_subdirections=subdirections,
             )
             command = [
@@ -1621,6 +1655,128 @@ class ProfessorInformationTests(unittest.TestCase):
             drifted = subprocess.run(command, capture_output=True, text=True)
             self.assertNotEqual(drifted.returncode, 0)
             self.assertIn("bilingual document structure", drifted.stderr)
+
+    def test_release_validator_rejects_canonical_publication_and_assignment_drift(self):
+        professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
+        analysis = research_analysis()
+        publications = [{
+            "officialProfileId": "20", "publicationId": "doi:10.1/example",
+            "title": "Canonical Publication", "effectiveDate": "2025-08-01",
+            "publicationType": "journal", "venue": "Canonical Venue",
+            "keywords": ["source-keyword"], "evidenceUrls": ["https://openalex.org/W1"],
+        }]
+        subdirections = reviewed_subdirections("20", ["doi:10.1/example"])
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest = generate_documents(
+                root, professors, [analysis], publications,
+                "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                research_subdirections=subdirections,
+            )["manifest"]
+            inputs = professor_logic.collect_translation_inputs(
+                professors, [analysis], publications, "2024-09-01", "2026-09-01",
+                research_subdirections=subdirections,
+            )
+            memory = {value: f"中译：{value}" for value in inputs}
+            for filename, value in (
+                ("professors.json", professors), ("research-analysis.json", [analysis]),
+                ("publications.json", publications), ("research-subdirections.json", subdirections),
+                ("translations.zh-CN.json", memory),
+            ):
+                (root / "data" / filename).write_text(json.dumps(value), encoding="utf-8")
+            professor_logic.generate_chinese_documents(
+                root, professors, [analysis], publications,
+                "2024-09-01", "2026-09-01", professor_logic.build_translation_memory_translator(memory),
+                research_subdirections=subdirections,
+            )
+            command = [sys.executable, str(Path(__file__).parents[1] / "scripts/validate_professor_information.py"), "--root", str(root), "--cutoff", "2026-09-01"]
+            chinese_path = root / manifest["documents"][professors[0]["slug"]]["publications"]["zhCN"]
+            original = chinese_path.read_text(encoding="utf-8")
+            mutations = {
+                "title": ("中译：Canonical Publication", "篡改标题"),
+                "venue": ("Canonical Venue", "Invented Venue"),
+                "source keywords": ("source-keyword", "invented-keyword"),
+                "assignment note": ("生成的研究细分方向：中译：Evidence-limited research profile", "生成的研究细分方向：虚构方向"),
+            }
+            for label, (source, replacement) in mutations.items():
+                with self.subTest(label=label):
+                    chinese_path.write_text(original.replace(source, replacement, 1), encoding="utf-8")
+                    rejected = subprocess.run(command, capture_output=True, text=True)
+                    self.assertNotEqual(rejected.returncode, 0)
+                    self.assertIn("canonical publication document", rejected.stderr)
+
+    def test_release_validator_enforces_frozen_english_after_chinese_generation(self):
+        professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
+        analysis = research_analysis()
+        subdirections = reviewed_subdirections()
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest = generate_documents(
+                root, professors, [analysis], [],
+                "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                research_subdirections=subdirections,
+            )["manifest"]
+            inputs = professor_logic.collect_translation_inputs(
+                professors, [analysis], [], "2024-09-01", "2026-09-01",
+                research_subdirections=subdirections,
+            )
+            memory = {value: f"中译：{value}" for value in inputs}
+            for filename, value in (
+                ("professors.json", professors), ("research-analysis.json", [analysis]),
+                ("publications.json", []), ("research-subdirections.json", subdirections),
+                ("translations.zh-CN.json", memory),
+            ):
+                (root / "data" / filename).write_text(json.dumps(value), encoding="utf-8")
+            professor_logic.generate_chinese_documents(
+                root, professors, [analysis], [], "2024-09-01", "2026-09-01",
+                professor_logic.build_translation_memory_translator(memory),
+                research_subdirections=subdirections,
+            )
+            command = [sys.executable, str(Path(__file__).parents[1] / "scripts/validate_professor_information.py"), "--root", str(root), "--cutoff", "2026-09-01"]
+            english_path = root / manifest["documents"][professors[0]["slug"]]["profile"]["en"]
+            original_english = english_path.read_text(encoding="utf-8")
+            english_path.write_text(original_english + "\nChanged after Chinese generation.\n", encoding="utf-8")
+            rejected = subprocess.run(command, capture_output=True, text=True)
+            self.assertNotEqual(rejected.returncode, 0)
+            self.assertIn("frozen English file changed", rejected.stderr)
+
+            english_path.write_text(original_english, encoding="utf-8")
+            changed_analysis = deepcopy(analysis)
+            changed_analysis["summaryEn"] = "Changed after the frozen English release."
+            (root / "data/research-analysis.json").write_text(json.dumps([changed_analysis]), encoding="utf-8")
+            rejected = subprocess.run(command, capture_output=True, text=True)
+            self.assertNotEqual(rejected.returncode, 0)
+            self.assertIn("frozen English inputs changed", rejected.stderr)
+
+    def test_chinese_generation_rejects_unsafe_manifest_paths_before_writing(self):
+        professors, _ = normalize_faculty_rows([faculty_row()], baseline_ids={"20"})
+        analysis = research_analysis()
+        subdirections = reviewed_subdirections()
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_root = Path(temporary)
+            unsafe_paths = (
+                ("profile", str(temporary_root / "escaped-profile.md")),
+                ("publications", "../escaped-publications.md"),
+            )
+            for kind, unsafe_relative in unsafe_paths:
+                with self.subTest(kind=kind):
+                    root = temporary_root / kind
+                    manifest = generate_documents(
+                        root, professors, [analysis], [],
+                        "2024-09-01", "2026-09-01", "2026-09-02T00:00:00Z",
+                        research_subdirections=subdirections,
+                    )["manifest"]
+                    slug = professors[0]["slug"]
+                    manifest["documents"][slug][kind]["zhCN"] = unsafe_relative
+                    (root / "data/manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+                    escaped = Path(unsafe_relative) if Path(unsafe_relative).is_absolute() else root / unsafe_relative
+                    with self.assertRaisesRegex(SourceDataError, "unsafe.*zhCN"):
+                        professor_logic.generate_chinese_documents(
+                            root, professors, [analysis], [],
+                            "2024-09-01", "2026-09-01", lambda text: f"中译：{text}",
+                            research_subdirections=subdirections,
+                        )
+                    self.assertFalse(escaped.exists())
 
     def test_not_started_retrieval_is_not_publishable(self):
         analyses = [research_analysis(status="not-started")]

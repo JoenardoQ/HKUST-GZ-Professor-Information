@@ -45,7 +45,7 @@ Professor identity: `245`
 
 现有分析标签与检索到的论文无法构成一致的研究细分方向。
 
-冲突审核抽样检查了“Origins of the Margou magnesian skarn deposit containing green–black and black nephrite in the South Altyn Tagh, Xinjiang, northwest China: Constraints from petrography, geochemistry, and zircon U–Pb dating and O isotopes”, “Harmonizing measurements of oxidative potential of PM: an interlaboratory comparison of the ascorbic acid assay”, and 1 other sampled publication，这些论文未能一致支持分析主题。
+冲突审核抽样检查了“Origins of the Margou magnesian skarn deposit containing green–black and black nephrite in the South Altyn Tagh, Xinjiang, northwest China: Constraints from petrography, geochemistry, and zircon U–Pb dating and O isotopes”, “Harmonizing measurements of oxidative potential of PM: an interlaboratory comparison of the ascorbic acid assay”，另有 1 篇抽样论文，这些论文未能一致支持分析主题。
 
 由于本次发布中的分析主题与大多数归属论文元数据存在偏离，因此不主张实质性的论文归类。
 
