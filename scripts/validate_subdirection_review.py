@@ -8,6 +8,7 @@ import json
 import re
 import unicodedata
 from collections import Counter, defaultdict
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -45,10 +46,39 @@ _WEAK_SINGLE_TOKENS = frozenset({
     "effect", "impact", "management", "material", "method", "model", "network",
     "optimization", "process", "system", "technology",
 })
+_NON_DISCRIMINATIVE_CORE_WORDS = frozenset({
+    *_GENERIC_WORDS,
+    *_WEAK_SINGLE_TOKENS,
+    "algorithm", "algorithms", "application", "applications", "catalyst", "catalysts",
+    "condition", "conditions", "learning", "machine", "material", "materials", "method",
+    "methods", "property", "properties", "related", "science", "studies", "study",
+    "production", "technique", "techniques", "treatment", "treatments",
+})
 _DUPLICATE_MODIFIERS = frozenset({
     "advanced", "advancement", "analysis", "application", "material", "optimization",
     "research", "study", "technique", "technology",
 })
+_CONCEPT_ALIASES: dict[str, frozenset[str]] = {
+    "alloy": frozenset({"alloy"}),
+    "biogas": frozenset({"biogas", "methane"}),
+    "cancer": frozenset({"antitumor", "cancer", "oncology", "tumor"}),
+    "co2": frozenset({"co2", "carbon dioxide"}),
+    "converter": frozenset({"converter", "convertor", "inverter"}),
+    "electrocatalyst": frozenset({"electrocatalysis", "electrocatalyst", "electrocatalytic"}),
+    "electric_motor": frozenset({
+        "electric machine", "electric motor", "permanent magnet synchronous motor", "pmsm",
+        "reluctance motor", "srm", "switched reluctance motor", "synchronous motor",
+    }),
+    "magnetic": frozenset({"ferromagnetic", "ferromagnetism", "magnet", "magnetic", "magnetism"}),
+    "multimodal": frozenset({"multimodal", "multi modal", "vision language action", "vla"}),
+    "multilevel": frozenset({"multi level", "multilevel"}),
+    "photocatalysis": frozenset({"photocatalysis", "photocatalyst", "photocatalytic"}),
+    "reduction": frozenset({"electroreduction", "reduce", "reduced", "reducing", "reduction"}),
+    "robot": frozenset({"robot", "robotic", "robotics"}),
+    "sensorless": frozenset({"sensorless"}),
+    "spondyloarthritis": frozenset({"ankylosing spondylitis", "axial spondyloarthritis", "spondyloarthritis"}),
+    "synthesis": frozenset({"synthesis", "synthesize", "synthesized", "synthesizing"}),
+}
 _UNASSIGNED_REASON = (
     "The reviewed evidence does not support a reliable assignment of this publication "
     "to the accepted sub-directions."
@@ -56,6 +86,7 @@ _UNASSIGNED_REASON = (
 
 
 def _ascii(value: str) -> str:
+    value = value.translate(str.maketrans("₀₁₂₃₄₅₆₇₈₉", "0123456789"))
     return unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode().casefold()
 
 
@@ -106,12 +137,70 @@ def _has_any(value: str, terms: set[str]) -> bool:
     return bool(tokens & terms) or any(term in normalized for term in terms if " " in term)
 
 
+@lru_cache(maxsize=None)
+def _normalized_words(value: str) -> tuple[str, ...]:
+    return tuple(_review_stem(token) for token in re.findall(r"[a-z0-9]+", _ascii(value)))
+
+
+def _contains_normalized_phrase(topic: str, value: str) -> bool:
+    topic_words, value_words = _normalized_words(topic), _normalized_words(value)
+    if not topic_words or len(topic_words) > len(value_words):
+        return False
+    return any(
+        value_words[index:index + len(topic_words)] == topic_words
+        for index in range(len(value_words) - len(topic_words) + 1)
+    )
+
+
+@lru_cache(maxsize=None)
+def _canonical_concept(word: str) -> str:
+    for concept, aliases in _CONCEPT_ALIASES.items():
+        if word in {_review_stem(alias) for alias in aliases if " " not in alias}:
+            return concept
+    return word
+
+
+@lru_cache(maxsize=None)
+def _topic_core_concepts(topic: str) -> frozenset[str]:
+    tokens = _review_tokens(topic)
+    generic = {_review_stem(token) for token in _NON_DISCRIMINATIVE_CORE_WORDS}
+    concepts = {_canonical_concept(token) for token in tokens - generic}
+    topic_ascii = _ascii(topic)
+    if "carbon dioxide" in topic_ascii:
+        concepts -= {"carbon", "dioxide"}
+        concepts.add("co2")
+    if "electric motor" in topic_ascii:
+        concepts -= {"electric", "motor"}
+        concepts.add("electric_motor")
+    concepts -= {"3d", "ai", "artificial", "intelligence", "ml"}
+    return frozenset(concepts)
+
+
+def _concept_present(concept: str, value: str) -> bool:
+    value_ascii = _ascii(value)
+    value_tokens = _review_tokens(value)
+    if concept == "multilevel" and re.search(
+        r"\b(?:three|five|seven|nine|eleven|\d+)[ -]level\b", value_ascii
+    ):
+        return True
+    aliases = _CONCEPT_ALIASES.get(concept, frozenset({concept}))
+    for alias in aliases:
+        if " " in alias:
+            if re.search(rf"\b{re.escape(alias)}\b", value_ascii):
+                return True
+        elif _review_stem(alias) in value_tokens:
+            return True
+    return False
+
+
 def _review_text_support(topic: str, value: str) -> bool:
     """Require topic-discriminative concepts, not a generic acronym or dimension token."""
     topic_tokens = _review_tokens(topic, topical=True)
     value_tokens = _review_tokens(value)
-    overlap = topic_tokens & value_tokens
     topic_ascii = _ascii(topic)
+
+    if _contains_normalized_phrase(topic, value):
+        return True
 
     if "artificial intelligence" in topic_ascii or re.search(r"\bai\b", topic_ascii):
         if not _has_ai_signal(value):
@@ -155,12 +244,12 @@ def _review_text_support(topic: str, value: str) -> bool:
             or _has_any(value, {"vehicular"})
         )
 
-    topic_coverage = len(overlap) / len(topic_tokens) if topic_tokens else 0.0
-    if topic_coverage >= 0.5 and (
-        len(overlap) >= 2
-        or any(len(token) >= 6 and token not in _WEAK_SINGLE_TOKENS for token in overlap)
-    ):
-        return True
+    if re.search(r"\bbim\b", topic_ascii):
+        return bool(
+            re.search(r"\bbim\b", _ascii(value))
+            or "building information model" in _ascii(value)
+        )
+
     value_ascii = _ascii(value)
     compact_value = re.sub(r"[^a-z0-9]", "", value_ascii)
     multimodal_signal = (
@@ -187,7 +276,10 @@ def _review_text_support(topic: str, value: str) -> bool:
         cancer_signal = bool(value_tokens & {"antitumor", "cancer", "tumor"})
         if nano_signal and cancer_signal:
             return True
-    return False
+    core_concepts = _topic_core_concepts(topic)
+    return bool(core_concepts) and all(
+        _concept_present(concept, value) for concept in core_concepts
+    )
 
 
 def _exact_subject_has_context(topic: str, publication: dict[str, Any]) -> bool:
@@ -312,7 +404,9 @@ def _relevant_analysis_terms(name: str, keywords: list[str]) -> list[str]:
 
 
 def _direction_core(name: str) -> set[str]:
-    return _review_tokens(name, topical=True) - _DUPLICATE_MODIFIERS
+    return _topic_core_concepts(name) - {
+        _canonical_concept(token) for token in _DUPLICATE_MODIFIERS
+    }
 
 
 def _overlap_coefficient(left: set[str], right: set[str]) -> float:
@@ -336,48 +430,56 @@ def _near_duplicate(
     core_subset = bool(left_core and right_core) and (
         left_core <= right_core or right_core <= left_core
     )
+    if "sensorless" in left_core ^ right_core:
+        return False
     return core_subset and _overlap_coefficient(left_ids, right_ids) >= 0.75
 
 
 def _merge_reviewed_direction(
     target: tuple[dict[str, Any], dict[str, Any], set[str]],
     incoming: tuple[dict[str, Any], dict[str, Any], set[str]],
+    publications: list[dict[str, Any]],
 ) -> tuple[dict[str, Any], dict[str, Any], set[str]]:
-    direction, review, evidence_ids = target
+    target_direction, target_review, target_ids = target
     incoming_direction, incoming_review, incoming_ids = incoming
+    target_core = _direction_core(str(target_direction["nameEn"]))
+    incoming_core = _direction_core(str(incoming_direction["nameEn"]))
+    canonical = incoming if incoming_core and incoming_core < target_core else target
+    direction = dict(canonical[0])
+    review = dict(canonical[1])
     source_names = [
-        *review["sourceNamesEn"],
-        *[name for name in incoming_review["sourceNamesEn"] if name not in review["sourceNamesEn"]],
+        *target_review["sourceNamesEn"],
+        *[
+            name for name in incoming_review["sourceNamesEn"]
+            if name not in target_review["sourceNamesEn"]
+        ],
     ]
-    judgments_by_id = {
-        judgment["publicationId"]: dict(judgment)
-        for judgment in review["evidenceJudgments"]
-    }
-    for judgment in incoming_review["evidenceJudgments"]:
-        if judgment["publicationId"] not in judgments_by_id:
-            judgments_by_id[judgment["publicationId"]] = dict(judgment)
-            continue
-        existing = judgments_by_id[judgment["publicationId"]]
-        existing["titleSupport"] = existing["titleSupport"] or judgment["titleSupport"]
-        existing["indexedSubjectSupport"] = (
-            existing["indexedSubjectSupport"] or judgment["indexedSubjectSupport"]
+    union_ids = target_ids | incoming_ids
+    publications_by_id = {item["publicationId"]: item for item in publications}
+    merged_judgments = [
+        judgment for publication_id in sorted(union_ids)
+        if publication_id in publications_by_id
+        and (
+            judgment := _publication_judgment(
+                str(direction["nameEn"]), publications_by_id[publication_id]
+            )
+        ) is not None
+    ]
+    merged_ids = {str(item["publicationId"]) for item in merged_judgments}
+    evidence_publications = [publications_by_id[publication_id] for publication_id in sorted(merged_ids)]
+    if merged_judgments:
+        evidence_urls = _direction_urls(evidence_publications)
+    else:
+        evidence_urls = sorted(
+            set(target_direction["evidenceUrls"]) | set(incoming_direction["evidenceUrls"])
         )
-        existing["matchedSubjectLabels"] = sorted(set(
-            existing["matchedSubjectLabels"] + judgment["matchedSubjectLabels"]
-        ), key=lambda value: (_ascii(value), value))
-        existing["reasonEn"] = _judgment_reason(
-            existing["titleSupport"], existing["indexedSubjectSupport"]
-        )
-    merged_ids = evidence_ids | incoming_ids
-    merged_judgments = sorted(
-        judgments_by_id.values(), key=lambda item: str(item["publicationId"])
-    )
     direction["evidencePublicationIds"] = sorted(merged_ids)
-    direction["evidenceUrls"] = sorted(set(direction["evidenceUrls"]) | set(incoming_direction["evidenceUrls"]))
+    direction["evidenceUrls"] = evidence_urls
     review.update({
+        "subdirectionId": direction["id"],
         "sourceNamesEn": source_names,
         "evidencePublicationIds": sorted(merged_ids),
-        "evidenceUrls": list(direction["evidenceUrls"]),
+        "evidenceUrls": evidence_urls,
         "sourceTitles": [item["sourceTitle"] for item in merged_judgments],
         "evidenceJudgments": merged_judgments,
     })
@@ -565,7 +667,7 @@ def review_subdirection_candidates(
                     reviewed.append(result)
                 else:
                     reviewed[duplicate_index] = _merge_reviewed_direction(
-                        reviewed[duplicate_index], result
+                        reviewed[duplicate_index], result, queue_item["publications"]
                     )
             reviewed = reviewed[:3]
             if not reviewed:
@@ -625,7 +727,7 @@ def review_subdirection_candidates(
                     reviewed.append(result)
                 else:
                     reviewed[duplicate_index] = _merge_reviewed_direction(
-                        reviewed[duplicate_index], result
+                        reviewed[duplicate_index], result, queue_item["publications"]
                     )
             reviewed = reviewed[:3]
         else:

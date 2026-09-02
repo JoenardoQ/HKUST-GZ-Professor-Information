@@ -602,6 +602,102 @@ class ProfessorInformationTests(unittest.TestCase):
                 report, non_english, queue, candidates, {"20", "21"}, publications
             )
 
+    def test_subdirection_matcher_requires_every_discriminative_core_concept(self):
+        from scripts.validate_subdirection_review import _review_text_support
+
+        rejected_pairs = [
+            ("Spondyloarthritis Studies and Treatments", "Pancreatitis pathology and treatment"),
+            ("Advanced Bandit Algorithms Research", "A generic optimization algorithm"),
+            ("CO2 Reduction Techniques and Catalysts", "A carbon catalyst for oxygen reduction"),
+            ("Multimodal Machine Learning Applications", "A machine learning model"),
+            ("Risk and Portfolio Optimization", "Portfolio optimization methods"),
+            ("Artificial Intelligence in Games", "AI forecasting for electricity demand"),
+            ("3D Printing in Biomedical Research", "3D printing of concrete structures"),
+        ]
+        for topic, evidence in rejected_pairs:
+            with self.subTest(topic=topic, evidence=evidence):
+                self.assertFalse(_review_text_support(topic, evidence))
+
+        accepted_pairs = [
+            ("Spondyloarthritis Studies and Treatments", "Therapies for axial spondyloarthritis"),
+            ("Advanced Bandit Algorithms Research", "Contextual bandits with delayed feedback"),
+            ("CO2 Reduction Techniques and Catalysts", "Catalytic carbon dioxide electroreduction"),
+            ("Multimodal Machine Learning Applications", "Multimodal learning for perception"),
+            ("Risk and Portfolio Optimization", "Risk-aware portfolio optimisation"),
+            ("Magnetic Properties of Alloys", "Magnetism in compositionally complex alloy systems"),
+            ("BIM and Construction Integration", "BIM-based model visualization"),
+            ("Advanced Bandit Algorithms Research", "Advanced bandit algorithm research"),
+        ]
+        for topic, evidence in accepted_pairs:
+            with self.subTest(topic=topic, evidence=evidence):
+                self.assertTrue(_review_text_support(topic, evidence))
+
+    def test_subdirection_duplicate_merge_revalidates_unioned_publications(self):
+        from scripts.validate_subdirection_review import _merge_reviewed_direction
+
+        publications = [
+            {
+                "publicationId": "p-shared",
+                "title": "Perovskite materials for infrared sensing",
+                "keywords": [],
+                "evidenceUrls": ["https://openalex.org/W-shared"],
+            },
+            {
+                "publicationId": "p-narrow-only",
+                "title": "Magnetic transport in an alloy",
+                "keywords": [],
+                "evidenceUrls": ["https://openalex.org/W-narrow"],
+            },
+        ]
+        narrow = (
+            {
+                "id": "magnetic-transport-perovskites",
+                "nameEn": "Magnetic transport in perovskites",
+                "evidencePublicationIds": ["p-narrow-only", "p-shared"],
+                "evidenceUrls": ["https://openalex.org/W-narrow", "https://openalex.org/W-shared"],
+            },
+            {
+                "subdirectionId": "magnetic-transport-perovskites",
+                "sourceNamesEn": ["Magnetic transport in perovskites"],
+                "evidenceBasis": "title-or-indexed-subject support",
+                "evidencePublicationIds": ["p-narrow-only", "p-shared"],
+                "evidenceUrls": ["https://openalex.org/W-narrow", "https://openalex.org/W-shared"],
+                "sourceTitles": [item["title"] for item in publications],
+                "evidenceJudgments": [],
+            },
+            {"p-narrow-only", "p-shared"},
+        )
+        broad = (
+            {
+                "id": "perovskite-materials",
+                "nameEn": "Perovskite materials",
+                "evidencePublicationIds": ["p-shared"],
+                "evidenceUrls": ["https://openalex.org/W-shared"],
+            },
+            {
+                "subdirectionId": "perovskite-materials",
+                "sourceNamesEn": ["Perovskite materials"],
+                "evidenceBasis": "title-or-indexed-subject support",
+                "evidencePublicationIds": ["p-shared"],
+                "evidenceUrls": ["https://openalex.org/W-shared"],
+                "sourceTitles": [publications[0]["title"]],
+                "evidenceJudgments": [],
+            },
+            {"p-shared"},
+        )
+
+        direction, review, evidence_ids = _merge_reviewed_direction(
+            narrow, broad, publications
+        )
+        self.assertEqual(direction["nameEn"], "Perovskite materials")
+        self.assertEqual(direction["id"], "perovskite-materials")
+        self.assertEqual(evidence_ids, {"p-shared"})
+        self.assertEqual(review["evidencePublicationIds"], ["p-shared"])
+        self.assertEqual(
+            review["sourceNamesEn"],
+            ["Magnetic transport in perovskites", "Perovskite materials"],
+        )
+
     def test_subdirection_release_regressions(self):
         from scripts.prepare_subdirection_work_queue import (
             build_subdirection_candidates,
@@ -734,6 +830,36 @@ class ProfessorInformationTests(unittest.TestCase):
         self.assertTrue(any(
             publication_id not in biomedical_3d["titleSupportedPublicationIds"]
             for publication_id in biomedical_3d["indexedSubjectSupportedPublicationIds"]
+        ))
+
+        self.assertNotIn(
+            "Spondyloarthritis Studies and Treatments",
+            {item["nameEn"] for item in by_id["570"]["subdirections"]},
+        )
+        self.assertNotIn(
+            "Advanced Bandit Algorithms Research",
+            {item["nameEn"] for item in by_id["375"]["subdirections"]},
+        )
+        self.assertNotIn(
+            "CO2 Reduction Techniques and Catalysts",
+            {item["nameEn"] for item in by_id["558"]["subdirections"]},
+        )
+
+        perovskite_review = next(
+            item for item in reviews["11"]["directionReviews"]
+            if item["subdirectionId"] == "perovskite-materials-and-applications"
+        )
+        self.assertEqual(
+            perovskite_review["subdirectionId"],
+            "perovskite-materials-and-applications",
+        )
+        infrared_publication_id = "doi:10.1016/j.device.2024.100661"
+        self.assertIn(infrared_publication_id, perovskite_review["evidencePublicationIds"])
+        self.assertFalse(any(
+            item["subdirectionId"]
+            == "magnetic-and-transport-properties-of-perovskites-and-related-materials"
+            and infrared_publication_id in item["evidencePublicationIds"]
+            for item in reviews["11"]["directionReviews"]
         ))
 
     def test_retrieval_attempts_skip_then_fail_after_three_targeted_failures(self):
