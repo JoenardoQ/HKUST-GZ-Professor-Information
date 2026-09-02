@@ -986,13 +986,28 @@ def validate_research_subdirections(
                 _valid_official_subdirection_evidence(url) for url in evidence_urls
             ):
                 raise SourceDataError(f"subdirection {direction_id} without publications requires official research evidence")
-            validate_review_status(direction.get("reviewStatus"), f"subdirection {direction_id}")
+            direction_review_status = direction.get("reviewStatus")
+            validate_review_status(direction_review_status, f"subdirection {direction_id}")
+            if direction_review_status == "limited":
+                limitation = direction.get("limitationEn")
+                if not isinstance(limitation, str) or not clean(limitation):
+                    raise SourceDataError(f"limited subdirection {direction_id} requires a non-empty limitation")
+                if limitation != sentences[2]:
+                    raise SourceDataError(f"limited subdirection {direction_id} limitation must match the third explanation sentence")
+            elif "limitationEn" in direction:
+                raise SourceDataError(f"pass subdirection {direction_id} cannot include a limitation")
+            if not evidence_publications and (
+                record.get("reviewStatus") != "limited" or direction_review_status != "limited"
+            ):
+                raise SourceDataError(f"official-only subdirection {direction_id} and its professor record must be limited")
 
         assigned_publications: set[str] = set()
         for assignment in assignments:
             if not isinstance(assignment, dict):
                 raise SourceDataError(f"professor {profile_id} has a malformed publication assignment")
             publication_id = assignment.get("publicationId")
+            if not isinstance(publication_id, str) or not clean(publication_id):
+                raise SourceDataError("publication ID must be a non-empty string")
             if publication_owners.get(publication_id) != profile_id:
                 raise SourceDataError(f"publication assignment references a publication not owned by professor {profile_id}")
             if publication_id in assigned_publications:
