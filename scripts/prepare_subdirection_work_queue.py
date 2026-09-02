@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare and deterministically resolve the reviewed English sub-direction queue."""
+"""Prepare canonical evidence and unreviewed English sub-direction candidates."""
 
 from __future__ import annotations
 
@@ -20,11 +20,6 @@ try:
         clean,
         in_window,
         validate_research_analysis,
-        validate_research_subdirections,
-    )
-    from scripts.validate_subdirection_review import (
-        build_subdirection_review_report,
-        validate_subdirection_review_report,
     )
 except ModuleNotFoundError:  # Direct script execution adds scripts/, not the repository root.
     from professor_information import (  # type: ignore[no-redef]
@@ -34,24 +29,19 @@ except ModuleNotFoundError:  # Direct script execution adds scripts/, not the re
         clean,
         in_window,
         validate_research_analysis,
-        validate_research_subdirections,
-    )
-    from validate_subdirection_review import (  # type: ignore[no-redef]
-        build_subdirection_review_report,
-        validate_subdirection_review_report,
     )
 
 
-UNASSIGNED_REASON = (
-    "The indexed metadata for this publication does not support a reliable "
-    "assignment to the reviewed sub-directions."
-)
-LIMITED_DIRECTION_NAME = "Evidence-limited research profile"
-LIMITED_EXPLANATION = [
-    "The approved release data does not support a specific research sub-direction for this professor.",
-    "The official profile identifies the professor, while no retrieved publication metadata provides a reviewed thematic match.",
-    "This record is limited to documenting insufficient approved evidence and should not be read as a description of the professor's broader research agenda.",
-]
+_GENERIC_TOPIC_WORDS = frozenset({
+    "a", "an", "and", "application", "applications", "approach", "approaches",
+    "advanced", "based", "for", "in", "of", "on", "research", "study", "studies",
+    "the", "to",
+})
+_WEAK_SINGLE_TOKENS = frozenset({
+    "analysis", "approach", "architecture", "computational", "design", "development",
+    "effect", "impact", "management", "material", "method", "model", "network",
+    "optimization", "process", "system", "technology",
+})
 
 
 def _professor_sort_key(record: dict[str, Any]) -> tuple[str, str]:
@@ -73,11 +63,85 @@ def _publication_sort_key(record: dict[str, Any]) -> tuple[int, str, str]:
     )
 
 
+def _ascii_text(value: str) -> str:
+    return unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode().casefold()
+
+
+def _stem(word: str) -> str:
+    if len(word) > 5 and word.endswith("ies"):
+        return word[:-3] + "y"
+    if len(word) > 5 and word.endswith("ing"):
+        return word[:-3]
+    if len(word) > 4 and word.endswith("ed"):
+        return word[:-2]
+    if len(word) > 4 and word.endswith("s"):
+        return word[:-1]
+    return word
+
+
+def _tokens(value: str, *, drop_generic: bool = False) -> set[str]:
+    result = {_stem(token) for token in re.findall(r"[a-z0-9]+", _ascii_text(value)) if len(token) >= 2}
+    if drop_generic:
+        result -= {_stem(token) for token in _GENERIC_TOPIC_WORDS}
+    return result
+
+
+def _similarity(left: str, right: str) -> float:
+    left_tokens, right_tokens = _tokens(left, drop_generic=True), _tokens(right, drop_generic=True)
+    if not left_tokens or not right_tokens:
+        return 0.0
+    return len(left_tokens & right_tokens) / len(left_tokens | right_tokens)
+
+
+def _set_similarity(left: set[str], right: set[str]) -> float:
+    if not left or not right:
+        return 0.0
+    return len(left & right) / len(left | right)
+
+
+def _topic_matches_publication(topic: str, publication: dict[str, Any]) -> bool:
+    """Require title-level support; keyword labels alone are not sufficient."""
+    topic_tokens = _tokens(topic, drop_generic=True)
+    title = str(publication.get("title") or "")
+    title_tokens = _tokens(title)
+    overlap = topic_tokens & title_tokens
+    topic_coverage = len(overlap) / len(topic_tokens) if topic_tokens else 0.0
+    if topic_coverage >= 0.5 and (
+        len(overlap) >= 2
+        or any(len(token) >= 6 and token not in _WEAK_SINGLE_TOKENS for token in overlap)
+    ):
+        return True
+    topic_ascii, title_ascii = _ascii_text(topic), _ascii_text(title)
+    compact_title = re.sub(r"[^a-z0-9]", "", title_ascii)
+    if "multimodal" in topic_ascii and (
+        "multimodal" in compact_title
+        or "visionlanguageaction" in compact_title
+        or re.search(r"\bvla\b", title_ascii)
+    ):
+        return True
+    if "robot" in topic_ascii and "social" not in topic_ascii and (
+        "visionlanguageaction" in compact_title or re.search(r"\bvla\b", title_ascii)
+    ):
+        return True
+    if "battery" in topic_ascii and title_tokens & {
+        "anode", "battery", "cathode", "lithium", "sodium", "zinc", "zn"
+    }:
+        return True
+    if "nanoplatform" in topic_ascii and {"cancer", "theranostic"} & topic_tokens:
+        nano_signal = bool(title_tokens & {"biomaterial", "nano", "nanoplatform", "photosensitizer"})
+        cancer_signal = bool(title_tokens & {"antitumor", "cancer", "tumor"})
+        if nano_signal and cancer_signal:
+            return True
+    if "3d" in topic_tokens and "3d" in title_tokens:
+        return True
+    if "artificial intelligence" in topic_ascii or re.search(r"\bai\b", topic_ascii):
+        return "artificial intelligence" in title_ascii or bool(re.search(r"\bai\b", title_ascii))
+    return False
+
+
 def _direction_id(name: str, used: set[str]) -> str:
-    normalized = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode()
-    base = "-".join(re.findall(r"[a-z0-9]+", normalized.casefold())) or "research-direction"
-    candidate = base
-    suffix = 2
+    base = "-".join(re.findall(r"[a-z0-9]+", _ascii_text(name))) or "research-direction"
+    candidate, suffix = base, 2
     while candidate in used:
         candidate = f"{base}-{suffix}"
         suffix += 1
@@ -92,10 +156,9 @@ def _approved_urls(values: Any, *, allow_official: bool = False) -> list[str]:
     for value in values:
         if not isinstance(value, str):
             raise SourceDataError("evidence URL must be a string")
-        approved = _valid_evidence(value) or (
+        if not _valid_evidence(value) and not (
             allow_official and _valid_official_subdirection_evidence(value)
-        )
-        if not approved:
+        ):
             raise SourceDataError("work queue contains evidence outside approved sources")
         result.append(value)
     return sorted(set(result))
@@ -107,7 +170,7 @@ def build_subdirection_work_queue(
     publications: list[dict[str, Any]],
     cutoff: str,
 ) -> dict[str, Any]:
-    """Build a deterministic, professor-scoped queue from canonical English inputs."""
+    """Build deterministic professor-scoped evidence without Scholar-derived fields."""
     try:
         cutoff_date = date.fromisoformat(cutoff)
         start = cutoff_date.replace(year=cutoff_date.year - 2).isoformat()
@@ -130,11 +193,7 @@ def build_subdirection_work_queue(
         professor_by_id[profile_id] = professor
     professor_ids = set(professor_by_id)
     validate_research_analysis(analyses, professor_ids)
-
-    analysis_by_id: dict[str, dict[str, Any]] = {}
-    for analysis in analyses:
-        profile_id = str(analysis["officialProfileId"])
-        analysis_by_id[profile_id] = analysis
+    analysis_by_id = {str(item["officialProfileId"]): item for item in analyses}
 
     publications_by_professor: dict[str, list[dict[str, Any]]] = defaultdict(list)
     seen_publications: set[tuple[str, str]] = set()
@@ -145,45 +204,40 @@ def build_subdirection_work_queue(
         publication_id = clean(publication.get("publicationId"))
         if not profile_id or profile_id not in professor_ids:
             raise SourceDataError("publication references an unknown professor")
-        scoped_publication_id = (profile_id, publication_id or "")
-        if not publication_id or scoped_publication_id in seen_publications:
+        scoped_id = (profile_id, publication_id or "")
+        if not publication_id or scoped_id in seen_publications:
             raise SourceDataError("publication IDs must be unique within each professor")
-        seen_publications.add(scoped_publication_id)
-        if not clean(publication.get("title")):
+        seen_publications.add(scoped_id)
+        title = clean(publication.get("title"))
+        if not title:
             raise SourceDataError("publication title must be non-empty")
         effective_date = str(publication.get("effectiveDate") or "")
         if not in_window(start, cutoff, effective_date):
             raise SourceDataError("publication falls outside the release window")
-        if not isinstance(publication.get("keywords"), list) or any(
-            not isinstance(value, str) for value in publication["keywords"]
-        ):
+        keywords = publication.get("keywords")
+        if not isinstance(keywords, list) or any(not isinstance(value, str) for value in keywords):
             raise SourceDataError("publication keywords must be a list of strings")
         evidence_urls = _approved_urls(publication.get("evidenceUrls"))
         if not evidence_urls:
             raise SourceDataError("publication requires approved evidence")
         publications_by_professor[profile_id].append({
             "publicationId": publication_id,
-            "title": clean(publication.get("title")),
+            "title": title,
             "effectiveDate": effective_date,
             "publicationType": clean(publication.get("publicationType")),
             "venue": clean(publication.get("venue")),
-            "keywords": list(publication["keywords"]),
+            "keywords": list(keywords),
             "evidenceUrls": evidence_urls,
         })
 
-    queued_professors: list[dict[str, Any]] = []
+    queued: list[dict[str, Any]] = []
     for professor in sorted(professors, key=_professor_sort_key):
         profile_id = str(professor["officialProfileId"])
         analysis = analysis_by_id[profile_id]
-        official_urls = _approved_urls(
-            [
-                url
-                for url in (professor.get("officialProfileUrl"), professor.get("permaLink"))
-                if url
-            ],
-            allow_official=True,
-        )
-        queued_professors.append({
+        official_urls = _approved_urls([
+            url for url in (professor.get("officialProfileUrl"), professor.get("permaLink")) if url
+        ], allow_official=True)
+        queued.append({
             "officialProfileId": profile_id,
             "nameEn": clean(professor.get("nameEn")),
             "officialEvidenceUrls": official_urls,
@@ -197,127 +251,106 @@ def build_subdirection_work_queue(
                 "evidenceUrls": _approved_urls(analysis["evidenceUrls"]),
                 "lastVerifiedOn": analysis.get("lastVerifiedOn"),
             },
-            "publications": sorted(
-                publications_by_professor.get(profile_id, []),
-                key=_publication_sort_key,
-            ),
+            "publications": sorted(publications_by_professor.get(profile_id, []), key=_publication_sort_key),
         })
-
     return {
         "schemaVersion": 1,
         "cutoff": cutoff,
         "window": {"start": start, "end": cutoff, "inclusive": True},
-        "professors": queued_professors,
+        "professors": queued,
     }
 
 
-def build_research_subdirections(queue: dict[str, Any]) -> dict[str, Any]:
-    """Resolve only exact analysis-topic/publication-metadata matches into directions."""
-    records: list[dict[str, Any]] = []
-    for item in queue.get("professors") or []:
-        profile_id = str(item["officialProfileId"])
-        publications = item["publications"]
-        candidate_names: list[str] = []
-        seen_names: set[str] = set()
-        analysis = item["researchAnalysis"]
-        for raw_name in [*analysis["researchInterests"], *analysis["researchAreas"]]:
-            name = clean(raw_name)
-            normalized = unicodedata.normalize("NFKC", name or "").casefold()
-            if not name or normalized in seen_names:
-                continue
-            seen_names.add(normalized)
-            if any(
-                normalized
-                in {
-                    unicodedata.normalize("NFKC", keyword).casefold()
-                    for keyword in publication["keywords"]
-                }
-                for publication in publications
-            ):
-                candidate_names.append(name)
-            if len(candidate_names) == 3:
-                break
-
-        used_ids: set[str] = set()
-        directions: list[dict[str, Any]] = []
-        direction_matches: dict[str, set[str]] = {}
-        for name in candidate_names:
-            normalized = unicodedata.normalize("NFKC", name).casefold()
-            matches = [
-                publication
-                for publication in publications
-                if normalized
-                in {
-                    unicodedata.normalize("NFKC", keyword).casefold()
-                    for keyword in publication["keywords"]
-                }
-            ]
-            direction_id = _direction_id(name, used_ids)
-            direction_matches[direction_id] = {
-                publication["publicationId"] for publication in matches
-            }
-            directions.append({
-                "id": direction_id,
-                "nameEn": name,
-                "explanationEn": [
-                    f"{name} is a research sub-direction identified from subject metadata in this professor's release-window publications.",
-                    f"The indexed metadata assigns this topic to {len(matches)} owned publication{'s' if len(matches) != 1 else ''} in the {queue['window']['start']} through {queue['window']['end']} release window.",
-                    "This grouping reflects the available publication metadata and does not establish activity outside the reviewed release window.",
-                ],
-                "evidencePublicationIds": [
-                    publication["publicationId"] for publication in matches
-                ],
-                "evidenceUrls": sorted({
-                    url
-                    for publication in matches
-                    for url in publication["evidenceUrls"]
-                }),
-                "reviewStatus": "pass",
+def _merge_direction(directions: list[dict[str, Any]], name: str, matches: list[dict[str, Any]]) -> None:
+    match_ids = {item["publicationId"] for item in matches}
+    for direction in directions:
+        existing_ids = set(direction["evidencePublicationIds"])
+        if _similarity(name, direction["nameEn"]) >= 0.55 or _set_similarity(match_ids, existing_ids) >= 0.9:
+            if name not in direction["sourceNamesEn"]:
+                direction["sourceNamesEn"].append(name)
+            direction["evidencePublicationIds"] = sorted(existing_ids | match_ids)
+            direction["evidenceUrls"] = sorted(set(direction["evidenceUrls"]) | {
+                url for publication in matches for url in publication["evidenceUrls"]
             })
+            return
+    directions.append({
+        "nameEn": name,
+        "sourceNamesEn": [name],
+        "evidencePublicationIds": sorted(item["publicationId"] for item in matches),
+        "evidenceUrls": sorted({url for item in matches for url in item["evidenceUrls"]}),
+        "evidenceBasis": "publication-title-and-analysis-topic",
+    })
 
-        if not directions:
-            if not item["officialEvidenceUrls"]:
-                raise SourceDataError(
-                    f"professor {profile_id} lacks official evidence for a limited direction"
-                )
-            direction_id = _direction_id(LIMITED_DIRECTION_NAME, used_ids)
+
+def build_subdirection_candidates(queue: dict[str, Any]) -> dict[str, Any]:
+    """Generate status-free candidates; review and disposition happen separately."""
+    candidate_records: list[dict[str, Any]] = []
+    for item in queue.get("professors") or []:
+        analysis, publications = item["researchAnalysis"], item["publications"]
+        topics: list[str] = []
+        for raw in [*analysis["researchInterests"], *analysis["researchAreas"]]:
+            topic = clean(raw)
+            if topic and topic.casefold() not in {value.casefold() for value in topics}:
+                topics.append(topic)
+        directions: list[dict[str, Any]] = []
+        if publications:
+            for topic in topics:
+                matches = [publication for publication in publications if _topic_matches_publication(topic, publication)]
+                if matches:
+                    _merge_direction(directions, topic, matches)
+                if len(directions) >= 3:
+                    break
+            if not directions:
+                sampled = publications[:3]
+                directions = [{
+                    "nameEn": "Conflicting indexed research evidence",
+                    "sourceNamesEn": topics[:3],
+                    "evidencePublicationIds": [entry["publicationId"] for entry in sampled],
+                    "evidenceUrls": sorted(
+                        {url for publication in sampled for url in publication["evidenceUrls"]}
+                        | set(item["officialEvidenceUrls"])
+                        | set(analysis["evidenceUrls"])
+                    ),
+                    "evidenceBasis": "conflicting-record",
+                }]
+        elif topics:
+            for topic in topics:
+                if any(_similarity(topic, direction["nameEn"]) >= 0.55 for direction in directions):
+                    continue
+                directions.append({
+                    "nameEn": topic,
+                    "sourceNamesEn": [topic],
+                    "evidencePublicationIds": [],
+                    "evidenceUrls": sorted(set(item["officialEvidenceUrls"]) | set(analysis["evidenceUrls"])),
+                    "evidenceBasis": "analysis-only",
+                })
+                if len(directions) == 3:
+                    break
+        else:
             directions = [{
-                "id": direction_id,
-                "nameEn": LIMITED_DIRECTION_NAME,
-                "explanationEn": list(LIMITED_EXPLANATION),
+                "nameEn": "Evidence-limited research profile",
+                "sourceNamesEn": [],
                 "evidencePublicationIds": [],
                 "evidenceUrls": list(item["officialEvidenceUrls"]),
-                "reviewStatus": "limited",
-                "limitationEn": LIMITED_EXPLANATION[2],
+                "evidenceBasis": "insufficient-evidence",
             }]
-            review_status = "limited"
-        else:
-            review_status = "pass"
 
-        assignments: list[dict[str, Any]] = []
-        for publication in publications:
-            assigned_ids = [
-                direction["id"]
-                for direction in directions
-                if publication["publicationId"]
-                in direction_matches.get(direction["id"], set())
-            ]
-            assignments.append({
-                "publicationId": publication["publicationId"],
-                "subdirectionIds": assigned_ids,
-                "unassignedReasonEn": None if assigned_ids else UNASSIGNED_REASON,
-            })
-        records.append({
-            "officialProfileId": profile_id,
-            "reviewStatus": review_status,
+        used_ids: set[str] = set()
+        for direction in directions:
+            direction["id"] = _direction_id(direction["nameEn"], used_ids)
+        candidate_records.append({
+            "officialProfileId": item["officialProfileId"],
             "subdirections": directions,
-            "publicationAssignments": assignments,
+            "publicationAssignments": [{
+                "publicationId": publication["publicationId"],
+                "subdirectionIds": [
+                    direction["id"] for direction in directions
+                    if publication["publicationId"] in direction["evidencePublicationIds"]
+                    and direction["evidenceBasis"] == "publication-title-and-analysis-topic"
+                ],
+            } for publication in publications],
         })
-    return {
-        "schemaVersion": 1,
-        "cutoff": queue.get("cutoff"),
-        "professors": records,
-    }
+    return {"schemaVersion": 1, "cutoff": queue.get("cutoff"), "professors": candidate_records}
 
 
 def _load_json(path: Path) -> Any:
@@ -329,10 +362,7 @@ def _load_json(path: Path) -> Any:
 
 def _write_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def main() -> None:
@@ -341,32 +371,16 @@ def main() -> None:
     parser.add_argument("--cutoff", required=True)
     args = parser.parse_args()
     root = args.root
-    professors = _load_json(root / "data/professors.json")
-    analyses = _load_json(root / "data/research-analysis.json")
-    publications = _load_json(root / "data/publications.json")
     queue = build_subdirection_work_queue(
-        professors, analyses, publications, args.cutoff
+        _load_json(root / "data/professors.json"),
+        _load_json(root / "data/research-analysis.json"),
+        _load_json(root / "data/publications.json"),
+        args.cutoff,
     )
-    artifact = build_research_subdirections(queue)
-    professor_ids = {str(item["officialProfileId"]) for item in professors}
-    publication_owners: dict[str, set[str]] = defaultdict(set)
-    for publication in publications:
-        publication_owners[publication["publicationId"]].add(
-            str(publication["officialProfileId"])
-        )
-    validate_research_subdirections(artifact, professor_ids, publication_owners)
-    review = build_subdirection_review_report(artifact)
-    validate_subdirection_review_report(
-        review, artifact, professor_ids, publications
-    )
-    _write_json(
-        root / f"reports/{args.cutoff}-subdirection-work-queue.json", queue
-    )
-    _write_json(root / "data/research-subdirections.json", artifact)
-    _write_json(
-        root / f"reports/{args.cutoff}-subdirection-self-review.json", review
-    )
-    print(f"{len(artifact['professors'])}/{len(professors)}")
+    candidates = build_subdirection_candidates(queue)
+    _write_json(root / f"reports/{args.cutoff}-subdirection-work-queue.json", queue)
+    _write_json(root / f"reports/{args.cutoff}-subdirection-candidates.json", candidates)
+    print(f"{len(candidates['professors'])}/{len(queue['professors'])}")
 
 
 if __name__ == "__main__":

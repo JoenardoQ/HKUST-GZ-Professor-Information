@@ -10,5 +10,6 @@ reports/*-retrieval-evidence.json
 reports/*-translation-inputs.json
 reports/translation-shards/
 reports/*-subdirection-work-queue.json
+reports/*-subdirection-candidates.json
 reports/*-subdirection-prompt.md
 reports/subdirection-shards/

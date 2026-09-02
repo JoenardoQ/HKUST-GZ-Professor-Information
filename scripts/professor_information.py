@@ -940,6 +940,8 @@ def validate_research_subdirections(
         assignments = record.get("publicationAssignments")
         if not isinstance(subdirections, list) or not isinstance(assignments, list):
             raise SourceDataError(f"professor {profile_id} requires subdirections and publication assignments")
+        if not subdirections:
+            raise SourceDataError(f"professor {profile_id} requires at least one subdirection")
 
         direction_ids: set[str] = set()
         normalized_names: set[str] = set()

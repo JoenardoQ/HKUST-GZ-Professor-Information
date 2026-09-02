@@ -297,11 +297,23 @@ class ProfessorInformationTests(unittest.TestCase):
         with self.assertRaisesRegex(SourceDataError, "blocked"):
             validate_research_subdirections(unresolved_block, professor_ids, publication_owners)
 
+        zero_directions = deepcopy(payload)
+        zero_directions["professors"][0]["subdirections"] = []
+        zero_directions["professors"][0]["publicationAssignments"][0].update({
+            "subdirectionIds": [],
+            "unassignedReasonEn": "No reliable generated sub-direction assignment was made.",
+        })
+        with self.assertRaisesRegex(SourceDataError, "at least one subdirection"):
+            validate_research_subdirections(
+                zero_directions, professor_ids, publication_owners
+            )
+
     def test_subdirection_work_queue(self):
         from scripts.prepare_subdirection_work_queue import (
-            build_research_subdirections,
+            build_subdirection_candidates,
             build_subdirection_work_queue,
         )
+        from scripts.validate_subdirection_review import review_subdirection_candidates
 
         second_row = faculty_row("21", "王明", "Ming WANG")
         professors, _ = normalize_faculty_rows(
@@ -322,11 +334,11 @@ class ProfessorInformationTests(unittest.TestCase):
             {
                 "officialProfileId": "20",
                 "publicationId": "doi:10.1/database",
-                "title": "A Database Study",
+                "title": "A Database Systems Study",
                 "effectiveDate": "2025-08-01",
                 "publicationType": "article",
                 "venue": "Example Journal",
-                "keywords": ["Database systems", "database"],
+                "keywords": [],
                 "evidenceUrls": ["https://openalex.org/W20"],
             },
             {
@@ -342,11 +354,11 @@ class ProfessorInformationTests(unittest.TestCase):
             {
                 "officialProfileId": "21",
                 "publicationId": "doi:10.1/database",
-                "title": "A Database Study",
+                "title": "A Database Systems Study",
                 "effectiveDate": "2025-08-01",
                 "publicationType": "article",
                 "venue": "Example Journal",
-                "keywords": ["Database systems", "database"],
+                "keywords": [],
                 "evidenceUrls": ["https://openalex.org/W20"],
             },
         ]
@@ -376,7 +388,9 @@ class ProfessorInformationTests(unittest.TestCase):
         )
         self.assertNotIn("scholar.google.com", json.dumps(queue))
 
-        artifact = build_research_subdirections(queue)
+        candidates = build_subdirection_candidates(queue)
+        self.assertNotIn("reviewStatus", json.dumps(candidates))
+        artifact, report = review_subdirection_candidates(queue, candidates)
         publication_owners = {}
         for publication in publications:
             publication_owners.setdefault(publication["publicationId"], set()).add(
@@ -418,6 +432,40 @@ class ProfessorInformationTests(unittest.TestCase):
         self.assertTrue(
             by_id["21"]["publicationAssignments"][0]["unassignedReasonEn"]
         )
+        result_by_id = {
+            item["officialProfileId"]: item for item in report["results"]
+        }
+        direction_review = result_by_id["20"]["directionReviews"][0]
+        self.assertEqual(direction_review["evidenceBasis"], "title-and-subject-metadata")
+        self.assertEqual(direction_review["evidencePublicationIds"], ["doi:10.1/database"])
+        self.assertEqual(direction_review["evidenceUrls"], ["https://openalex.org/W20"])
+        self.assertTrue(direction_review["reasonEn"])
+
+        token_duplicate = deepcopy(candidates)
+        duplicate_direction = deepcopy(
+            token_duplicate["professors"][0]["subdirections"][0]
+        )
+        duplicate_direction["id"] = "advanced-database-systems-research"
+        duplicate_direction["nameEn"] = "Advanced Database Systems Research"
+        duplicate_direction["evidencePublicationIds"] = []
+        duplicate_direction["evidenceUrls"] = []
+        token_duplicate["professors"][0]["subdirections"].append(
+            duplicate_direction
+        )
+        with self.assertRaisesRegex(SourceDataError, "semantic duplicate"):
+            review_subdirection_candidates(queue, token_duplicate)
+
+        evidence_duplicate = deepcopy(candidates)
+        duplicate_direction = deepcopy(
+            evidence_duplicate["professors"][0]["subdirections"][0]
+        )
+        duplicate_direction["id"] = "relational-storage-engines"
+        duplicate_direction["nameEn"] = "Relational storage engines"
+        evidence_duplicate["professors"][0]["subdirections"].append(
+            duplicate_direction
+        )
+        with self.assertRaisesRegex(SourceDataError, "semantic duplicate"):
+            review_subdirection_candidates(queue, evidence_duplicate)
 
         with self.assertRaisesRegex(SourceDataError, "March 1 or September 1"):
             build_subdirection_work_queue(
@@ -438,115 +486,188 @@ class ProfessorInformationTests(unittest.TestCase):
             )
 
     def test_subdirection_review_report(self):
+        from scripts.prepare_subdirection_work_queue import (
+            build_subdirection_candidates,
+            build_subdirection_work_queue,
+        )
         from scripts.validate_subdirection_review import (
-            build_subdirection_review_report,
+            review_subdirection_candidates,
             validate_subdirection_review_report,
         )
 
+        professors, _ = normalize_faculty_rows(
+            [faculty_row(), faculty_row("21", "王明", "Ming WANG")],
+            baseline_ids={"20", "21"},
+        )
+        analyses = [
+            {**research_analysis(), "researchAreas": ["Database systems"]},
+            {
+                **research_analysis("21"),
+                "researchInterests": ["Smart Grid Energy Management"],
+                "researchAreas": ["Smart Grid Energy Management"],
+                "evidenceUrls": ["https://openalex.org/W21"],
+            },
+        ]
         publications = [{
             "officialProfileId": "20",
             "publicationId": "doi:10.1/database",
+            "title": "A Database Systems Study",
+            "effectiveDate": "2025-08-01",
+            "publicationType": "article",
+            "venue": "Example Journal",
             "keywords": ["Database systems"],
             "evidenceUrls": ["https://openalex.org/W20"],
         }]
-        artifact = {
-            "schemaVersion": 1,
-            "cutoff": "2026-09-01",
-            "professors": [
-                {
-                    "officialProfileId": "20",
-                    "reviewStatus": "pass",
-                    "subdirections": [{
-                        "id": "database-systems",
-                        "nameEn": "Database systems",
-                        "explanationEn": ["Scope.", "Evidence.", "Boundary."],
-                        "evidencePublicationIds": ["doi:10.1/database"],
-                        "evidenceUrls": ["https://openalex.org/W20"],
-                        "reviewStatus": "pass",
-                    }],
-                    "publicationAssignments": [{
-                        "publicationId": "doi:10.1/database",
-                        "subdirectionIds": ["database-systems"],
-                        "unassignedReasonEn": None,
-                    }],
-                },
-                {
-                    "officialProfileId": "21",
-                    "reviewStatus": "limited",
-                    "subdirections": [{
-                        "id": "evidence-limited-research-profile",
-                        "nameEn": "Evidence-limited research profile",
-                        "explanationEn": [
-                            "No specific direction is supported.",
-                            "Only the official profile is available.",
-                            "The available evidence is insufficient to describe a broader research agenda.",
-                        ],
-                        "evidencePublicationIds": [],
-                        "evidenceUrls": [
-                            "https://facultyprofiles.hkust-gz.edu.cn/faculty-personal-page?id=21"
-                        ],
-                        "reviewStatus": "limited",
-                        "limitationEn": "The available evidence is insufficient to describe a broader research agenda.",
-                    }],
-                    "publicationAssignments": [],
-                },
-            ],
-        }
-        report = build_subdirection_review_report(artifact)
+        queue = build_subdirection_work_queue(
+            professors, analyses, publications, "2026-09-01"
+        )
+        candidates = build_subdirection_candidates(queue)
+        artifact, report = review_subdirection_candidates(queue, candidates)
         self.assertEqual(
             report["summary"],
             {"block": 0, "limited": 1, "pass": 1, "total": 2},
         )
-        self.assertEqual(
-            report["results"][1]["limitationsEn"],
-            ["The available evidence is insufficient to describe a broader research agenda."],
-        )
         validate_subdirection_review_report(
-            report, artifact, {"20", "21"}, publications
+            report, artifact, queue, candidates, {"20", "21"}, publications
         )
 
         blocked = deepcopy(report)
-        blocked["results"][0]["reviewStatus"] = "block"
+        blocked["results"][0]["disposition"] = "block"
         blocked["summary"] = {"block": 1, "limited": 1, "pass": 0, "total": 2}
         with self.assertRaisesRegex(SourceDataError, "blocked"):
             validate_subdirection_review_report(
-                blocked, artifact, {"20", "21"}, publications
+                blocked, artifact, queue, candidates, {"20", "21"}, publications
             )
 
         missing = deepcopy(report)
         missing["results"].pop()
         with self.assertRaisesRegex(SourceDataError, "missing professor IDs"):
             validate_subdirection_review_report(
-                missing, artifact, {"20", "21"}, publications
+                missing, artifact, queue, candidates, {"20", "21"}, publications
             )
 
         duplicate = deepcopy(report)
         duplicate["results"].append(deepcopy(duplicate["results"][0]))
         with self.assertRaisesRegex(SourceDataError, "duplicate"):
             validate_subdirection_review_report(
-                duplicate, artifact, {"20", "21"}, publications
+                duplicate, artifact, queue, candidates, {"20", "21"}, publications
             )
 
-        missing_limitation = deepcopy(report)
-        del missing_limitation["results"][1]["limitationsEn"]
-        with self.assertRaisesRegex(SourceDataError, "explicit limitations"):
+        circular = deepcopy(report)
+        circular["results"][0]["directionReviews"][0]["reasonEn"] = "Candidate says so."
+        with self.assertRaisesRegex(SourceDataError, "independent review"):
             validate_subdirection_review_report(
-                missing_limitation, artifact, {"20", "21"}, publications
+                circular, artifact, queue, candidates, {"20", "21"}, publications
             )
 
-        unsupported = deepcopy(publications)
-        unsupported[0]["keywords"] = ["Security"]
-        with self.assertRaisesRegex(SourceDataError, "subject metadata"):
+        unknown_owner = deepcopy(publications)
+        unknown_owner[0]["officialProfileId"] = "99"
+        with self.assertRaisesRegex(SourceDataError, "unknown professor"):
             validate_subdirection_review_report(
-                report, artifact, {"20", "21"}, unsupported
+                report, artifact, queue, candidates, {"20", "21"}, unknown_owner
+            )
+
+        changed_source = deepcopy(publications)
+        changed_source[0]["title"] = "A different canonical title"
+        with self.assertRaisesRegex(SourceDataError, "canonical publication evidence"):
+            validate_subdirection_review_report(
+                report, artifact, queue, candidates, {"20", "21"}, changed_source
             )
 
         non_english = deepcopy(artifact)
         non_english["professors"][0]["subdirections"][0]["explanationEn"][0] = "数据库系统。"
         with self.assertRaisesRegex(SourceDataError, "English-only"):
             validate_subdirection_review_report(
-                report, non_english, {"20", "21"}, publications
+                report, non_english, queue, candidates, {"20", "21"}, publications
             )
+
+    def test_subdirection_release_regressions(self):
+        from scripts.prepare_subdirection_work_queue import (
+            build_subdirection_candidates,
+            build_subdirection_work_queue,
+        )
+        from scripts.validate_subdirection_review import review_subdirection_candidates
+
+        root = Path(__file__).parents[1]
+        professors = json.loads((root / "data/professors.json").read_text(encoding="utf-8"))
+        analyses = json.loads((root / "data/research-analysis.json").read_text(encoding="utf-8"))
+        publications = json.loads((root / "data/publications.json").read_text(encoding="utf-8"))
+        queue = build_subdirection_work_queue(
+            professors, analyses, publications, "2026-09-01"
+        )
+        candidates = build_subdirection_candidates(queue)
+        artifact, report = review_subdirection_candidates(queue, candidates)
+        by_id = {item["officialProfileId"]: item for item in artifact["professors"]}
+        reviews = {item["officialProfileId"]: item for item in report["results"]}
+
+        names_626 = {item["nameEn"] for item in by_id["626"]["subdirections"]}
+        self.assertIn("Multimodal Machine Learning Applications", names_626)
+        self.assertIn("3D Shape Modeling and Analysis", names_626)
+        self.assertNotIn("Evidence-limited research profile", names_626)
+        review_3d = next(
+            item for item in reviews["626"]["directionReviews"]
+            if item["subdirectionId"] == "3d-shape-modeling-and-analysis"
+        )
+        self.assertTrue(all("3D" in title for title in review_3d["sourceTitles"]))
+
+        names_671 = {item["nameEn"] for item in by_id["671"]["subdirections"]}
+        self.assertIn("Smart Grid Energy Management", names_671)
+        self.assertNotIn("Evidence-limited research profile", names_671)
+        self.assertTrue(all(item["reviewStatus"] == "limited" for item in by_id["671"]["subdirections"]))
+        self.assertEqual(reviews["671"]["professorBasis"], "analysis-only")
+        self.assertTrue(all(
+            "Electricity" in item["explanationEn"][1]
+            for item in by_id["671"]["subdirections"]
+        ))
+
+        self.assertEqual(reviews["22"]["professorBasis"], "conflicting-record")
+        self.assertEqual(
+            {item["nameEn"] for item in by_id["22"]["subdirections"]},
+            {"Conflicting indexed research evidence"},
+        )
+        self.assertNotIn("matched publication", by_id["22"]["subdirections"][0]["explanationEn"][1])
+        self.assertTrue(all(not item["subdirectionIds"] for item in by_id["22"]["publicationAssignments"]))
+        self.assertNotIn(
+            "AI in cancer detection",
+            {item["nameEn"] for item in by_id["384"]["subdirections"]},
+        )
+        self.assertEqual(reviews["475"]["professorBasis"], "incoherent-publication-record")
+        self.assertEqual(
+            {item["nameEn"] for item in by_id["475"]["subdirections"]},
+            {
+                "Anaerobic Digestion and Biogas Production",
+                "Nanoplatforms for cancer theranostics",
+            },
+        )
+        cancer_review = next(
+            item for item in reviews["475"]["directionReviews"]
+            if item["subdirectionId"] == "nanoplatforms-for-cancer-theranostics"
+        )
+        self.assertTrue(all(
+            any(term in title.casefold() for term in ("cancer", "tumor", "antitumor"))
+            for title in cancer_review["sourceTitles"]
+        ))
+        self.assertTrue(all(not item["subdirectionIds"] for item in by_id["475"]["publicationAssignments"]))
+        self.assertEqual(
+            {item["nameEn"] for item in by_id["393"]["subdirections"]},
+            {"BIM and Construction Integration"},
+        )
+        for profile_id in ("340", "364"):
+            battery_directions = [
+                item for item in by_id[profile_id]["subdirections"]
+                if "battery" in item["nameEn"].casefold()
+            ]
+            self.assertEqual(len(battery_directions), 1)
+            battery_review = next(
+                item for item in reviews[profile_id]["directionReviews"]
+                if item["subdirectionId"] == battery_directions[0]["id"]
+            )
+            self.assertTrue(all(
+                any(term in title.casefold() for term in (
+                    "anode", "batter", "cathode", "lithium", "sodium", "zinc", "zn"
+                ))
+                for title in battery_review["sourceTitles"]
+            ))
 
     def test_retrieval_attempts_skip_then_fail_after_three_targeted_failures(self):
         item = build_publication_work_queue(
